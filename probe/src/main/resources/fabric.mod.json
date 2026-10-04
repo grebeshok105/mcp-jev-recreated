@@ -1,0 +1,21 @@
+{
+    "schemaVersion": 1,
+    "id": "vfxlab-probe",
+    "version": "${version}",
+    "name": "VFX Lab Probe",
+    "description": "Experimental environment probing Minecraft/Photon/Codex VFX resources at runtime: registry dumps, particle spawn, frame capture, measurements.",
+    "authors": ["jevlab"],
+    "license": "MIT",
+    "environment": "*",
+    "entrypoints": {
+        "main": ["io.jevlab.probe.VfxLabProbe"],
+        "client": ["io.jevlab.probe.VfxLabProbeClient"]
+    },
+    "mixins": ["vfxlab-probe.mixins.json"],
+    "depends": {
+        "fabricloader": ">=0.19.2",
+        "minecraft": "~1.21.1",
+        "java": ">=21",
+        "fabric-api": "*"
+    }
+}

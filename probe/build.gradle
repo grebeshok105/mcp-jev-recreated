@@ -1,0 +1,98 @@
+plugins {
+    id 'fabric-loom' version '1.16-SNAPSHOT'
+    id 'java'
+}
+
+version = '0.1.0'
+group = 'io.jevlab'
+
+base { archivesName = 'vfxlab-probe' }
+
+repositories {
+    // aliyun first: this box gets rate-limited (429) by Maven Central
+    maven { url = 'https://maven.aliyun.com/repository/central' }
+    mavenCentral()
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net/'
+    }
+    maven {
+        name = 'Modrinth'
+        url = 'https://api.modrinth.com/maven'
+        content { includeGroup 'maven.modrinth' }
+    }
+    maven { url = 'https://cursemaven.com' }
+    maven {
+        name = 'BlameJared'
+        url = 'https://maven.blamejared.com'
+    }
+    maven {
+        name = 'GeckoLib'
+        url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content { includeGroup 'software.bernie.geckolib' }
+    }
+    maven { url = 'https://jitpack.io/' }
+}
+
+// The capture lane rides ldlib2's bundled UITestRunner (the same harness Photon's
+// own scenarios use on this exact stack): the Fabric client-gametest artifacts
+// published for this era all mixin against post-1.21.2 client internals and crash
+// on 1.21.1. Launch with `./gradlew runUitest`; the runner creates a world, joins
+// it and executes every scenario selected by ldlib2.uitest.run (group 'vfxlab').
+loom {
+    runs {
+        create('uitest') {
+            client()
+            name 'vfxlab-uitest'
+            ideConfigGenerated false
+            // Run all probe scenarios (vfxlab.1_dump, vfxlab.2_fixturegen, vfxlab.3_capture).
+            // Selection syntax: all|*|group:<g>|tag:<t>|mod:<m>|regex:<re>|<exact name>.
+            property 'ldlib2.uitest.run', 'group:vfxlab'
+            property 'ldlib2.uitest.out', layout.projectDirectory.dir('../data/uitest-report').asFile.absolutePath
+            property 'ldlib2.uitest.window', '1280,720'
+            property 'ldlib2.uitest.watchdogSec', '900'
+            // Probe artifacts land in the repo's data dir so the python pipeline reads them.
+            property 'vfxlab.outdir', layout.projectDirectory.dir('../data/capture').asFile.absolutePath
+            property 'vfxlab.fixturesdir', layout.projectDirectory.dir('../data/fixtures').asFile.absolutePath
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:1.21.1"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:0.19.2"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.116.12+1.21.1"
+
+    modRuntimeOnly "net.fabricmc:fabric-language-kotlin:1.12.3+kotlin.2.0.21"
+
+    // Photon stack (vendored jars, same versions as the Photon's fabric port).
+    modImplementation files('libs/photon-fabric-1.21.1-2.2.7.jar')
+    modImplementation files('libs/ldlib2-fabric-1.21.1-2.7.jar')
+    // ldlib2's own jar-in-jar nested deps (UI layout); dev classpath needs them flat.
+    modImplementation files('libs/taffy-1.1.4.jar')
+    modImplementation files('libs/yoga-1.0.0.jar')
+    modImplementation files('libs/kilagraph-fabric-1.21.1-21.1.0.15.jar')
+    modImplementation "curse.maven:architectury-api-419699:5786326"
+    modImplementation "maven.modrinth:forge-config-api-port:v21.1.6-1.21.1-Fabric"
+
+    // Veil provides the quasar emitter engine Codex VFX emitters require.
+    modImplementation "foundry.veil:veil-fabric-1.21.1:4.1.2"
+
+    // Codex-Superheroes bundles geckolib/EMF/ETF via jar-in-jar for production;
+    // in the dev classpath the nested jars are not expanded, so they are declared
+    // separately (same coordinates/versions as the bundled ones).
+    modImplementation files('libs/superheroes-4.7.0.jar')
+    modImplementation "software.bernie.geckolib:geckolib-fabric-1.21:4.5.8"
+    modImplementation "maven.modrinth:entity-model-features:3.3.9-fabric-1.21"
+    modImplementation "maven.modrinth:entitytexturefeatures:7.2.4-fabric-1.21"
+
+    implementation "com.electronwill.night-config:core:3.8.0"
+    implementation "com.electronwill.night-config:toml:3.8.0"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}

@@ -1,0 +1,98 @@
+{
+  "scene": {
+    "pos": [
+      8.5,
+      2,
+      8.5
+    ],
+    "time": 6000,
+    "weather": "clear"
+  },
+  "defaults": {
+    "frames": [
+      3,
+      8,
+      20
+    ],
+    "angles": [
+      "front",
+      "side",
+      "top"
+    ],
+    "max_ticks": 20
+  },
+  "shots": [
+    {
+      "id": "minecraft:sonic_boom",
+      "kind": "particle"
+    },
+    {
+      "id": "minecraft:flame",
+      "kind": "particle",
+      "options": {
+        "count": 5,
+        "delta": 0.5
+      }
+    },
+    {
+      "id": "minecraft:dust",
+      "kind": "particle",
+      "options": {
+        "count": 30,
+        "color": [
+          0.1,
+          0.8,
+          1.0
+        ],
+        "scale": 2.0,
+        "delta": 0.4
+      }
+    },
+    {
+      "id": "levelevent_2001",
+      "kind": "level_event",
+      "event": 2001,
+      "data_block": "minecraft:stone"
+    },
+    {
+      "id": "superheroes:white_boom",
+      "kind": "particle"
+    },
+    {
+      "id": "vfxlab:ember_ring_burst",
+      "kind": "fx",
+      "frames": [
+        2,
+        6,
+        15
+      ]
+    },
+    {
+      "id": "vfxlab:laser_beam",
+      "kind": "fx"
+    },
+    {
+      "id": "superheroes:scorpion_hellfire",
+      "kind": "quasar_emitter",
+      "frames": [
+        1,
+        2,
+        4
+      ],
+      "angles": [
+        "front"
+      ]
+    },
+    {
+      "id": "superheroes:homelander_roar_wave",
+      "kind": "quasar_emitter",
+      "frames": [
+        2,
+        4
+      ],
+      "angles": [
+        "side"
+      ]
+    }
+  ]
+}

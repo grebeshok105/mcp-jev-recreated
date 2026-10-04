@@ -1,0 +1,12 @@
+{
+    "required": true,
+    "package": "io.jevlab.probe.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "client": [
+        "ParticleEngineAccessor",
+        "ParticleEngineSpawnCounter"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}
