@@ -1,0 +1,23 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+dist/
+build/
+
+# local secrets / env
+.env
+
+# knowledge-base artifacts (large / generated)
+data/captures/
+data/cache/
+data/raw/
+data/*.tmp
+
+# probe mod (java/gradle)
+probe/.gradle/
+probe/build/
+probe/run/
+probe/.loom/
+*.hprof

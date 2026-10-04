@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jevlab"
+version = "0.1.0"
+description = "VFX Knowledge Base + Jev selector for Minecraft Fabric 1.21.1 (Photon/vanilla/modded visual resources)"
+requires-python = ">=3.10"
+dependencies = [
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
+[project.scripts]
+jevlab = "jevlab.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "typesafe: tests that call the real TypeSafe/Jev API (requires TYPESAFE_API_KEY)",
+    "slow: long-running tests",
+]
