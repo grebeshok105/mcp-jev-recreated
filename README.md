@@ -77,11 +77,11 @@ pytest tests/ -m typesafe  # 2 live API tests, needs TYPESAFE_API_KEY
   .fx, 6 meshes, 130 photon shaders/postfx, 3,910 textures, 15 quasar emitters,
   132 quasar particle defs, 8 composites — **0 build diagnostics**
 - measured layer: 9 captured shots (multi-angle × multi-tick, real Minecraft)
-- visual layer: 9 shots × 2 independent passes; 29/91 disagreement flags
-  (token-normalized incl. singularization)
+- visual layer: 9 shots × 2 independent passes; 31/91 disagreement flags
+  (token-normalized incl. singularization + domain stopwords)
 - Codex eval: **recall@10 = 0.56–0.58** across two live runs (28–29/50
   expected ids), 12/12 cases with ≥1 hit, ~1.0 s/query, ~938k input tokens
-- 35 tests green (33 offline + 2 live)
+- 37 tests green (35 offline + 2 live)
 
 See `docs/architecture.md` for design, `docs/evaluation.md` for full eval
 results and known limits.

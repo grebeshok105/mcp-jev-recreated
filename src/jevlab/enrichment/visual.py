@@ -26,6 +26,10 @@ _STOPWORDS = frozenset({
     "between", "through", "across", "from", "than", "then", "only",
     "very", "quite", "rather", "mostly", "roughly", "about", "around",
     "no", "not", "all", "every", "each", "some", "any",
+    # ubiquitous domain vocabulary — shared by nearly every particle
+    # observation, so it must not bridge genuinely divergent descriptions
+    "particle", "particles", "effect", "speck", "specks",
+    "pixel", "pixels",
 })
 
 
@@ -61,10 +65,22 @@ def merge_passes(pass_outputs: list[dict[str, Any]]) -> dict[str, dict[str, Any]
         confs, roles, descs, vis = [], [], [], []
         for i, obs in enumerate(obs_list):
             tag = chr(ord("a") + i)
-            for k, vals in (obs.get("properties") or {}).items():
-                props.setdefault(k, []).append((tag, [str(v) for v in vals]))
-            confs.append(float(obs.get("confidence", 0)))
-            roles.extend(str(r) for r in obs.get("possible_roles", []))
+            if not isinstance(obs, dict):
+                continue  # one malformed record never breaks the stage
+            raw_props = obs.get("properties")
+            if isinstance(raw_props, dict):
+                for k, vals in raw_props.items():
+                    if not isinstance(vals, (list, tuple)):
+                        continue  # a bare string would explode into chars
+                    props.setdefault(k, []).append(
+                        (tag, [str(v) for v in vals]))
+            try:
+                confs.append(float(obs.get("confidence", 0)))
+            except (TypeError, ValueError):
+                confs.append(0.0)
+            raw_roles = obs.get("possible_roles")
+            if isinstance(raw_roles, (list, tuple)):
+                roles.extend(str(r) for r in raw_roles)
             if obs.get("description"):
                 descs.append(f"[{tag}] {obs['description']}")
             vis.append(str(obs.get("visibility", "")))

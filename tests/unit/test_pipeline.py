@@ -133,6 +133,26 @@ def test_merge_flags_real_disagreement():
     assert m["brightness"].evidence == ["a", "b"]
 
 
+def test_merge_malformed_records_never_crash():
+    bad = {"observations": {"s1": {
+        "properties": {"shape": ["x"], "density": "notalist",
+                       "motion": {"nested": 1}},
+        "confidence": "high", "visibility": "clear",
+        "possible_roles": "abc"}}}
+    good = _pass("s1", {"shape": ["round puff"]}, vis="faint")
+    m = merge_passes([bad, good])["s1"]["visual"]
+    assert "density" not in m and "motion" not in m  # non-list dropped
+    assert sorted(m["shape"].values) == ["round puff", "x"]
+    assert m["shape"].disagreement  # 'x' vs 'round puff' share no tokens
+
+
+def test_domain_stopwords_dont_bridge():
+    a = _pass("s1", {"texture_quality": ["blocky pixel particles"]})
+    b = _pass("s1", {"texture_quality": ["small square particle specks"]})
+    m = merge_passes([a, b])["s1"]["visual"]
+    assert m["texture_quality"].disagreement
+
+
 def test_merge_visibility_conflict_flagged():
     a = _pass("s1", {}, vis="clear")
     b = _pass("s1", {}, vis="none")

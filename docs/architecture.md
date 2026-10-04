@@ -57,13 +57,15 @@ contact sheets (each saw only the images; B never saw A's output). Merge
 rules:
 
 - union of observed values per property key, each tagged with evidence
-  (`a`/`b`);
+  (`a`/`b`); malformed records (non-dict observations, non-list values,
+  non-numeric confidence) are skipped, never fatal;
 - `disagreement` flags only when the two passes use **fully disjoint content
   tokens** — a shared content token suppresses the flag. `_tokens()` strips
-  timing qualifiers (`t3`, `t8`), stopwords, punctuation and naive
-  singularization (`puffs`→`puff`) so trivial phrasing doesn't fake
-  divergence — genuinely different vocabulary still flags. Result: 29
-  flagged keys / 91 — real divergences like bright-vs-matte and
+  timing qualifiers (`t3`, `t8`), connective/domain stopwords (ubiquitous
+  terms like `particle`/`speck` can't bridge real divergence), punctuation
+  and naive singularization (`puffs`→`puff`) so trivial phrasing doesn't
+  fake divergence — genuinely different vocabulary still flags. Result:
+  31 flagged keys / 91 — real divergences like bright-vs-matte and
   clear-vs-faint.
 
 ### 5. Jev client (`src/jevlab/jev/`)
