@@ -1,0 +1,364 @@
+{
+  "observations": {
+    "minecraft_angry_villager": {
+      "visibility": "faint",
+      "description": "Essentially empty at every angle and tick. The only anomaly is a tiny dark gray blob with a small orange pixel clipped at the top edge of the front t3 cell, as if a small effect sits just above the frame. Nothing in threequarter or top views; t8/t20 all baseline.",
+      "properties": {
+        "dominant_colors": ["dark gray", "orange"],
+        "shape": ["tiny irregular blob", "single pixel cluster"],
+        "motion": ["static at frame edge"],
+        "brightness": ["dim", "muted"],
+        "density": ["single speck"],
+        "scale_impression": ["tiny"],
+        "persistence": ["seen only at t3"],
+        "texture_quality": ["few pixels, unreadable"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["ambient overhead indicator", "mob mood marker", "status icon above entity"],
+      "confidence": 0.35,
+      "notes": "Only a few pixels visible at the top edge of one cell; the effect likely sits above the camera frame. Semantics are a guess from color alone."
+    },
+    "minecraft_cloud": {
+      "visibility": "clear",
+      "description": "Large billowy white/cream cloud puffs fill the upper-left of front and threequarter t3 cells and appear as a broad white splotch on the grass in top t3. By t8 they shrink to a few scattered small wisps; by t20 every view is back to baseline.",
+      "properties": {
+        "dominant_colors": ["white", "cream", "light gray"],
+        "shape": ["billowy puff cluster", "irregular rounded blobs"],
+        "motion": ["expands at t3 then dissipates"],
+        "brightness": ["bright", "high contrast against sky"],
+        "density": ["dense at t3", "sparse at t8"],
+        "scale_impression": ["large volume"],
+        "persistence": ["gone by t20"],
+        "texture_quality": ["soft chunky pixel blobs"],
+        "blend_appearance": ["opaque", "solid"]
+      },
+      "possible_roles": ["explosion aftermath smoke", "steam vent", "smoke burst", "evaporation puff"],
+      "confidence": 0.85,
+      "notes": "Clean single-burst smoke cloud; fades fast."
+    },
+    "minecraft_dripping_honey": {
+      "visibility": "faint",
+      "description": "A thin vertical strand of three to four small amber/gold square droplets descends from the top edge of frame, visible identically at t3, t8 and t20 in both front and threequarter views (a couple of drops also appear in front view lower down). Nothing visible in top view besides background debris.",
+      "properties": {
+        "dominant_colors": ["amber", "gold", "yellow-orange"],
+        "shape": ["small square droplets", "thin vertical strand"],
+        "motion": ["dripping downward"],
+        "brightness": ["warm mid brightness"],
+        "density": ["very sparse", "a few drops"],
+        "scale_impression": ["tiny droplets"],
+        "persistence": ["persists across all ticks"],
+        "texture_quality": ["flat single-color squares"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["dripping liquid", "honey leak from block", "sticky residue drip", "ambient goo"],
+      "confidence": 0.6,
+      "notes": "Consistent sparse drip; source is above the frame so only the falling strand is caught."
+    },
+    "minecraft_elder_guardian": {
+      "visibility": "clear",
+      "description": "A huge beige/tan ghostly apparition with radiating spikes and an orange eye/face region fills the left half of front and threequarter t3 cells and the left of top t3 (seen from above). It is completely gone by t8 in every angle.",
+      "properties": {
+        "dominant_colors": ["beige", "tan", "orange", "cream"],
+        "shape": ["spiky creature silhouette", "large mob-shaped apparition", "radiating spikes"],
+        "motion": ["appears as one big flash then vanishes"],
+        "brightness": ["pale but high coverage"],
+        "density": ["single large figure"],
+        "scale_impression": ["enormous, fills half the frame"],
+        "persistence": ["t3 only"],
+        "texture_quality": ["smooth flat fill, translucent feel"],
+        "blend_appearance": ["translucent", "ghostly overlay"]
+      },
+      "possible_roles": ["jumpscare apparition", "curse marker", "boss warning flash", "omen overlay"],
+      "confidence": 0.8,
+      "notes": "Clearly a rendered mob-like sprite flashed for one tick, not a particle burst."
+    },
+    "minecraft_falling_dust": {
+      "visibility": "clear",
+      "description": "Clusters of irregular gray blocky flakes hover and drift in the upper sky at front/threequarter t3, thinning to scattered small specks by t8 and nearly gone by t20. In top view they read as flat gray squares resting on or just above the grass at t3/t8.",
+      "properties": {
+        "dominant_colors": ["gray", "light gray", "dark gray"],
+        "shape": ["blocky flakes", "irregular square chunks"],
+        "motion": ["drifting and settling downward"],
+        "brightness": ["mid gray, muted"],
+        "density": ["moderate at t3", "sparse later"],
+        "scale_impression": ["medium scattered pieces"],
+        "persistence": ["fades by t20"],
+        "texture_quality": ["chunky pixel flakes"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["crumbling debris", "ash fall", "ceiling dust", "block decay particles", "collapse aftermath"],
+      "confidence": 0.7,
+      "notes": "Reads as dry granular debris rather than smoke; colors stay neutral gray."
+    },
+    "minecraft_flash": {
+      "visibility": "none",
+      "description": "Every cell equals the baseline: flat grass, sky horizon, and the persistent brown debris pile in top views. No particles or overlays at any tick or angle.",
+      "properties": {
+        "dominant_colors": ["none"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["unchanged baseline"],
+        "density": ["zero"],
+        "scale_impression": ["none"],
+        "persistence": ["none"],
+        "texture_quality": ["none"],
+        "blend_appearance": ["none"]
+      },
+      "possible_roles": ["screen-space flash not capturable in world shots", "camera effect"],
+      "confidence": 0.5,
+      "notes": "If this effect is a full-screen camera flash it would not appear in third-person world captures; nothing visible at any tick."
+    },
+    "minecraft_item": {
+      "visibility": "faint",
+      "description": "At t3 only: a small red square sprite with a white top stripe sits on the grass in front view, with a smaller red speck beside it; threequarter t3 shows the same small red sprite near the debris and top t3 shows a red speck embedded by the debris pile. All empty afterwards.",
+      "properties": {
+        "dominant_colors": ["red", "white"],
+        "shape": ["small square item sprite"],
+        "motion": ["pops in at t3 then gone"],
+        "brightness": ["saturated bright red"],
+        "density": ["one or two sprites"],
+        "scale_impression": ["tiny"],
+        "persistence": ["t3 only"],
+        "texture_quality": ["flat item-like quad"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["item drop marker", "loot pickup indicator", "spawned item display"],
+      "confidence": 0.55,
+      "notes": "Looks like a single rendered item sprite (red with light stripe) rather than a particle system; brief appearance."
+    },
+    "minecraft_nautilus": {
+      "visibility": "clear",
+      "description": "Dark teal/navy bubble-like dots rise through the sky at t3 in front/threequarter views and trail diagonally upward at t8 before vanishing at t20. The top view is the striking one: at t8 it shows several large blocky spiral shell shapes in blue/cyan with dark navy shading and dark brown centers.",
+      "properties": {
+        "dominant_colors": ["blue", "cyan", "navy", "dark teal", "brown"],
+        "shape": ["spiral shells", "coiled rings", "round bubble dots"],
+        "motion": ["rising and spiraling upward"],
+        "brightness": ["saturated mid-dark blue"],
+        "density": ["several distinct coils plus dot trail"],
+        "scale_impression": ["large shells, biggest at top edge"],
+        "persistence": ["t3-t8, gone by t20"],
+        "texture_quality": ["chunky shaded spiral sprites"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["water spell channel", "whirlpool summon", "conch activation", "underwater magic burst"],
+      "confidence": 0.75,
+      "notes": "The spiral motif only resolves clearly in the top view at t8; in side views it reads as dark rising bubbles."
+    },
+    "minecraft_sculk_charge_pop": {
+      "visibility": "faint",
+      "description": "Only a few tiny cyan/teal flecks near the top of the front t3 cell and two or three similar marks in threequarter t3. Everything at t8 and t20 and all top views is baseline.",
+      "properties": {
+        "dominant_colors": ["cyan", "teal"],
+        "shape": ["tiny curved flecks"],
+        "motion": ["brief upward pop"],
+        "brightness": ["bright small specks"],
+        "density": ["a few flecks"],
+        "scale_impression": ["tiny"],
+        "persistence": ["t3 only"],
+        "texture_quality": ["minimal pixels"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["small energy pop", "sensor trigger tick", "sculk magic ping", "sparkle burst"],
+      "confidence": 0.45,
+      "notes": "Most of the burst likely sits above the frame; only the fringe is captured."
+    },
+    "minecraft_soul_fire_flame": {
+      "visibility": "clear",
+      "description": "A bright cyan flame-shaped sprite cluster floats in the upper-left sky at front t3 and shrinks to a smaller cyan flame at t8; threequarter t3 shows the same cyan flame clipped at the top edge. Gone by t20. Nothing in top views beyond background debris.",
+      "properties": {
+        "dominant_colors": ["cyan", "bright blue", "pale blue"],
+        "shape": ["flame silhouette", "teardrop licks"],
+        "motion": ["flickers upward then dissipates"],
+        "brightness": ["bright luminous cyan"],
+        "density": ["single flame cluster"],
+        "scale_impression": ["small-medium flame"],
+        "persistence": ["t3 to t8"],
+        "texture_quality": ["pixelated flame texture", "layered licks"],
+        "blend_appearance": ["additive-looking bright core", "slightly translucent edges"]
+      },
+      "possible_roles": ["soul fire flame", "spirit fire marker", "cold magic fire", "torch flame accent"],
+      "confidence": 0.8,
+      "notes": "Reads unmistakably as a cyan flame sprite; brief lifetime."
+    },
+    "minecraft_underwater": {
+      "visibility": "faint",
+      "description": "A handful of tiny pale blue-gray specks drift high in the sky at front t3, thinning to one or two specks at t8 and t20; threequarter shows the same sparse dots. Top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["pale blue", "blue-gray"],
+        "shape": ["tiny round dots", "bubble specks"],
+        "motion": ["slow drift, slight rise"],
+        "brightness": ["dim", "low contrast"],
+        "density": ["very sparse"],
+        "scale_impression": ["tiny"],
+        "persistence": ["still a speck at t20"],
+        "texture_quality": ["soft tiny dots"],
+        "blend_appearance": ["translucent"]
+      },
+      "possible_roles": ["ambient moisture motes", "underwater bubbles", "drowning air bubbles", "mist particles"],
+      "confidence": 0.45,
+      "notes": "Barely a handful of pixels; could pass for noise but consistent positions across ticks make it a real sparse effect."
+    },
+    "world_event_ANIMATION_END_GATEWAY_SPAWN": {
+      "visibility": "clear",
+      "description": "A massive white/light-gray billowing mass explodes into frame at t3: it fills the left third of the front view and sweeps across the left half of the threequarter view with layered cloudy edges and gray shading. By t8 it is completely gone. Top views show only the background debris pile.",
+      "properties": {
+        "dominant_colors": ["white", "light gray", "gray"],
+        "shape": ["huge billowing cloud", "irregular dense fog mass"],
+        "motion": ["erupts at t3 then vanishes"],
+        "brightness": ["very bright", "dominant whites"],
+        "density": ["very dense, solid-looking"],
+        "scale_impression": ["enormous, frame-filling"],
+        "persistence": ["t3 only"],
+        "texture_quality": ["chunky layered cloud shading"],
+        "blend_appearance": ["mostly opaque with soft edges"]
+      },
+      "possible_roles": ["portal spawn burst", "teleport arrival shockwave", "boss entrance flash", "massive explosion fog"],
+      "confidence": 0.8,
+      "notes": "Reads as a one-frame huge white burst; likely a gateway/teleport flash effect."
+    },
+    "world_event_PARTICLES_DESTROY_BLOCK": {
+      "visibility": "clear",
+      "description": "At t3 many dark gray/olive blocky chunks are scattered through the upper frame with smaller purple-gray shards lower near the grass in front and threequarter views; top t3 shows flat dark squares on the grass. By t8 only a few small purple-gray specks remain near ground level; t20 is baseline.",
+      "properties": {
+        "dominant_colors": ["dark gray", "olive gray", "muted purple"],
+        "shape": ["square blocky chunks", "small shards"],
+        "motion": ["burst outward then fall and settle"],
+        "brightness": ["dark, muted"],
+        "density": ["moderate scatter at t3"],
+        "scale_impression": ["medium debris pieces"],
+        "persistence": ["settles by t8, gone t20"],
+        "texture_quality": ["chunky block fragments"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["block break debris", "demolition fragments", "structure destruction burst", "impact shatter"],
+      "confidence": 0.75,
+      "notes": "Classic break-block debris: chunky dark pieces plus finer shards; the purple-gray tint may hint at the destroyed block's material."
+    },
+    "world_event_PARTICLES_SCULK_SHRIEK": {
+      "visibility": "faint",
+      "description": "A single tiny cyan wavy squiggle mark sits near the top of the front view at t3 and a similar faint mark at t8; nothing else at any angle or tick. All threequarter and top cells are baseline.",
+      "properties": {
+        "dominant_colors": ["cyan", "teal"],
+        "shape": ["tiny zigzag wave mark"],
+        "motion": ["faint pulse at frame top"],
+        "brightness": ["dim but distinct cyan"],
+        "density": ["one or two marks"],
+        "scale_impression": ["tiny"],
+        "persistence": ["t3 and t8, gone t20"],
+        "texture_quality": ["few anti-aliased pixels"],
+        "blend_appearance": ["translucent"]
+      },
+      "possible_roles": ["sound wave ping", "shriek pulse", "signal ring fringe", "sculk alert tick"],
+      "confidence": 0.35,
+      "notes": "Only the fringe of what is probably a large expanding ring is caught at the top edge of the front camera; nearly invisible."
+    },
+    "world_event_PARTICLES_TRIAL_SPAWNER_SPAWN_MOB_AT": {
+      "visibility": "clear",
+      "description": "A burst of orange/yellow flame sprites mixed with dark gray smoke puffs appears in the upper-left sky at front t3 and threequarter t3, with a residual flame or two lingering at t8 at the top edge. All gone by t20; top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["orange", "yellow", "dark gray", "black"],
+        "shape": ["flame silhouettes", "small smoke puffs"],
+        "motion": ["burst upward and fade fast"],
+        "brightness": ["bright hot orange against dim smoke"],
+        "density": ["moderate cluster at t3"],
+        "scale_impression": ["medium burst"],
+        "persistence": ["t3 burst, embers at t8"],
+        "texture_quality": ["pixelated flame sprites", "chunky smoke"],
+        "blend_appearance": ["opaque flames", "soft smoke"]
+      },
+      "possible_roles": ["mob spawn ignition", "spawner activation burst", "fiery summon flash", "spawn poof"],
+      "confidence": 0.75,
+      "notes": "Fire-plus-smoke burst strongly suggests a spawn/summon ignition."
+    },
+    "superheroes_dark_star": {
+      "visibility": "clear",
+      "description": "Small dark multi-point star/sparkle clusters drift slowly across the sky in front and threequarter views at t3, t8 and t20 (moving left to right and thinning). The top view at t20 shows two large dark translucent blocky patches on the grass — a big smoky rectangular shadow mass — absent at earlier ticks.",
+      "properties": {
+        "dominant_colors": ["black", "dark gray", "dark brown"],
+        "shape": ["four-point stars", "sparkle clusters", "blocky shadow patches"],
+        "motion": ["slow lateral drift", "lingering"],
+        "brightness": ["very dark, shadow-like"],
+        "density": ["sparse sparkles plus heavy shadow patch"],
+        "scale_impression": ["small sparkles, large shadow mass"],
+        "persistence": ["persists through t20"],
+        "texture_quality": ["crisp star sprites", "smoky translucent slabs"],
+        "blend_appearance": ["translucent dark overlay"]
+      },
+      "possible_roles": ["dark magic aura", "void sparkle field", "corruption shadow", "ominous spell channel", "dark energy charge"],
+      "confidence": 0.7,
+      "notes": "Two readable components: drifting dark star sparkles in side views and a large dark translucent patch only in top t20."
+    },
+    "superheroes_homelander_iron_fists_hand": {
+      "visibility": "none",
+      "description": "Every cell equals the baseline: grass horizon, empty sky, and only the persistent brown debris pile/scatter in top views. No visible effect at any tick or angle.",
+      "properties": {
+        "dominant_colors": ["none"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["unchanged baseline"],
+        "density": ["zero"],
+        "scale_impression": ["none"],
+        "persistence": ["none"],
+        "texture_quality": ["none"],
+        "blend_appearance": ["none"]
+      },
+      "possible_roles": ["hand-anchored effect outside camera view", "untriggered or zero-size burst"],
+      "confidence": 0.45,
+      "notes": "Name implies an effect anchored to a hand/fist that may sit outside the captured area or below the frame; nothing visible."
+    },
+    "superheroes_kratos_hand_burst_3": {
+      "visibility": "faint",
+      "description": "Tiny clusters of pale cream/white sparkle specks float in the sky at t3, t8 and t20 in both front and threequarter views, drifting slowly rightward with slightly changing positions. Top views show only background debris scatter.",
+      "properties": {
+        "dominant_colors": ["cream", "pale yellow", "white"],
+        "shape": ["tiny sparkle specks", "small mote cluster"],
+        "motion": ["slow lateral drift"],
+        "brightness": ["soft pale, low contrast"],
+        "density": ["sparse cluster"],
+        "scale_impression": ["tiny"],
+        "persistence": ["persists across all ticks"],
+        "texture_quality": ["fine pinpoint sparkles"],
+        "blend_appearance": ["translucent"]
+      },
+      "possible_roles": ["hand charge sparkle", "energy gathering motes", "small buff aura", "rage/power-up shimmer"],
+      "confidence": 0.5,
+      "notes": "Very sparse faint specks; consistent across ticks so a real subtle effect, not noise."
+    },
+    "superheroes_scorpion_hellbreath": {
+      "visibility": "none",
+      "description": "Front and threequarter cells are clean sky and grass at all ticks. Top views show only the persistent brown debris pieces. No visible effect.",
+      "properties": {
+        "dominant_colors": ["none"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["unchanged baseline"],
+        "density": ["zero"],
+        "scale_impression": ["none"],
+        "persistence": ["none"],
+        "texture_quality": ["none"],
+        "blend_appearance": ["none"]
+      },
+      "possible_roles": ["breath/cone effect outside captured area", "untriggered burst"],
+      "confidence": 0.45,
+      "notes": "A breath effect likely projects forward from an entity outside this fixed capture volume; nothing in frame at any tick."
+    },
+    "superheroes_unibeam_spark": {
+      "visibility": "clear",
+      "description": "A bright cyan chunky spark cluster drifts across the sky in front view at t3, t8 and t20 (shifting rightward, shrinking to a small cyan square by t20), mirrored in threequarter views where t20 shows cyan pieces at the top edge. The top view at t20 shows a large translucent cyan glowing patch covering part of the grass.",
+      "properties": {
+        "dominant_colors": ["cyan", "bright blue", "teal"],
+        "shape": ["chunky blocky cluster", "square spark", "large glow patch"],
+        "motion": ["drifts laterally", "lingers and grows into wide glow"],
+        "brightness": ["bright saturated cyan"],
+        "density": ["compact cluster plus wide translucent patch"],
+        "scale_impression": ["small cluster expanding to large area"],
+        "persistence": ["persists through t20"],
+        "texture_quality": ["crisp chunky cyan pixels", "soft translucent patch"],
+        "blend_appearance": ["bright core opaque", "glow translucent"]
+      },
+      "possible_roles": ["energy beam discharge", "electric spark burst", "plasma projectile", "unibeam charge residue", "lightning strike accent"],
+      "confidence": 0.75,
+      "notes": "Reads as a persistent cyan energy spark that ends as a broad translucent glow on the ground in top view."
+    }
+  }
+}

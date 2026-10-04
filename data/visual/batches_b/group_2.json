@@ -1,0 +1,346 @@
+{
+  "observations": {
+    "minecraft_bubble": {
+      "visibility": "none",
+      "description": "front and threequarter rows are flat grass + sky at every tick. top row shows only the persistent brown dirt-debris pile (clump at t3, scattered chunks at t8, clean at t20). no bluish or white bubble-like specks anywhere in any cell.",
+      "properties": {
+        "dominant_colors": ["brown"],
+        "shape": ["debris chunks"],
+        "motion": ["static scatter"],
+        "brightness": ["dim"],
+        "density": ["sparse"],
+        "scale_impression": ["small"],
+        "persistence": ["fades by t20"],
+        "texture_quality": ["blocky"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["ambient debris", "digging aftermath"],
+      "confidence": 0.8,
+      "notes": "only the documented background dirt pile is present; no particle attributable to the shot is visible. the effect may have expired before t3 or failed to render."
+    },
+    "minecraft_crimson_spore": {
+      "visibility": "faint",
+      "description": "a handful of tiny pinkish-red specks scattered across the upper sky in front t3 (roughly 7-8 dots) and a smaller cluster in threequarter t3; a single faint speck remains at threequarter t8; nothing by t20. top view shows only the background dirt pile.",
+      "properties": {
+        "dominant_colors": ["red", "pink"],
+        "shape": ["tiny dots"],
+        "motion": ["slow drift"],
+        "brightness": ["medium"],
+        "density": ["very sparse"],
+        "scale_impression": ["tiny"],
+        "persistence": ["gone by t8-t20"],
+        "texture_quality": ["pixel dots"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["ambient spore drift", "spore burst", "spore ambience"],
+      "confidence": 0.65,
+      "notes": "specks sit high in the frame against sky, consistent with particles drifting upward; count is small so per-particle shape is not resolvable."
+    },
+    "minecraft_dripping_honey": {
+      "visibility": "clear",
+      "description": "a small tight cluster of amber/gold droplets hanging in the upper sky, visible in every front cell (t3, t8, t20) at the same position and likewise in every threequarter cell near the top edge. top view shows only the dirt pile. the cluster is identical across ticks, suggesting a hanging or continuously re-dripping droplet.",
+      "properties": {
+        "dominant_colors": ["amber", "gold"],
+        "shape": ["droplet cluster"],
+        "motion": ["hanging drip"],
+        "brightness": ["saturated"],
+        "density": ["2-3 droplets"],
+        "scale_impression": ["tiny"],
+        "persistence": ["present all ticks"],
+        "texture_quality": ["smooth blob"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["dripping liquid hazard", "honey block drip", "leaking fluid cue"],
+      "confidence": 0.8,
+      "notes": "droplets do not visibly move between ticks — either very slow fall or a re-spawning drip; located high above the grass plane."
+    },
+    "minecraft_electric_spark": {
+      "visibility": "none",
+      "description": "all front and threequarter cells are empty grass + sky. top row contains only the background dirt-debris pile at t3/t8. no yellow, white, or spark-shaped pixels anywhere.",
+      "properties": {
+        "dominant_colors": ["brown"],
+        "shape": ["debris chunks"],
+        "motion": ["static"],
+        "brightness": ["dim"],
+        "density": ["sparse"],
+        "scale_impression": ["small"],
+        "persistence": ["fades by t20"],
+        "texture_quality": ["blocky"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": [],
+      "confidence": 0.8,
+      "notes": "nothing but the background dirt pile; the spark either despawned before t3 or did not render."
+    },
+    "minecraft_falling_dripstone_lava": {
+      "visibility": "clear",
+      "description": "a saturated orange-red blob sits low on the horizon at front t3 and t8 (same spot), shrinking to a thin red dash by t20; threequarter view shows the same small orange-red cluster low on the grass at t3/t8. top view shows a bright orange-red streak/smear among the debris at t8 and a thin red-orange dash at t20.",
+      "properties": {
+        "dominant_colors": ["orange-red", "red"],
+        "shape": ["droplet", "streak"],
+        "motion": ["falling", "settling"],
+        "brightness": ["bright", "saturated"],
+        "density": ["single blob"],
+        "scale_impression": ["small"],
+        "persistence": ["decays by t20"],
+        "texture_quality": ["glossy blob"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["falling lava droplet", "lava leak cue", "burning hazard marker"],
+      "confidence": 0.85,
+      "notes": "the mark sits near ground level in front/threequarter views; in top view the t8 streak partially overlaps the dirt pile but is distinctly orange-red."
+    },
+    "minecraft_flash": {
+      "visibility": "none",
+      "description": "all front and threequarter cells are empty grass + sky. top row shows only the background dirt-debris pile (a slightly larger clump than usual at t3). no bright flash or white pixels anywhere.",
+      "properties": {
+        "dominant_colors": ["brown"],
+        "shape": ["debris chunks"],
+        "motion": ["static"],
+        "brightness": ["dim"],
+        "density": ["sparse"],
+        "scale_impression": ["small"],
+        "persistence": ["fades by t20"],
+        "texture_quality": ["blocky"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": [],
+      "confidence": 0.85,
+      "notes": "a flash effect lasting ~2 ticks would already be gone by t3; nothing captured."
+    },
+    "minecraft_item_slime": {
+      "visibility": "faint",
+      "description": "a small mint/light-green cube sits in the air above the grass at front t3 (upper area near the horizon) and appears lower-right at front t8, consistent with a small cube descending or bouncing toward the ground; a few tiny dark specks at threequarter t3 near the horizon. gone by t20. top view shows only debris.",
+      "properties": {
+        "dominant_colors": ["mint green", "light green"],
+        "shape": ["small cube"],
+        "motion": ["descending"],
+        "brightness": ["medium"],
+        "density": ["single object"],
+        "scale_impression": ["tiny"],
+        "persistence": ["gone by t20"],
+        "texture_quality": ["flat sprite"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["item pickup display", "bounce pad cue", "slime hop feedback"],
+      "confidence": 0.6,
+      "notes": "the cube moves between t3 and t8 which suggests fall/bounce motion; only one object, easy to miss at distance."
+    },
+    "minecraft_ominous_spawning": {
+      "visibility": "faint",
+      "description": "a loose cluster of pale cyan/light-blue specks high in the sky at front t3 (about a dozen tiny dots) and a similar cluster near the top of threequarter t3; nothing at t8 or t20 in any angle. top view shows only the dirt pile.",
+      "properties": {
+        "dominant_colors": ["pale cyan", "light blue"],
+        "shape": ["speck cluster"],
+        "motion": ["hovering swirl"],
+        "brightness": ["pale", "low contrast vs sky"],
+        "density": ["sparse cluster"],
+        "scale_impression": ["tiny"],
+        "persistence": ["t3 only"],
+        "texture_quality": ["soft specks"],
+        "blend_appearance": ["translucent look"]
+      },
+      "possible_roles": ["mob spawn warning", "ominous event aura", "trial spawner cue"],
+      "confidence": 0.6,
+      "notes": "the cyan specks sit near the frame top, low contrast against sky; may be part of a taller swirl mostly out of frame."
+    },
+    "minecraft_splash": {
+      "visibility": "clear",
+      "description": "an arcing spray of deep-blue droplets fills the upper-left of front t3 — dozens of small blue squares arranged in a downward arc like water thrown from an impact point; the same blue arc appears in threequarter t3. completely gone by t8 and t20 in all angles. top view shows only debris.",
+      "properties": {
+        "dominant_colors": ["deep blue", "blue"],
+        "shape": ["droplet arc", "spray"],
+        "motion": ["arcing downward"],
+        "brightness": ["saturated"],
+        "density": ["dozens of droplets"],
+        "scale_impression": ["medium burst"],
+        "persistence": ["gone by t8"],
+        "texture_quality": ["square droplets"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["water splash", "splash potion impact", "dive impact", "water hit feedback"],
+      "confidence": 0.9,
+      "notes": "single-burst effect fully decayed by t8; droplets clearly read as water spray."
+    },
+    "minecraft_vibration": {
+      "visibility": "none",
+      "description": "all front and threequarter cells are empty grass + sky. top row shows only the background dirt-debris pile at t3/t8. no vibration squiggle or teal particles visible.",
+      "properties": {
+        "dominant_colors": ["brown"],
+        "shape": ["debris chunks"],
+        "motion": ["static"],
+        "brightness": ["dim"],
+        "density": ["sparse"],
+        "scale_impression": ["small"],
+        "persistence": ["fades by t20"],
+        "texture_quality": ["blocky"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": [],
+      "confidence": 0.8,
+      "notes": "nothing captured; vibration particles travel and expire quickly, likely missed the capture window."
+    },
+    "superheroes_homelander_clap_flash": {
+      "visibility": "none",
+      "description": "front and threequarter rows are empty grass + sky at all ticks. top t3 shows a larger-than-usual brown debris pile; t8 scattered chunks; t20 clean. no white flash, shockwave ring, or other effect pixels.",
+      "properties": {
+        "dominant_colors": ["brown"],
+        "shape": ["debris chunks"],
+        "motion": ["static"],
+        "brightness": ["dim"],
+        "density": ["moderate pile"],
+        "scale_impression": ["small"],
+        "persistence": ["fades by t20"],
+        "texture_quality": ["blocky"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": [],
+      "confidence": 0.8,
+      "notes": "a clap flash would be brief; nothing but background debris captured."
+    },
+    "superheroes_homelander_laser_impact": {
+      "visibility": "none",
+      "description": "all front and threequarter cells are empty grass + sky. top row shows only the background dirt pile. no red beam, glow, or impact sparks visible in any cell.",
+      "properties": {
+        "dominant_colors": ["brown"],
+        "shape": ["debris chunks"],
+        "motion": ["static"],
+        "brightness": ["dim"],
+        "density": ["sparse"],
+        "scale_impression": ["small"],
+        "persistence": ["fades by t20"],
+        "texture_quality": ["blocky"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": [],
+      "confidence": 0.8,
+      "notes": "nothing but background debris captured."
+    },
+    "superheroes_kratos_hand_burst_2": {
+      "visibility": "faint",
+      "description": "a wispy diagonal spray of very pale whitish-blue specks high in the sky, present in all three front cells (t3, t8, t20) and in all threequarter cells at the same relative spot, drifting slightly downward over time. top view shows only debris, plus a tiny pale patch at the left edge of top t20.",
+      "properties": {
+        "dominant_colors": ["pale white", "whitish blue"],
+        "shape": ["wispy spray", "speck trail"],
+        "motion": ["slow descent"],
+        "brightness": ["very pale"],
+        "density": ["sparse"],
+        "scale_impression": ["tiny specks"],
+        "persistence": ["present all ticks"],
+        "texture_quality": ["soft"],
+        "blend_appearance": ["translucent look"]
+      },
+      "possible_roles": ["hand burst discharge", "energy release", "charging aura"],
+      "confidence": 0.55,
+      "notes": "specks are extremely faint against sky blue — low contrast, few pixels each; persistent across ticks suggests a repeating emitter."
+    },
+    "superheroes_scorpion_harpoon": {
+      "visibility": "none",
+      "description": "all front and threequarter cells are empty grass + sky. top row shows only the background dirt pile (a larger clump at t3). no chain, spear, or projectile trail pixels visible.",
+      "properties": {
+        "dominant_colors": ["brown"],
+        "shape": ["debris chunks"],
+        "motion": ["static"],
+        "brightness": ["dim"],
+        "density": ["sparse"],
+        "scale_impression": ["small"],
+        "persistence": ["fades by t20"],
+        "texture_quality": ["blocky"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": [],
+      "confidence": 0.8,
+      "notes": "nothing but background debris captured."
+    },
+    "superheroes_silent": {
+      "visibility": "none",
+      "description": "every cell is empty grass + sky except the top row's background dirt pile (clump at t3, scattered at t8, clean at t20). consistent with a deliberately silent/empty shot or baseline.",
+      "properties": {
+        "dominant_colors": ["brown"],
+        "shape": ["debris chunks"],
+        "motion": ["static"],
+        "brightness": ["dim"],
+        "density": ["sparse"],
+        "scale_impression": ["small"],
+        "persistence": ["fades by t20"],
+        "texture_quality": ["blocky"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["baseline reference"],
+      "confidence": 0.85,
+      "notes": "used as the diff baseline for this batch; contains only the documented debris pile."
+    },
+    "vfxlab_ribbon_trail": {
+      "visibility": "none",
+      "description": "front and threequarter rows are empty grass + sky at all ticks. top t3 shows an unusually large spread of brown debris chunks (bigger than other sheets); t8 two small chunks; t20 clean. no ribbon or trail element visible in any cell.",
+      "properties": {
+        "dominant_colors": ["brown"],
+        "shape": ["debris chunks"],
+        "motion": ["static"],
+        "brightness": ["dim"],
+        "density": ["dense pile at t3"],
+        "scale_impression": ["small"],
+        "persistence": ["fades by t20"],
+        "texture_quality": ["blocky"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": [],
+      "confidence": 0.7,
+      "notes": "the t3 debris pile is roughly 3x larger than in other sheets but uses the same dirt-block material; treating it as background per instructions. no trail geometry visible."
+    },
+    "world_event_PARTICLES_AND_SOUND_PLANT_GROWTH": {
+      "visibility": "none",
+      "description": "all front and threequarter cells are empty grass + sky. top row shows only the background dirt pile. no green growth sparkles or bone-meal-style particles visible.",
+      "properties": {
+        "dominant_colors": ["brown"],
+        "shape": ["debris chunks"],
+        "motion": ["static"],
+        "brightness": ["dim"],
+        "density": ["sparse"],
+        "scale_impression": ["small"],
+        "persistence": ["fades by t20"],
+        "texture_quality": ["blocky"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": [],
+      "confidence": 0.8,
+      "notes": "nothing but background debris captured."
+    },
+    "world_event_PARTICLES_SCULK_SHRIEK": {
+      "visibility": "faint",
+      "description": "a tiny pale-cyan mark (a short '<>'-like squiggle) at the very top edge of front t3, and a similar small cyan mark at the top edge of front t8; nothing at t20 and nothing in threequarter. top view shows only debris. reads as a faint cyan wisp rising and clipping the top of the frame.",
+      "properties": {
+        "dominant_colors": ["pale cyan"],
+        "shape": ["tiny wisp", "chevron"],
+        "motion": ["rising", "out of frame"],
+        "brightness": ["pale"],
+        "density": ["1-2 specks"],
+        "scale_impression": ["tiny"],
+        "persistence": ["t3-t8 only"],
+        "texture_quality": ["soft"],
+        "blend_appearance": ["translucent look"]
+      },
+      "possible_roles": ["shriek soul wisp", "warden alert cue", "sculk scream effect"],
+      "confidence": 0.5,
+      "notes": "only a few cyan pixels at the frame edge — the bulk of the effect likely sits outside the captured region; very low pixel count."
+    },
+    "world_event_PARTICLES_TRIAL_SPAWNER_DETECT_PLAYER": {
+      "visibility": "faint",
+      "description": "a cluster of small orange/ember specks along the top edge of front t3 (several tiny orange squares and dashes, partially clipped by the frame top); nothing at t8 or t20 and nothing in threequarter. top view shows only the dirt pile.",
+      "properties": {
+        "dominant_colors": ["orange", "ember"],
+        "shape": ["ember specks"],
+        "motion": ["rising", "out of frame"],
+        "brightness": ["saturated"],
+        "density": ["sparse cluster"],
+        "scale_impression": ["tiny"],
+        "persistence": ["t3 only"],
+        "texture_quality": ["square specks"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["spawner activation cue", "mob detection flare", "ember burst"],
+      "confidence": 0.55,
+      "notes": "specks are clipped by the top edge of the capture — the effect likely continues above the frame; only the lower fringe is recorded."
+    }
+  }
+}

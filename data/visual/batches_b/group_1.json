@@ -1,0 +1,364 @@
+{
+  "observations": {
+    "minecraft_ash": {
+      "visibility": "faint",
+      "description": "Loose clusters of tiny dark gray square specks floating above the horizon in front and threequarter views at t3, thinning at t8, gone by t20; a few dark gray specks sit among the background debris field in top view at t8",
+      "properties": {
+        "dominant_colors": ["dark gray", "charcoal"],
+        "shape": ["tiny squares", "specks"],
+        "motion": ["slow drift", "dispersing"],
+        "brightness": ["dim", "low contrast"],
+        "density": ["sparse", "few particles"],
+        "scale_impression": ["tiny flecks"],
+        "persistence": ["fades by t8", "gone by t20"],
+        "texture_quality": ["flat pixel squares"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["ash fallout", "smoke residue", "ambient drifting motes", "explosion aftermath embers"],
+      "confidence": 0.65,
+      "notes": "Particles are small and dark; easy to confuse with the background dirt debris in the top view"
+    },
+    "minecraft_composter": {
+      "visibility": "none",
+      "description": "Every cell shows flat grass and sky baseline; top t8 contains only the persistent brown dirt-debris chunks seen in all sheets",
+      "properties": {
+        "dominant_colors": ["none"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["none"],
+        "density": ["none"],
+        "scale_impression": ["none"],
+        "persistence": ["none"],
+        "texture_quality": ["none"],
+        "blend_appearance": ["none"]
+      },
+      "possible_roles": [],
+      "confidence": 0.7,
+      "notes": "No effect pixels detected; only the known background debris field"
+    },
+    "minecraft_dolphin": {
+      "visibility": "faint",
+      "description": "Small cluster of saturated blue square specks floating mid-sky in front and threequarter views at t3, reduced to a couple of specks at t8, invisible at t20; nothing in top view beyond background debris",
+      "properties": {
+        "dominant_colors": ["saturated blue"],
+        "shape": ["tiny squares", "loose arc cluster"],
+        "motion": ["drifting", "dispersing"],
+        "brightness": ["moderate", "saturated"],
+        "density": ["sparse cluster"],
+        "scale_impression": ["tiny flecks"],
+        "persistence": ["brief", "gone by t20"],
+        "texture_quality": ["flat pixel squares"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["water splash", "bubble trail", "swim splash burst", "wet impact spray"],
+      "confidence": 0.7,
+      "notes": "Blue specks read clearly against sky; low count makes them easy to miss"
+    },
+    "minecraft_dust_plume": {
+      "visibility": "faint",
+      "description": "A handful of pale grayish-white specks near the top edge of frame in front and threequarter views at t3 only; all other cells are baseline or background debris",
+      "properties": {
+        "dominant_colors": ["pale gray", "off-white"],
+        "shape": ["tiny specks", "small crosses"],
+        "motion": ["rising or drifting upward"],
+        "brightness": ["dim", "soft"],
+        "density": ["very sparse"],
+        "scale_impression": ["tiny flecks"],
+        "persistence": ["brief", "t3 only"],
+        "texture_quality": ["soft pixel specks"],
+        "blend_appearance": ["semi-transparent"]
+      },
+      "possible_roles": ["dust puff", "soft footstep dust", "gentle smoke wisp", "landing poof"],
+      "confidence": 0.55,
+      "notes": "Specks partially clipped at top edge of frame; very few pixels"
+    },
+    "minecraft_explosion": {
+      "visibility": "clear",
+      "description": "A clean stepped diagonal line of solid pale-cream square billboards rising from grass into the sky, visible in front view at t3 only; all other cells baseline or background debris",
+      "properties": {
+        "dominant_colors": ["cream", "white"],
+        "shape": ["staircase line", "square billboards"],
+        "motion": ["diagonal upward sweep"],
+        "brightness": ["bright", "solid"],
+        "density": ["single thin line"],
+        "scale_impression": ["large squares", "short range"],
+        "persistence": ["instant", "t3 only"],
+        "texture_quality": ["flat solid squares"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["explosion shockwave", "blast trail", "impact burst", "knockback wave"],
+      "confidence": 0.8,
+      "notes": "Distinctive staircase formation; oddly absent from threequarter view at the same tick"
+    },
+    "minecraft_falling_water": {
+      "visibility": "faint",
+      "description": "Tiny clusters of saturated blue square specks just above ground level in front and threequarter views at t3; a small cluster of blue specks hugs the lower-right edge of the debris pile in top view at t3; gone by t8",
+      "properties": {
+        "dominant_colors": ["saturated blue"],
+        "shape": ["tiny squares", "small cluster"],
+        "motion": ["falling or settling low"],
+        "brightness": ["moderate", "saturated"],
+        "density": ["sparse"],
+        "scale_impression": ["tiny droplets"],
+        "persistence": ["brief", "t3 only"],
+        "texture_quality": ["flat pixel squares"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["water drip", "splash droplets", "leak particles", "wet trail"],
+      "confidence": 0.72,
+      "notes": "Particles sit low near the ground; blue specks in top view partly overlap the debris pile"
+    },
+    "minecraft_item_cobweb": {
+      "visibility": "faint",
+      "description": "Small white pixel-textured sprite shapes (tiny square sprites with a web-like white pattern) floating low over grass in front and threequarter views at t3, one tiny speck at t8; top view at t3 shows two larger white sprite shapes around the debris pile",
+      "properties": {
+        "dominant_colors": ["white"],
+        "shape": ["small sprites", "plus-like shapes"],
+        "motion": ["floating", "slow drift"],
+        "brightness": ["bright", "high contrast"],
+        "density": ["very sparse", "one to three shapes"],
+        "scale_impression": ["small sprite-sized"],
+        "persistence": ["brief", "mostly t3"],
+        "texture_quality": ["pixel-textured sprites"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["item pickup sparkle", "web trap marker", "spawn indicator", "thrown item puff"],
+      "confidence": 0.6,
+      "notes": "White sprite shapes are larger than typical specks in top view; could be an item-icon particle"
+    },
+    "minecraft_note": {
+      "visibility": "ambiguous",
+      "description": "A single small brown dirt-textured square speck low over grass in threequarter view at t8; every other cell is baseline or background debris",
+      "properties": {
+        "dominant_colors": ["brown"],
+        "shape": ["single small square"],
+        "motion": ["static or slow"],
+        "brightness": ["dim"],
+        "density": ["single particle"],
+        "scale_impression": ["tiny fleck"],
+        "persistence": ["one tick only"],
+        "texture_quality": ["pixel-textured"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["ambient mote", "tiny debris puff"],
+      "confidence": 0.35,
+      "notes": "The lone speck is texture-identical to background dirt debris; cannot confirm it belongs to the effect"
+    },
+    "minecraft_shriek": {
+      "visibility": "faint",
+      "description": "A thin pale-cyan ellipse ring outline high in the sky in front view at t3 only; all other cells baseline or background debris",
+      "properties": {
+        "dominant_colors": ["pale cyan"],
+        "shape": ["thin ellipse ring", "outline"],
+        "motion": ["expanding ring"],
+        "brightness": ["dim", "translucent"],
+        "density": ["single thin ring"],
+        "scale_impression": ["small ring"],
+        "persistence": ["instant", "t3 only"],
+        "texture_quality": ["thin line", "dashed-looking edge"],
+        "blend_appearance": ["translucent"]
+      },
+      "possible_roles": ["sonic ring", "shockwave ring", "alert pulse", "scream wavefront"],
+      "confidence": 0.6,
+      "notes": "Ring is thin and faint; seen nearly edge-on as a narrow ellipse"
+    },
+    "minecraft_vault_connection": {
+      "visibility": "faint",
+      "description": "One or two tiny ochre/tan specks at t8: a speck at horizon level in front view, a speck high in threequarter view, and a single solid mustard-yellow square among the debris field in top view; nothing at t3 or t20",
+      "properties": {
+        "dominant_colors": ["ochre", "mustard yellow"],
+        "shape": ["tiny squares", "specks"],
+        "motion": ["floating", "sparse drift"],
+        "brightness": ["moderate"],
+        "density": ["very sparse", "one or two particles"],
+        "scale_impression": ["tiny flecks"],
+        "persistence": ["brief", "t8 only"],
+        "texture_quality": ["flat solid squares"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["link tether particles", "lock-on indicator", "beam endpoint sparks", "channeling motes"],
+      "confidence": 0.5,
+      "notes": "Only a couple of particles captured; yellow square in top view is the clearest, the rest are marginal specks"
+    },
+    "superheroes_chaos_orb": {
+      "visibility": "clear",
+      "description": "Loose clusters of tiny multicolored pixel-textured specks (orange, yellow, green, teal, brown) floating mid-sky in front and threequarter views at t3 and t8, dispersing into a few pale specks by t20; top view at t20 shows large translucent mustard-yellow square billboards plus one dark vertical slab on the right side",
+      "properties": {
+        "dominant_colors": ["multicolor", "orange", "yellow", "green", "teal"],
+        "shape": ["tiny pixel clusters", "square billboards"],
+        "motion": ["drifting", "dispersing outward"],
+        "brightness": ["moderate", "varied"],
+        "density": ["sparse clusters"],
+        "scale_impression": ["tiny specks plus large billboards"],
+        "persistence": ["lingers through t20"],
+        "texture_quality": ["pixel-textured specks", "translucent squares"],
+        "blend_appearance": ["mixed opaque and translucent"]
+      },
+      "possible_roles": ["chaotic projectile trail", "glitch particles", "magic orb burst", "elemental explosion"],
+      "confidence": 0.68,
+      "notes": "Top-view t20 yellow billboards and dark slab are odd; possibly the same effect seen edge-on from above"
+    },
+    "superheroes_homelander_iron_fists_impact": {
+      "visibility": "clear",
+      "description": "A large soft diffuse pale pinkish-white cloud floating high in the sky in front view at t3 only; all other cells baseline or background debris",
+      "properties": {
+        "dominant_colors": ["pale pink", "off-white"],
+        "shape": ["diffuse cloud", "blob"],
+        "motion": ["expanding softly"],
+        "brightness": ["soft", "low contrast"],
+        "density": ["single large puff"],
+        "scale_impression": ["large cloud"],
+        "persistence": ["instant", "t3 only"],
+        "texture_quality": ["soft smooth gradient"],
+        "blend_appearance": ["translucent", "additive-looking haze"]
+      },
+      "possible_roles": ["impact dust burst", "slam shockwave puff", "explosion aftermath cloud", "landing poof"],
+      "confidence": 0.7,
+      "notes": "Cloud is large but very soft; low contrast against the sky"
+    },
+    "superheroes_kratos_hand_burst_1": {
+      "visibility": "faint",
+      "description": "Small clusters of tiny white square/diamond specks floating above the horizon in front and threequarter views at all three ticks, most at t3, thinning to one or two faint specks by t20; nothing in top view beyond background debris",
+      "properties": {
+        "dominant_colors": ["white"],
+        "shape": ["tiny squares", "diamond specks"],
+        "motion": ["drifting", "dispersing"],
+        "brightness": ["bright specks"],
+        "density": ["sparse cluster"],
+        "scale_impression": ["tiny flecks"],
+        "persistence": ["persists faintly to t20"],
+        "texture_quality": ["flat pixel specks"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["sparkle burst", "energy hand charge", "impact sparkles", "magic cast motes"],
+      "confidence": 0.68,
+      "notes": "Consistent small white flecks across ticks; subtle but clearly non-baseline"
+    },
+    "superheroes_naruto_clone_poof": {
+      "visibility": "faint",
+      "description": "Sparse pale cream/beige specks floating mid-sky in front and threequarter views at t3 and t8, nearly gone by t20; top view at t20 shows a single pale beige irregular puffy cloud shape",
+      "properties": {
+        "dominant_colors": ["pale cream", "beige"],
+        "shape": ["tiny specks", "soft cloud blob"],
+        "motion": ["drifting", "dispersing"],
+        "brightness": ["soft", "muted"],
+        "density": ["sparse"],
+        "scale_impression": ["small flecks and one puff"],
+        "persistence": ["fades toward t20"],
+        "texture_quality": ["flat specks", "soft puff"],
+        "blend_appearance": ["semi-transparent puff"]
+      },
+      "possible_roles": ["spawn smoke poof", "clone summon puff", "teleport smoke", "despawn cloud"],
+      "confidence": 0.6,
+      "notes": "The top-view cream blob at t20 is the clearest signal; side views only show faint specks"
+    },
+    "superheroes_scorpion_teleport": {
+      "visibility": "ambiguous",
+      "description": "Two small brown dirt-textured square chunks resting low over grass in threequarter view at t8; every other cell is baseline or background debris",
+      "properties": {
+        "dominant_colors": ["brown"],
+        "shape": ["small squares", "chunks"],
+        "motion": ["static or settling"],
+        "brightness": ["dim"],
+        "density": ["two particles"],
+        "scale_impression": ["small chunks"],
+        "persistence": ["one tick only"],
+        "texture_quality": ["pixel-textured"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["teleport debris", "ground burst flecks"],
+      "confidence": 0.3,
+      "notes": "The chunks are texture-identical to the persistent background dirt debris; no distinctly non-background particles visible"
+    },
+    "vfxlab_laser_beam": {
+      "visibility": "clear",
+      "description": "A bright saturated cyan tapered streak clipping through the top edge of frame in front view at all three ticks, shifting rightward across ticks; threequarter and top views show nothing beyond baseline and background debris",
+      "properties": {
+        "dominant_colors": ["saturated cyan"],
+        "shape": ["elongated streak", "tapered beam"],
+        "motion": ["sweeping laterally"],
+        "brightness": ["bright", "vivid"],
+        "density": ["single beam"],
+        "scale_impression": ["large", "partially out of frame"],
+        "persistence": ["persistent across all ticks"],
+        "texture_quality": ["smooth gradient beam"],
+        "blend_appearance": ["additive glow"]
+      },
+      "possible_roles": ["energy beam", "laser attack", "beam sweep", "projectile trail"],
+      "confidence": 0.75,
+      "notes": "Beam is clipped at the top edge of the frame so full extent is not visible; front view only"
+    },
+    "world_event_ANIMATION_VAULT_ACTIVATE": {
+      "visibility": "none",
+      "description": "Every cell shows flat grass and sky baseline; top view t8 contains only the persistent brown dirt-debris chunks seen in all sheets",
+      "properties": {
+        "dominant_colors": ["none"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["none"],
+        "density": ["none"],
+        "scale_impression": ["none"],
+        "persistence": ["none"],
+        "texture_quality": ["none"],
+        "blend_appearance": ["none"]
+      },
+      "possible_roles": [],
+      "confidence": 0.7,
+      "notes": "No effect pixels detected; the activation animation may fall outside the capture ticks"
+    },
+    "world_event_PARTICLES_SCULK_CHARGE": {
+      "visibility": "none",
+      "description": "Every cell shows flat grass and sky baseline; top view t8 contains only the persistent brown dirt-debris chunks seen in all sheets",
+      "properties": {
+        "dominant_colors": ["none"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["none"],
+        "density": ["none"],
+        "scale_impression": ["none"],
+        "persistence": ["none"],
+        "texture_quality": ["none"],
+        "blend_appearance": ["none"]
+      },
+      "possible_roles": [],
+      "confidence": 0.7,
+      "notes": "No effect pixels detected; debris field identical in character to other sheets"
+    },
+    "world_event_PARTICLES_SMASH_ATTACK": {
+      "visibility": "none",
+      "description": "Every cell shows flat grass and sky baseline; top view t8 shows a cluster of brown dirt-textured chunks that match the persistent background debris field seen across all sheets",
+      "properties": {
+        "dominant_colors": ["none"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["none"],
+        "density": ["none"],
+        "scale_impression": ["none"],
+        "persistence": ["none"],
+        "texture_quality": ["none"],
+        "blend_appearance": ["none"]
+      },
+      "possible_roles": [],
+      "confidence": 0.55,
+      "notes": "The top-view dirt chunks could plausibly be thrown debris from a smash, but they are texture-identical to the persistent background debris in every other sheet, so they cannot be attributed to the effect"
+    },
+    "world_event_PARTICLES_WATER_EVAPORATING": {
+      "visibility": "clear",
+      "description": "Top view at t3 shows a dense cluster of large opaque black square particles with irregular pixelated edges surrounding the debris pile; front view at t3 shows a small cluster of pale cream/beige pixel specks clipped at the top edge of frame; everything else baseline or background debris",
+      "properties": {
+        "dominant_colors": ["black", "pale cream"],
+        "shape": ["large squares", "irregular blobs", "small specks"],
+        "motion": ["clustered", "rising implied"],
+        "brightness": ["dark opaque", "low contrast cream"],
+        "density": ["dense cluster in top view"],
+        "scale_impression": ["large squares", "heavy"],
+        "persistence": ["t3 only"],
+        "texture_quality": ["pixelated edges", "flat specks"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["dark smoke burst", "steam cloud", "evaporation puff", "ink burst"],
+      "confidence": 0.7,
+      "notes": "Two different particle looks in one shot: bold black squares from above and faint cream specks from the front; the black cluster is unambiguous"
+    }
+  }
+}

@@ -1,0 +1,364 @@
+{
+  "observations": {
+    "minecraft_bubble": {
+      "visibility": "none",
+      "description": "All front and threequarter frames show only flat grass and sky. Top views show the persistent brown dirt-debris pile (background) and nothing else. No particle-like pixels at any tick.",
+      "properties": {
+        "dominant_colors": ["none visible"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["n/a"],
+        "density": ["empty"],
+        "scale_impression": ["none"],
+        "persistence": ["not rendered"],
+        "texture_quality": ["n/a"],
+        "blend_appearance": ["n/a"]
+      },
+      "possible_roles": ["underwater ambience bubbles", "bubble column effect"],
+      "confidence": 0.9,
+      "notes": "Likely an underwater-only particle that does not render in air; nothing but the background debris pile is present."
+    },
+    "minecraft_current_down": {
+      "visibility": "none",
+      "description": "Every frame equals the empty baseline: flat grass, sky horizon, and the brown debris pile in top views. No particles at any angle or tick.",
+      "properties": {
+        "dominant_colors": ["none visible"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["n/a"],
+        "density": ["empty"],
+        "scale_impression": ["none"],
+        "persistence": ["not rendered"],
+        "texture_quality": ["n/a"],
+        "blend_appearance": ["n/a"]
+      },
+      "possible_roles": ["underwater downward current", "whirlpool pull indicator"],
+      "confidence": 0.9,
+      "notes": "Consistent with a water-only current particle; invisible on land."
+    },
+    "minecraft_dust": {
+      "visibility": "clear",
+      "description": "t3: a dense irregular cloud of small cyan/teal-blue pixelated square specks hovering at the horizon line (front and threequarter). t8: cloud has split into a few looser speck clusters drifting apart. t20: nearly gone, only 2-3 tiny specks. Top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["cyan", "teal", "deep blue"],
+        "shape": ["small square specks", "irregular blob cluster"],
+        "motion": ["burst then disperses outward", "slow drift"],
+        "brightness": ["saturated mid-bright"],
+        "density": ["dense blob thinning to sparse"],
+        "scale_impression": ["small specks, fist-sized cluster"],
+        "persistence": ["gone by t20"],
+        "texture_quality": ["hard-edged pixelated quads"],
+        "blend_appearance": ["opaque solid color"]
+      },
+      "possible_roles": ["magic sparkle burst", "spell hit impact", "colored dust puff", "ability activation flash"],
+      "confidence": 0.9,
+      "notes": "Cluster sits at ground level near the anchor; clearly readable in both horizontal angles."
+    },
+    "minecraft_end_rod": {
+      "visibility": "clear",
+      "description": "A single soft white puffball blob near the horizon in front and threequarter views at t3 and t8, roughly stable in position. At t20 only a few faint off-white remnant specks remain. Top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["white", "off-white"],
+        "shape": ["single rounded puffball", "soft blob"],
+        "motion": ["slow drift", "dissipates over time"],
+        "brightness": ["bright white"],
+        "density": ["one compact blob"],
+        "scale_impression": ["small, about a block"],
+        "persistence": ["fades to specks by t20"],
+        "texture_quality": ["soft-edged puffy"],
+        "blend_appearance": ["bright, near-additive"]
+      },
+      "possible_roles": ["magic projectile puff", "sparkle mote", "gentle trail particle", "light spark"],
+      "confidence": 0.85,
+      "notes": "t20 remnants are very faint; main puff clearly visible at t3/t8."
+    },
+    "minecraft_falling_obsidian_tear": {
+      "visibility": "clear",
+      "description": "Front/threequarter: tiny violet specks at sky height at t3, small purple streaks resting on the grass by t8, a couple of faint purple dashes further along the ground at t20. Top view is dramatic: two enormous solid violet flat quads lying on the ground at t3 (several blocks wide), thinning to short purple dashes at t8 and t20.",
+      "properties": {
+        "dominant_colors": ["vivid violet", "deep purple"],
+        "shape": ["huge flat rectangles from above", "tiny specks and dashes edge-on"],
+        "motion": ["falls from sky to ground", "settles flat"],
+        "brightness": ["saturated, high contrast"],
+        "density": ["sparse, 2-3 bodies"],
+        "scale_impression": ["very large flat quads"],
+        "persistence": ["still present at t20"],
+        "texture_quality": ["flat solid untextured quads"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["void meteor strike", "dark magic rain", "boss telegraph impact", "falling curse shard"],
+      "confidence": 0.85,
+      "notes": "Particles are camera-facing quads, so the top view exaggerates them into giant violet slabs; front views read as small falling specks."
+    },
+    "minecraft_gust_emitter_large": {
+      "visibility": "clear",
+      "description": "t3 only: a massive white/gray wind vortex fills the upper frame in front and threequarter views - opaque white cloud masses, several gray spiral curl hooks, and long dashed diagonal streaks. Also visible as white spiral arcs in top view at t3. Completely gone by t8 and t20.",
+      "properties": {
+        "dominant_colors": ["white", "off-white", "light gray"],
+        "shape": ["spiral curls", "cloud puffs", "dashed arcs"],
+        "motion": ["single expanding burst"],
+        "brightness": ["bright whites with gray shading"],
+        "density": ["dense multi-shape cluster"],
+        "scale_impression": ["very large, fills half the frame"],
+        "persistence": ["one-shot, gone by t8"],
+        "texture_quality": ["pixelated opaque masses"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["tornado gust", "aoe knockback wave", "wind spell cast", "shockwave burst"],
+      "confidence": 0.95,
+      "notes": "Strongest effect in the batch; unmistakable large-scale vortex."
+    },
+    "minecraft_landing_honey": {
+      "visibility": "clear",
+      "description": "A small amber/golden smear resting on the grass near the anchor, visible at the same spot in front and threequarter views at all three ticks with slight shape change (splatter wobble). In top views, short amber-orange streaks appear beside the brown debris at t8 and t20.",
+      "properties": {
+        "dominant_colors": ["amber", "golden orange", "honey brown"],
+        "shape": ["small splat smear", "short streaks"],
+        "motion": ["settles and slides slightly"],
+        "brightness": ["muted warm"],
+        "density": ["single small cluster"],
+        "scale_impression": ["small, under a block"],
+        "persistence": ["persists through t20"],
+        "texture_quality": ["soft blobby smears"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["sticky landing splat", "honey slow patch", "goo impact residue"],
+      "confidence": 0.8,
+      "notes": "Effect is subtle and close to the ground; amber tint is distinct from the darker debris pile."
+    },
+    "minecraft_portal": {
+      "visibility": "faint",
+      "description": "Small curved clusters of tiny magenta/violet pixel specks high in the sky: visible in front view at t3 (upper left) and t8 (upper center), and a couple of specks in threequarter t3/t8. Nothing at t20. Top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["magenta", "violet", "purple"],
+        "shape": ["tiny specks", "loose curved cluster"],
+        "motion": ["drifts upward and laterally"],
+        "brightness": ["saturated but tiny"],
+        "density": ["very sparse"],
+        "scale_impression": ["tiny motes"],
+        "persistence": ["gone by t20"],
+        "texture_quality": ["hard-edged pixels"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["teleport sparkle", "portal ambience motes", "ender magic wisps"],
+      "confidence": 0.75,
+      "notes": "Only a handful of pixels; clearly colored but small enough to overlook at sheet scale."
+    },
+    "minecraft_small_gust": {
+      "visibility": "faint",
+      "description": "A single small pale-gray/white curled wisp (a tiny hook-shaped puff) in the upper sky at t3 in front and threequarter views. Nothing at t8 or t20; top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["pale gray", "off-white"],
+        "shape": ["small curl", "wispy hook"],
+        "motion": ["brief single puff"],
+        "brightness": ["low contrast against sky"],
+        "density": ["one wisp"],
+        "scale_impression": ["very small"],
+        "persistence": ["t3 only"],
+        "texture_quality": ["soft translucent-looking"],
+        "blend_appearance": ["semi-transparent look"]
+      },
+      "possible_roles": ["subtle wind puff", "breath gust", "faint air ripple"],
+      "confidence": 0.7,
+      "notes": "Very low contrast; verified by zooming the cell - the curl is real but easy to miss."
+    },
+    "minecraft_squid_ink": {
+      "visibility": "clear",
+      "description": "t3: a dense splat of chunky black square particles clumped into one blob near the horizon (largest in threequarter view, ~60px; a few dark specks in front view). t8: two small dark specks low near the ground. t20: nothing. Top views show only debris.",
+      "properties": {
+        "dominant_colors": ["black", "dark navy"],
+        "shape": ["chunky square specks", "dense blob"],
+        "motion": ["ejected then falls and dissipates"],
+        "brightness": ["very dark"],
+        "density": ["one tight clump plus stragglers"],
+        "scale_impression": ["medium blob"],
+        "persistence": ["gone by t20"],
+        "texture_quality": ["hard-edged pixel squares"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["ink burst", "blindness effect", "dark smoke puff", "escape smoke cloud"],
+      "confidence": 0.9,
+      "notes": "The 3q t3 splat is the strongest single frame; effect reads as a thrown ink blob."
+    },
+    "minecraft_wax_off": {
+      "visibility": "faint",
+      "description": "A handful of pale cream-pink four-pointed star/plus-shaped sparkle specks near the horizon at t3 (front and threequarter), one or two tiny specks at t8, none at t20. Top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["pale cream", "pinkish white"],
+        "shape": ["four-pointed star sparkles", "tiny plus shapes"],
+        "motion": ["drifts and fades"],
+        "brightness": ["pale, low contrast"],
+        "density": ["very sparse, 4-6 sparkles"],
+        "scale_impression": ["tiny"],
+        "persistence": ["gone by t20"],
+        "texture_quality": ["small star sprites"],
+        "blend_appearance": ["soft semi-transparent look"]
+      },
+      "possible_roles": ["scrape shimmer", "polish sparkle", "wax coating flakes", "gentle buff sparkle"],
+      "confidence": 0.75,
+      "notes": "Star/plus shape confirmed by zoom; sparse and low contrast."
+    },
+    "world_event_ANIMATION_VAULT_DEACTIVATE": {
+      "visibility": "clear",
+      "description": "t3: a loose burst of ~15 small flame-sprite specks - yellow-orange bodies with red-orange tips - scattered across the upper sky (front view strongest; fewer in threequarter). t8: 2-3 small orange stragglers. t20: nothing. Top views show only debris.",
+      "properties": {
+        "dominant_colors": ["orange", "yellow", "red tips"],
+        "shape": ["teardrop flame specks"],
+        "motion": ["upward burst then dissipation"],
+        "brightness": ["warm saturated"],
+        "density": ["loose scattered burst"],
+        "scale_impression": ["small specks"],
+        "persistence": ["essentially gone by t8"],
+        "texture_quality": ["pixelated flame sprites"],
+        "blend_appearance": ["opaque, glowing look"]
+      },
+      "possible_roles": ["deactivation ember burst", "explosion sparks", "flame pop", "machine shutdown spark"],
+      "confidence": 0.85,
+      "notes": "Brief one-shot burst; front t3 is the only frame where it is dense."
+    },
+    "world_event_PARTICLES_ELECTRIC_SPARK": {
+      "visibility": "none",
+      "description": "All frames are empty baseline: flat grass and sky in front/threequarter, brown debris pile in top views. No spark-like pixels at any tick or angle.",
+      "properties": {
+        "dominant_colors": ["none visible"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["n/a"],
+        "density": ["empty"],
+        "scale_impression": ["none"],
+        "persistence": ["not rendered"],
+        "texture_quality": ["n/a"],
+        "blend_appearance": ["n/a"]
+      },
+      "possible_roles": ["electric arc", "spark burst", "lightning tickle"],
+      "confidence": 0.85,
+      "notes": "Either the effect failed to render or its particles are sub-pixel; nothing distinguishable from baseline."
+    },
+    "world_event_PARTICLES_SPELL_POTION_SPLASH": {
+      "visibility": "clear",
+      "description": "t3: dozens of small orange-red hollow spiral/ring particles (open circular outlines) scattered widely across the upper sky and a few near the ground, in front and threequarter views. t8: mostly gone, a few faint rings. t20: a single ring plus a small red square in threequarter. Top views show only debris.",
+      "properties": {
+        "dominant_colors": ["orange", "reddish orange", "salmon"],
+        "shape": ["hollow spiral rings", "open circles"],
+        "motion": ["splash ejection then dissipation"],
+        "brightness": ["saturated warm"],
+        "density": ["dense scattered cloud at t3"],
+        "scale_impression": ["small rings"],
+        "persistence": ["stragglers to t20"],
+        "texture_quality": ["ring outline sprites"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["splash potion burst", "spell impact splash", "status effect application", "aoe spell hit"],
+      "confidence": 0.9,
+      "notes": "Distinctive spiral-ring silhouette; the widest-spread burst in the batch."
+    },
+    "superheroes_anomaly_slice": {
+      "visibility": "clear",
+      "description": "A compact loose cloud of a few dozen tiny white/pale specks floating at sky height. Across ticks the whole cloud translates left-to-right within the frame (left at t3, center at t8, right at t20) in both front and threequarter rows, slightly dimmer and thinner by t20. Top views show only debris.",
+      "properties": {
+        "dominant_colors": ["white", "pale gray"],
+        "shape": ["cluster of tiny specks", "roughly spherical cloud"],
+        "motion": ["lateral drift across view", "slow dispersal"],
+        "brightness": ["bright white"],
+        "density": ["loose but coherent cloud"],
+        "scale_impression": ["small cluster, ~1 block"],
+        "persistence": ["persists through t20, fading"],
+        "texture_quality": ["tiny hard-edged specks"],
+        "blend_appearance": ["bright semi-opaque"]
+      },
+      "possible_roles": ["anomaly field marker", "spatial rift sparkle", "teleport residue", "energy orb remnant"],
+      "confidence": 0.85,
+      "notes": "The cluster visibly moves sideways between ticks, suggesting a traveling emitter or drifting group."
+    },
+    "superheroes_goku_kamehameha_trail": {
+      "visibility": "clear",
+      "description": "A tight irregular blob of dark navy-blue pixelated quads with lighter blue/white highlights sits at sky height and translates left-to-right across the frame over the three ticks (front and threequarter). Slightly paler and looser at t20. Top t20 also shows a large blue region at the right frame edge, but it is textured like water/terrain and treated as world geometry.",
+      "properties": {
+        "dominant_colors": ["navy blue", "deep blue", "white highlights"],
+        "shape": ["tight blobby cluster", "ragged quad clump"],
+        "motion": ["fast lateral translation", "slight fade"],
+        "brightness": ["saturated dark blue"],
+        "density": ["compact cluster"],
+        "scale_impression": ["small-medium blob"],
+        "persistence": ["persists through t20"],
+        "texture_quality": ["hard-edged pixel quads"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["energy beam trail", "projectile wake", "charge-up energy blob", "flight trail"],
+      "confidence": 0.8,
+      "notes": "The large blue area in top t20 reads as water/terrain edge, not the effect; the moving blue blob is the real effect."
+    },
+    "superheroes_homelander_roar_wave": {
+      "visibility": "none",
+      "description": "All frames equal the empty baseline: flat grass, sky horizon, background debris in top views. No visible effect at any tick or angle.",
+      "properties": {
+        "dominant_colors": ["none visible"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["n/a"],
+        "density": ["empty"],
+        "scale_impression": ["none"],
+        "persistence": ["not rendered"],
+        "texture_quality": ["n/a"],
+        "blend_appearance": ["n/a"]
+      },
+      "possible_roles": ["sonic shockwave", "roar ring", "screen-shake cue"],
+      "confidence": 0.85,
+      "notes": "Likely a non-particle effect (sound/shake) or it failed to render; nothing in the pixels."
+    },
+    "superheroes_naruto_kawarimi_smoke": {
+      "visibility": "clear",
+      "description": "A small cluster of large white/cream hollow-ring smoke puffs (soft circular outlines with empty centers) at sky level, translating left-to-right across ticks and thinning by t20, visible in front and threequarter views. Top t20 additionally shows large pale flat rectangular patches on the ground - ambiguous, could be settled smoke or terrain.",
+      "properties": {
+        "dominant_colors": ["white", "cream"],
+        "shape": ["hollow ring puffs", "open circles"],
+        "motion": ["lateral drift", "slow fade"],
+        "brightness": ["pale white, low contrast"],
+        "density": ["loose cluster of ~6 rings"],
+        "scale_impression": ["medium rings"],
+        "persistence": ["faint remnants at t20"],
+        "texture_quality": ["soft fuzzy outlines"],
+        "blend_appearance": ["semi-transparent look"]
+      },
+      "possible_roles": ["smoke bomb puff", "kawarimi replacement smoke", "teleport poof", "ninja vanish cloud"],
+      "confidence": 0.8,
+      "notes": "Pale ground rectangles in top t20 may be smoke settling or a terrain feature; flagged ambiguous."
+    },
+    "superheroes_silent": {
+      "visibility": "none",
+      "description": "Every frame is the empty baseline: flat grass and sky, debris pile in top views. Nothing visible at any tick or angle.",
+      "properties": {
+        "dominant_colors": ["none visible"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["n/a"],
+        "density": ["empty"],
+        "scale_impression": ["none"],
+        "persistence": ["not rendered"],
+        "texture_quality": ["n/a"],
+        "blend_appearance": ["n/a"]
+      },
+      "possible_roles": ["silent placeholder event", "invisible logic trigger"],
+      "confidence": 0.9,
+      "notes": "Consistent with an intentionally silent/invisible event; no pixels to interpret."
+    },
+    "vfxlab_ribbon_trail": {
+      "visibility": "none",
+      "description": "All front and threequarter frames are empty baseline. Top views show only the brown debris pile (large clump at t3, scattered chunks at t8). No ribbon or trail pixels anywhere.",
+      "properties": {
+        "dominant_colors": ["none visible"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["n/a"],
+        "density": ["empty"],
+        "scale_impression": ["none"],
+        "persistence": ["not rendered"],
+        "texture_quality": ["n/a"],
+        "blend_appearance": ["n/a"]
+      },
+      "possible_roles": ["ribbon trail", "motion streak", "swing trail"],
+      "confidence": 0.85,
+      "notes": "No ribbon geometry rendered in any frame; possibly a failed spawn or off-camera trail."
+    }
+  }
+}

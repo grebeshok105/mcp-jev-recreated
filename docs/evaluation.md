@@ -18,14 +18,38 @@ Raw artifacts: `data/catalog.json`, `data/evals/results.json`,
 | textures (materials pool) | 3,910 |
 | quasar_emitter / quasar_particle / composite | 15 / 132 / 8 |
 | build diagnostics | **0** |
-| measured passports | 9 |
-| visually annotated passports | 9 (2 independent passes) |
-| visual disagreement flags | 31 of 91 keys (token-normalized incl.
-naive singularization; domain-stopword set keeps ubiquitous terms like
-'particle' from bridging real divergences) |
+| measured passports | **197** |
+| visually annotated passports | **197** (pass A on all; pass B second
+independent pass on the 78 ambiguous/low-confidence shots) |
+| visual coverage of answerable | **205/205** — 197 visually annotated +
+8 documented exceptions |
+| visual disagreement flags | 73 keys across merged passes |
 | answerable candidates per query | 205 |
 
-## Capture lane
+### Capture lane v2 (full catalog)
+
+197 shots × 3 angles × 3 ticks captured in a real 1.21.1 client (ldlib2
+uitest, xvfb, 28,383 steps, ~39 min, scenario PASS). Every shot spawned
+real particles server-side (`spawned > 0` for all 197; quasar emitters
+emitted 12–252 manager particles each). All frames + contact sheets under
+`data/capture/`; shot→attachment manifest `data/capture/sheet_manifest.json`.
+
+**Honest visibility outcome**: 34 shots spawned particles that rendered
+nothing at any captured angle/tick — quasar emitters that fire off-frame
+(below the ground plane or behind the camera) and water-dependent vanilla
+particles (`bubble`, `underwater`, `current_down`, `nautilus`…) that
+cannot render in air. Pass A marked them `none`; independent pass B
+confirmed on 30/34 (4 re-graded faint/ambiguous). This is real semantics:
+the passport records "spawns but renders nothing in this capture
+geometry", not a missing analysis.
+
+**Exceptions (8, `data/capture/exceptions.json`)**: `superheroes:vfx/*`
+composite passports are Codex ability parameter bundles (scalars only —
+contactSeconds, ringRadius, distortionStrength…) consumed by ability
+code, with no spawnable emitter — proven unrenderable by file inspection,
+not skipped lazily.
+
+## Capture lane v1 (historical — 9-shot baseline)
 
 9 shots captured in a real 1.21.1 client (ldlib2 uitest lane, xvfb):
 multiple angles × tick samples with runner-native frames + per-tick
@@ -39,7 +63,7 @@ not hidden: `scorpion_hellfire`/`homelander_roar_wave` visual descriptions
 describe what the frames actually showed (debris fields), and their noul
 ranks suffer honestly for it.
 
-## Codex ability eval — `data/evals/results.json`
+## Codex ability eval — `data/evals/results.json` (earlier 9/205 baseline)
 
 12 cases built from real Codex-Superheroes abilities
 (`data/evals/codex_cases.json`, English queries, no resource-name hints).
@@ -94,6 +118,49 @@ visual semantics — the rest rank on name+facts only; (2) expected sets list
 every acceptable sibling, so list diversity is punished; (3) quasar
 eye-level capture gap makes some emitters look like debris.
 
+## Full-enrichment impact experiment (205/205)
+
+After reaching 205/205 visual coverage the full eval was re-run. The
+bigger briefs hit TypeSafe's `max_tokens_exceeded` cap, so the sweep was
+re-run at `--batch-size 12 --stage2-pool 12`. To isolate content effects
+from that config change, four configurations were measured live:
+
+| measured layer | visual layer | batch/pool | recall@10 | hit@1 | hit@3 | hit@10 | MRR |
+|---|---|---|---|---|---|---|---|
+| 9 | 9 | 25/30 (original) | 0.56–0.58 | — | — | — | — |
+| 9 | 9 | 12/12 | 0.56 | 0.33 | 0.75 | 1.00 | 0.547 |
+| 197 | 9 | 12/12 | **0.68** | 0.50 | 1.00 | 1.00 | 0.750 |
+| 197 | 197 | 12/12 | **0.50** | 0.42 | 0.83 | 0.92 | 0.618 |
+
+(Full 197-visual cell replicated: 25/50 identical per-case on both runs.)
+
+### Attribution
+
+- **Config shrink (25/30 → 12/12) is neutral** at baseline content:
+  0.56 sits inside the old 0.56–0.58 band.
+- **Full measured layer HELPED: +0.12** (0.56 → 0.68). Spawn counts,
+  particle bounds and alive trajectories give Jev genuinely discriminative
+  facts.
+- **Full visual layer HURT: −0.18** (0.68 → 0.50). Mechanism, verified in
+  the data: expected-but-off-frame emitters (e.g. the `scorpion_*`,
+  `homelander_*` quasar set) now carry honest descriptions like "All
+  frames equal the empty baseline … No visible effect at any tick or
+  angle" plus property unions of `none`/`empty`. Jev reads that as
+  "this candidate produces nothing" and drops them below generic
+  alternatives — `raiden_musou_isshin` went 0/7 (was 1–2/7), and per-case
+  losses concentrate on shots with `visibility=none`/`faint` verdicts.
+- The flip side is consistent too: **hit@1 improved 0.33 → 0.42** and
+  MRR 0.547 → 0.618 — where visuals were real, Jev picked the obvious
+  right answer higher; the loss is purely at the recall tail.
+
+### Costs of full enrichment
+
+- Input tokens/query: ~78k → **~330k** (4.2× — richer briefs × more
+  stage-1 batches at size 12).
+- Latency/case: ~1.0 s → **~3.1 s**.
+- Stage-2 pool 25 → 12 (token cap); recall@10 is now bounded by a
+  shallower choice pool as well.
+
 ## TypeSafe contract (verified live)
 
 - `POST /v1/systemone` with `model: "jev-latest"` → response `jev-1.13.0`
@@ -117,11 +184,22 @@ eye-level capture gap makes some emitters look like debris.
 
 ## Known limits
 
-1. Visual layer covers 9 of 205 answerable resources — coverage, not depth, is
-   the main recall lever.
-2. Quasar emitters are invisible at eye level in captured frames.
+1. Full visual coverage is achieved (205/205) but **regressed recall@10
+   to 0.50** — see the attribution matrix above. The honest fix direction
+   is brief-shaping (keep visual facts, compress "nothing rendered" into
+   a single low-signal marker instead of full prose + none-valued
+   property unions), not less coverage.
+2. Quasar emitters spawn off-frame: 34/197 shots render nothing at any
+   captured angle/tick even though counters prove 12–252 live particles.
 3. Choice probabilities are only comparable inside one question — stage-2
-   pool is capped at 25, so recall is bounded by stage-1 quality.
-4. ~78k input tokens/query is the honest cost of full passport briefs at
-   this catalog size; candidate filtering is the mitigator.
+   pool is capped at 12 (TypeSafe `max_tokens_exceeded` at pool 25 with
+   enriched briefs), so recall is bounded by stage-1 quality and pool
+   depth.
+4. ~330k input tokens/query is the honest cost of full enriched briefs at
+   this catalog size; candidate filtering and brief compression are the
+   mitigators.
 5. `content_hash` caches assume artifact paths are stable inside `data/`.
+6. `visibility` is omitted from the merged visual dict when all passes
+   agree — the signal reaches Jev through description text and property
+   values instead; adding it unconditionally is a one-line change if a
+   downstream consumer needs it explicit.

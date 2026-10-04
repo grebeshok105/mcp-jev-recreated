@@ -1,0 +1,364 @@
+{
+  "observations": {
+    "minecraft_angry_villager": {
+      "visibility": "faint",
+      "description": "small cluster of dark gray specks mixed with a few bright orange and yellow square particles, visible only at the very top edge of the front view at t3 (partly cut off by the frame/label bar); nothing in any other angle or tick; brown dirt-debris specks in top view treated as background",
+      "properties": {
+        "dominant_colors": ["dark gray", "orange", "yellow"],
+        "shape": ["small squares", "speck cluster"],
+        "motion": ["rising out of frame", "brief"],
+        "brightness": ["bright accents on dim cluster"],
+        "density": ["sparse"],
+        "scale_impression": ["tiny"],
+        "persistence": ["one tick only"],
+        "texture_quality": ["blocky pixel squares"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["npc anger indicator", "status emote burst", "overhead warning sparkle", "small impact flash"],
+      "confidence": 0.5,
+      "notes": "particles sit at the extreme top edge of the front t3 frame and are partially out of view; colors suggest ember-like bits but the sample is thin"
+    },
+    "minecraft_bubble_pop": {
+      "visibility": "none",
+      "description": "every frame matches the empty baseline (flat grass, sky horizon); only the persistent brown debris pile and scattered debris show in top views, identical in character to other shots",
+      "properties": {
+        "dominant_colors": ["none"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["none"],
+        "density": ["none"],
+        "scale_impression": ["none"],
+        "persistence": ["none"],
+        "texture_quality": ["none"],
+        "blend_appearance": ["none"]
+      },
+      "possible_roles": ["underwater bubble pop (likely not rendered above water)", "submerged ambience"],
+      "confidence": 0.8,
+      "notes": "an underwater-context particle; absence above water is plausible, cannot confirm intended look from these pixels"
+    },
+    "minecraft_current_down": {
+      "visibility": "none",
+      "description": "all frames equal the empty baseline; top views show only the usual brown debris scatter; no airborne or ground particles of any color",
+      "properties": {
+        "dominant_colors": ["none"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["none"],
+        "density": ["none"],
+        "scale_impression": ["none"],
+        "persistence": ["none"],
+        "texture_quality": ["none"],
+        "blend_appearance": ["none"]
+      },
+      "possible_roles": ["underwater downdraft current (invisible above water)", "whirlpool pull indicator"],
+      "confidence": 0.8,
+      "notes": "likely a water-column particle that does not render on dry land"
+    },
+    "minecraft_dust_pillar": {
+      "visibility": "ambiguous",
+      "description": "essentially baseline; the only deviation is a single ~4px dark gray speck resting on the grass in front view at t3, plus the background debris in top views; no column or dust cloud is visible at any tick",
+      "properties": {
+        "dominant_colors": ["dark gray"],
+        "shape": ["single speck"],
+        "motion": ["static"],
+        "brightness": ["dim"],
+        "density": ["singular"],
+        "scale_impression": ["tiny"],
+        "persistence": ["one tick only"],
+        "texture_quality": ["flat speck"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["falling-block landing dust", "pillar collapse dust", "footstep puff"],
+      "confidence": 0.3,
+      "notes": "a lone speck could be a stray particle or a texture artifact; the expected dust column is not visible in these captures"
+    },
+    "minecraft_enchanted_hit": {
+      "visibility": "none",
+      "description": "all cells match the empty baseline; no cyan/blue sparkle or star particles appear in any angle or tick; only background debris in top views",
+      "properties": {
+        "dominant_colors": ["none"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["none"],
+        "density": ["none"],
+        "scale_impression": ["none"],
+        "persistence": ["none"],
+        "texture_quality": ["none"],
+        "blend_appearance": ["none"]
+      },
+      "possible_roles": ["enchanted weapon hit sparkles", "magic crit burst"],
+      "confidence": 0.8,
+      "notes": "expected cyan glint particles are absent from every frame"
+    },
+    "minecraft_falling_nectar": {
+      "visibility": "clear",
+      "description": "a tight cluster of ~6-8 pale pinkish-tan blocky square droplets hanging above the anchor at t3 in front and threequarter views; a couple of specks linger at t8 (3q and faintly in top view); gone by t20",
+      "properties": {
+        "dominant_colors": ["pale tan", "pinkish beige"],
+        "shape": ["blocky square droplets", "small cluster"],
+        "motion": ["falling", "downward drift"],
+        "brightness": ["mid-tone", "soft"],
+        "density": ["sparse cluster"],
+        "scale_impression": ["small"],
+        "persistence": ["decays by t8", "gone by t20"],
+        "texture_quality": ["solid pixel squares"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["honey/nectar drip", "liquid droplet fall", "ambient drip from ceiling or plant", "splash residue"],
+      "confidence": 0.8,
+      "notes": "droplet count is small; color is muted tan-pink rather than vivid honey-gold"
+    },
+    "minecraft_item": {
+      "visibility": "clear",
+      "description": "two-to-three chunky red/pink blocky item-sprite fragments sitting at ground level at t3, visible in front, threequarter and top views (bright pink-red angular shape in top view); completely absent by t8",
+      "properties": {
+        "dominant_colors": ["red", "pink red"],
+        "shape": ["blocky shards", "angular squares"],
+        "motion": ["static to falling", "brief appearance"],
+        "brightness": ["saturated", "mid-bright"],
+        "density": ["two to three pieces"],
+        "scale_impression": ["small object scale"],
+        "persistence": ["one tick only"],
+        "texture_quality": ["item-sprite pixel chunks"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["item break debris", "item drop spawn flash", "tool-break fragments", "pickup feedback"],
+      "confidence": 0.75,
+      "notes": "fragments read as a small red item sprite rather than round particles; vanishes after t3"
+    },
+    "minecraft_lava": {
+      "visibility": "clear",
+      "description": "at t3 a loose vertical column of dark gray/black swirl-puff smoke rises above the anchor with a bright glowing yellow-orange square at its base (ground level); by t8 only sparse drifting dark flecks remain plus a faint ember dot; t20 empty",
+      "properties": {
+        "dominant_colors": ["black", "dark gray", "orange", "yellow"],
+        "shape": ["swirly puff clusters", "loose column", "glowing square core"],
+        "motion": ["rising", "billowing upward"],
+        "brightness": ["bright ember core", "dark smoke"],
+        "density": ["moderate at t3", "sparse by t8"],
+        "scale_impression": ["tall column", "one to two blocks wide"],
+        "persistence": ["strong at t3", "fades fast"],
+        "texture_quality": ["soft swirl sprites", "blocky ember"],
+        "blend_appearance": ["opaque smoke", "glowing ember"]
+      },
+      "possible_roles": ["lava splash embers", "fire column", "volcanic vent", "molten burst aftermath"],
+      "confidence": 0.85,
+      "notes": "smoke puffs rise well above the anchor and clip the top of the frame; the glowing square could be a lava-pop particle or a small light-emitting core"
+    },
+    "minecraft_sculk_charge_pop": {
+      "visibility": "faint",
+      "description": "a tiny cluster of ~4 teal/turquoise crescent-shaped shard particles floating just above the anchor at t3 in front and threequarter views; nothing at t8 or t20; top views show only background debris",
+      "properties": {
+        "dominant_colors": ["teal", "turquoise", "cyan blue"],
+        "shape": ["curved shards", "crescent flecks"],
+        "motion": ["burst outward", "static scatter"],
+        "brightness": ["saturated", "vivid"],
+        "density": ["very sparse"],
+        "scale_impression": ["tiny"],
+        "persistence": ["one tick only"],
+        "texture_quality": ["hard-edged pixel shards"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["sculk energy pop", "teleport flash", "sonic burst residue", "magic dispel sparkle"],
+      "confidence": 0.7,
+      "notes": "distinctive teal color is unambiguous where present but the whole effect is only a few dozen pixels"
+    },
+    "minecraft_underwater": {
+      "visibility": "faint",
+      "description": "roughly ten tiny pale blue/lavender specks suspended in mid-air around the anchor at t3 (front and threequarter); fewer specks still present at t8 in threequarter; gone by t20",
+      "properties": {
+        "dominant_colors": ["pale blue", "lavender"],
+        "shape": ["pinpoint specks", "tiny squares"],
+        "motion": ["suspended", "slow drift"],
+        "brightness": ["pale", "low contrast vs sky"],
+        "density": ["sparse"],
+        "scale_impression": ["tiny motes"],
+        "persistence": ["t3 and t8", "gone by t20"],
+        "texture_quality": ["soft small squares"],
+        "blend_appearance": ["translucent look"]
+      },
+      "possible_roles": ["underwater ambient motes", "suspended micro-bubbles", "humid air particles", "gentle dust"],
+      "confidence": 0.65,
+      "notes": "low contrast against the sky makes the count uncertain; consistent blue tint separates them from debris"
+    },
+    "minecraft_white_ash": {
+      "visibility": "faint",
+      "description": "a very sparse drift of tiny pale gray/white flecks descending from sky level toward the grass across t3 and t8 in front and threequarter views; a few pale squares also land in the top view near the debris pile; nothing by t20",
+      "properties": {
+        "dominant_colors": ["white", "pale gray"],
+        "shape": ["tiny flecks", "scattered squares"],
+        "motion": ["drifting downward", "falling slowly"],
+        "brightness": ["pale", "soft"],
+        "density": ["very sparse"],
+        "scale_impression": ["tiny specks"],
+        "persistence": ["t3 through t8", "gone by t20"],
+        "texture_quality": ["flat pale specks"],
+        "blend_appearance": ["semi translucent look"]
+      },
+      "possible_roles": ["ash fall ambience", "snow drift", "post-burn residue", "gentle weather motes"],
+      "confidence": 0.65,
+      "notes": "each frame holds only a handful of flecks; easy to miss without the diff, but consistent across angles"
+    },
+    "superheroes_homelander_iron_fists_hand": {
+      "visibility": "none",
+      "description": "all frames match the empty baseline; no fist marker, ring, or impact particles in any angle or tick; only the usual top-view debris",
+      "properties": {
+        "dominant_colors": ["none"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["none"],
+        "density": ["none"],
+        "scale_impression": ["none"],
+        "persistence": ["none"],
+        "texture_quality": ["none"],
+        "blend_appearance": ["none"]
+      },
+      "possible_roles": ["melee impact marker", "hand-target indicator"],
+      "confidence": 0.8,
+      "notes": "whatever this shot was meant to show is not rendering into these frames"
+    },
+    "superheroes_homelander_sun_ember": {
+      "visibility": "none",
+      "description": "every cell is baseline grass/sky plus the standard debris scatter in top views; no ember or glow pixels anywhere",
+      "properties": {
+        "dominant_colors": ["none"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["none"],
+        "density": ["none"],
+        "scale_impression": ["none"],
+        "persistence": ["none"],
+        "texture_quality": ["none"],
+        "blend_appearance": ["none"]
+      },
+      "possible_roles": ["solar ember burst", "glowing hero aura"],
+      "confidence": 0.8,
+      "notes": "no warm-colored particle of any kind is present; if the effect exists it did not appear in these captures"
+    },
+    "superheroes_laser_spark": {
+      "visibility": "clear",
+      "description": "a cluster of ~7 bright golden-orange four-pointed star sparkles above the anchor at t3 and t8 in front and threequarter views; the same stars are still present but faded pale-tan at t20; the top view at t20 additionally shows a large translucent golden-orange rectangular overlay covering a multi-block patch of ground",
+      "properties": {
+        "dominant_colors": ["gold", "orange", "yellow"],
+        "shape": ["four-pointed stars", "sparkle cluster", "rectangular overlay"],
+        "motion": ["hovering", "slow drift", "fading in place"],
+        "brightness": ["bright glow", "saturated"],
+        "density": ["moderate cluster"],
+        "scale_impression": ["small sparkles", "large ground projection"],
+        "persistence": ["t3 through t20", "fades over time"],
+        "texture_quality": ["crisp star sprites", "translucent quad"],
+        "blend_appearance": ["additive glow look"]
+      },
+      "possible_roles": ["laser hit sparkles", "energy beam impact", "charged shot flare", "persistent scorch/glow field"],
+      "confidence": 0.85,
+      "notes": "the large golden overlay in top t20 is the most unusual feature — reads like a huge translucent quad seen from above rather than normal particles"
+    },
+    "superheroes_scorpion_hellfire": {
+      "visibility": "none",
+      "description": "all frames are baseline; no flame, ember, or colored particle appears in any angle or tick; top views carry only the standard brown debris",
+      "properties": {
+        "dominant_colors": ["none"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["none"],
+        "density": ["none"],
+        "scale_impression": ["none"],
+        "persistence": ["none"],
+        "texture_quality": ["none"],
+        "blend_appearance": ["none"]
+      },
+      "possible_roles": ["hellfire flame burst", "scorpion attack fire"],
+      "confidence": 0.8,
+      "notes": "no fire-colored pixels anywhere; either the effect failed to emit or emits below the visible threshold"
+    },
+    "superheroes_white_boom": {
+      "visibility": "faint",
+      "description": "a loose scatter of ~10 small pale cream/white soft specks in mid-air around the anchor at t3 in front and threequarter views; only a couple of specks remain at t8; gone by t20",
+      "properties": {
+        "dominant_colors": ["pale cream", "off white"],
+        "shape": ["soft small puffs", "specks"],
+        "motion": ["dispersing outward", "fading"],
+        "brightness": ["pale", "low contrast vs sky"],
+        "density": ["sparse"],
+        "scale_impression": ["small burst"],
+        "persistence": ["mostly t3", "faint trace at t8"],
+        "texture_quality": ["soft blurry specks"],
+        "blend_appearance": ["translucent look"]
+      },
+      "possible_roles": ["small explosion aftermath puff", "soft impact burst", "dissipating shockwave cloud"],
+      "confidence": 0.6,
+      "notes": "the 'boom' is very subtle — a small puff already dissipated by the first capture tick rather than a dramatic explosion"
+    },
+    "world_event_ANIMATION_SPAWN_COBWEB": {
+      "visibility": "clear",
+      "description": "a large blocky white structure built of chunky pixelated web-strand clusters appears above/at the anchor at t3 in front and threequarter views (clearly reads as a spawned cobweb block with fluffy white clumps); a smaller white remnant persists at front t8; nothing by t20",
+      "properties": {
+        "dominant_colors": ["white", "light gray"],
+        "shape": ["blocky web strands", "chunky clusters", "angular lattice"],
+        "motion": ["appears in place", "shrinks after spawn"],
+        "brightness": ["bright white"],
+        "density": ["dense central mass"],
+        "scale_impression": ["block-scale", "about a block wide"],
+        "persistence": ["strong at t3", "smaller at t8", "gone by t20"],
+        "texture_quality": ["hard pixel edges", "block texture"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["cobweb spawn trap", "web projectile landing", "spider nest marker", "entangle ability visual"],
+      "confidence": 0.9,
+      "notes": "largest and most legible effect in the batch; unmistakably a spawned web block/structure rather than loose particles"
+    },
+    "world_event_PARTICLES_ELECTRIC_SPARK": {
+      "visibility": "none",
+      "description": "all cells match the empty baseline; no yellow/white spark or arc pixels in any angle or tick; top views show only background debris",
+      "properties": {
+        "dominant_colors": ["none"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["none"],
+        "density": ["none"],
+        "scale_impression": ["none"],
+        "persistence": ["none"],
+        "texture_quality": ["none"],
+        "blend_appearance": ["none"]
+      },
+      "possible_roles": ["electric zap spark", "lightning impact", "charged attack glint"],
+      "confidence": 0.8,
+      "notes": "no bright spark-like pixels anywhere; effect is invisible in these captures"
+    },
+    "world_event_PARTICLES_SHOOT_WHITE_SMOKE": {
+      "visibility": "none",
+      "description": "every frame equals the baseline; no white/gray smoke puff is visible in any angle or tick; only the standard top-view debris",
+      "properties": {
+        "dominant_colors": ["none"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["none"],
+        "density": ["none"],
+        "scale_impression": ["none"],
+        "persistence": ["none"],
+        "texture_quality": ["none"],
+        "blend_appearance": ["none"]
+      },
+      "possible_roles": ["smoke puff projectile trail", "steam vent", "exhaust burst"],
+      "confidence": 0.8,
+      "notes": "the named effect should emit white smoke, but no smoke-toned cluster is present; possibly mistimed or occluded"
+    },
+    "world_event_PARTICLES_TURTLE_EGG_PLACEMENT": {
+      "visibility": "none",
+      "description": "all frames are baseline grass and sky; no egg, crackle, or placement particles visible anywhere; top views show only the usual debris scatter",
+      "properties": {
+        "dominant_colors": ["none"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["none"],
+        "density": ["none"],
+        "scale_impression": ["none"],
+        "persistence": ["none"],
+        "texture_quality": ["none"],
+        "blend_appearance": ["none"]
+      },
+      "possible_roles": ["block placement confirmation puff", "egg set indicator"],
+      "confidence": 0.8,
+      "notes": "nothing rendered; if a particle fired it was gone or too small to register"
+    }
+  }
+}

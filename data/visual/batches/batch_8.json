@@ -1,0 +1,346 @@
+{
+  "observations": {
+    "minecraft_campfire_signal_smoke": {
+      "visibility": "clear",
+      "description": "A single large rounded gray-beige puff/blob hovers just above the horizon in every front and threequarter frame at all three ticks; it sits slightly higher/closer in threequarter views and stays essentially static in size and shape across t3/t8/t20. Top views show only the persistent brown dirt-debris background.",
+      "properties": {
+        "dominant_colors": ["gray", "beige", "light brown"],
+        "shape": ["single rounded cloud blob", "cotton-ball puff", "irregular oval"],
+        "motion": ["nearly static", "slow drift"],
+        "brightness": ["medium", "matte"],
+        "density": ["single dense puff"],
+        "scale_impression": ["large", "two to three blocks"],
+        "persistence": ["present at all ticks"],
+        "texture_quality": ["soft pixelated edge", "subtle speckle"],
+        "blend_appearance": ["opaque", "normal blend"]
+      },
+      "possible_roles": ["campfire smoke signal", "chimney smoke column", "explosion aftermath puff"],
+      "confidence": 0.82,
+      "notes": "Slightly clipped by the top edge of threequarter cells, so full height may be underestimated."
+    },
+    "minecraft_dripping_dripstone_lava": {
+      "visibility": "faint",
+      "description": "Sparse tiny orange square droplets (3-5 per frame) float in mid-air at scattered heights in front/threequarter t3 and t8; by t20 they appear as small red-orange marks resting on the grass at the right side. Top t20 also shows a few small red-orange dashes among the background debris.",
+      "properties": {
+        "dominant_colors": ["orange", "red-orange"],
+        "shape": ["tiny rounded squares", "droplet specks"],
+        "motion": ["falling or dripping", "settling to ground"],
+        "brightness": ["saturated", "medium bright"],
+        "density": ["very sparse"],
+        "scale_impression": ["tiny", "sub-block specks"],
+        "persistence": ["present at all ticks"],
+        "texture_quality": ["flat pixel sprites"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["lava drip telegraph", "dripping hazard particles", "falling ember motes"],
+      "confidence": 0.7,
+      "notes": "Very few pixels per frame; easy to miss at normal scale."
+    },
+    "minecraft_effect": {
+      "visibility": "faint",
+      "description": "A loose cluster of 5-6 white/pale spiral-ring outline particles hovers just above the horizon at front t3, with a faint remnant in threequarter t3. Completely gone by t8 in all angles; top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["white", "pale gray"],
+        "shape": ["open spiral rings", "swirl outlines", "hollow circles"],
+        "motion": ["swirling", "dissipating"],
+        "brightness": ["pale", "translucent"],
+        "density": ["sparse cluster"],
+        "scale_impression": ["small", "sub-block rings"],
+        "persistence": ["single tick only", "gone by t8"],
+        "texture_quality": ["thin outlines", "translucent"],
+        "blend_appearance": ["translucent alpha"]
+      },
+      "possible_roles": ["potion effect swirl", "status effect indicator", "magic aura motes"],
+      "confidence": 0.75,
+      "notes": "Distinctive spiral rings confirmed in magnified crop; very short-lived."
+    },
+    "minecraft_falling_dripstone_lava": {
+      "visibility": "faint",
+      "description": "A few small bright orange-red flat dashes lie on the grass at ground level in front/threequarter views (1-4 per frame) at all ticks. Top view shows orange-red specks embedded in the background debris cluster at t3/t8 and a lone dash at t20.",
+      "properties": {
+        "dominant_colors": ["bright orange", "red"],
+        "shape": ["short flat dashes", "tiny squares on ground"],
+        "motion": ["settled", "mostly static"],
+        "brightness": ["bright saturated"],
+        "density": ["very sparse"],
+        "scale_impression": ["tiny specks"],
+        "persistence": ["present at all ticks"],
+        "texture_quality": ["flat pixel sprites"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["landed lava droplets", "ground embers", "hazard ground marks"],
+      "confidence": 0.68,
+      "notes": "Particles rest at ground level; distinguishable from the brown debris pile by color."
+    },
+    "minecraft_fishing": {
+      "visibility": "faint",
+      "description": "A small cluster of roughly 8-10 dark-blue irregular droplet/blob specks sits just above the horizon at t3 in front and threequarter views; only 2-3 faint blue specks remain at t8; nothing at t20. Top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["dark blue", "navy"],
+        "shape": ["irregular small blobs", "droplet specks"],
+        "motion": ["brief burst", "settling downward"],
+        "brightness": ["dark", "muted"],
+        "density": ["sparse"],
+        "scale_impression": ["small specks"],
+        "persistence": ["t3 to t8 only", "gone by t20"],
+        "texture_quality": ["flat pixel blobs"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["water splash droplets", "fishing bobber splash", "splash impact particles"],
+      "confidence": 0.7,
+      "notes": "Low-contrast dark blue on blue sky reduces apparent visibility."
+    },
+    "minecraft_infested": {
+      "visibility": "faint",
+      "description": "Roughly 6-8 dark gray angular spiky specks — small bug/mite-shaped motes — cluster above the horizon at front t3 and 3-4 at threequarter t3; all side views are empty at t8 and t20. Top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["dark gray", "black"],
+        "shape": ["angular spiky specks", "insect-like motes", "x-shaped flecks"],
+        "motion": ["brief hover scatter"],
+        "brightness": ["dark", "muted"],
+        "density": ["sparse cluster"],
+        "scale_impression": ["tiny specks"],
+        "persistence": ["single tick only"],
+        "texture_quality": ["rough pixelated"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["infestation motes", "silverfish swarm cue", "decay or curse particles"],
+      "confidence": 0.75,
+      "notes": "Magnified crop shows spiky critter silhouettes rather than plain dots."
+    },
+    "minecraft_lava": {
+      "visibility": "clear",
+      "description": "At front t3 a loose vertical spray of ~15-20 irregular dark-gray/black chunky specks rises above the horizon with a tiny orange ember near the top edge; only a few specks remain by t8. Threequarter shows a handful of drifting dark specks still in mid-air at t8 and even t20. Top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["dark gray", "black", "hint of orange"],
+        "shape": ["irregular chunky specks", "small debris blobs"],
+        "motion": ["rising upward", "scattering spray"],
+        "brightness": ["dark specks", "one bright ember"],
+        "density": ["moderate at t3", "thinning fast"],
+        "scale_impression": ["small specks"],
+        "persistence": ["strong at t3", "residual drift to t20"],
+        "texture_quality": ["rough pixelated"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["lava burst debris", "fire splash aftermath", "molten impact smoke"],
+      "confidence": 0.62,
+      "notes": "Mostly dark smoke-like specks rather than the expected orange; the tiny orange speck is only at the top edge."
+    },
+    "minecraft_scrape": {
+      "visibility": "faint",
+      "description": "A sparse cluster of small pale teal-green 4-point star sparkles hovers just above the horizon at t3 and t8 in front and threequarter views (about 4-6 per frame); gone by t20. Top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["teal", "pale green", "mint"],
+        "shape": ["small four-point stars", "sparkle crosses"],
+        "motion": ["hovering", "slowly fading"],
+        "brightness": ["muted pastel"],
+        "density": ["sparse"],
+        "scale_impression": ["small specks"],
+        "persistence": ["t3 and t8", "gone by t20"],
+        "texture_quality": ["flat sparkle sprites"],
+        "blend_appearance": ["semi-translucent"]
+      },
+      "possible_roles": ["oxidation scrape sparkles", "shimmer glint", "arcane dust trail"],
+      "confidence": 0.72,
+      "notes": "Fewer and dimmer than the world_event scrape variant; star shapes verified in crop."
+    },
+    "minecraft_sonic_boom": {
+      "visibility": "clear",
+      "description": "One giant flat saturated teal disc/ellipse sits low over the horizon at t3 in front and threequarter views (~3-4 blocks wide, partially clipped by the cell top); both angles are completely empty at t8 and t20. Top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["teal", "cyan"],
+        "shape": ["huge solid disc", "wide ellipse"],
+        "motion": ["single pulse", "no residual"],
+        "brightness": ["flat saturated"],
+        "density": ["single solid mass"],
+        "scale_impression": ["very large", "several blocks wide"],
+        "persistence": ["single tick only"],
+        "texture_quality": ["flat uniform fill", "pixelated edge"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["shockwave ring", "sonic blast projectile", "expanding pulse telegraph"],
+      "confidence": 0.85,
+      "notes": "Reads as a solid disc rather than a ring at this capture tick; may be mid-expansion."
+    },
+    "minecraft_trial_spawner_detection": {
+      "visibility": "faint",
+      "description": "Four to five tiny vertical orange dashes — elongated rounded rectangles with pale peach/white cores — hang in a loose vertical column above the horizon at front t3 only; every other frame including all threequarter and top cells is empty except background debris.",
+      "properties": {
+        "dominant_colors": ["orange", "pale peach core"],
+        "shape": ["tiny vertical streaks", "elongated dashes"],
+        "motion": ["static flicker"],
+        "brightness": ["bright core", "saturated edge"],
+        "density": ["very sparse"],
+        "scale_impression": ["tiny marks"],
+        "persistence": ["single tick only"],
+        "texture_quality": ["flat pixel sprites"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["detection ping", "spawner warning markers", "scanning beam segments"],
+      "confidence": 0.7,
+      "notes": "Visible only from the front camera; confirms a very localized/small effect."
+    },
+    "minecraft_witch": {
+      "visibility": "clear",
+      "description": "A cluster of roughly 5-7 magenta-purple X-shaped sparkles plus a few small purple dots floats above the horizon at front t3, with a fainter version at threequarter t3; all frames are empty by t8. Top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["magenta", "purple", "dark purple"],
+        "shape": ["x-shaped sparkles", "star-cross motes", "small dots"],
+        "motion": ["brief hover", "vanishing"],
+        "brightness": ["saturated", "medium bright"],
+        "density": ["moderate small cluster"],
+        "scale_impression": ["small particles"],
+        "persistence": ["single tick only"],
+        "texture_quality": ["flat pixel sparkles"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["witch magic sparkle", "spell cast burst", "potion splash sparkle"],
+      "confidence": 0.8,
+      "notes": "X-shaped sparkle morphology verified in magnified crop."
+    },
+    "world_event_PARTICLES_AND_SOUND_WAX_ON": {
+      "visibility": "clear",
+      "description": "A burst of ~15-20 small orange-gold 4-point star sparkles appears above the horizon at t3 in front and threequarter views, thinning to ~8-10 stars at t8 and nothing at t20. Top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["orange", "amber", "gold"],
+        "shape": ["four-point star sparkles", "small plus shapes"],
+        "motion": ["burst expansion", "drifting and thinning"],
+        "brightness": ["bright saturated"],
+        "density": ["moderate then sparse"],
+        "scale_impression": ["small particles"],
+        "persistence": ["t3 and t8", "gone by t20"],
+        "texture_quality": ["flat sparkle sprites"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["waxing shine burst", "buff applied sparkle", "completion flourish"],
+      "confidence": 0.8,
+      "notes": ""
+    },
+    "world_event_PARTICLES_SCRAPE": {
+      "visibility": "clear",
+      "description": "A burst of ~12-15 green-teal star/cross sparkles fills the air above the horizon at t3, shrinking to ~6-8 at t8 with a few pale ones still visible at front t20; threequarter is similar through t8. Top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["green-teal", "mint", "seafoam"],
+        "shape": ["star sparkles", "cross motes"],
+        "motion": ["burst then fade"],
+        "brightness": ["muted pastel"],
+        "density": ["moderate then sparse"],
+        "scale_impression": ["small particles"],
+        "persistence": ["t3 through t20", "fading tail"],
+        "texture_quality": ["flat sparkle sprites"],
+        "blend_appearance": ["semi-translucent"]
+      },
+      "possible_roles": ["oxidation scrape burst", "patina removal sparkle", "nature shimmer"],
+      "confidence": 0.78,
+      "notes": "Denser and greener than the minecraft_scrape variant; longer tail."
+    },
+    "world_event_PARTICLES_TRIAL_SPAWNER_SPAWN": {
+      "visibility": "clear",
+      "description": "A dense burst of ~15-20 small orange-yellow flame/teardrop particles rises in a scattered column at t3 with a few dark-gray smoke motes mixed in; ~5-6 flames remain at t8 and 2-3 tiny orange specks at t20. Threequarter shows the same pattern at lower density. Top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["orange", "yellow", "dark gray accents"],
+        "shape": ["teardrop flames", "small fire blobs", "smoke motes"],
+        "motion": ["rising column spray"],
+        "brightness": ["bright saturated cores"],
+        "density": ["dense burst", "thinning fast"],
+        "scale_impression": ["small particles", "tall column"],
+        "persistence": ["strong t3", "residual to t20"],
+        "texture_quality": ["flat flame sprites"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["mob spawn ignition", "spawner activation burst", "summon flames"],
+      "confidence": 0.8,
+      "notes": "Mixed flame + dark smoke specks verified in magnified crop."
+    },
+    "superheroes_cap_shield_trail": {
+      "visibility": "clear",
+      "description": "A single chunky solid-orange blocky blob with a hard-edged stepped pixel silhouette (~1 block) hovers above the horizon and drifts steadily rightward across t3/t8 in front and threequarter views, partially exiting the right edge of the frame by t20. Top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["saturated orange"],
+        "shape": ["blocky stepped blob", "single chunky quad"],
+        "motion": ["horizontal drift rightward", "exits frame by t20"],
+        "brightness": ["bright flat"],
+        "density": ["single solid mass"],
+        "scale_impression": ["about one block"],
+        "persistence": ["present at all ticks"],
+        "texture_quality": ["flat solid pixels", "hard edges"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["projectile trail head", "thrown shield tracer", "energy bolt sprite"],
+      "confidence": 0.72,
+      "notes": "Reads as one moving sprite rather than a particle spray; motion direction consistent across angles."
+    },
+    "superheroes_homelander_flight_boost": {
+      "visibility": "none",
+      "description": "All six front and threequarter frames equal the empty baseline (flat grass plus sky horizon) at every tick; top views contain only the persistent brown dirt-debris background. No effect pixels observed anywhere.",
+      "properties": {
+        "dominant_colors": ["none observed"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["none"],
+        "density": ["none"],
+        "scale_impression": ["none"],
+        "persistence": ["none"],
+        "texture_quality": ["none"],
+        "blend_appearance": ["none"]
+      },
+      "possible_roles": ["unobserved in this capture"],
+      "confidence": 0.6,
+      "notes": "Effect may be sub-threshold, mis-anchored, or produce no particles; pixel-diff vs baseline confirms empty cells."
+    },
+    "superheroes_kratos_hand_burst_1": {
+      "visibility": "faint",
+      "description": "A handful (~6-10) of tiny white specks clusters above the horizon at t3 in front and threequarter views, diminishing to ~3-4 specks at t8 and ~2-3 at t20. Verified in magnified crop — real but extremely small. Top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["white", "pale"],
+        "shape": ["tiny point specks"],
+        "motion": ["slow scatter", "fading"],
+        "brightness": ["pale low-contrast"],
+        "density": ["very sparse"],
+        "scale_impression": ["tiny specks"],
+        "persistence": ["all ticks", "weakening"],
+        "texture_quality": ["flat pixel dots"],
+        "blend_appearance": ["semi-translucent"]
+      },
+      "possible_roles": ["hand burst sparkle", "impact glint residue", "charge-up motes"],
+      "confidence": 0.55,
+      "notes": "White pixels blend into sky at normal scale; visible only after magnification."
+    },
+    "superheroes_repulsor_spark": {
+      "visibility": "clear",
+      "description": "A soft cyan-blue glowing blob (~1 block, pixelated irregular silhouette with a brighter mottled core) floats above the horizon at t3 and t8 in front and threequarter views; only faint cyan residue marks remain at the right edge at t20. Top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["cyan", "light blue", "pale core"],
+        "shape": ["irregular glowing blob", "soft cloud"],
+        "motion": ["slow drift", "fading by t20"],
+        "brightness": ["bright glowing center"],
+        "density": ["single soft mass"],
+        "scale_impression": ["about one block"],
+        "persistence": ["t3 and t8", "faint residue t20"],
+        "texture_quality": ["soft pixelated glow", "mottled core"],
+        "blend_appearance": ["additive-looking glow"]
+      },
+      "possible_roles": ["repulsor blast", "energy projectile", "arc spark discharge"],
+      "confidence": 0.75,
+      "notes": "Softer/glowier than vanilla flat sprites; bright core confirmed in crop."
+    },
+    "superheroes_sword_explosion": {
+      "visibility": "faint",
+      "description": "Roughly 8-10 tiny white specks sit above the horizon at t3 in front view (verified in magnified crop), with a few fainter specks persisting at t8 and t20; threequarter shows a similar sparse scatter. Top views show only background debris.",
+      "properties": {
+        "dominant_colors": ["white", "pale"],
+        "shape": ["tiny point specks"],
+        "motion": ["slow scatter", "fading"],
+        "brightness": ["pale low-contrast"],
+        "density": ["very sparse"],
+        "scale_impression": ["tiny specks"],
+        "persistence": ["all ticks", "weakening"],
+        "texture_quality": ["flat pixel dots"],
+        "blend_appearance": ["semi-translucent"]
+      },
+      "possible_roles": ["explosion sparkle residue", "sword burst glints", "impact flash motes"],
+      "confidence": 0.5,
+      "notes": "Nearly identical appearance to superheroes_kratos_hand_burst_1 in this capture set; very low pixel budget."
+    }
+  }
+}

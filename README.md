@@ -26,8 +26,9 @@ Jev stage 2 — single Choice over the top pool
 top-10: {rank, id, source, kind, noul_relevance, choice_probability, summary}
 ```
 
-Measured end-to-end: **~1.0 s per query**, ~78k input tokens/query on the
-4.4k-resource catalog (candidate-filtered to ~200 answerable entries).
+Measured end-to-end: **~3.1 s per query**, ~330k input tokens/query on the
+4.4k-resource catalog (candidate-filtered to ~200 answerable entries,
+all with full measured+visual enrichment).
 
 ## Layout
 
@@ -51,17 +52,19 @@ Measured end-to-end: **~1.0 s per query**, ~78k input tokens/query on the
 pip install -e .            # python >=3.10, deps: httpx, pytest
 export TYPESAFE_API_KEY=…   # live TypeSafe/Jev key
 
-# rebuild the catalog from committed dumps
+# rebuild the catalog from committed dumps + all visual passes
 python -m jevlab.build_catalog --data-dir data \
-    --visual-pass data/visual/pass_a.json \
-    --visual-pass data/visual/pass_b.json
+    --exceptions data/capture/exceptions.json \
+    $(for f in data/visual/batches/batch_*.json data/visual/batches_b/group_*.json; do \
+      printf -- "--visual-pass %s " "$f"; done)
 
 # ask for an effect — real Jev calls, top-10 JSON
 python -m jevlab.find_effects "a cold blue beam that holds for a second" \
-    --top-k 10 --no-query-cache
+    --top-k 10 --batch-size 12 --stage2-pool 12 --no-query-cache
 
 # run the Codex ability eval (12 real ability descriptions)
-python -m jevlab.evals.run_eval --out data/evals/results.json
+python -m jevlab.evals.run_eval --out data/evals/results_full_enrichment.json \
+    --batch-size 12 --stage2-pool 12 --no-query-cache
 ```
 
 ## Tests
@@ -76,11 +79,18 @@ pytest tests/ -m typesafe  # 2 live API tests, needs TYPESAFE_API_KEY
 - catalog **4,430** resources: 142 particle types, 82 world events, 5 photon
   .fx, 6 meshes, 130 photon shaders/postfx, 3,910 textures, 15 quasar emitters,
   132 quasar particle defs, 8 composites — **0 build diagnostics**
-- measured layer: 9 captured shots (multi-angle × multi-tick, real Minecraft)
-- visual layer: 9 shots × 2 independent passes; 31/91 disagreement flags
-  (token-normalized incl. singularization + domain stopwords)
-- Codex eval: **recall@10 = 0.56–0.58** across two live runs (28–29/50
-  expected ids), 12/12 cases with ≥1 hit, ~1.0 s/query, ~938k input tokens
+- measured layer: **197 captured shots** (3 angles × 3 ticks, real
+  Minecraft; every shot spawned server-side particles)
+- visual layer: **197/197 shots annotated** — pass A on all, independent
+  pass B on the 78 ambiguous/low-confidence shots; 73 disagreement flags
+- visual coverage of answerable candidates: **205/205** (197 annotated +
+  8 documented unrenderable composite exceptions)
+- Codex eval at full enrichment (2 identical live runs): **recall@10 =
+  0.50**, hit@1 = 0.42, hit@3 = 0.83, hit@10 = 0.92, MRR = 0.618,
+  ~3.1 s/query, ~330k input tokens/query. Full visual enrichment
+  *regressed* recall vs the 0.56–0.58 baseline — measured layer alone
+  scored 0.68 under identical config; attribution matrix in
+  docs/evaluation.md.
 - 37 tests green (35 offline + 2 live)
 
 See `docs/architecture.md` for design, `docs/evaluation.md` for full eval

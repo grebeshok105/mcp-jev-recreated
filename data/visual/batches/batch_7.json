@@ -1,0 +1,346 @@
+{
+  "observations": {
+    "minecraft_campfire_cosy_smoke": {
+      "visibility": "clear",
+      "description": "a single puffy light grey-beige cloud hovering in the sky above the horizon anchor, slowly morphing shape and drifting; visible at t3, t8 and t20 in front and threequarter views; not discernible in any top view (only the background dirt debris there)",
+      "properties": {
+        "dominant_colors": ["light grey", "beige", "tan"],
+        "shape": ["puffy blob", "cauliflower cloud"],
+        "motion": ["slow drift", "gentle morphing"],
+        "brightness": ["medium", "soft"],
+        "density": ["single puff", "compact"],
+        "scale_impression": ["medium-large", "player-height cloud"],
+        "persistence": ["persists across all ticks"],
+        "texture_quality": ["soft noisy cluster sprite"],
+        "blend_appearance": ["translucent alpha"]
+      },
+      "possible_roles": ["campfire smoke plume", "chimney smoke", "ambient hearth smoke", "cozy environment ambience"],
+      "confidence": 0.85,
+      "notes": "absent from top view - likely outside the top camera framing or too faint from above"
+    },
+    "minecraft_dragon_breath": {
+      "visibility": "clear",
+      "description": "compact cloud of vivid magenta-fuchsia specks with a partial internal gap, floating mid-air; present at all ticks in front and threequarter views, slightly shrunken by t20; nothing visible in top view",
+      "properties": {
+        "dominant_colors": ["magenta", "fuchsia", "purple-pink"],
+        "shape": ["speckled blob cluster", "ring-ish gap"],
+        "motion": ["slow drift", "slight contraction"],
+        "brightness": ["vivid", "saturated"],
+        "density": ["dense speckled cluster"],
+        "scale_impression": ["small-medium cloud"],
+        "persistence": ["all ticks", "diminishing by t20"],
+        "texture_quality": ["fine square particles"],
+        "blend_appearance": ["mostly opaque", "alpha edges"]
+      },
+      "possible_roles": ["breath weapon cloud", "magic gas", "status aoe marker", "dragon breath residue"],
+      "confidence": 0.9,
+      "notes": ""
+    },
+    "minecraft_dust_plume": {
+      "visibility": "faint",
+      "description": "two small loose clusters of grey-brown specks near the top edge of the front t3 cell only; a couple of matching specks in threequarter t3; nothing at t8 or t20 and nothing in top view",
+      "properties": {
+        "dominant_colors": ["grey", "grey-brown"],
+        "shape": ["scattered speck clusters"],
+        "motion": ["risen high quickly", "dispersing"],
+        "brightness": ["muted"],
+        "density": ["very sparse"],
+        "scale_impression": ["tiny specks"],
+        "persistence": ["t3 only"],
+        "texture_quality": ["fine square specks"],
+        "blend_appearance": ["opaque specks"]
+      },
+      "possible_roles": ["dust kick", "landing dust", "plume settling", "footstep puff"],
+      "confidence": 0.55,
+      "notes": "particles sit at the very top edge of the frame at t3 - the plume may have already risen out of its dense phase, or the emission is partly clipped by the frame"
+    },
+    "minecraft_explosion_emitter": {
+      "visibility": "clear",
+      "description": "a massive billowing grey-white smoke cloud fills most of the frame at t3 from all angles including top view, where it spreads over the ground; almost entirely dissipated by t8 (only faint residual wisps in threequarter and top t8) and fully gone by t20",
+      "properties": {
+        "dominant_colors": ["grey", "white", "dark grey"],
+        "shape": ["large billowing cloud"],
+        "motion": ["rapid expansion", "fast dissipation"],
+        "brightness": ["bright white highlights", "grey body"],
+        "density": ["very dense"],
+        "scale_impression": ["huge", "fills view"],
+        "persistence": ["single burst at t3"],
+        "texture_quality": ["noisy billow sprites"],
+        "blend_appearance": ["translucent layered"]
+      },
+      "possible_roles": ["explosion aftermath", "bomb burst", "cannon blast", "impact smoke"],
+      "confidence": 0.95,
+      "notes": ""
+    },
+    "minecraft_firework": {
+      "visibility": "clear",
+      "description": "clusters of white x-shaped sparkle bursts floating in the sky at t3 and t8 in front and threequarter views; in the top view at t8 the same effect appears as a wide scatter of white square sparkles spread over the grass; everything gone by t20",
+      "properties": {
+        "dominant_colors": ["white", "pale yellow-white"],
+        "shape": ["x-shaped star sparkles"],
+        "motion": ["outward scatter", "fade"],
+        "brightness": ["bright"],
+        "density": ["moderate clustered scatter"],
+        "scale_impression": ["small sprites", "wide spread"],
+        "persistence": ["t3-t8", "gone by t20"],
+        "texture_quality": ["crisp sparkle sprites"],
+        "blend_appearance": ["opaque bright"]
+      },
+      "possible_roles": ["firework burst", "celebration sparkles", "magic star burst", "sparkle emitter"],
+      "confidence": 0.9,
+      "notes": "top view at t8 shows the sparkles scattered on the ground plane - particles fall rather than stay airborne"
+    },
+    "minecraft_heart": {
+      "visibility": "clear",
+      "description": "a single pixel-art red heart sprite floating in the sky at t3 in the front view, with only a tiny red speck clipped at the top edge of the threequarter t3 cell; nothing at t8 or t20 and nothing in top view",
+      "properties": {
+        "dominant_colors": ["red"],
+        "shape": ["heart icon"],
+        "motion": ["single rising emission"],
+        "brightness": ["saturated"],
+        "density": ["single sprite"],
+        "scale_impression": ["medium sprite"],
+        "persistence": ["t3 only"],
+        "texture_quality": ["flat pixel-art heart"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["heal feedback", "taming/love indicator", "regen buff cue", "pet affection"],
+      "confidence": 0.9,
+      "notes": "only one heart particle captured - the effect appears to be a single-emission icon"
+    },
+    "minecraft_large_smoke": {
+      "visibility": "clear",
+      "description": "a dense cluster of black and dark-grey square smoke particles at t3 in front and threequarter views, high in the frame; one stray speck lingers at front t8; nothing at t20 and nothing in top view",
+      "properties": {
+        "dominant_colors": ["black", "dark grey"],
+        "shape": ["irregular speckled blob"],
+        "motion": ["brief burst", "quick dispersion"],
+        "brightness": ["dark"],
+        "density": ["dense cluster"],
+        "scale_impression": ["medium cluster"],
+        "persistence": ["essentially t3 only"],
+        "texture_quality": ["chunky square particles"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["dark smoke puff", "exhaust burst", "combustion byproduct", "smoke stack puff"],
+      "confidence": 0.85,
+      "notes": "despite the shot name the visible cluster is small-medium and very brief"
+    },
+    "minecraft_reverse_portal": {
+      "visibility": "clear",
+      "description": "a small swirling vortex of purple-magenta particles forming an elongated spiral shape, present at t3 and t8 in front and threequarter views; gone by t20; nothing in top view",
+      "properties": {
+        "dominant_colors": ["purple", "magenta", "violet"],
+        "shape": ["spiral swirl", "vortex"],
+        "motion": ["swirling drift"],
+        "brightness": ["vivid"],
+        "density": ["tight moderate cluster"],
+        "scale_impression": ["small"],
+        "persistence": ["t3-t8"],
+        "texture_quality": ["speckled swirl particles"],
+        "blend_appearance": ["mixed alpha"]
+      },
+      "possible_roles": ["portal swirl", "teleport effect", "ender magic", "dimensional rift"],
+      "confidence": 0.85,
+      "notes": ""
+    },
+    "minecraft_snowflake": {
+      "visibility": "clear",
+      "description": "several white hexagonal snowflake-shaped sprites drifting downward at t3 in front and threequarter views, thinning to a few small white specks at t8 and only a couple of specks by t20 (front view); top view shows only the background dirt debris and a few white specks near the frame edge at t20",
+      "properties": {
+        "dominant_colors": ["white"],
+        "shape": ["hexagonal snowflake glyphs"],
+        "motion": ["slow downward drift", "scattering"],
+        "brightness": ["bright white"],
+        "density": ["sparse group", "thinning over time"],
+        "scale_impression": ["small-medium sprites"],
+        "persistence": ["t3 strong", "t8 sparse", "t20 nearly gone"],
+        "texture_quality": ["crisp snowflake sprite"],
+        "blend_appearance": ["mostly opaque"]
+      },
+      "possible_roles": ["snowfall ambience", "frost/ice spell", "cold weather cue", "freeze effect"],
+      "confidence": 0.9,
+      "notes": ""
+    },
+    "minecraft_trial_omen": {
+      "visibility": "clear",
+      "description": "two small cyan-teal skull-shaped sprites floating in the sky at t3 in the front view, plus one clipped teal speck at the top edge of the threequarter t3 cell; nothing at t8 or t20 and nothing in top view",
+      "properties": {
+        "dominant_colors": ["cyan", "teal"],
+        "shape": ["skull icon"],
+        "motion": ["single emitted pair"],
+        "brightness": ["saturated"],
+        "density": ["two sprites"],
+        "scale_impression": ["small"],
+        "persistence": ["t3 only"],
+        "texture_quality": ["flat glyph sprite"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["ominous event marker", "trial trigger cue", "curse indicator", "boss warning"],
+      "confidence": 0.85,
+      "notes": "zoomed crop confirms a distinct skull-face silhouette on both sprites; particles sit high in the frame"
+    },
+    "minecraft_white_smoke": {
+      "visibility": "faint",
+      "description": "a loose cluster of pale pinkish-white specks at t3 in front and threequarter views; nothing at t8 or t20 and nothing in top view",
+      "properties": {
+        "dominant_colors": ["pale white", "faint pink"],
+        "shape": ["scattered speck cluster"],
+        "motion": ["brief wisp", "fast fade"],
+        "brightness": ["pale", "low contrast"],
+        "density": ["sparse"],
+        "scale_impression": ["small"],
+        "persistence": ["t3 only"],
+        "texture_quality": ["fine specks"],
+        "blend_appearance": ["translucent"]
+      },
+      "possible_roles": ["gentle steam wisp", "potion mist", "small smoke puff", "dissipating vapor"],
+      "confidence": 0.7,
+      "notes": "low contrast against the sky - the emission may be under-dense or nearly finished by t3"
+    },
+    "world_event_PARTICLES_AND_SOUND_PLANT_GROWTH": {
+      "visibility": "none",
+      "description": "every cell matches the empty baseline - flat grass and sky horizon in front and threequarter views, grass plus the persistent brown dirt debris in top views; no particles at any angle or tick",
+      "properties": {
+        "dominant_colors": ["none observed"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["n/a"],
+        "density": ["none"],
+        "scale_impression": ["none"],
+        "persistence": ["none"],
+        "texture_quality": ["none"],
+        "blend_appearance": ["none"]
+      },
+      "possible_roles": ["plant growth sparkle", "crop growth cue", "bonemeal feedback"],
+      "confidence": 0.8,
+      "notes": "pixel-level diff against the empty baseline sheet is zero in every front and threequarter cell - the expected green growth sparkles were not captured; they may have spawned below the frame or failed to emit"
+    },
+    "world_event_PARTICLES_MOBBLOCK_SPAWN": {
+      "visibility": "clear",
+      "description": "a wide burst of small orange-yellow flame sprites mixed with dark smoke specks scattered across the upper frame at t3 in front and threequarter views; a few residual flames near the top edge at front t8; gone by t20; nothing in top view",
+      "properties": {
+        "dominant_colors": ["orange", "yellow", "black"],
+        "shape": ["small flame tongues", "smoke specks"],
+        "motion": ["scattered rising", "quick fade"],
+        "brightness": ["bright warm"],
+        "density": ["wide moderate scatter"],
+        "scale_impression": ["small flames"],
+        "persistence": ["essentially t3 only"],
+        "texture_quality": ["crisp flame sprites"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["mob spawn burst", "summon effect", "ignition ring", "spawner activation"],
+      "confidence": 0.9,
+      "notes": ""
+    },
+    "world_event_PARTICLES_TRIAL_SPAWNER_DETECT_PLAYER_OMINOUS": {
+      "visibility": "faint",
+      "description": "a sparse vertical trail of tiny teal-cyan specks descending from the top edge of the front t3 cell only; every other cell at every angle and tick is empty baseline",
+      "properties": {
+        "dominant_colors": ["teal", "cyan"],
+        "shape": ["tiny elongated specks"],
+        "motion": ["falling inward from above"],
+        "brightness": ["saturated but small"],
+        "density": ["very sparse"],
+        "scale_impression": ["tiny"],
+        "persistence": ["t3 only"],
+        "texture_quality": ["fine specks"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["detection cue", "ominous activation", "warning particle stream"],
+      "confidence": 0.6,
+      "notes": "specks enter from above the frame - the main body of the effect is likely above the captured area"
+    },
+    "superheroes_cap_shield_slam_burst": {
+      "visibility": "clear",
+      "description": "a small cluster of soft round cream-white puffs present at all ticks in front and threequarter views, drifting laterally and gradually fading by t20; nothing in top view",
+      "properties": {
+        "dominant_colors": ["cream", "white"],
+        "shape": ["round soft puffs"],
+        "motion": ["slow lateral drift", "gradual fade"],
+        "brightness": ["pale", "soft"],
+        "density": ["few puffs", "sparse"],
+        "scale_impression": ["small-medium"],
+        "persistence": ["t3-t20", "fading"],
+        "texture_quality": ["soft blurry sprites"],
+        "blend_appearance": ["translucent alpha"]
+      },
+      "possible_roles": ["impact puff", "slam burst residue", "melee hit feedback", "shockwave dust"],
+      "confidence": 0.8,
+      "notes": ""
+    },
+    "superheroes_homelander_clap_flash": {
+      "visibility": "none",
+      "description": "every cell equals the empty baseline - no particles at any angle or any tick; top views show only the background dirt debris",
+      "properties": {
+        "dominant_colors": ["none observed"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["n/a"],
+        "density": ["none"],
+        "scale_impression": ["none"],
+        "persistence": ["none"],
+        "texture_quality": ["none"],
+        "blend_appearance": ["none"]
+      },
+      "possible_roles": ["clap flash", "shockwave flash", "aoe burst cue"],
+      "confidence": 0.75,
+      "notes": "a flash effect may decay before the first capture tick t3, or the emission failed; this sheet was also used as the pixel baseline and shows zero diffs in all cells"
+    },
+    "superheroes_jiwald_effect": {
+      "visibility": "clear",
+      "description": "a bright white angular shape built of overlapping squares, resembling a stepped glyph or folded sigil, hovering above the horizon at all ticks in front and threequarter views; slightly smaller and noticeably translucent by t20; nothing in top view",
+      "properties": {
+        "dominant_colors": ["white"],
+        "shape": ["angular stepped glyph", "blocky sigil"],
+        "motion": ["slow drift", "gradual fade"],
+        "brightness": ["bright white"],
+        "density": ["solid overlapping cluster"],
+        "scale_impression": ["medium"],
+        "persistence": ["t3-t20", "fading by t20"],
+        "texture_quality": ["hard-edged flat quads"],
+        "blend_appearance": ["mostly opaque", "translucent by t20"]
+      },
+      "possible_roles": ["energy glyph", "signature ability mark", "energy core", "hero power indicator"],
+      "confidence": 0.75,
+      "notes": "the shape reads as a stylized glyph rather than an organic particle - possibly a single large quad or a tight formation"
+    },
+    "superheroes_purple_flame": {
+      "visibility": "clear",
+      "description": "a cluster of purple-magenta flame tongues with bright whitish cores rising above the anchor at all ticks in front and threequarter views; in the top view at t20 the same effect appears as huge soft translucent purple billboards covering part of the frame",
+      "properties": {
+        "dominant_colors": ["purple", "magenta", "white cores"],
+        "shape": ["flame tongues", "giant translucent quads from top"],
+        "motion": ["flickering rise", "drift"],
+        "brightness": ["vivid", "bright cores"],
+        "density": ["moderate cluster"],
+        "scale_impression": ["medium flames", "large billboards from top"],
+        "persistence": ["all ticks"],
+        "texture_quality": ["crisp flame sprites side-on", "soft quads from top"],
+        "blend_appearance": ["translucent", "additive look"]
+      },
+      "possible_roles": ["magic flame", "enchanted fire", "damaging fire patch", "dark fire aura"],
+      "confidence": 0.85,
+      "notes": "top-view quads confirm the effect renders as camera-facing billboards - from above they fill large screen areas"
+    },
+    "superheroes_sun_particle": {
+      "visibility": "clear",
+      "description": "a small cluster of golden four-point star sparkles floating above the horizon at t3 and t8 in front and threequarter views, reduced to a faint sparkle remnant at t20; nothing in top view",
+      "properties": {
+        "dominant_colors": ["gold", "yellow"],
+        "shape": ["four-point star sparkles"],
+        "motion": ["gentle hover drift", "slow fade"],
+        "brightness": ["bright warm"],
+        "density": ["few sprites", "sparse"],
+        "scale_impression": ["small"],
+        "persistence": ["t3-t20", "diminishing"],
+        "texture_quality": ["crisp sparkle sprites"],
+        "blend_appearance": ["mostly opaque"]
+      },
+      "possible_roles": ["radiant sparkle", "buff aura", "heal shimmer", "sun-themed accent"],
+      "confidence": 0.85,
+      "notes": ""
+    }
+  }
+}

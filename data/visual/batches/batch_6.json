@@ -1,0 +1,364 @@
+{
+  "observations": {
+    "minecraft_bubble_pop": {
+      "visibility": "none",
+      "description": "All front and threequarter frames at every tick equal the empty baseline (flat grass + sky). The top row shows only the standard background pattern present on every sheet in this batch: a brown dirt-debris pile at t3, scattered small brown block chunks at t8, clean grass at t20. No distinguishable effect particles anywhere.",
+      "properties": {
+        "dominant_colors": ["green", "brown"],
+        "shape": ["scattered block chunks"],
+        "motion": ["none"],
+        "brightness": ["flat daylight"],
+        "density": ["empty"],
+        "scale_impression": ["none visible"],
+        "persistence": ["no effect seen"],
+        "texture_quality": ["only background debris"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["subtle ambient effect possibly below capture threshold"],
+      "confidence": 0.7,
+      "notes": "Top-row brown chunks are the same background debris event seen on every other sheet, so they are not counted as the effect. Effect itself produced no visible pixels."
+    },
+    "minecraft_dolphin": {
+      "visibility": "faint",
+      "description": "Front t3: a loose cluster of small blue specks floating in the sky above the horizon, left of center. Front t8: fewer, higher, fainter blue specks. Threequarter t3 shows a similar small blue speck cluster; t8 only 2-3 specks. Nothing by t20. Top row shows only background debris.",
+      "properties": {
+        "dominant_colors": ["blue"],
+        "shape": ["small square specks"],
+        "motion": ["drifting upward", "dispersing"],
+        "brightness": ["moderate"],
+        "density": ["sparse", "thin cluster"],
+        "scale_impression": ["tiny points"],
+        "persistence": ["gone by t20"],
+        "texture_quality": ["simple pixel dots"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["water creature ambient sparkle", "buff indicator motes", "swim speed effect"],
+      "confidence": 0.6,
+      "notes": "Only a handful of blue specks; they read as airborne sparkles rather than a body of water."
+    },
+    "minecraft_dust_pillar": {
+      "visibility": "faint",
+      "description": "A single tiny dark gray-purple smudge sitting on the grass near frame center at t3 only (front and threequarter). Nothing at t8 or t20 in any angle. Top row shows only background debris.",
+      "properties": {
+        "dominant_colors": ["dark gray"],
+        "shape": ["small smudge"],
+        "motion": ["static", "gone instantly"],
+        "brightness": ["dim"],
+        "density": ["single speck"],
+        "scale_impression": ["very small"],
+        "persistence": ["one frame only"],
+        "texture_quality": ["soft blob"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["ground dust puff", "landing dust", "footstep dust"],
+      "confidence": 0.35,
+      "notes": "Only one ambiguous speck separates this from an empty baseline; a pillar-shaped column is not visible at any tick."
+    },
+    "minecraft_explosion": {
+      "visibility": "clear",
+      "description": "Front t3 only: a striking white stair-step diagonal streak of square particles ascending from near the ground into the upper sky, like a column of bright blocks climbing rightward. Front t8 and t20 empty. Threequarter row empty at all ticks. Top row shows only background debris.",
+      "properties": {
+        "dominant_colors": ["white"],
+        "shape": ["diagonal staircase of squares", "linear streak"],
+        "motion": ["climbing", "directed upward"],
+        "brightness": ["bright white"],
+        "density": ["tight single trail"],
+        "scale_impression": ["tall column reach"],
+        "persistence": ["single frame burst"],
+        "texture_quality": ["blocky squares"],
+        "blend_appearance": ["bright additive look"]
+      },
+      "possible_roles": ["explosion flash trail", "launch trail", "beam strike"],
+      "confidence": 0.6,
+      "notes": "Visible only in the front camera at t3; the diagonal white staircase is unusual for a radial explosion and may be a directional burst."
+    },
+    "minecraft_falling_water": {
+      "visibility": "faint",
+      "description": "Front t3: a tiny cluster of about five small blue specks low on the grass near center. Threequarter t3: a few similar blue specks near the horizon. Top t3: two larger blue square specks and a couple of blue dots beside the debris pile. Nothing by t8 in any angle.",
+      "properties": {
+        "dominant_colors": ["blue"],
+        "shape": ["tiny droplet specks"],
+        "motion": ["settling low", "brief"],
+        "brightness": ["medium"],
+        "density": ["very sparse"],
+        "scale_impression": ["small droplets"],
+        "persistence": ["gone by t8"],
+        "texture_quality": ["pixel droplets"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["dripping water", "splash residue", "rain puddle drips"],
+      "confidence": 0.5,
+      "notes": "Only a few blue specks at ground level at t3; no visible column or stream of water."
+    },
+    "minecraft_happy_villager": {
+      "visibility": "clear",
+      "description": "Clusters of bright green cross/star-shaped sparkle particles floating in the sky at t3 and t8 (front and threequarter), with two or three green sparkles still visible at front t20. In threequarter the cluster sits right at the horizon line. Top row shows only background debris.",
+      "properties": {
+        "dominant_colors": ["green", "lime"],
+        "shape": ["four-point star crosses", "sparkle cluster"],
+        "motion": ["floating", "drifting slowly"],
+        "brightness": ["bright", "vivid"],
+        "density": ["moderate cluster"],
+        "scale_impression": ["hand-sized sparkles"],
+        "persistence": ["lasts into t20"],
+        "texture_quality": ["crisp star sprites"],
+        "blend_appearance": ["bright additive look"]
+      },
+      "possible_roles": ["positive buff sparkle", "healing or breeding success indicator", "villager approval cue", "celebration effect"],
+      "confidence": 0.85,
+      "notes": "Green plus/star twinkles are consistent across two ticks and both horizontal angles; unmistakable."
+    },
+    "minecraft_landing_obsidian_tear": {
+      "visibility": "clear",
+      "description": "Small flat purple streaks/dashes lying on the grass, drifting rightward across t3, t8, and t20 in the front and threequarter views. In the top view, short purple dashes appear interleaved with the brown debris chunks at t3 and t8, and two purple dashes remain at t20.",
+      "properties": {
+        "dominant_colors": ["purple", "violet"],
+        "shape": ["flat dashes", "elongated streaks"],
+        "motion": ["sliding along ground", "rightward drift"],
+        "brightness": ["medium"],
+        "density": ["sparse", "few streaks"],
+        "scale_impression": ["short ground streaks"],
+        "persistence": ["persists through t20"],
+        "texture_quality": ["flat quads"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["landing impact marks", "teleport residue", "crystals or shards on ground", "shadow magic traces"],
+      "confidence": 0.7,
+      "notes": "Purple marks hug the ground plane and persist; direction of drift is consistent across angles."
+    },
+    "minecraft_rain": {
+      "visibility": "clear",
+      "description": "Front t3: a loose spray of a dozen-plus small blue droplet specks arcing upward from near the horizon into the sky. Threequarter t3: fewer blue specks above the horizon with a dotted trail down to the grass. Top t3: several blue square specks and dots scattered around the debris pile. Nothing by t8 or t20 anywhere.",
+      "properties": {
+        "dominant_colors": ["blue", "sky blue"],
+        "shape": ["small droplet specks", "arcing spray"],
+        "motion": ["scattering upward", "burst-like"],
+        "brightness": ["medium"],
+        "density": ["loose spray"],
+        "scale_impression": ["small droplets"],
+        "persistence": ["single frame"],
+        "texture_quality": ["pixel dots"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["splash burst", "water impact spray", "weather precipitation cue"],
+      "confidence": 0.6,
+      "notes": "A one-tick scatter of blue droplets rather than ongoing rainfall; gone immediately after t3."
+    },
+    "minecraft_sneeze": {
+      "visibility": "clear",
+      "description": "Front t3: a cluster of cyan/aqua plus-shaped sparkle particles in the upper sky. Front t8: a few higher, sparser cyan sparkles. Threequarter t3: cyan sparkle cluster at the top edge of the frame. Top t3: a clump of cyan plus sparkles sitting on/above the debris pile. Everything gone by t20.",
+      "properties": {
+        "dominant_colors": ["cyan", "aqua"],
+        "shape": ["plus-shaped sparkles", "cross stars"],
+        "motion": ["drifting up", "dispersing"],
+        "brightness": ["bright"],
+        "density": ["moderate cluster thinning"],
+        "scale_impression": ["small sparkles"],
+        "persistence": ["fades by t8-t20"],
+        "texture_quality": ["crisp sparkle sprites"],
+        "blend_appearance": ["bright additive look"]
+      },
+      "possible_roles": ["sneeze or burst discharge", "sparkle pop", "magic puff", "status sparkle"],
+      "confidence": 0.75,
+      "notes": "Same cross-star sprite family as happy_villager but cyan instead of green; dissipates faster."
+    },
+    "minecraft_totem_of_undying": {
+      "visibility": "clear",
+      "description": "Chunky square-ish blobs in green and yellow/gold clustered low over the grass at t3 (front and threequarter), fewer at t8, and only two faint green specks left at t20. In the top view, large green and yellow pixel-blobs mix with the brown debris at t3 and t8.",
+      "properties": {
+        "dominant_colors": ["green", "yellow", "gold"],
+        "shape": ["chunky square blobs", "pixel clusters"],
+        "motion": ["burst then settling", "expanding outward"],
+        "brightness": ["bright", "vivid"],
+        "density": ["dense clump at t3"],
+        "scale_impression": ["large motes"],
+        "persistence": ["mostly gone by t20"],
+        "texture_quality": ["blocky pixel chunks"],
+        "blend_appearance": ["opaque to bright"]
+      },
+      "possible_roles": ["death-save celebration burst", "revival flash", "item activation burst", "level-up sparkle shower"],
+      "confidence": 0.75,
+      "notes": "Big two-tone green/gold mote burst; classic totem palette; heaviest concentration at ground level in the first tick."
+    },
+    "minecraft_white_ash": {
+      "visibility": "faint",
+      "description": "Front t3: about six or seven tiny pale peach-white square specks floating in the sky at various heights, plus one on the grass. Front t8: one or two faint specks remain. Threequarter shows a few pale specks at t3 and t8 near the top of frame. Top t3 has a couple of pale specks beside the debris pile. Nothing by t20.",
+      "properties": {
+        "dominant_colors": ["pale white", "peach"],
+        "shape": ["tiny square specks"],
+        "motion": ["slow drift", "floating"],
+        "brightness": ["dim", "washed out"],
+        "density": ["very sparse"],
+        "scale_impression": ["dust-like points"],
+        "persistence": ["gone by t20"],
+        "texture_quality": ["faint pixel dots"],
+        "blend_appearance": ["soft translucent look"]
+      },
+      "possible_roles": ["ash fall ambience", "post-burn residue drift", "dust motes", "snow-like gentle fall"],
+      "confidence": 0.55,
+      "notes": "Specks are few and very pale; easy to miss at full-sheet scale but confirmed in the zoomed crop."
+    },
+    "world_event_PARTICLES_AND_SOUND_BRUSH_BLOCK_COMPLETE": {
+      "visibility": "clear",
+      "description": "Front t3: a burst of many small gray-brown square debris particles spraying into the sky and littering the grass below, some particles clipped by the top of frame. Threequarter t3: same dark debris burst from a different angle. Only a few faint specks remain at t8; nothing at t20. Top row shows only the standard background debris.",
+      "properties": {
+        "dominant_colors": ["gray", "brown"],
+        "shape": ["small square debris chunks"],
+        "motion": ["burst outward", "scattering", "falling"],
+        "brightness": ["muted"],
+        "density": ["moderate burst"],
+        "scale_impression": ["handful of crumbs"],
+        "persistence": ["mostly gone by t8"],
+        "texture_quality": ["blocky crumbs"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["block brushing completion puff", "excavation dust burst", "block-break debris"],
+      "confidence": 0.75,
+      "notes": "Debris reads darker/grayer than the brown background pile and is clearly airborne at t3."
+    },
+    "world_event_PARTICLES_INSTANT_POTION_SPLASH": {
+      "visibility": "clear",
+      "description": "Front t3: a dense spray of cyan x-shaped sparkle particles fills the upper-left sky, with scattered cyan specks near the horizon. Threequarter t3: the same dense cyan sparkle burst plus a distinct white splash blob sitting on the grass. Only a stray speck at t8; nothing at t20. Top row shows only background debris.",
+      "properties": {
+        "dominant_colors": ["cyan", "white"],
+        "shape": ["x-shaped sparkles", "splash splat"],
+        "motion": ["radial burst", "settling"],
+        "brightness": ["bright"],
+        "density": ["dense burst"],
+        "scale_impression": ["wide splash spread"],
+        "persistence": ["single tick event"],
+        "texture_quality": ["crisp sparkle sprites"],
+        "blend_appearance": ["bright additive look"]
+      },
+      "possible_roles": ["splash potion impact", "potion burst application", "instant effect discharge"],
+      "confidence": 0.85,
+      "notes": "The white splat on the ground at threequarter t3 plus the dense cyan sparkle cloud make a clear splash-impact picture."
+    },
+    "world_event_PARTICLES_TRIAL_SPAWNER_DETECT_PLAYER": {
+      "visibility": "faint",
+      "description": "Front t3 only: several small orange vertical ember rectangles descending from the top edge of the frame, partially cut off by the label bar. Nothing in any other cell; top row shows only background debris.",
+      "properties": {
+        "dominant_colors": ["orange"],
+        "shape": ["small vertical ember rectangles"],
+        "motion": ["falling", "descending"],
+        "brightness": ["warm glow"],
+        "density": ["few embers"],
+        "scale_impression": ["small embers"],
+        "persistence": ["one frame only"],
+        "texture_quality": ["glowing embers"],
+        "blend_appearance": ["warm additive look"]
+      },
+      "possible_roles": ["detection flare embers", "spawner activation sparks", "alert ember shower"],
+      "confidence": 0.5,
+      "notes": "Effect is emitted high above the visible frame; only the lower edge of an ember fall is captured, so the full shape is unknown."
+    },
+    "superheroes_blue_flame": {
+      "visibility": "clear",
+      "description": "A persistent cluster of deep-blue vertical flame-tongue sprites hovering in the sky, present at t3, t8, and t20 in both front and threequarter views, drifting slightly rightward over time. The cluster reads as several licking flame shapes packed together. Top row shows only background debris.",
+      "properties": {
+        "dominant_colors": ["deep blue", "blue"],
+        "shape": ["flame tongues", "licking fire shapes"],
+        "motion": ["hovering", "slow drift", "flicker implied"],
+        "brightness": ["vivid"],
+        "density": ["tight cluster"],
+        "scale_impression": ["torch-sized flame"],
+        "persistence": ["lasts all ticks"],
+        "texture_quality": ["layered flame sprites"],
+        "blend_appearance": ["bright additive look"]
+      },
+      "possible_roles": ["magic blue fire", "flight or power aura", "energy weapon flame", "soul fire ambience"],
+      "confidence": 0.8,
+      "notes": "Unusually persistent compared to the one-burst effects; flame tongue silhouettes are readable at sheet scale."
+    },
+    "superheroes_homelander_clap_dust": {
+      "visibility": "clear",
+      "description": "Front t3: a large radial burst of many tiny dark gray-black debris specks expanding across the upper sky in a roughly circular pattern, with a faint dust smudge near the horizon beneath it. Threequarter t3: a smaller dark debris burst at the frame edge. Only a couple of faint gray wisps at t8; nothing at t20. Top row shows only background debris.",
+      "properties": {
+        "dominant_colors": ["dark gray", "black"],
+        "shape": ["radial debris spray", "expanding ring of specks"],
+        "motion": ["explosive outward burst", "dissipating"],
+        "brightness": ["dark particles"],
+        "density": ["dense then scattering"],
+        "scale_impression": ["wide shockwave scale"],
+        "persistence": ["one main burst frame"],
+        "texture_quality": ["fine grit specks"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["clap shockwave dust", "impact shockwave", "strength burst debris"],
+      "confidence": 0.75,
+      "notes": "The radial expansion pattern reads as a shockwave clap; very different signature from the falling debris background."
+    },
+    "superheroes_homelander_sun_ember": {
+      "visibility": "none",
+      "description": "Every front and threequarter cell at all ticks is the empty baseline. The top row shows only the standard background debris pile pattern (pile t3, scattered chunks t8, clean t20) shared by all sheets. No effect pixels visible anywhere.",
+      "properties": {
+        "dominant_colors": ["green", "brown"],
+        "shape": ["none"],
+        "motion": ["none"],
+        "brightness": ["flat daylight"],
+        "density": ["empty"],
+        "scale_impression": ["none visible"],
+        "persistence": ["no effect seen"],
+        "texture_quality": ["only background debris"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["effect possibly off-frame or below capture threshold"],
+      "confidence": 0.7,
+      "notes": "Zero distinguishable effect particles; the orange glow seen in the sibling sparks shot is absent here."
+    },
+    "superheroes_nightfall": {
+      "visibility": "clear",
+      "description": "Clusters of cyan/turquoise cross-shaped sparkle particles drifting steadily rightward across the sky from t3 to t20 in both front and threequarter views, shrinking to a few sparkles by t20 at the right frame edge. Top t20 additionally shows a large translucent cyan T-shaped glow patch lying on the ground.",
+      "properties": {
+        "dominant_colors": ["cyan", "turquoise"],
+        "shape": ["cross sparkles", "t-shaped glow patch"],
+        "motion": ["lateral drift", "rightward travel"],
+        "brightness": ["bright", "glowing"],
+        "density": ["small cluster"],
+        "scale_impression": ["sparkle cluster plus large glow"],
+        "persistence": ["persists through t20"],
+        "texture_quality": ["crisp sprites and soft glow"],
+        "blend_appearance": ["translucent additive look"]
+      },
+      "possible_roles": ["night or shadow power trail", "magic projectile sparkles", "teleport shimmer", "energy aura sweep"],
+      "confidence": 0.75,
+      "notes": "The large cyan T-shaped glow on the ground at top t20 is unusual — reads as a big soft light quad seen from above."
+    },
+    "superheroes_sparks": {
+      "visibility": "clear",
+      "description": "A cluster of chunky red square-block particles floating in the sky at t3 and t8 (front and threequarter), shifting orange by t20 near the right frame edge. Top t20 shows a large translucent orange-gold glow wash covering much of the ground on the right side.",
+      "properties": {
+        "dominant_colors": ["red", "orange"],
+        "shape": ["blocky pixel chunks", "large glow wash"],
+        "motion": ["drifting rightward", "glow expanding"],
+        "brightness": ["bright", "hot"],
+        "density": ["tight chunk cluster"],
+        "scale_impression": ["big ember blocks plus area glow"],
+        "persistence": ["persists through t20"],
+        "texture_quality": ["hard square sprites and soft glow"],
+        "blend_appearance": ["strong additive glow"]
+      },
+      "possible_roles": ["fire spark burst", "heat blast aura", "ember projectile", "laser or heat vision aftermath"],
+      "confidence": 0.8,
+      "notes": "Red-to-orange shift over time plus the huge ground glow at t20 suggest an expanding heat/fire effect rather than simple sparkles."
+    },
+    "vfxlab_sparkle_sphere": {
+      "visibility": "clear",
+      "description": "A dense spherical cloud of light-blue/cyan sparkle specks floating high in the sky, present at all three ticks in front and threequarter views. The sphere expands and drifts rightward from t3 to t20, becoming larger and more diffuse, with its lower edge reaching toward the horizon by t20. Top row shows only background debris.",
+      "properties": {
+        "dominant_colors": ["light blue", "cyan", "white"],
+        "shape": ["spherical cluster", "round sparkle cloud"],
+        "motion": ["expanding", "drifting rightward"],
+        "brightness": ["bright", "luminous"],
+        "density": ["dense core, diffuse edge"],
+        "scale_impression": ["large ball of light"],
+        "persistence": ["persists through t20"],
+        "texture_quality": ["fine speck cloud"],
+        "blend_appearance": ["soft additive look"]
+      },
+      "possible_roles": ["magic orb", "energy sphere", "sparkle burst celebration", "spell charge-up ball"],
+      "confidence": 0.8,
+      "notes": "Genuinely spherical formation, not a flat spray — consistent volume readable from both horizontal angles."
+    }
+  }
+}

@@ -1,0 +1,2054 @@
+{
+ "cases": [
+  {
+   "name": "homelander_clap",
+   "query": "a very short, powerful air impact burst from a hand clap — a hard flash at the hands, a fast expanding shock ring in front of the player, dust kicked up along the direction, violent but readable, done in under a second",
+   "expected_ids": [
+    "superheroes:homelander_clap_flash",
+    "superheroes:homelander_clap_dust",
+    "superheroes:vfx/clap"
+   ],
+   "top_ids": [
+    "superheroes:homelander_clap_dust",
+    "minecraft:sonic_boom",
+    "minecraft:gust_emitter_large",
+    "minecraft:shriek",
+    "minecraft:world_event/PARTICLES_EYE_OF_ENDER_DEATH",
+    "superheroes:homelander_flight_landing",
+    "minecraft:explosion_emitter",
+    "minecraft:gust",
+    "minecraft:gust_emitter_small",
+    "superheroes:cap_shield_slam_burst"
+   ],
+   "hits": [
+    "superheroes:homelander_clap_dust"
+   ],
+   "missed": [
+    "superheroes:homelander_clap_flash",
+    "superheroes:vfx/clap"
+   ],
+   "hit_at_topk": 0.3333333333333333,
+   "first_hit_rank": 1,
+   "hit_at_1": true,
+   "hit_at_3": true,
+   "hit_at_10": true,
+   "reciprocal_rank": 1.0,
+   "candidates": [
+    {
+     "rank": 1,
+     "id": "superheroes:homelander_clap_dust",
+     "source": "quasar",
+     "kind": "quasar_emitter",
+     "noul_relevance": 0.75,
+     "choice_probability": 0.68,
+     "ready_to_use": true,
+     "summary": "superheroes:homelander_clap_dust: quasar_emitter, clap shockwave dust/impact shockwave/strength burst debris, shape=expanding ring of specks/radial debris spray, motion=dissipating/explosive outward burst"
+    },
+    {
+     "rank": 2,
+     "id": "minecraft:sonic_boom",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.72,
+     "choice_probability": 0.25,
+     "ready_to_use": true,
+     "summary": "minecraft:sonic_boom: particle, expanding pulse telegraph/shockwave ring/sonic blast projectile, shape=huge solid disc/wide ellipse, motion=no residual/single pulse"
+    },
+    {
+     "rank": 3,
+     "id": "minecraft:gust_emitter_large",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.7,
+     "choice_probability": 0.03,
+     "ready_to_use": true,
+     "summary": "minecraft:gust_emitter_large: particle, aoe knockback wave/shockwave burst/tornado gust, shape=cloud puffs/dashed arcs, motion=single expanding burst"
+    },
+    {
+     "rank": 4,
+     "id": "minecraft:shriek",
+     "source": "particles",
+     "kind": "parameterized_particle",
+     "noul_relevance": 0.52,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "minecraft:shriek: parameterized_particle, alert pulse/expanding shockwave ring/scream wavefront, shape=outline/thin ellipse ring, motion=expanding ring/expanding ring implied"
+    },
+    {
+     "rank": 5,
+     "id": "minecraft:world_event/PARTICLES_EYE_OF_ENDER_DEATH",
+     "source": "world_events",
+     "kind": "world_event",
+     "noul_relevance": 0.48,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "minecraft:world_event/PARTICLES_EYE_OF_ENDER_DEATH: world_event, ender magic death/eye break ritual/item shatter burst, shape=elliptical ring then scattered spray, motion=ring burst expanding outward"
+    },
+    {
+     "rank": 6,
+     "id": "superheroes:homelander_flight_landing",
+     "source": "quasar",
+     "kind": "quasar_emitter",
+     "noul_relevance": 0.5,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "superheroes:homelander_flight_landing: quasar_emitter, explosion aftermath/ground pound burst/heavy impact effect, shape=dust cloud/irregular square flecks, motion=explosive outward burst/rising and scattering"
+    },
+    {
+     "rank": 7,
+     "id": "minecraft:explosion_emitter",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.51,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "minecraft:explosion_emitter: particle, bomb burst/cannon blast/explosion aftermath, shape=large billowing cloud, motion=fast dissipation/rapid expansion"
+    },
+    {
+     "rank": 8,
+     "id": "minecraft:gust",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.52,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "minecraft:gust: particle, dash gust/deflect swipe/knockback wave, shape=crescent/curved arc, motion=rotational sweep/swirling"
+    },
+    {
+     "rank": 9,
+     "id": "minecraft:gust_emitter_small",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.63,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "minecraft:gust_emitter_small: particle, dash puff/jump or launch blast/knockback shockwave, shape=spiral curl vortex puff, motion=swirling outward expansion"
+    },
+    {
+     "rank": 10,
+     "id": "superheroes:cap_shield_slam_burst",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.49,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "superheroes:cap_shield_slam_burst: particle, impact puff/melee hit feedback/shockwave dust, shape=round soft puffs, motion=gradual fade/slow lateral drift"
+    }
+   ],
+   "choice_distribution": {
+    "minecraft:gust": 0.0,
+    "superheroes:homelander_flight_landing": 0.01,
+    "minecraft:shriek": 0.01,
+    "superheroes:cap_shield_slam_burst": 0.0,
+    "minecraft:gust_emitter_small": 0.0,
+    "minecraft:gust_emitter_large": 0.03,
+    "superheroes:vfx/clap": 0.0,
+    "superheroes:homelander_clap_dust": 0.68,
+    "vfxlab:ember_ring_burst": 0.0,
+    "minecraft:sonic_boom": 0.25,
+    "minecraft:explosion_emitter": 0.0,
+    "minecraft:world_event/PARTICLES_EYE_OF_ENDER_DEATH": 0.01
+   },
+   "stats": {
+    "stage1_evaluated": 205,
+    "stage1_batches": 18,
+    "stage2_pool": 12,
+    "usage": {
+     "input_tokens": 332216,
+     "output_tokens": 3793
+    },
+    "latency_s": 3.235
+   },
+   "usage": {
+    "input_tokens": 332216,
+    "output_tokens": 3793
+   },
+   "latency_s": 3.235,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "homelander_eye_lasers",
+   "query": "twin bright energy beams streaming continuously from the eyes that converge on whatever is being looked at, hot core with a softer colored glow around it, charred marks left on blocks the beam touches, hums while held and snaps off cleanly",
+   "expected_ids": [
+    "superheroes:homelander_laser_impact",
+    "superheroes:laser_spark",
+    "superheroes:vfx/laser",
+    "vfxlab:laser_beam"
+   ],
+   "top_ids": [
+    "vfxlab:laser_beam",
+    "superheroes:vfx/laser",
+    "superheroes:goku_kamehameha_core",
+    "superheroes:black_flame",
+    "superheroes:unibeam_spark",
+    "superheroes:vfx/sun_charge",
+    "minecraft:lava",
+    "minecraft:trial_spawner_detection",
+    "superheroes:blue_flame",
+    "superheroes:goku_kamehameha_trail"
+   ],
+   "hits": [
+    "superheroes:vfx/laser",
+    "vfxlab:laser_beam"
+   ],
+   "missed": [
+    "superheroes:homelander_laser_impact",
+    "superheroes:laser_spark"
+   ],
+   "hit_at_topk": 0.5,
+   "first_hit_rank": 1,
+   "hit_at_1": true,
+   "hit_at_3": true,
+   "hit_at_10": true,
+   "reciprocal_rank": 1.0,
+   "candidates": [
+    {
+     "rank": 1,
+     "id": "vfxlab:laser_beam",
+     "source": "photon",
+     "kind": "fx",
+     "noul_relevance": 0.44,
+     "choice_probability": 0.68,
+     "ready_to_use": true,
+     "summary": "vfxlab:laser_beam: fx, beam attack/beam sweep/energy beam, shape=beam/elongated streak, motion=steady beam/sweeping laterally"
+    },
+    {
+     "rank": 2,
+     "id": "superheroes:vfx/laser",
+     "source": "quasar",
+     "kind": "composite",
+     "noul_relevance": 0.56,
+     "choice_probability": 0.27,
+     "ready_to_use": true,
+     "summary": "superheroes:vfx/laser: composite"
+    },
+    {
+     "rank": 3,
+     "id": "superheroes:goku_kamehameha_core",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.21,
+     "choice_probability": 0.02,
+     "ready_to_use": true,
+     "summary": "superheroes:goku_kamehameha_core: particle, beam core glimmer/charging aura/energy core sparkle, shape=four-pointed stars/starburst sparkles, motion=hovering cluster/slight drift"
+    },
+    {
+     "rank": 4,
+     "id": "superheroes:black_flame",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.17,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "superheroes:black_flame: particle, black-fire burn/cursed flame weapon effect/dark fire aura, shape=twin flame licks, motion=flickering, stationary at anchor"
+    },
+    {
+     "rank": 5,
+     "id": "superheroes:unibeam_spark",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.22,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "superheroes:unibeam_spark: particle, electric spark burst/energy beam discharge/lightning strike accent, shape=chunky blocky cluster/large glow patch, motion=drifts laterally/lingers and grows into wide glow"
+    },
+    {
+     "rank": 6,
+     "id": "superheroes:vfx/sun_charge",
+     "source": "quasar",
+     "kind": "composite",
+     "noul_relevance": 0.14,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "superheroes:vfx/sun_charge: composite"
+    },
+    {
+     "rank": 7,
+     "id": "minecraft:lava",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.12,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "minecraft:lava: particle, fire column/fire splash aftermath/lava burst debris, shape=glowing square core/irregular chunky specks, motion=billowing upward/rising"
+    },
+    {
+     "rank": 8,
+     "id": "minecraft:trial_spawner_detection",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.12,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "minecraft:trial_spawner_detection: particle, detection ping/scanning beam segments/spawner warning markers, shape=elongated dashes/tiny vertical streaks, motion=static flicker"
+    },
+    {
+     "rank": 9,
+     "id": "superheroes:blue_flame",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.14,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "superheroes:blue_flame: particle, energy weapon flame/flight or power aura/magic blue fire, shape=flame tongues/licking fire shapes, motion=flicker implied/hovering"
+    },
+    {
+     "rank": 10,
+     "id": "superheroes:goku_kamehameha_trail",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.21,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "superheroes:goku_kamehameha_trail: particle, charge-up energy blob/energy beam trail/flight trail, shape=ragged quad clump/tight blobby cluster, motion=fast lateral translation/slight fade"
+    }
+   ],
+   "choice_distribution": {
+    "vfxlab:laser_beam": 0.68,
+    "superheroes:blue_flame": 0.0,
+    "minecraft:lava": 0.0,
+    "minecraft:trial_spawner_detection": 0.0,
+    "superheroes:laser_spark": 0.0,
+    "superheroes:goku_kamehameha_core": 0.02,
+    "superheroes:sparks": 0.0,
+    "superheroes:unibeam_spark": 0.01,
+    "superheroes:black_flame": 0.01,
+    "superheroes:goku_kamehameha_trail": 0.0,
+    "superheroes:vfx/laser": 0.27,
+    "superheroes:vfx/sun_charge": 0.01
+   },
+   "stats": {
+    "stage1_evaluated": 205,
+    "stage1_batches": 18,
+    "stage2_pool": 12,
+    "usage": {
+     "input_tokens": 328608,
+     "output_tokens": 3789
+    },
+    "latency_s": 3.5
+   },
+   "usage": {
+    "input_tokens": 328608,
+    "output_tokens": 3789
+   },
+   "latency_s": 3.5,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "homelander_roar",
+   "query": "a roar that visibly pushes air forward — repeated translucent rings rippling out of the mouth in a cone, faint heat-haze shimmer, dust stirring on the ground, lasting about a second and a half",
+   "expected_ids": [
+    "superheroes:homelander_roar_wave",
+    "superheroes:homelander_roar_dust",
+    "superheroes:vfx/roar"
+   ],
+   "top_ids": [
+    "minecraft:shriek",
+    "superheroes:vfx/roar",
+    "superheroes:homelander_roar_dust",
+    "superheroes:naruto_kawarimi_smoke",
+    "minecraft:gust_emitter_small",
+    "minecraft:gust_emitter_large",
+    "minecraft:effect",
+    "minecraft:world_event/PARTICLES_EYE_OF_ENDER_DEATH",
+    "minecraft:world_event/PARTICLES_SPELL_POTION_SPLASH",
+    "minecraft:sonic_boom"
+   ],
+   "hits": [
+    "superheroes:homelander_roar_dust",
+    "superheroes:vfx/roar"
+   ],
+   "missed": [
+    "superheroes:homelander_roar_wave"
+   ],
+   "hit_at_topk": 0.6666666666666666,
+   "first_hit_rank": 2,
+   "hit_at_1": false,
+   "hit_at_3": true,
+   "hit_at_10": true,
+   "reciprocal_rank": 0.5,
+   "candidates": [
+    {
+     "rank": 1,
+     "id": "minecraft:shriek",
+     "source": "particles",
+     "kind": "parameterized_particle",
+     "noul_relevance": 0.41,
+     "choice_probability": 0.29,
+     "ready_to_use": true,
+     "summary": "minecraft:shriek: parameterized_particle, alert pulse/expanding shockwave ring/scream wavefront, shape=outline/thin ellipse ring, motion=expanding ring/expanding ring implied"
+    },
+    {
+     "rank": 2,
+     "id": "superheroes:vfx/roar",
+     "source": "quasar",
+     "kind": "composite",
+     "noul_relevance": 0.62,
+     "choice_probability": 0.25,
+     "ready_to_use": true,
+     "summary": "superheroes:vfx/roar: composite"
+    },
+    {
+     "rank": 3,
+     "id": "superheroes:homelander_roar_dust",
+     "source": "quasar",
+     "kind": "quasar_emitter",
+     "noul_relevance": 0.44,
+     "choice_probability": 0.16,
+     "ready_to_use": true,
+     "summary": "superheroes:homelander_roar_dust: quasar_emitter, explosion aftermath/ground slam debris/heavy smoke burst, shape=billowing dust cloud/speck stream, motion=drifting dissipation/explosive expansion"
+    },
+    {
+     "rank": 4,
+     "id": "superheroes:naruto_kawarimi_smoke",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.49,
+     "choice_probability": 0.12,
+     "ready_to_use": true,
+     "summary": "superheroes:naruto_kawarimi_smoke: particle, kawarimi replacement smoke/ninja vanish cloud/smoke bomb puff, shape=hollow ring puffs/open circles, motion=lateral drift/slow fade"
+    },
+    {
+     "rank": 5,
+     "id": "minecraft:gust_emitter_small",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.49,
+     "choice_probability": 0.05,
+     "ready_to_use": true,
+     "summary": "minecraft:gust_emitter_small: particle, dash puff/jump or launch blast/knockback shockwave, shape=spiral curl vortex puff, motion=swirling outward expansion"
+    },
+    {
+     "rank": 6,
+     "id": "minecraft:gust_emitter_large",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.46,
+     "choice_probability": 0.04,
+     "ready_to_use": true,
+     "summary": "minecraft:gust_emitter_large: particle, aoe knockback wave/shockwave burst/tornado gust, shape=cloud puffs/dashed arcs, motion=single expanding burst"
+    },
+    {
+     "rank": 7,
+     "id": "minecraft:effect",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.32,
+     "choice_probability": 0.03,
+     "ready_to_use": true,
+     "summary": "minecraft:effect: particle, magic aura motes/potion effect swirl/status effect indicator, shape=hollow circles/open spiral rings, motion=dissipating/swirling"
+    },
+    {
+     "rank": 8,
+     "id": "minecraft:world_event/PARTICLES_EYE_OF_ENDER_DEATH",
+     "source": "world_events",
+     "kind": "world_event",
+     "noul_relevance": 0.29,
+     "choice_probability": 0.02,
+     "ready_to_use": true,
+     "summary": "minecraft:world_event/PARTICLES_EYE_OF_ENDER_DEATH: world_event, ender magic death/eye break ritual/item shatter burst, shape=elliptical ring then scattered spray, motion=ring burst expanding outward"
+    },
+    {
+     "rank": 9,
+     "id": "minecraft:world_event/PARTICLES_SPELL_POTION_SPLASH",
+     "source": "world_events",
+     "kind": "world_event",
+     "noul_relevance": 0.38,
+     "choice_probability": 0.02,
+     "ready_to_use": true,
+     "summary": "minecraft:world_event/PARTICLES_SPELL_POTION_SPLASH: world_event, aoe spell hit/spell impact splash/splash potion burst, shape=hollow spiral rings/open circles, motion=splash ejection then dissipation"
+    },
+    {
+     "rank": 10,
+     "id": "minecraft:sonic_boom",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.34,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "minecraft:sonic_boom: particle, expanding pulse telegraph/shockwave ring/sonic blast projectile, shape=huge solid disc/wide ellipse, motion=no residual/single pulse"
+    }
+   ],
+   "choice_distribution": {
+    "minecraft:gust_emitter_large": 0.04,
+    "minecraft:effect": 0.03,
+    "minecraft:gust_emitter_small": 0.05,
+    "minecraft:sonic_boom": 0.01,
+    "minecraft:world_event/PARTICLES_EYE_OF_ENDER_DEATH": 0.02,
+    "superheroes:vfx/roar": 0.25,
+    "superheroes:naruto_kawarimi_smoke": 0.12,
+    "superheroes:homelander_roar_dust": 0.16,
+    "minecraft:shriek": 0.29,
+    "minecraft:world_event/PARTICLES_SPELL_POTION_SPLASH": 0.02,
+    "vfxlab:ember_ring_burst": 0.01,
+    "minecraft:gust": 0.0
+   },
+   "stats": {
+    "stage1_evaluated": 205,
+    "stage1_batches": 18,
+    "stage2_pool": 12,
+    "usage": {
+     "input_tokens": 330632,
+     "output_tokens": 3787
+    },
+    "latency_s": 3.198
+   },
+   "usage": {
+    "input_tokens": 330632,
+    "output_tokens": 3787
+   },
+   "latency_s": 3.198,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "flight_aura",
+   "query": "a supersonic flight aura — a soft white vapor contrail streaming off the torso and thin speed lines off the fists while flying fast, and a small shock ring popping periodically like breaking the air barrier",
+   "expected_ids": [
+    "superheroes:homelander_flight_boost",
+    "superheroes:homelander_flight_landing",
+    "superheroes:vfx/flight",
+    "vfxlab:ribbon_trail"
+   ],
+   "top_ids": [
+    "superheroes:vfx/flight",
+    "minecraft:shriek",
+    "vfxlab:smoke_plume",
+    "minecraft:sonic_boom",
+    "superheroes:fula_particle",
+    "superheroes:homelander_roar_dust",
+    "superheroes:naruto_kawarimi_smoke",
+    "minecraft:gust",
+    "minecraft:gust_emitter_large",
+    "minecraft:gust_emitter_small"
+   ],
+   "hits": [
+    "superheroes:vfx/flight"
+   ],
+   "missed": [
+    "superheroes:homelander_flight_boost",
+    "superheroes:homelander_flight_landing",
+    "vfxlab:ribbon_trail"
+   ],
+   "hit_at_topk": 0.25,
+   "first_hit_rank": 1,
+   "hit_at_1": true,
+   "hit_at_3": true,
+   "hit_at_10": true,
+   "reciprocal_rank": 1.0,
+   "candidates": [
+    {
+     "rank": 1,
+     "id": "superheroes:vfx/flight",
+     "source": "quasar",
+     "kind": "composite",
+     "noul_relevance": 0.51,
+     "choice_probability": 0.73,
+     "ready_to_use": true,
+     "summary": "superheroes:vfx/flight: composite"
+    },
+    {
+     "rank": 2,
+     "id": "minecraft:shriek",
+     "source": "particles",
+     "kind": "parameterized_particle",
+     "noul_relevance": 0.37,
+     "choice_probability": 0.16,
+     "ready_to_use": true,
+     "summary": "minecraft:shriek: parameterized_particle, alert pulse/expanding shockwave ring/scream wavefront, shape=outline/thin ellipse ring, motion=expanding ring/expanding ring implied"
+    },
+    {
+     "rank": 3,
+     "id": "vfxlab:smoke_plume",
+     "source": "photon",
+     "kind": "fx",
+     "noul_relevance": 0.37,
+     "choice_probability": 0.05,
+     "ready_to_use": true,
+     "summary": "vfxlab:smoke_plume: fx, campfire plume/chimney smoke/explosion aftermath smoke, shape=billowy cloud cluster, motion=continuous plume, stable aloft"
+    },
+    {
+     "rank": 4,
+     "id": "minecraft:sonic_boom",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.41,
+     "choice_probability": 0.02,
+     "ready_to_use": true,
+     "summary": "minecraft:sonic_boom: particle, expanding pulse telegraph/shockwave ring/sonic blast projectile, shape=huge solid disc/wide ellipse, motion=no residual/single pulse"
+    },
+    {
+     "rank": 5,
+     "id": "superheroes:fula_particle",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.29,
+     "choice_probability": 0.02,
+     "ready_to_use": true,
+     "summary": "superheroes:fula_particle: particle, cloud aura/smoke puff/steam vent, shape=curly spiral wisps, motion=hovering cloud cluster"
+    },
+    {
+     "rank": 6,
+     "id": "superheroes:homelander_roar_dust",
+     "source": "quasar",
+     "kind": "quasar_emitter",
+     "noul_relevance": 0.29,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "superheroes:homelander_roar_dust: quasar_emitter, explosion aftermath/ground slam debris/heavy smoke burst, shape=billowing dust cloud/speck stream, motion=drifting dissipation/explosive expansion"
+    },
+    {
+     "rank": 7,
+     "id": "superheroes:naruto_kawarimi_smoke",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.24,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "superheroes:naruto_kawarimi_smoke: particle, kawarimi replacement smoke/ninja vanish cloud/smoke bomb puff, shape=hollow ring puffs/open circles, motion=lateral drift/slow fade"
+    },
+    {
+     "rank": 8,
+     "id": "minecraft:gust",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.3,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "minecraft:gust: particle, dash gust/deflect swipe/knockback wave, shape=crescent/curved arc, motion=rotational sweep/swirling"
+    },
+    {
+     "rank": 9,
+     "id": "minecraft:gust_emitter_large",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.27,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "minecraft:gust_emitter_large: particle, aoe knockback wave/shockwave burst/tornado gust, shape=cloud puffs/dashed arcs, motion=single expanding burst"
+    },
+    {
+     "rank": 10,
+     "id": "minecraft:gust_emitter_small",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.27,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "minecraft:gust_emitter_small: particle, dash puff/jump or launch blast/knockback shockwave, shape=spiral curl vortex puff, motion=swirling outward expansion"
+    }
+   ],
+   "choice_distribution": {
+    "superheroes:fula_particle": 0.02,
+    "vfxlab:smoke_plume": 0.05,
+    "superheroes:vfx/flight": 0.73,
+    "minecraft:gust_emitter_large": 0.0,
+    "minecraft:shriek": 0.16,
+    "minecraft:gust_emitter_small": 0.0,
+    "superheroes:white_boom": 0.0,
+    "superheroes:naruto_kawarimi_smoke": 0.01,
+    "minecraft:sonic_boom": 0.02,
+    "superheroes:homelander_roar_dust": 0.01,
+    "minecraft:gust": 0.0,
+    "vfxlab:ember_ring_burst": 0.0
+   },
+   "stats": {
+    "stage1_evaluated": 205,
+    "stage1_batches": 18,
+    "stage2_pool": 12,
+    "usage": {
+     "input_tokens": 330594,
+     "output_tokens": 3776
+    },
+    "latency_s": 3.181
+   },
+   "usage": {
+    "input_tokens": 330594,
+    "output_tokens": 3776
+   },
+   "latency_s": 3.181,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "homelander_sun",
+   "query": "a long visible charge-up where the character glows hotter and brighter, embers rising off them, then a huge screen-filling solar explosion with an expanding ring of fire and debris",
+   "expected_ids": [
+    "superheroes:homelander_sun_ember",
+    "superheroes:homelander_sun_debris",
+    "superheroes:vfx/sun_charge",
+    "superheroes:vfx/sun_detonation",
+    "superheroes:sun_particle",
+    "minecraft:explosion_emitter"
+   ],
+   "top_ids": [
+    "superheroes:vfx/sun_detonation",
+    "vfxlab:ember_ring_burst",
+    "superheroes:vfx/sun_charge",
+    "minecraft:explosion",
+    "minecraft:explosion_emitter",
+    "minecraft:flame",
+    "minecraft:lava",
+    "superheroes:goku_ki_aura",
+    "superheroes:homelander_clap_dust",
+    "superheroes:homelander_sun_debris"
+   ],
+   "hits": [
+    "superheroes:homelander_sun_debris",
+    "superheroes:vfx/sun_charge",
+    "superheroes:vfx/sun_detonation",
+    "minecraft:explosion_emitter"
+   ],
+   "missed": [
+    "superheroes:homelander_sun_ember",
+    "superheroes:sun_particle"
+   ],
+   "hit_at_topk": 0.6666666666666666,
+   "first_hit_rank": 1,
+   "hit_at_1": true,
+   "hit_at_3": true,
+   "hit_at_10": true,
+   "reciprocal_rank": 1.0,
+   "candidates": [
+    {
+     "rank": 1,
+     "id": "superheroes:vfx/sun_detonation",
+     "source": "quasar",
+     "kind": "composite",
+     "noul_relevance": 0.74,
+     "choice_probability": 0.68,
+     "ready_to_use": true,
+     "summary": "superheroes:vfx/sun_detonation: composite"
+    },
+    {
+     "rank": 2,
+     "id": "vfxlab:ember_ring_burst",
+     "source": "photon",
+     "kind": "fx",
+     "noul_relevance": 0.42,
+     "choice_probability": 0.17,
+     "ready_to_use": true,
+     "summary": "vfxlab:ember_ring_burst: fx, aoe burst indicator/explosion shockwave ring/fire nova, shape=ring of round ember dots, motion=expanding ring burst"
+    },
+    {
+     "rank": 3,
+     "id": "superheroes:vfx/sun_charge",
+     "source": "quasar",
+     "kind": "composite",
+     "noul_relevance": 0.55,
+     "choice_probability": 0.14,
+     "ready_to_use": true,
+     "summary": "superheroes:vfx/sun_charge: composite"
+    },
+    {
+     "rank": 4,
+     "id": "minecraft:explosion",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.19,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "minecraft:explosion: particle, beam strike/blast trail/explosion flash trail, shape=diagonal staircase of squares/linear streak, motion=climbing/diagonal upward sweep"
+    },
+    {
+     "rank": 5,
+     "id": "minecraft:explosion_emitter",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.26,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "minecraft:explosion_emitter: particle, bomb burst/cannon blast/explosion aftermath, shape=large billowing cloud, motion=fast dissipation/rapid expansion"
+    },
+    {
+     "rank": 6,
+     "id": "minecraft:flame",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.17,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "minecraft:flame: particle, ambient fire/burning entity/explosion aftermath, shape=flame sprites/teardrop flames, motion=flickering upward/rising"
+    },
+    {
+     "rank": 7,
+     "id": "minecraft:lava",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.22,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "minecraft:lava: particle, fire column/fire splash aftermath/lava burst debris, shape=glowing square core/irregular chunky specks, motion=billowing upward/rising"
+    },
+    {
+     "rank": 8,
+     "id": "superheroes:goku_ki_aura",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.19,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "superheroes:goku_ki_aura: particle, charge-up indicator/energy charge mass/power-up aura, shape=blocky blob cluster, motion=hovering, settles and fades by t20"
+    },
+    {
+     "rank": 9,
+     "id": "superheroes:homelander_clap_dust",
+     "source": "quasar",
+     "kind": "quasar_emitter",
+     "noul_relevance": 0.17,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "superheroes:homelander_clap_dust: quasar_emitter, clap shockwave dust/impact shockwave/strength burst debris, shape=expanding ring of specks/radial debris spray, motion=dissipating/explosive outward burst"
+    },
+    {
+     "rank": 10,
+     "id": "superheroes:homelander_sun_debris",
+     "source": "quasar",
+     "kind": "quasar_emitter",
+     "noul_relevance": 0.26,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "superheroes:homelander_sun_debris: quasar_emitter, dark vortex/debris explosion/destruction shockwave, shape=streaky shard vortex, motion=spiraling upward, then dissipating"
+    }
+   ],
+   "choice_distribution": {
+    "superheroes:purple_flame": 0.0,
+    "minecraft:flame": 0.0,
+    "superheroes:homelander_sun_debris": 0.0,
+    "minecraft:lava": 0.0,
+    "superheroes:goku_ki_aura": 0.0,
+    "superheroes:vfx/sun_charge": 0.14,
+    "superheroes:sparks": 0.0,
+    "superheroes:vfx/sun_detonation": 0.68,
+    "vfxlab:ember_ring_burst": 0.17,
+    "minecraft:explosion": 0.0,
+    "superheroes:homelander_clap_dust": 0.0,
+    "minecraft:explosion_emitter": 0.0
+   },
+   "stats": {
+    "stage1_evaluated": 205,
+    "stage1_batches": 18,
+    "stage2_pool": 12,
+    "usage": {
+     "input_tokens": 331148,
+     "output_tokens": 3788
+    },
+    "latency_s": 3.309
+   },
+   "usage": {
+    "input_tokens": 331148,
+    "output_tokens": 3788
+   },
+   "latency_s": 3.309,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "scorpion_teleport",
+   "query": "an instant blink teleport — the character erupts in a burst of hellish flame where they stood and reappears at the target inside a second matching flame burst",
+   "expected_ids": [
+    "superheroes:scorpion_teleport",
+    "minecraft:flame",
+    "minecraft:lava"
+   ],
+   "top_ids": [
+    "minecraft:world_event/PARTICLES_MOBBLOCK_SPAWN",
+    "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_SPAWN_ITEM",
+    "minecraft:world_event/ANIMATION_TRIAL_SPAWNER_EJECT_ITEM",
+    "minecraft:flame",
+    "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_SPAWN_MOB_AT",
+    "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_SPAWN",
+    "vfxlab:ember_ring_burst",
+    "superheroes:black_flame",
+    "superheroes:purple_flame",
+    "minecraft:small_flame"
+   ],
+   "hits": [
+    "minecraft:flame"
+   ],
+   "missed": [
+    "superheroes:scorpion_teleport",
+    "minecraft:lava"
+   ],
+   "hit_at_topk": 0.3333333333333333,
+   "first_hit_rank": 4,
+   "hit_at_1": false,
+   "hit_at_3": false,
+   "hit_at_10": true,
+   "reciprocal_rank": 0.25,
+   "candidates": [
+    {
+     "rank": 1,
+     "id": "minecraft:world_event/PARTICLES_MOBBLOCK_SPAWN",
+     "source": "world_events",
+     "kind": "world_event",
+     "noul_relevance": 0.48,
+     "choice_probability": 0.34,
+     "ready_to_use": true,
+     "summary": "minecraft:world_event/PARTICLES_MOBBLOCK_SPAWN: world_event, ignition ring/mob spawn burst/spawner activation, shape=small flame tongues/smoke specks, motion=quick fade/scattered rising"
+    },
+    {
+     "rank": 2,
+     "id": "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_SPAWN_ITEM",
+     "source": "world_events",
+     "kind": "world_event",
+     "noul_relevance": 0.41,
+     "choice_probability": 0.19,
+     "ready_to_use": true,
+     "summary": "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_SPAWN_ITEM: world_event, explosion ignition/mob spawn burst/spawner ignition effect, shape=square smoke flecks/teardrop flames, motion=rising/scattering upward and outward"
+    },
+    {
+     "rank": 3,
+     "id": "minecraft:world_event/ANIMATION_TRIAL_SPAWNER_EJECT_ITEM",
+     "source": "world_events",
+     "kind": "world_event",
+     "noul_relevance": 0.36,
+     "choice_probability": 0.12,
+     "ready_to_use": true,
+     "summary": "minecraft:world_event/ANIMATION_TRIAL_SPAWNER_EJECT_ITEM: world_event, explosion burst/item eject poof/spawner fire puff, shape=smoke specks plus flame teardrops, motion=explosive burst outward"
+    },
+    {
+     "rank": 4,
+     "id": "minecraft:flame",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.56,
+     "choice_probability": 0.09,
+     "ready_to_use": true,
+     "summary": "minecraft:flame: particle, ambient fire/burning entity/explosion aftermath, shape=flame sprites/teardrop flames, motion=flickering upward/rising"
+    },
+    {
+     "rank": 5,
+     "id": "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_SPAWN_MOB_AT",
+     "source": "world_events",
+     "kind": "world_event",
+     "noul_relevance": 0.38,
+     "choice_probability": 0.09,
+     "ready_to_use": true,
+     "summary": "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_SPAWN_MOB_AT: world_event, fiery summon flash/mob spawn ignition/spawn poof, shape=flame silhouettes/small smoke puffs, motion=burst upward and fade fast"
+    },
+    {
+     "rank": 6,
+     "id": "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_SPAWN",
+     "source": "world_events",
+     "kind": "world_event",
+     "noul_relevance": 0.4,
+     "choice_probability": 0.07,
+     "ready_to_use": true,
+     "summary": "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_SPAWN: world_event, mob spawn ignition/spawner activation burst/summon flames, shape=small fire blobs/smoke motes, motion=rising column spray"
+    },
+    {
+     "rank": 7,
+     "id": "vfxlab:ember_ring_burst",
+     "source": "photon",
+     "kind": "fx",
+     "noul_relevance": 0.4,
+     "choice_probability": 0.04,
+     "ready_to_use": true,
+     "summary": "vfxlab:ember_ring_burst: fx, aoe burst indicator/explosion shockwave ring/fire nova, shape=ring of round ember dots, motion=expanding ring burst"
+    },
+    {
+     "rank": 8,
+     "id": "superheroes:black_flame",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.37,
+     "choice_probability": 0.02,
+     "ready_to_use": true,
+     "summary": "superheroes:black_flame: particle, black-fire burn/cursed flame weapon effect/dark fire aura, shape=twin flame licks, motion=flickering, stationary at anchor"
+    },
+    {
+     "rank": 9,
+     "id": "superheroes:purple_flame",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.45,
+     "choice_probability": 0.02,
+     "ready_to_use": true,
+     "summary": "superheroes:purple_flame: particle, damaging fire patch/dark fire aura/enchanted fire, shape=flame tongues/giant translucent quads from top, motion=drift/flickering rise"
+    },
+    {
+     "rank": 10,
+     "id": "minecraft:small_flame",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.36,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "minecraft:small_flame: particle, ambient fire/burning embers/small fire hit, shape=ember specks/small flame licks, motion=flickering scatter"
+    }
+   ],
+   "choice_distribution": {
+    "minecraft:flame": 0.09,
+    "minecraft:world_event/PARTICLES_MOBBLOCK_SPAWN": 0.34,
+    "minecraft:lava": 0.0,
+    "superheroes:purple_flame": 0.02,
+    "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_SPAWN_ITEM": 0.19,
+    "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_SPAWN": 0.07,
+    "vfxlab:ember_ring_burst": 0.04,
+    "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_SPAWN_MOB_AT": 0.09,
+    "superheroes:black_flame": 0.02,
+    "superheroes:scorpion_hellfire": 0.01,
+    "minecraft:small_flame": 0.01,
+    "minecraft:world_event/ANIMATION_TRIAL_SPAWNER_EJECT_ITEM": 0.12
+   },
+   "stats": {
+    "stage1_evaluated": 205,
+    "stage1_batches": 18,
+    "stage2_pool": 12,
+    "usage": {
+     "input_tokens": 332095,
+     "output_tokens": 3838
+    },
+    "latency_s": 3.098
+   },
+   "usage": {
+    "input_tokens": 332095,
+    "output_tokens": 3838
+   },
+   "latency_s": 3.098,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "scorpion_hellbreath",
+   "query": "a sustained stream of hellish fire pouring out of the mouth like a flamethrower — a widening cone of flames with embers and dark smoke at the far end, held for as long as the button is held",
+   "expected_ids": [
+    "superheroes:scorpion_hellbreath",
+    "minecraft:flame",
+    "minecraft:lava",
+    "minecraft:large_smoke",
+    "superheroes:black_flame"
+   ],
+   "top_ids": [
+    "superheroes:purple_flame",
+    "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_SPAWN_ITEM",
+    "minecraft:lava",
+    "superheroes:scorpion_hellbreath",
+    "superheroes:sparks",
+    "superheroes:black_flame",
+    "minecraft:flame",
+    "superheroes:vfx/roar",
+    "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_BECOME_OMINOUS",
+    "minecraft:dragon_breath"
+   ],
+   "hits": [
+    "superheroes:scorpion_hellbreath",
+    "minecraft:flame",
+    "minecraft:lava",
+    "superheroes:black_flame"
+   ],
+   "missed": [
+    "minecraft:large_smoke"
+   ],
+   "hit_at_topk": 0.8,
+   "first_hit_rank": 3,
+   "hit_at_1": false,
+   "hit_at_3": true,
+   "hit_at_10": true,
+   "reciprocal_rank": 0.3333333333333333,
+   "candidates": [
+    {
+     "rank": 1,
+     "id": "superheroes:purple_flame",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.36,
+     "choice_probability": 0.5,
+     "ready_to_use": true,
+     "summary": "superheroes:purple_flame: particle, damaging fire patch/dark fire aura/enchanted fire, shape=flame tongues/giant translucent quads from top, motion=drift/flickering rise"
+    },
+    {
+     "rank": 2,
+     "id": "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_SPAWN_ITEM",
+     "source": "world_events",
+     "kind": "world_event",
+     "noul_relevance": 0.15,
+     "choice_probability": 0.15,
+     "ready_to_use": true,
+     "summary": "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_SPAWN_ITEM: world_event, explosion ignition/mob spawn burst/spawner ignition effect, shape=square smoke flecks/teardrop flames, motion=rising/scattering upward and outward"
+    },
+    {
+     "rank": 3,
+     "id": "minecraft:lava",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.3,
+     "choice_probability": 0.08,
+     "ready_to_use": true,
+     "summary": "minecraft:lava: particle, fire column/fire splash aftermath/lava burst debris, shape=glowing square core/irregular chunky specks, motion=billowing upward/rising"
+    },
+    {
+     "rank": 4,
+     "id": "superheroes:scorpion_hellbreath",
+     "source": "quasar",
+     "kind": "quasar_emitter",
+     "noul_relevance": 0.22,
+     "choice_probability": 0.08,
+     "ready_to_use": true,
+     "summary": "superheroes:scorpion_hellbreath: quasar_emitter, breath/cone effect outside captured area/indeterminate - effect not visible in capture/untriggered burst, shape=none, motion=none"
+    },
+    {
+     "rank": 5,
+     "id": "superheroes:sparks",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.2,
+     "choice_probability": 0.05,
+     "ready_to_use": true,
+     "summary": "superheroes:sparks: particle, ember projectile/fire spark burst/heat blast aura, shape=blocky pixel chunks/large glow wash, motion=drifting rightward/glow expanding"
+    },
+    {
+     "rank": 6,
+     "id": "superheroes:black_flame",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.24,
+     "choice_probability": 0.04,
+     "ready_to_use": true,
+     "summary": "superheroes:black_flame: particle, black-fire burn/cursed flame weapon effect/dark fire aura, shape=twin flame licks, motion=flickering, stationary at anchor"
+    },
+    {
+     "rank": 7,
+     "id": "minecraft:flame",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.21,
+     "choice_probability": 0.03,
+     "ready_to_use": true,
+     "summary": "minecraft:flame: particle, ambient fire/burning entity/explosion aftermath, shape=flame sprites/teardrop flames, motion=flickering upward/rising"
+    },
+    {
+     "rank": 8,
+     "id": "superheroes:vfx/roar",
+     "source": "quasar",
+     "kind": "composite",
+     "noul_relevance": 0.27,
+     "choice_probability": 0.03,
+     "ready_to_use": true,
+     "summary": "superheroes:vfx/roar: composite"
+    },
+    {
+     "rank": 9,
+     "id": "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_BECOME_OMINOUS",
+     "source": "world_events",
+     "kind": "world_event",
+     "noul_relevance": 0.15,
+     "choice_probability": 0.02,
+     "ready_to_use": true,
+     "summary": "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_BECOME_OMINOUS: world_event, ominous ignition burst/ritual activation flare/soul fire eruption, shape=upward flame licks, motion=rising scatter"
+    },
+    {
+     "rank": 10,
+     "id": "minecraft:dragon_breath",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.17,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "minecraft:dragon_breath: particle, breath weapon cloud/dragon breath residue/magic gas, shape=ring-ish gap/speckled blob cluster, motion=slight contraction/slow drift"
+    }
+   ],
+   "choice_distribution": {
+    "superheroes:scorpion_hellfire": 0.01,
+    "minecraft:lava": 0.08,
+    "superheroes:vfx/roar": 0.03,
+    "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_BECOME_OMINOUS": 0.02,
+    "superheroes:sparks": 0.05,
+    "minecraft:flame": 0.03,
+    "minecraft:small_flame": 0.0,
+    "minecraft:dragon_breath": 0.01,
+    "superheroes:purple_flame": 0.5,
+    "superheroes:black_flame": 0.04,
+    "superheroes:scorpion_hellbreath": 0.08,
+    "minecraft:world_event/PARTICLES_TRIAL_SPAWNER_SPAWN_ITEM": 0.15
+   },
+   "stats": {
+    "stage1_evaluated": 205,
+    "stage1_batches": 18,
+    "stage2_pool": 12,
+    "usage": {
+     "input_tokens": 332359,
+     "output_tokens": 3802
+    },
+    "latency_s": 3.136
+   },
+   "usage": {
+    "input_tokens": 332359,
+    "output_tokens": 3802
+   },
+   "latency_s": 3.136,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "scorpion_harpoon",
+   "query": "a burning chain harpoon that streaks out, skewers the target in a flare of fire, and drags them back — a fiery dotted line from the thrower to the victim",
+   "expected_ids": [
+    "superheroes:scorpion_harpoon",
+    "superheroes:scorpion_hellfire",
+    "minecraft:flame",
+    "minecraft:crit"
+   ],
+   "top_ids": [
+    "vfxlab:laser_beam",
+    "superheroes:scorpion_harpoon",
+    "minecraft:falling_lava",
+    "superheroes:goku_kamehameha_trail",
+    "minecraft:vault_connection",
+    "superheroes:vfx/laser",
+    "minecraft:flame",
+    "superheroes:cap_shield_trail",
+    "superheroes:sparks",
+    "superheroes:scorpion_hellfire"
+   ],
+   "hits": [
+    "superheroes:scorpion_harpoon",
+    "superheroes:scorpion_hellfire",
+    "minecraft:flame"
+   ],
+   "missed": [
+    "minecraft:crit"
+   ],
+   "hit_at_topk": 0.75,
+   "first_hit_rank": 2,
+   "hit_at_1": false,
+   "hit_at_3": true,
+   "hit_at_10": true,
+   "reciprocal_rank": 0.5,
+   "candidates": [
+    {
+     "rank": 1,
+     "id": "vfxlab:laser_beam",
+     "source": "photon",
+     "kind": "fx",
+     "noul_relevance": 0.22,
+     "choice_probability": 0.51,
+     "ready_to_use": true,
+     "summary": "vfxlab:laser_beam: fx, beam attack/beam sweep/energy beam, shape=beam/elongated streak, motion=steady beam/sweeping laterally"
+    },
+    {
+     "rank": 2,
+     "id": "superheroes:scorpion_harpoon",
+     "source": "quasar",
+     "kind": "quasar_emitter",
+     "noul_relevance": 0.17,
+     "choice_probability": 0.22,
+     "ready_to_use": true,
+     "summary": "superheroes:scorpion_harpoon: quasar_emitter, fast-moving projectile out of frame/harpoon/chain throw/projectile trail, shape=debris chunks/none, motion=none/static"
+    },
+    {
+     "rank": 3,
+     "id": "minecraft:falling_lava",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.2,
+     "choice_probability": 0.08,
+     "ready_to_use": true,
+     "summary": "minecraft:falling_lava: particle, fire projectile residue/lava drip hazard/molten droplet trail, shape=droplets and short streaks, motion=falling"
+    },
+    {
+     "rank": 4,
+     "id": "superheroes:goku_kamehameha_trail",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.21,
+     "choice_probability": 0.05,
+     "ready_to_use": true,
+     "summary": "superheroes:goku_kamehameha_trail: particle, charge-up energy blob/energy beam trail/flight trail, shape=ragged quad clump/tight blobby cluster, motion=fast lateral translation/slight fade"
+    },
+    {
+     "rank": 5,
+     "id": "minecraft:vault_connection",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.18,
+     "choice_probability": 0.04,
+     "ready_to_use": true,
+     "summary": "minecraft:vault_connection: particle, beam endpoint sparks/channeling motes/link tether particles, shape=none/specks, motion=floating/none"
+    },
+    {
+     "rank": 6,
+     "id": "superheroes:vfx/laser",
+     "source": "quasar",
+     "kind": "composite",
+     "noul_relevance": 0.21,
+     "choice_probability": 0.03,
+     "ready_to_use": true,
+     "summary": "superheroes:vfx/laser: composite"
+    },
+    {
+     "rank": 7,
+     "id": "minecraft:flame",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.24,
+     "choice_probability": 0.02,
+     "ready_to_use": true,
+     "summary": "minecraft:flame: particle, ambient fire/burning entity/explosion aftermath, shape=flame sprites/teardrop flames, motion=flickering upward/rising"
+    },
+    {
+     "rank": 8,
+     "id": "superheroes:cap_shield_trail",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.2,
+     "choice_probability": 0.02,
+     "ready_to_use": true,
+     "summary": "superheroes:cap_shield_trail: particle, energy bolt sprite/projectile trail head/thrown shield tracer, shape=blocky stepped blob/single chunky quad, motion=exits frame by t20/horizontal drift rightward"
+    },
+    {
+     "rank": 9,
+     "id": "superheroes:sparks",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.18,
+     "choice_probability": 0.02,
+     "ready_to_use": true,
+     "summary": "superheroes:sparks: particle, ember projectile/fire spark burst/heat blast aura, shape=blocky pixel chunks/large glow wash, motion=drifting rightward/glow expanding"
+    },
+    {
+     "rank": 10,
+     "id": "superheroes:scorpion_hellfire",
+     "source": "quasar",
+     "kind": "quasar_emitter",
+     "noul_relevance": 0.17,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "superheroes:scorpion_hellfire: quasar_emitter, hellfire flame burst/scorpion attack fire, shape=none, motion=none"
+    }
+   ],
+   "choice_distribution": {
+    "minecraft:falling_lava": 0.08,
+    "minecraft:lava": 0.0,
+    "superheroes:scorpion_harpoon": 0.22,
+    "superheroes:goku_kamehameha_trail": 0.05,
+    "vfxlab:laser_beam": 0.51,
+    "minecraft:vault_connection": 0.04,
+    "minecraft:flame": 0.02,
+    "superheroes:vfx/laser": 0.03,
+    "minecraft:small_flame": 0.0,
+    "superheroes:scorpion_hellfire": 0.01,
+    "superheroes:cap_shield_trail": 0.02,
+    "superheroes:sparks": 0.02
+   },
+   "stats": {
+    "stage1_evaluated": 205,
+    "stage1_batches": 18,
+    "stage2_pool": 12,
+    "usage": {
+     "input_tokens": 332330,
+     "output_tokens": 3779
+    },
+    "latency_s": 2.965
+   },
+   "usage": {
+    "input_tokens": 332330,
+    "output_tokens": 3779
+   },
+   "latency_s": 2.965,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "goku_kamehameha",
+   "query": "a massive blue-white energy wave fired from cupped hands after a visible charge-up — a thick continuous beam of light that pours forward for seconds and explodes where it lands",
+   "expected_ids": [
+    "superheroes:goku_kamehameha_core",
+    "superheroes:goku_kamehameha_trail",
+    "superheroes:goku_ki_aura",
+    "minecraft:end_rod"
+   ],
+   "top_ids": [
+    "vfxlab:laser_beam",
+    "superheroes:vfx/laser",
+    "superheroes:goku_kamehameha_trail",
+    "minecraft:gust_emitter_large",
+    "superheroes:blue_flame",
+    "superheroes:goku_kamehameha_core",
+    "superheroes:laser_spark",
+    "superheroes:nightfall",
+    "superheroes:unibeam_spark",
+    "superheroes:vfx/iron_fists"
+   ],
+   "hits": [
+    "superheroes:goku_kamehameha_core",
+    "superheroes:goku_kamehameha_trail"
+   ],
+   "missed": [
+    "superheroes:goku_ki_aura",
+    "minecraft:end_rod"
+   ],
+   "hit_at_topk": 0.5,
+   "first_hit_rank": 3,
+   "hit_at_1": false,
+   "hit_at_3": true,
+   "hit_at_10": true,
+   "reciprocal_rank": 0.3333333333333333,
+   "candidates": [
+    {
+     "rank": 1,
+     "id": "vfxlab:laser_beam",
+     "source": "photon",
+     "kind": "fx",
+     "noul_relevance": 0.42,
+     "choice_probability": 0.84,
+     "ready_to_use": true,
+     "summary": "vfxlab:laser_beam: fx, beam attack/beam sweep/energy beam, shape=beam/elongated streak, motion=steady beam/sweeping laterally"
+    },
+    {
+     "rank": 2,
+     "id": "superheroes:vfx/laser",
+     "source": "quasar",
+     "kind": "composite",
+     "noul_relevance": 0.55,
+     "choice_probability": 0.15000000000000002,
+     "ready_to_use": true,
+     "summary": "superheroes:vfx/laser: composite"
+    },
+    {
+     "rank": 3,
+     "id": "superheroes:goku_kamehameha_trail",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.36,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "superheroes:goku_kamehameha_trail: particle, charge-up energy blob/energy beam trail/flight trail, shape=ragged quad clump/tight blobby cluster, motion=fast lateral translation/slight fade"
+    },
+    {
+     "rank": 4,
+     "id": "minecraft:gust_emitter_large",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.14,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "minecraft:gust_emitter_large: particle, aoe knockback wave/shockwave burst/tornado gust, shape=cloud puffs/dashed arcs, motion=single expanding burst"
+    },
+    {
+     "rank": 5,
+     "id": "superheroes:blue_flame",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.14,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "superheroes:blue_flame: particle, energy weapon flame/flight or power aura/magic blue fire, shape=flame tongues/licking fire shapes, motion=flicker implied/hovering"
+    },
+    {
+     "rank": 6,
+     "id": "superheroes:goku_kamehameha_core",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.16,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "superheroes:goku_kamehameha_core: particle, beam core glimmer/charging aura/energy core sparkle, shape=four-pointed stars/starburst sparkles, motion=hovering cluster/slight drift"
+    },
+    {
+     "rank": 7,
+     "id": "superheroes:laser_spark",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.14,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "superheroes:laser_spark: particle, charged shot flare/energy beam impact/energy discharge, shape=four-pointed stars/large flat rectangles in top view, motion=fading in place/hovering"
+    },
+    {
+     "rank": 8,
+     "id": "superheroes:nightfall",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.14,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "superheroes:nightfall: particle, energy aura sweep/magic projectile sparkles/night or shadow power trail, shape=cross sparkles/t-shaped glow patch, motion=lateral drift/rightward travel"
+    },
+    {
+     "rank": 9,
+     "id": "superheroes:unibeam_spark",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.26,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "superheroes:unibeam_spark: particle, electric spark burst/energy beam discharge/lightning strike accent, shape=chunky blocky cluster/large glow patch, motion=drifts laterally/lingers and grows into wide glow"
+    },
+    {
+     "rank": 10,
+     "id": "superheroes:vfx/iron_fists",
+     "source": "quasar",
+     "kind": "composite",
+     "noul_relevance": 0.16,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "superheroes:vfx/iron_fists: composite"
+    }
+   ],
+   "choice_distribution": {
+    "vfxlab:laser_beam": 0.84,
+    "superheroes:goku_kamehameha_trail": 0.01,
+    "minecraft:gust_emitter_large": 0.0,
+    "superheroes:blue_flame": 0.0,
+    "superheroes:vfx/laser": 0.15000000000000002,
+    "superheroes:vfx/iron_fists": 0.0,
+    "superheroes:goku_kamehameha_core": 0.0,
+    "superheroes:laser_spark": 0.0,
+    "superheroes:unibeam_spark": 0.0,
+    "superheroes:vfx/sun_detonation": 0.0,
+    "superheroes:nightfall": 0.0,
+    "superheroes:vfx/sun_charge": 0.0
+   },
+   "stats": {
+    "stage1_evaluated": 205,
+    "stage1_batches": 18,
+    "stage2_pool": 12,
+    "usage": {
+     "input_tokens": 325890,
+     "output_tokens": 3800
+    },
+    "latency_s": 3.205
+   },
+   "usage": {
+    "input_tokens": 325890,
+    "output_tokens": 3800
+   },
+   "latency_s": 3.205,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "naruto_rasenshuriken",
+   "query": "a spinning chakra disc hurled like a frisbee — a swirling white-blue vortex of wind that visibly screws through the air and bursts on whoever it clips",
+   "expected_ids": [
+    "superheroes:naruto_rasengan_swirl",
+    "minecraft:gust",
+    "minecraft:gust_emitter_large",
+    "minecraft:sweep_attack"
+   ],
+   "top_ids": [
+    "minecraft:gust_emitter_large",
+    "minecraft:gust",
+    "minecraft:gust_emitter_small",
+    "superheroes:naruto_rasengan_swirl",
+    "minecraft:sonic_boom",
+    "superheroes:goku_kamehameha_trail",
+    "minecraft:reverse_portal",
+    "minecraft:effect",
+    "minecraft:nautilus",
+    "minecraft:world_event/PARTICLES_EYE_OF_ENDER_DEATH"
+   ],
+   "hits": [
+    "superheroes:naruto_rasengan_swirl",
+    "minecraft:gust",
+    "minecraft:gust_emitter_large"
+   ],
+   "missed": [
+    "minecraft:sweep_attack"
+   ],
+   "hit_at_topk": 0.75,
+   "first_hit_rank": 1,
+   "hit_at_1": true,
+   "hit_at_3": true,
+   "hit_at_10": true,
+   "reciprocal_rank": 1.0,
+   "candidates": [
+    {
+     "rank": 1,
+     "id": "minecraft:gust_emitter_large",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.7,
+     "choice_probability": 0.27,
+     "ready_to_use": true,
+     "summary": "minecraft:gust_emitter_large: particle, aoe knockback wave/shockwave burst/tornado gust, shape=cloud puffs/dashed arcs, motion=single expanding burst"
+    },
+    {
+     "rank": 2,
+     "id": "minecraft:gust",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.5,
+     "choice_probability": 0.2,
+     "ready_to_use": true,
+     "summary": "minecraft:gust: particle, dash gust/deflect swipe/knockback wave, shape=crescent/curved arc, motion=rotational sweep/swirling"
+    },
+    {
+     "rank": 3,
+     "id": "minecraft:gust_emitter_small",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.6,
+     "choice_probability": 0.2,
+     "ready_to_use": true,
+     "summary": "minecraft:gust_emitter_small: particle, dash puff/jump or launch blast/knockback shockwave, shape=spiral curl vortex puff, motion=swirling outward expansion"
+    },
+    {
+     "rank": 4,
+     "id": "superheroes:naruto_rasengan_swirl",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.49,
+     "choice_probability": 0.11,
+     "ready_to_use": true,
+     "summary": "superheroes:naruto_rasengan_swirl: particle, charged energy ball/dark chakra swirl/held projectile charge, shape=spiral curls in a tight cluster, motion=held swirling mass, fading"
+    },
+    {
+     "rank": 5,
+     "id": "minecraft:sonic_boom",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.32,
+     "choice_probability": 0.1,
+     "ready_to_use": true,
+     "summary": "minecraft:sonic_boom: particle, expanding pulse telegraph/shockwave ring/sonic blast projectile, shape=huge solid disc/wide ellipse, motion=no residual/single pulse"
+    },
+    {
+     "rank": 6,
+     "id": "superheroes:goku_kamehameha_trail",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.27,
+     "choice_probability": 0.05,
+     "ready_to_use": true,
+     "summary": "superheroes:goku_kamehameha_trail: particle, charge-up energy blob/energy beam trail/flight trail, shape=ragged quad clump/tight blobby cluster, motion=fast lateral translation/slight fade"
+    },
+    {
+     "rank": 7,
+     "id": "minecraft:reverse_portal",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.39,
+     "choice_probability": 0.02,
+     "ready_to_use": true,
+     "summary": "minecraft:reverse_portal: particle, dimensional rift/ender magic/portal swirl, shape=spiral swirl/vortex, motion=swirling drift"
+    },
+    {
+     "rank": 8,
+     "id": "minecraft:effect",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.31,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "minecraft:effect: particle, magic aura motes/potion effect swirl/status effect indicator, shape=hollow circles/open spiral rings, motion=dissipating/swirling"
+    },
+    {
+     "rank": 9,
+     "id": "minecraft:nautilus",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.37,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "minecraft:nautilus: particle, conch activation/underwater magic burst/water spell channel, shape=coiled rings/round bubble dots, motion=rising and spiraling upward"
+    },
+    {
+     "rank": 10,
+     "id": "minecraft:world_event/PARTICLES_EYE_OF_ENDER_DEATH",
+     "source": "world_events",
+     "kind": "world_event",
+     "noul_relevance": 0.24,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "minecraft:world_event/PARTICLES_EYE_OF_ENDER_DEATH: world_event, ender magic death/eye break ritual/item shatter burst, shape=elliptical ring then scattered spray, motion=ring burst expanding outward"
+    }
+   ],
+   "choice_distribution": {
+    "minecraft:reverse_portal": 0.02,
+    "superheroes:fula_particle": 0.0,
+    "superheroes:goku_kamehameha_trail": 0.05,
+    "minecraft:effect": 0.01,
+    "superheroes:homelander_sun_debris": 0.01,
+    "minecraft:sonic_boom": 0.1,
+    "minecraft:world_event/PARTICLES_EYE_OF_ENDER_DEATH": 0.01,
+    "superheroes:naruto_rasengan_swirl": 0.11,
+    "minecraft:gust_emitter_large": 0.27,
+    "minecraft:nautilus": 0.01,
+    "minecraft:gust": 0.2,
+    "minecraft:gust_emitter_small": 0.2
+   },
+   "stats": {
+    "stage1_evaluated": 205,
+    "stage1_batches": 18,
+    "stage2_pool": 12,
+    "usage": {
+     "input_tokens": 331469,
+     "output_tokens": 3783
+    },
+    "latency_s": 3.001
+   },
+   "usage": {
+    "input_tokens": 331469,
+    "output_tokens": 3783
+   },
+   "latency_s": 3.001,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "raiden_musou_isshin",
+   "query": "an overcharged katana ultimate — the fighter freezes the area while power gathers, then one enormous slash that rips up the ground and drops a row of lightning bolts along the cut",
+   "expected_ids": [
+    "superheroes:anomaly_slice",
+    "superheroes:moonveil",
+    "superheroes:jiwald_effect",
+    "superheroes:sparks",
+    "superheroes:white_boom",
+    "superheroes:sword_explosion",
+    "superheroes:shamak"
+   ],
+   "top_ids": [
+    "minecraft:snowflake",
+    "vfxlab:laser_beam",
+    "superheroes:unibeam_spark",
+    "superheroes:homelander_sun_debris",
+    "superheroes:vfx/laser",
+    "minecraft:sonic_boom",
+    "minecraft:falling_obsidian_tear",
+    "minecraft:gust_emitter_large",
+    "minecraft:world_event/PARTICLES_EYE_OF_ENDER_DEATH",
+    "superheroes:laser_spark"
+   ],
+   "hits": [],
+   "missed": [
+    "superheroes:anomaly_slice",
+    "superheroes:moonveil",
+    "superheroes:jiwald_effect",
+    "superheroes:sparks",
+    "superheroes:white_boom",
+    "superheroes:sword_explosion",
+    "superheroes:shamak"
+   ],
+   "hit_at_topk": 0.0,
+   "first_hit_rank": null,
+   "hit_at_1": false,
+   "hit_at_3": false,
+   "hit_at_10": false,
+   "reciprocal_rank": 0.0,
+   "candidates": [
+    {
+     "rank": 1,
+     "id": "minecraft:snowflake",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.18,
+     "choice_probability": 0.38,
+     "ready_to_use": true,
+     "summary": "minecraft:snowflake: particle, cold weather cue/freeze effect/frost/ice spell, shape=hexagonal snowflake glyphs, motion=scattering/slow downward drift"
+    },
+    {
+     "rank": 2,
+     "id": "vfxlab:laser_beam",
+     "source": "photon",
+     "kind": "fx",
+     "noul_relevance": 0.23,
+     "choice_probability": 0.32,
+     "ready_to_use": true,
+     "summary": "vfxlab:laser_beam: fx, beam attack/beam sweep/energy beam, shape=beam/elongated streak, motion=steady beam/sweeping laterally"
+    },
+    {
+     "rank": 3,
+     "id": "superheroes:unibeam_spark",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.23,
+     "choice_probability": 0.09,
+     "ready_to_use": true,
+     "summary": "superheroes:unibeam_spark: particle, electric spark burst/energy beam discharge/lightning strike accent, shape=chunky blocky cluster/large glow patch, motion=drifts laterally/lingers and grows into wide glow"
+    },
+    {
+     "rank": 4,
+     "id": "superheroes:homelander_sun_debris",
+     "source": "quasar",
+     "kind": "quasar_emitter",
+     "noul_relevance": 0.23,
+     "choice_probability": 0.07,
+     "ready_to_use": true,
+     "summary": "superheroes:homelander_sun_debris: quasar_emitter, dark vortex/debris explosion/destruction shockwave, shape=streaky shard vortex, motion=spiraling upward, then dissipating"
+    },
+    {
+     "rank": 5,
+     "id": "superheroes:vfx/laser",
+     "source": "quasar",
+     "kind": "composite",
+     "noul_relevance": 0.21,
+     "choice_probability": 0.05,
+     "ready_to_use": true,
+     "summary": "superheroes:vfx/laser: composite"
+    },
+    {
+     "rank": 6,
+     "id": "minecraft:sonic_boom",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.16,
+     "choice_probability": 0.03,
+     "ready_to_use": true,
+     "summary": "minecraft:sonic_boom: particle, expanding pulse telegraph/shockwave ring/sonic blast projectile, shape=huge solid disc/wide ellipse, motion=no residual/single pulse"
+    },
+    {
+     "rank": 7,
+     "id": "minecraft:falling_obsidian_tear",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.21,
+     "choice_probability": 0.02,
+     "ready_to_use": true,
+     "summary": "minecraft:falling_obsidian_tear: particle, boss telegraph impact/dark magic rain/falling curse shard, shape=huge flat rectangles from above/tiny specks and dashes edge-on, motion=falls from sky to ground/settles flat"
+    },
+    {
+     "rank": 8,
+     "id": "minecraft:gust_emitter_large",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.2,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "minecraft:gust_emitter_large: particle, aoe knockback wave/shockwave burst/tornado gust, shape=cloud puffs/dashed arcs, motion=single expanding burst"
+    },
+    {
+     "rank": 9,
+     "id": "minecraft:world_event/PARTICLES_EYE_OF_ENDER_DEATH",
+     "source": "world_events",
+     "kind": "world_event",
+     "noul_relevance": 0.17,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "minecraft:world_event/PARTICLES_EYE_OF_ENDER_DEATH: world_event, ender magic death/eye break ritual/item shatter burst, shape=elliptical ring then scattered spray, motion=ring burst expanding outward"
+    },
+    {
+     "rank": 10,
+     "id": "superheroes:laser_spark",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.17,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "superheroes:laser_spark: particle, charged shot flare/energy beam impact/energy discharge, shape=four-pointed stars/large flat rectangles in top view, motion=fading in place/hovering"
+    }
+   ],
+   "choice_distribution": {
+    "superheroes:nightfall": 0.01,
+    "vfxlab:laser_beam": 0.32,
+    "minecraft:world_event/PARTICLES_EYE_OF_ENDER_DEATH": 0.01,
+    "minecraft:snowflake": 0.38,
+    "superheroes:laser_spark": 0.01,
+    "superheroes:homelander_sun_debris": 0.07,
+    "superheroes:unibeam_spark": 0.09,
+    "minecraft:falling_obsidian_tear": 0.02,
+    "superheroes:vfx/laser": 0.05,
+    "vfxlab:ember_ring_burst": 0.0,
+    "minecraft:gust_emitter_large": 0.01,
+    "minecraft:sonic_boom": 0.03
+   },
+   "stats": {
+    "stage1_evaluated": 205,
+    "stage1_batches": 18,
+    "stage2_pool": 12,
+    "usage": {
+     "input_tokens": 331028,
+     "output_tokens": 3790
+    },
+    "latency_s": 3.123
+   },
+   "usage": {
+    "input_tokens": 331028,
+    "output_tokens": 3790
+   },
+   "latency_s": 3.123,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "hero_transform",
+   "query": "a quick magical poof of sparkles wrapping the body for an instant as one character swaps into another — bright, celebratory, gone in a blink",
+   "expected_ids": [
+    "superheroes:transform_spark",
+    "minecraft:firework",
+    "minecraft:totem_of_undying"
+   ],
+   "top_ids": [
+    "minecraft:instant_effect",
+    "minecraft:firework",
+    "minecraft:world_event/PARTICLES_INSTANT_POTION_SPLASH",
+    "superheroes:transform_spark",
+    "minecraft:witch",
+    "minecraft:glow",
+    "minecraft:world_event/PARTICLES_EGG_CRACK",
+    "minecraft:dust",
+    "minecraft:dust_color_transition",
+    "minecraft:sneeze"
+   ],
+   "hits": [
+    "superheroes:transform_spark",
+    "minecraft:firework"
+   ],
+   "missed": [
+    "minecraft:totem_of_undying"
+   ],
+   "hit_at_topk": 0.6666666666666666,
+   "first_hit_rank": 2,
+   "hit_at_1": false,
+   "hit_at_3": true,
+   "hit_at_10": true,
+   "reciprocal_rank": 0.5,
+   "candidates": [
+    {
+     "rank": 1,
+     "id": "minecraft:instant_effect",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.62,
+     "choice_probability": 0.44,
+     "ready_to_use": true,
+     "summary": "minecraft:instant_effect: particle, heal sparkle/instant spell cast flash/magic cast feedback, shape=cross motes/x-shaped sparkles, motion=brief outward pop/static flash"
+    },
+    {
+     "rank": 2,
+     "id": "minecraft:firework",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.84,
+     "choice_probability": 0.29,
+     "ready_to_use": true,
+     "summary": "minecraft:firework: particle, celebration sparkles/firework burst/magic star burst, shape=x-shaped star sparkles, motion=fade/outward scatter"
+    },
+    {
+     "rank": 3,
+     "id": "minecraft:world_event/PARTICLES_INSTANT_POTION_SPLASH",
+     "source": "world_events",
+     "kind": "world_event",
+     "noul_relevance": 0.67,
+     "choice_probability": 0.13,
+     "ready_to_use": true,
+     "summary": "minecraft:world_event/PARTICLES_INSTANT_POTION_SPLASH: world_event, instant effect discharge/potion burst application/splash potion impact, shape=splash splat/x-shaped sparkles, motion=radial burst/settling"
+    },
+    {
+     "rank": 4,
+     "id": "superheroes:transform_spark",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.73,
+     "choice_probability": 0.08,
+     "ready_to_use": true,
+     "summary": "superheroes:transform_spark: particle, hero transform flash/magic charge burst/power-up aura, shape=four-pointed stars/plus sparkles, motion=hovering/slow rightward drift"
+    },
+    {
+     "rank": 5,
+     "id": "minecraft:witch",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.65,
+     "choice_probability": 0.04,
+     "ready_to_use": true,
+     "summary": "minecraft:witch: particle, potion splash sparkle/spell cast burst/witch magic sparkle, shape=small dots/star-cross motes, motion=brief hover/vanishing"
+    },
+    {
+     "rank": 6,
+     "id": "minecraft:glow",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.6,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "minecraft:glow: particle, buff twinkle/buff/debuff shimmer/enchantment glint, shape=compact cluster/cross shaped, motion=brief burst/minimal drift"
+    },
+    {
+     "rank": 7,
+     "id": "minecraft:world_event/PARTICLES_EGG_CRACK",
+     "source": "world_events",
+     "kind": "world_event",
+     "noul_relevance": 0.62,
+     "choice_probability": 0.01,
+     "ready_to_use": true,
+     "summary": "minecraft:world_event/PARTICLES_EGG_CRACK: world_event, breeding sparkles/egg hatch burst/nature magic burst, shape=four-pointed stars/sparkles, motion=dispersing/outward scatter"
+    },
+    {
+     "rank": 8,
+     "id": "minecraft:dust",
+     "source": "particles",
+     "kind": "parameterized_particle",
+     "noul_relevance": 0.65,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "minecraft:dust: parameterized_particle, ability activation flash/colored dust puff/magic sparkle burst, shape=irregular blob cluster/small square specks, motion=burst then disperses outward/slow drift"
+    },
+    {
+     "rank": 9,
+     "id": "minecraft:dust_color_transition",
+     "source": "particles",
+     "kind": "parameterized_particle",
+     "noul_relevance": 0.68,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "minecraft:dust_color_transition: parameterized_particle, color-cycling spell burst/enchantment shimmer/magic dust puff, shape=square specks in a round puff, motion=slow outward drift with hue shift"
+    },
+    {
+     "rank": 10,
+     "id": "minecraft:sneeze",
+     "source": "particles",
+     "kind": "particle",
+     "noul_relevance": 0.76,
+     "choice_probability": 0.0,
+     "ready_to_use": true,
+     "summary": "minecraft:sneeze: particle, magic puff/sneeze or burst discharge/sparkle pop, shape=cross stars/plus-shaped sparkles, motion=dispersing/drifting up"
+    }
+   ],
+   "choice_distribution": {
+    "minecraft:world_event/PARTICLES_EGG_CRACK": 0.01,
+    "minecraft:world_event/PARTICLES_DRAGON_FIREBALL_SPLASH": 0.0,
+    "minecraft:sneeze": 0.0,
+    "minecraft:firework": 0.29,
+    "minecraft:world_event/PARTICLES_INSTANT_POTION_SPLASH": 0.13,
+    "minecraft:instant_effect": 0.44,
+    "minecraft:world_event/PARTICLES_AND_SOUND_WAX_ON": 0.0,
+    "minecraft:dust": 0.0,
+    "superheroes:transform_spark": 0.08,
+    "minecraft:glow": 0.01,
+    "minecraft:dust_color_transition": 0.0,
+    "minecraft:witch": 0.04
+   },
+   "stats": {
+    "stage1_evaluated": 205,
+    "stage1_batches": 18,
+    "stage2_pool": 12,
+    "usage": {
+     "input_tokens": 330106,
+     "output_tokens": 3781
+    },
+    "latency_s": 3.113
+   },
+   "usage": {
+    "input_tokens": 330106,
+    "output_tokens": 3781
+   },
+   "latency_s": 3.113,
+   "query_cache": "live",
+   "diagnostics": []
+  }
+ ],
+ "started_at": 1791150224.216923,
+ "top_k": 10,
+ "stage2_pool": 12,
+ "batch_size": 12,
+ "finished_at": 1791150264.0556762,
+ "aggregate": {
+  "cases": 12,
+  "expected_total": 50,
+  "hits_total": 25,
+  "recall_at_topk": 0.5,
+  "cases_with_any_hit": 11,
+  "hit_at_1": 0.4166666666666667,
+  "hit_at_3": 0.8333333333333334,
+  "hit_at_10": 0.9166666666666666,
+  "mrr": 0.6181,
+  "total_input_tokens": 3968475,
+  "total_output_tokens": 45506,
+  "total_latency_s": 38.06
+ }
+}

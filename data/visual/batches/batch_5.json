@@ -1,0 +1,364 @@
+{
+  "observations": {
+    "minecraft_bubble_column_up": {
+      "visibility": "none",
+      "description": "front and threequarter frames are plain sky horizon over grass at every tick; top frames show only the persistent brown dirt-debris pile. no particles distinguishable from baseline noise (max pixel deviation ~2% of range).",
+      "properties": {
+        "dominant_colors": ["sky blue", "grass green"],
+        "shape": ["none visible"],
+        "motion": ["none"],
+        "brightness": ["unchanged ambient daylight"],
+        "density": ["empty"],
+        "scale_impression": ["no effect"],
+        "persistence": ["none across all ticks"],
+        "texture_quality": ["flat background only"],
+        "blend_appearance": ["n/a"]
+      },
+      "possible_roles": ["underwater bubble stream", "rising column marker", "whirlpool updraft"],
+      "confidence": 0.72,
+      "notes": "only sub-threshold 1-3px luminance specks; effect likely not emitted within the captured window or is invisible at this scale."
+    },
+    "minecraft_damage_indicator": {
+      "visibility": "clear",
+      "description": "a loose cluster of small dark red-brown heart-shaped sprites floating in the upper sky region at t3 on front and threequarter views; entirely gone by t8. top view shows only the dirt pile.",
+      "properties": {
+        "dominant_colors": ["dark red", "maroon", "brown"],
+        "shape": ["heart-shaped sprites"],
+        "motion": ["drifting upward"],
+        "brightness": ["dark, low luminance"],
+        "density": ["sparse cluster of ~5-8 sprites"],
+        "scale_impression": ["small sprites"],
+        "persistence": ["t3 only, despawned by t8"],
+        "texture_quality": ["pixelated iconic sprite, sharp silhouette"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["hit damage feedback", "combat damage popup", "heartbeat indicator", "status pulse"],
+      "confidence": 0.88,
+      "notes": "sprites sit near the top edge of the capture frame, so the cluster may extend higher; only the rising tail is framed."
+    },
+    "minecraft_dust_color_transition": {
+      "visibility": "clear",
+      "description": "a dense roundish puff of small square dust specks at the anchor on front and threequarter views; deep royal blue at t3, shifting toward violet and pink-magenta by t8 while thinning out, gone by t20. top view shows only the dirt pile.",
+      "properties": {
+        "dominant_colors": ["royal blue", "violet", "magenta pink"],
+        "shape": ["square specks in a round puff"],
+        "motion": ["slow outward drift with hue shift"],
+        "brightness": ["mid saturated"],
+        "density": ["dense central cluster, thinning over time"],
+        "scale_impression": ["small, roughly one block wide"],
+        "persistence": ["t3 and t8, gone by t20"],
+        "texture_quality": ["chunky square dust particles"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["magic dust puff", "enchantment shimmer", "color-cycling spell burst", "portal residue"],
+      "confidence": 0.9,
+      "notes": "observed hue progression blue -> violet -> pink matches a color-lerping dust; a couple of pink stragglers appear at t8."
+    },
+    "minecraft_entity_effect": {
+      "visibility": "clear",
+      "description": "about 4-7 spiral curl swirl sprites, bright orange with pale cores, scattered loosely in the sky region above the anchor at t3 on front and threequarter views; gone by t8.",
+      "properties": {
+        "dominant_colors": ["orange", "amber", "off-white"],
+        "shape": ["spiral curl swirl glyphs"],
+        "motion": ["gentle scatter drift"],
+        "brightness": ["bright warm highlights"],
+        "density": ["sparse cluster"],
+        "scale_impression": ["small glyphs"],
+        "persistence": ["t3 only"],
+        "texture_quality": ["distinct stylized swirl texture"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["potion effect burst", "buff application swirl", "spell cast glyph", "status splash"],
+      "confidence": 0.85,
+      "notes": "sprites partly clipped at the top of the frame in the threequarter view."
+    },
+    "minecraft_falling_spore_blossom": {
+      "visibility": "clear",
+      "description": "a sparse scatter of about 6-9 tiny green square specks floating mid-air at t3 on front and threequarter views; some show a slightly paler teal rim. a couple of residual specks at t8, none by t20. top view shows only the dirt pile.",
+      "properties": {
+        "dominant_colors": ["leaf green", "dark green", "pale teal rim"],
+        "shape": ["tiny square specks"],
+        "motion": ["slow downward drift"],
+        "brightness": ["mid, matte"],
+        "density": ["sparse"],
+        "scale_impression": ["tiny motes"],
+        "persistence": ["t3, trace at t8, none by t20"],
+        "texture_quality": ["flat blocky squares with slight shading"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["falling spores", "leaf litter drift", "nature ambience", "pollen fall"],
+      "confidence": 0.82,
+      "notes": "sparse specks near the capture noise floor; count is approximate."
+    },
+    "minecraft_gust_emitter_small": {
+      "visibility": "clear",
+      "description": "a large pale curling vortex puff wrapping around the anchor at t3, seen on front and threequarter views: soft white-gray billows forming a spiral curl shape roughly a third of frame height. completely dissipated by t8. top view shows only the dirt pile.",
+      "properties": {
+        "dominant_colors": ["white", "light gray", "pale gray"],
+        "shape": ["spiral curl vortex puff"],
+        "motion": ["swirling outward expansion"],
+        "brightness": ["bright pale"],
+        "density": ["moderate, translucent billows"],
+        "scale_impression": ["large, multi-block"],
+        "persistence": ["single t3 burst only"],
+        "texture_quality": ["soft billowy smoke-curl texture"],
+        "blend_appearance": ["translucent"]
+      },
+      "possible_roles": ["wind gust burst", "jump or launch blast", "knockback shockwave", "dash puff"],
+      "confidence": 0.86,
+      "notes": "one-shot burst; the curl silhouette is the most distinctive feature."
+    },
+    "minecraft_landing_lava": {
+      "visibility": "clear",
+      "description": "a few small bright orange-red molten splatter streaks lying flat on the grass at the anchor at t3 on front and threequarter views; a smaller residual speck persists at t8, nothing by t20. top view shows only the dirt pile.",
+      "properties": {
+        "dominant_colors": ["lava orange", "red orange", "dark amber"],
+        "shape": ["flat elongated splatter patches"],
+        "motion": ["settled, slight fade"],
+        "brightness": ["bright saturated glow-like"],
+        "density": ["sparse, 3-5 patches"],
+        "scale_impression": ["small ground splats"],
+        "persistence": ["t3, trace at t8"],
+        "texture_quality": ["blocky flat patches"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["lava landing splash", "molten drip impact", "fire landing mark", "hazard splat decal"],
+      "confidence": 0.8,
+      "notes": "low pixel count keeps this at the faint end though the streaks are distinctly saturated."
+    },
+    "minecraft_raid_omen": {
+      "visibility": "clear",
+      "description": "a narrow vertical column of red spiral-sigil particles rising above the anchor at t3 on the front view; the threequarter view catches the top of the same red column partly clipped at frame top. gone by t8. top view shows only the dirt pile.",
+      "properties": {
+        "dominant_colors": ["crimson red", "pinkish red", "dark red"],
+        "shape": ["spiral sigils in a vertical stack"],
+        "motion": ["rising column"],
+        "brightness": ["mid-dark saturated"],
+        "density": ["moderate column"],
+        "scale_impression": ["small glyphs in a tall column"],
+        "persistence": ["t3 only"],
+        "texture_quality": ["patterned swirl glyphs"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["ominous status marker", "raid warning effect", "curse aura column", "debuff indicator"],
+      "confidence": 0.82,
+      "notes": "column extends past the top of the frame, so only its lower part is measured."
+    },
+    "minecraft_smoke": {
+      "visibility": "clear",
+      "description": "two to three small dark gray-black blocky smoke puffs drifting in the sky region at t3 on front and threequarter views; nothing by t8. top view shows only the dirt pile.",
+      "properties": {
+        "dominant_colors": ["dark gray", "charcoal", "black"],
+        "shape": ["blocky puff blobs"],
+        "motion": ["slow rise and spread"],
+        "brightness": ["dark"],
+        "density": ["sparse, few puffs"],
+        "scale_impression": ["small"],
+        "persistence": ["t3 only"],
+        "texture_quality": ["pixelated matte puffs"],
+        "blend_appearance": ["mostly opaque"]
+      },
+      "possible_roles": ["small smoke puff", "campfire smoke", "extinguish puff", "exhaust burst"],
+      "confidence": 0.82,
+      "notes": "darker than typical gray smoke; reads almost black against sky."
+    },
+    "minecraft_sweep_attack": {
+      "visibility": "none",
+      "description": "every front, threequarter and top cell equals the flat grass and sky baseline; top views contain only the persistent dirt piles. no arc, swoosh or blade trail is visible at any sampled tick.",
+      "properties": {
+        "dominant_colors": ["sky blue", "grass green"],
+        "shape": ["none visible"],
+        "motion": ["none"],
+        "brightness": ["unchanged ambient daylight"],
+        "density": ["empty"],
+        "scale_impression": ["no effect"],
+        "persistence": ["none across all ticks"],
+        "texture_quality": ["flat background only"],
+        "blend_appearance": ["n/a"]
+      },
+      "possible_roles": ["melee sweep arc", "sword swoosh", "wide slash effect"],
+      "confidence": 0.7,
+      "notes": "the sweep arc is a very short-lived effect; all three sampled ticks may fall outside its brief active window."
+    },
+    "minecraft_wax_on": {
+      "visibility": "clear",
+      "description": "a cluster of golden-amber plus/cross-shaped sparkles hovering around the anchor at t3 and still present at t8 on front and threequarter views; gone by t20. top view shows only the dirt pile.",
+      "properties": {
+        "dominant_colors": ["gold", "amber", "orange"],
+        "shape": ["plus/cross star sparkles"],
+        "motion": ["nearly stationary hover with slight drift"],
+        "brightness": ["bright warm"],
+        "density": ["moderate cluster of ~5-8 sparkles"],
+        "scale_impression": ["small sparkles"],
+        "persistence": ["t3 through t8"],
+        "texture_quality": ["chunky sparkle sprites"],
+        "blend_appearance": ["opaque with slight pale edge"]
+      },
+      "possible_roles": ["coating apply feedback", "polish shine effect", "honey buff sparkle", "wax seal glimmer"],
+      "confidence": 0.87,
+      "notes": "sparkle positions barely change between t3 and t8, suggesting a slow hover rather than a burst."
+    },
+    "world_event_ANIMATION_VAULT_EJECT_ITEM": {
+      "visibility": "clear",
+      "description": "an upward eruption burst at t3: many orange-yellow flame teardrop sprites mixed with dark gray-black smoke puffs around the anchor on the front view. by t8 the burst has cleared and a single small golden item sprite floats high in the sky on the threequarter view. top view shows only the dirt pile.",
+      "properties": {
+        "dominant_colors": ["flame orange", "yellow", "dark gray", "gold"],
+        "shape": ["flame teardrops plus smoke puffs plus small item sprite"],
+        "motion": ["explosive upward ejection"],
+        "brightness": ["bright fire with dark smoke"],
+        "density": ["moderate-dense burst"],
+        "scale_impression": ["medium burst, about two blocks tall"],
+        "persistence": ["burst at t3, lingering item at t8"],
+        "texture_quality": ["pixelated flame and smoke sprites"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["loot ejection burst", "vault unlock reward pop", "item launch effect", "reward fountain"],
+      "confidence": 0.86,
+      "notes": "the t8 residual reads as a single gold item suspended mid-air, consistent with an ejected drop."
+    },
+    "world_event_PARTICLES_EYE_OF_ENDER_DEATH": {
+      "visibility": "clear",
+      "description": "at t3 a wide purple elliptical ring of small particles hangs high in the sky on the front view, with a few teal-green cube-like fragments nearby; by t8 the ring has dispersed into a broad horizontal spray of purple-magenta specks. top view at t3 shows a teal fragment block beside the dirt pile.",
+      "properties": {
+        "dominant_colors": ["purple", "magenta", "violet", "teal green"],
+        "shape": ["elliptical ring then scattered spray"],
+        "motion": ["ring burst expanding outward"],
+        "brightness": ["mid saturated"],
+        "density": ["moderate ring, thinning spray"],
+        "scale_impression": ["large spread, several blocks wide"],
+        "persistence": ["t3 to t8, gone by t20"],
+        "texture_quality": ["fine small specks plus blocky fragments"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["item shatter burst", "portal fragment explosion", "ender magic death", "eye break ritual"],
+      "confidence": 0.86,
+      "notes": "teal-green cube fragments read as physical debris pieces, not pure particles."
+    },
+    "world_event_PARTICLES_TRIAL_SPAWNER_BECOME_OMINOUS": {
+      "visibility": "clear",
+      "description": "a wide burst of many bright cyan soul-flame licks rising over the anchor at t3 on front and threequarter views, each flame showing a white-cyan core; only a few stragglers remain at t8 and none at t20. top view shows only the dirt pile.",
+      "properties": {
+        "dominant_colors": ["cyan", "teal", "white core"],
+        "shape": ["upward flame licks"],
+        "motion": ["rising scatter"],
+        "brightness": ["bright luminous cyan"],
+        "density": ["moderate to dense spread"],
+        "scale_impression": ["medium, multi-block wide burst"],
+        "persistence": ["strong at t3, sparse at t8"],
+        "texture_quality": ["flame sprites with bright cores"],
+        "blend_appearance": ["opaque with hot core look"]
+      },
+      "possible_roles": ["ominous ignition burst", "spawner state change", "soul fire eruption", "ritual activation flare"],
+      "confidence": 0.9,
+      "notes": "uniform cyan hue across all flames; the soul-fire-style palette is distinctive."
+    },
+    "superheroes_black_flame": {
+      "visibility": "clear",
+      "description": "a pair of dark flame licks with pale-white cores hovering at the anchor on every tick of the front and threequarter views; at t20 the flames look slightly grayer. the t20 top view shows several large translucent dark and pale beige rectangular panels covering much of the grass, consistent with the flame billboards seen from above.",
+      "properties": {
+        "dominant_colors": ["black", "charcoal", "white core", "gray"],
+        "shape": ["twin flame licks"],
+        "motion": ["flickering, stationary at anchor"],
+        "brightness": ["dark body, pale cores"],
+        "density": ["compact pair"],
+        "scale_impression": ["small-medium flames"],
+        "persistence": ["present at all ticks"],
+        "texture_quality": ["pixelated flame, high contrast"],
+        "blend_appearance": ["opaque flames; translucent panels in top view"]
+      },
+      "possible_roles": ["dark fire aura", "cursed flame weapon effect", "shadow empowerment", "black-fire burn"],
+      "confidence": 0.8,
+      "notes": "top-view panels look like billboard quads viewed edge-on; top framing makes the effect read as haze rather than flame."
+    },
+    "superheroes_goku_ki_aura": {
+      "visibility": "clear",
+      "description": "a compact saturated red blobby mass hovering at the anchor on every tick of the front and threequarter views; at t20 the mass has drifted down toward the grass and turned pale translucent pink-red. top view shows only the dirt pile.",
+      "properties": {
+        "dominant_colors": ["saturated red", "scarlet", "faded pink"],
+        "shape": ["blocky blob cluster"],
+        "motion": ["hovering, settles and fades by t20"],
+        "brightness": ["very saturated bright"],
+        "density": ["dense compact mass"],
+        "scale_impression": ["small-medium, under a block"],
+        "persistence": ["all ticks, fading at t20"],
+        "texture_quality": ["chunky square particle mass"],
+        "blend_appearance": ["opaque, slightly translucent when faded"]
+      },
+      "possible_roles": ["power-up aura", "charge-up indicator", "rage state glow", "energy charge mass"],
+      "confidence": 0.85,
+      "notes": "uniform flat red reads more like a solid energy mass than a layered aura halo."
+    },
+    "superheroes_homelander_sun_debris": {
+      "visibility": "clear",
+      "description": "a tall dark vortex of black streaky shard particles spiraling around the anchor at t3, filling much of the upper front and threequarter frames with a tornado of sharp fragments, plus a dark speckled patch on the grass below. from the top at t3 the same event reads as a wide black shard splatter radiating across the grass. by t8 only pale gray-blue wispy shards remain, drifting.",
+      "properties": {
+        "dominant_colors": ["black", "dark gray", "slate blue gray"],
+        "shape": ["streaky shard vortex"],
+        "motion": ["spiraling upward, then dissipating"],
+        "brightness": ["very dark"],
+        "density": ["dense streaky mass"],
+        "scale_impression": ["huge, spans much of frame height"],
+        "persistence": ["violent at t3, pale wisps at t8"],
+        "texture_quality": ["sharp shard streaks"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["debris explosion", "dark vortex", "heavy impact aftermath", "destruction shockwave"],
+      "confidence": 0.9,
+      "notes": "largest burst in the batch; reads as a violent debris event rather than a glow effect."
+    },
+    "superheroes_naruto_rasengan_swirl": {
+      "visibility": "clear",
+      "description": "a compact cluster of dark spiral-curl particles held at the anchor on every tick of the front and threequarter views; the curls are near-black with faint slate-blue edges at t3 and t8, fading to pale gray versions of the same curls by t20. top view shows only the dirt pile.",
+      "properties": {
+        "dominant_colors": ["black", "dark gray", "faint slate blue"],
+        "shape": ["spiral curls in a tight cluster"],
+        "motion": ["held swirling mass, fading"],
+        "brightness": ["dark"],
+        "density": ["compact cluster"],
+        "scale_impression": ["small-medium, about one block"],
+        "persistence": ["all ticks, paler at t20"],
+        "texture_quality": ["curly swirl sprites"],
+        "blend_appearance": ["opaque"]
+      },
+      "possible_roles": ["charged energy ball", "dark chakra swirl", "held projectile charge", "vortex charge-up"],
+      "confidence": 0.85,
+      "notes": "effect stays locked at the anchor; the fade at t20 suggests decay rather than movement."
+    },
+    "superheroes_soul_spark": {
+      "visibility": "clear",
+      "description": "a loose cluster of glowing cyan-white plus/star sparkles floating around the anchor on every tick; by t20 the sparkles have drifted down toward the grass and turned noticeably paler. top view shows only the dirt pile.",
+      "properties": {
+        "dominant_colors": ["cyan", "pale aqua", "white"],
+        "shape": ["star/cross sparkles"],
+        "motion": ["gentle downward drift"],
+        "brightness": ["bright glow"],
+        "density": ["sparse cluster of ~5-6 sparkles"],
+        "scale_impression": ["small sparkles"],
+        "persistence": ["all ticks, fading by t20"],
+        "texture_quality": ["sparkle sprites with soft glow edges"],
+        "blend_appearance": ["translucent emissive look"]
+      },
+      "possible_roles": ["soul wisp", "magic sparkle aura", "healing motes", "spirit energy cluster"],
+      "confidence": 0.9,
+      "notes": "soft luminous edges against the sky suggest an additive-style glow render."
+    },
+    "vfxlab_smoke_plume": {
+      "visibility": "clear",
+      "description": "a pale gray-beige billowing smoke cloud sits at the top edge of the front frame on every tick, made of soft blotchy semi-transparent puffs; stable in position across t3, t8 and t20. from the top at t3 the plume reads as faint gray speckling over the dirt pile area.",
+      "properties": {
+        "dominant_colors": ["light gray", "beige gray", "off-white"],
+        "shape": ["billowy cloud cluster"],
+        "motion": ["continuous plume, stable aloft"],
+        "brightness": ["pale mid luminance"],
+        "density": ["moderate translucent"],
+        "scale_impression": ["large cloud head"],
+        "persistence": ["constant across all ticks"],
+        "texture_quality": ["soft billow puffs"],
+        "blend_appearance": ["translucent"]
+      },
+      "possible_roles": ["chimney smoke", "campfire plume", "explosion aftermath smoke", "steam or pollution plume"],
+      "confidence": 0.85,
+      "notes": "only the cloud head is framed at the top edge; the rising column below it is out of view or too faint."
+    }
+  }
+}
