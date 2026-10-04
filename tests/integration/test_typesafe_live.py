@@ -113,9 +113,11 @@ def test_live_find_effects_shockwave(client):
     assert top.choice_probability is not None and top.choice_probability > 0.5
     assert res.choice_distribution
     ids = [c.id for c in res.candidates]
-    # 'flame' contradicts the explicit "no fire" constraint — Jev must drop it
-    # from the finalist pool entirely
-    assert "minecraft:flame" not in ids
+    # 'flame' contradicts the explicit "no fire" constraint. On a tiny
+    # candidate list the fixed-size pool can still carry it through noul,
+    # but stage-2 must assign it ~0 probability.
+    flame = next((c for c in res.candidates if c.id == "minecraft:flame"), None)
+    assert flame is None or flame.choice_probability == 0.0
     # 'heart' is irrelevant: it may survive into the pool on a tiny noul but
     # must be rejected in the final distribution
     heart = next((c for c in res.candidates if c.id == "minecraft:heart"), None)

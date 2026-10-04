@@ -47,7 +47,7 @@ def _tokens(value: str) -> set[str]:
     connective words stripped so phrasing differences don't fake
     disagreement. Keeps what the pass actually claimed."""
     toks = set()
-    for raw in re.findall(r"[a-z]+", value.lower()):
+    for raw in re.findall(r"[a-z]+\d*", value.lower()):
         if raw in _STOPWORDS or re.fullmatch(r"t\d+", raw):
             continue
         toks.add(raw)

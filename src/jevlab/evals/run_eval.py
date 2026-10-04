@@ -96,7 +96,7 @@ def main() -> int:
         json.dump(report, fh, ensure_ascii=False, indent=1)
     a = report["aggregate"]
     print(f"\naggregate: {a['hits_total']}/{a['expected_total']} "
-          f"recall@top{a['top_k']}={a['recall_at_topk']:.2f} "
+          f"recall@top{report['top_k']}={a['recall_at_topk']:.2f} "
           f"({a['cases_with_any_hit']}/{a['cases']} cases with a hit) "
           f"tokens={a['total_input_tokens']}+{a['total_output_tokens']} "
           f"latency={a['total_latency_s']}s -> {args.out}")

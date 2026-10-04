@@ -1,0 +1,477 @@
+{
+ "cases": [
+  {
+   "name": "homelander_clap",
+   "query": "a very short, powerful air impact burst from a hand clap — a hard flash at the hands, a fast expanding shock ring in front of the player, dust kicked up along the direction, violent but readable, done in under a second",
+   "expected_ids": [
+    "superheroes:homelander_clap_flash",
+    "superheroes:homelander_clap_dust",
+    "superheroes:vfx/clap"
+   ],
+   "top_ids": [
+    "minecraft:sonic_boom",
+    "superheroes:homelander_roar_wave",
+    "superheroes:vfx/clap",
+    "vfxlab:ember_ring_burst",
+    "superheroes:homelander_clap_dust",
+    "superheroes:homelander_clap_flash",
+    "minecraft:dust",
+    "minecraft:dust_color_transition",
+    "minecraft:explosion",
+    "minecraft:explosion_emitter"
+   ],
+   "hits": [
+    "superheroes:homelander_clap_flash",
+    "superheroes:homelander_clap_dust",
+    "superheroes:vfx/clap"
+   ],
+   "missed": [],
+   "hit_at_topk": 1.0,
+   "usage": {
+    "input_tokens": 79360,
+    "output_tokens": 4023
+   },
+   "latency_s": 1.057,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "homelander_eye_lasers",
+   "query": "twin bright energy beams streaming continuously from the eyes that converge on whatever is being looked at, hot core with a softer colored glow around it, charred marks left on blocks the beam touches, hums while held and snaps off cleanly",
+   "expected_ids": [
+    "superheroes:homelander_laser_impact",
+    "superheroes:laser_spark",
+    "superheroes:vfx/laser",
+    "vfxlab:laser_beam"
+   ],
+   "top_ids": [
+    "vfxlab:laser_beam",
+    "superheroes:vfx/laser",
+    "superheroes:homelander_laser_impact",
+    "superheroes:homelander_sun_ember",
+    "minecraft:dragon_breath",
+    "minecraft:dust",
+    "minecraft:dust_color_transition",
+    "minecraft:effect",
+    "minecraft:electric_spark",
+    "minecraft:end_rod"
+   ],
+   "hits": [
+    "superheroes:homelander_laser_impact",
+    "superheroes:vfx/laser",
+    "vfxlab:laser_beam"
+   ],
+   "missed": [
+    "superheroes:laser_spark"
+   ],
+   "hit_at_topk": 0.75,
+   "usage": {
+    "input_tokens": 76728,
+    "output_tokens": 4030
+   },
+   "latency_s": 1.09,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "homelander_roar",
+   "query": "a roar that visibly pushes air forward — repeated translucent rings rippling out of the mouth in a cone, faint heat-haze shimmer, dust stirring on the ground, lasting about a second and a half",
+   "expected_ids": [
+    "superheroes:homelander_roar_wave",
+    "superheroes:homelander_roar_dust",
+    "superheroes:vfx/roar"
+   ],
+   "top_ids": [
+    "minecraft:sonic_boom",
+    "minecraft:gust_emitter_large",
+    "superheroes:vfx/roar",
+    "superheroes:homelander_roar_wave",
+    "vfxlab:ember_ring_burst",
+    "minecraft:gust",
+    "superheroes:homelander_roar_dust",
+    "minecraft:dragon_breath",
+    "minecraft:dust_plume",
+    "minecraft:small_gust"
+   ],
+   "hits": [
+    "superheroes:homelander_roar_wave",
+    "superheroes:homelander_roar_dust",
+    "superheroes:vfx/roar"
+   ],
+   "missed": [],
+   "hit_at_topk": 1.0,
+   "usage": {
+    "input_tokens": 79310,
+    "output_tokens": 4019
+   },
+   "latency_s": 0.96,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "flight_aura",
+   "query": "a supersonic flight aura — a soft white vapor contrail streaming off the torso and thin speed lines off the fists while flying fast, and a small shock ring popping periodically like breaking the air barrier",
+   "expected_ids": [
+    "superheroes:homelander_flight_boost",
+    "superheroes:homelander_flight_landing",
+    "superheroes:vfx/flight",
+    "vfxlab:ribbon_trail"
+   ],
+   "top_ids": [
+    "superheroes:vfx/flight",
+    "minecraft:sonic_boom",
+    "superheroes:homelander_flight_boost",
+    "minecraft:white_smoke",
+    "superheroes:vfx/iron_fists",
+    "vfxlab:ribbon_trail",
+    "minecraft:cloud",
+    "minecraft:dragon_breath",
+    "minecraft:dust",
+    "minecraft:dust_color_transition"
+   ],
+   "hits": [
+    "superheroes:homelander_flight_boost",
+    "superheroes:vfx/flight",
+    "vfxlab:ribbon_trail"
+   ],
+   "missed": [
+    "superheroes:homelander_flight_landing"
+   ],
+   "hit_at_topk": 0.75,
+   "usage": {
+    "input_tokens": 77880,
+    "output_tokens": 4017
+   },
+   "latency_s": 0.913,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "homelander_sun",
+   "query": "a long visible charge-up where the character glows hotter and brighter, embers rising off them, then a huge screen-filling solar explosion with an expanding ring of fire and debris",
+   "expected_ids": [
+    "superheroes:homelander_sun_ember",
+    "superheroes:homelander_sun_debris",
+    "superheroes:vfx/sun_charge",
+    "superheroes:vfx/sun_detonation",
+    "superheroes:sun_particle",
+    "minecraft:explosion_emitter"
+   ],
+   "top_ids": [
+    "superheroes:vfx/sun_detonation",
+    "superheroes:vfx/sun_charge",
+    "vfxlab:ember_ring_burst",
+    "minecraft:ash",
+    "minecraft:dragon_breath",
+    "minecraft:dust",
+    "minecraft:dust_color_transition",
+    "minecraft:explosion",
+    "minecraft:explosion_emitter",
+    "minecraft:falling_lava"
+   ],
+   "hits": [
+    "superheroes:vfx/sun_charge",
+    "superheroes:vfx/sun_detonation",
+    "minecraft:explosion_emitter"
+   ],
+   "missed": [
+    "superheroes:homelander_sun_ember",
+    "superheroes:homelander_sun_debris",
+    "superheroes:sun_particle"
+   ],
+   "hit_at_topk": 0.5,
+   "usage": {
+    "input_tokens": 78032,
+    "output_tokens": 4038
+   },
+   "latency_s": 0.857,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "scorpion_teleport",
+   "query": "an instant blink teleport — the character erupts in a burst of hellish flame where they stood and reappears at the target inside a second matching flame burst",
+   "expected_ids": [
+    "superheroes:scorpion_teleport",
+    "minecraft:flame",
+    "minecraft:lava"
+   ],
+   "top_ids": [
+    "minecraft:flame",
+    "superheroes:scorpion_teleport",
+    "minecraft:flash",
+    "vfxlab:ember_ring_burst",
+    "minecraft:world_event/ANIMATION_END_GATEWAY_SPAWN",
+    "minecraft:world_event/PARTICLES_DRAGON_FIREBALL_SPLASH",
+    "minecraft:portal",
+    "minecraft:reverse_portal",
+    "minecraft:soul_fire_flame",
+    "superheroes:homelander_clap_flash"
+   ],
+   "hits": [
+    "superheroes:scorpion_teleport",
+    "minecraft:flame"
+   ],
+   "missed": [
+    "minecraft:lava"
+   ],
+   "hit_at_topk": 0.6666666666666666,
+   "usage": {
+    "input_tokens": 77484,
+    "output_tokens": 4020
+   },
+   "latency_s": 0.985,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "scorpion_hellbreath",
+   "query": "a sustained stream of hellish fire pouring out of the mouth like a flamethrower — a widening cone of flames with embers and dark smoke at the far end, held for as long as the button is held",
+   "expected_ids": [
+    "superheroes:scorpion_hellbreath",
+    "minecraft:flame",
+    "minecraft:lava",
+    "minecraft:large_smoke",
+    "superheroes:black_flame"
+   ],
+   "top_ids": [
+    "superheroes:scorpion_hellbreath",
+    "minecraft:flame",
+    "superheroes:homelander_sun_ember",
+    "minecraft:soul_fire_flame",
+    "minecraft:dragon_breath",
+    "minecraft:dust_color_transition",
+    "minecraft:falling_lava",
+    "minecraft:firework",
+    "minecraft:lava",
+    "minecraft:world_event/ANIMATION_DRAGON_SUMMON_ROAR"
+   ],
+   "hits": [
+    "superheroes:scorpion_hellbreath",
+    "minecraft:flame",
+    "minecraft:lava"
+   ],
+   "missed": [
+    "minecraft:large_smoke",
+    "superheroes:black_flame"
+   ],
+   "hit_at_topk": 0.6,
+   "usage": {
+    "input_tokens": 77475,
+    "output_tokens": 4030
+   },
+   "latency_s": 1.021,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "scorpion_harpoon",
+   "query": "a burning chain harpoon that streaks out, skewers the target in a flare of fire, and drags them back — a fiery dotted line from the thrower to the victim",
+   "expected_ids": [
+    "superheroes:scorpion_harpoon",
+    "superheroes:scorpion_hellfire",
+    "minecraft:flame",
+    "minecraft:crit"
+   ],
+   "top_ids": [
+    "vfxlab:laser_beam",
+    "vfxlab:ribbon_trail",
+    "vfxlab:ember_ring_burst",
+    "superheroes:scorpion_harpoon",
+    "minecraft:vault_connection",
+    "minecraft:dust_color_transition",
+    "minecraft:flame",
+    "minecraft:soul_fire_flame",
+    "superheroes:vfx/laser",
+    "minecraft:falling_lava"
+   ],
+   "hits": [
+    "superheroes:scorpion_harpoon",
+    "minecraft:flame"
+   ],
+   "missed": [
+    "superheroes:scorpion_hellfire",
+    "minecraft:crit"
+   ],
+   "hit_at_topk": 0.5,
+   "usage": {
+    "input_tokens": 79502,
+    "output_tokens": 4011
+   },
+   "latency_s": 0.937,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "goku_kamehameha",
+   "query": "a massive blue-white energy wave fired from cupped hands after a visible charge-up — a thick continuous beam of light that pours forward for seconds and explodes where it lands",
+   "expected_ids": [
+    "superheroes:goku_kamehameha_core",
+    "superheroes:goku_kamehameha_trail",
+    "superheroes:goku_ki_aura",
+    "minecraft:end_rod"
+   ],
+   "top_ids": [
+    "superheroes:vfx/laser",
+    "vfxlab:laser_beam",
+    "superheroes:homelander_laser_impact",
+    "superheroes:goku_kamehameha_core",
+    "superheroes:vfx/sun_detonation",
+    "superheroes:goku_kamehameha_trail",
+    "minecraft:dragon_breath",
+    "minecraft:dust_color_transition",
+    "minecraft:effect",
+    "minecraft:electric_spark"
+   ],
+   "hits": [
+    "superheroes:goku_kamehameha_core",
+    "superheroes:goku_kamehameha_trail"
+   ],
+   "missed": [
+    "superheroes:goku_ki_aura",
+    "minecraft:end_rod"
+   ],
+   "hit_at_topk": 0.5,
+   "usage": {
+    "input_tokens": 75122,
+    "output_tokens": 4034
+   },
+   "latency_s": 0.903,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "naruto_rasenshuriken",
+   "query": "a spinning chakra disc hurled like a frisbee — a swirling white-blue vortex of wind that visibly screws through the air and bursts on whoever it clips",
+   "expected_ids": [
+    "superheroes:naruto_rasengan_swirl",
+    "minecraft:gust",
+    "minecraft:gust_emitter_large",
+    "minecraft:sweep_attack"
+   ],
+   "top_ids": [
+    "minecraft:sonic_boom",
+    "superheroes:naruto_rasengan_swirl",
+    "minecraft:sculk_charge",
+    "minecraft:gust",
+    "minecraft:gust_emitter_large",
+    "superheroes:anomaly_slice",
+    "superheroes:scorpion_harpoon",
+    "vfxlab:ribbon_trail",
+    "minecraft:dragon_breath",
+    "minecraft:dust"
+   ],
+   "hits": [
+    "superheroes:naruto_rasengan_swirl",
+    "minecraft:gust",
+    "minecraft:gust_emitter_large"
+   ],
+   "missed": [
+    "minecraft:sweep_attack"
+   ],
+   "hit_at_topk": 0.75,
+   "usage": {
+    "input_tokens": 76233,
+    "output_tokens": 4006
+   },
+   "latency_s": 0.926,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "raiden_musou_isshin",
+   "query": "an overcharged katana ultimate — the fighter freezes the area while power gathers, then one enormous slash that rips up the ground and drops a row of lightning bolts along the cut",
+   "expected_ids": [
+    "superheroes:anomaly_slice",
+    "superheroes:moonveil",
+    "superheroes:jiwald_effect",
+    "superheroes:sparks",
+    "superheroes:white_boom",
+    "superheroes:sword_explosion",
+    "superheroes:shamak"
+   ],
+   "top_ids": [
+    "minecraft:world_event/PARTICLES_ELECTRIC_SPARK",
+    "minecraft:world_event/PARTICLES_DESTROY_BLOCK",
+    "superheroes:vfx/laser",
+    "vfxlab:ember_ring_burst",
+    "superheroes:anomaly_slice",
+    "minecraft:electric_spark",
+    "minecraft:world_event/PARTICLES_SMASH_ATTACK",
+    "minecraft:sonic_boom",
+    "superheroes:homelander_laser_impact",
+    "superheroes:homelander_roar_wave"
+   ],
+   "hits": [
+    "superheroes:anomaly_slice"
+   ],
+   "missed": [
+    "superheroes:moonveil",
+    "superheroes:jiwald_effect",
+    "superheroes:sparks",
+    "superheroes:white_boom",
+    "superheroes:sword_explosion",
+    "superheroes:shamak"
+   ],
+   "hit_at_topk": 0.14285714285714285,
+   "usage": {
+    "input_tokens": 82099,
+    "output_tokens": 4034
+   },
+   "latency_s": 0.861,
+   "query_cache": "live",
+   "diagnostics": []
+  },
+  {
+   "name": "hero_transform",
+   "query": "a quick magical poof of sparkles wrapping the body for an instant as one character swaps into another — bright, celebratory, gone in a blink",
+   "expected_ids": [
+    "superheroes:transform_spark",
+    "minecraft:firework",
+    "minecraft:totem_of_undying"
+   ],
+   "top_ids": [
+    "minecraft:dust",
+    "vfxlab:sparkle_sphere",
+    "superheroes:transform_spark",
+    "minecraft:flash",
+    "minecraft:poof",
+    "superheroes:sparks",
+    "minecraft:instant_effect",
+    "minecraft:enchanted_hit",
+    "superheroes:dazzling",
+    "minecraft:crit"
+   ],
+   "hits": [
+    "superheroes:transform_spark"
+   ],
+   "missed": [
+    "minecraft:firework",
+    "minecraft:totem_of_undying"
+   ],
+   "hit_at_topk": 0.3333333333333333,
+   "usage": {
+    "input_tokens": 74852,
+    "output_tokens": 3993
+   },
+   "latency_s": 0.914,
+   "query_cache": "live",
+   "diagnostics": []
+  }
+ ],
+ "started_at": 1791139709.4413838,
+ "top_k": 10,
+ "stage2_pool": 25,
+ "batch_size": 30,
+ "finished_at": 1791139721.8694787,
+ "aggregate": {
+  "cases": 12,
+  "expected_total": 50,
+  "hits_total": 29,
+  "recall_at_topk": 0.58,
+  "cases_with_any_hit": 12,
+  "total_input_tokens": 934077,
+  "total_output_tokens": 48255,
+  "total_latency_s": 11.42
+ }
+}
