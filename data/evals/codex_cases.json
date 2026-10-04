@@ -1,0 +1,62 @@
+[
+  {
+    "name": "homelander_clap",
+    "query": "a very short, powerful air impact burst from a hand clap — a hard flash at the hands, a fast expanding shock ring in front of the player, dust kicked up along the direction, violent but readable, done in under a second",
+    "expected_ids": ["superheroes:homelander_clap_flash", "superheroes:homelander_clap_dust", "superheroes:vfx/clap"]
+  },
+  {
+    "name": "homelander_eye_lasers",
+    "query": "twin bright energy beams streaming continuously from the eyes that converge on whatever is being looked at, hot core with a softer colored glow around it, charred marks left on blocks the beam touches, hums while held and snaps off cleanly",
+    "expected_ids": ["superheroes:homelander_laser_impact", "superheroes:laser_spark", "superheroes:vfx/laser", "vfxlab:laser_beam"]
+  },
+  {
+    "name": "homelander_roar",
+    "query": "a roar that visibly pushes air forward — repeated translucent rings rippling out of the mouth in a cone, faint heat-haze shimmer, dust stirring on the ground, lasting about a second and a half",
+    "expected_ids": ["superheroes:homelander_roar_wave", "superheroes:homelander_roar_dust", "superheroes:vfx/roar"]
+  },
+  {
+    "name": "flight_aura",
+    "query": "a supersonic flight aura — a soft white vapor contrail streaming off the torso and thin speed lines off the fists while flying fast, and a small shock ring popping periodically like breaking the air barrier",
+    "expected_ids": ["superheroes:homelander_flight_boost", "superheroes:homelander_flight_landing", "superheroes:vfx/flight", "vfxlab:ribbon_trail"]
+  },
+  {
+    "name": "homelander_sun",
+    "query": "a long visible charge-up where the character glows hotter and brighter, embers rising off them, then a huge screen-filling solar explosion with an expanding ring of fire and debris",
+    "expected_ids": ["superheroes:homelander_sun_ember", "superheroes:homelander_sun_debris", "superheroes:vfx/sun_charge", "superheroes:vfx/sun_detonation", "superheroes:sun_particle", "minecraft:explosion_emitter"]
+  },
+  {
+    "name": "scorpion_teleport",
+    "query": "an instant blink teleport — the character erupts in a burst of hellish flame where they stood and reappears at the target inside a second matching flame burst",
+    "expected_ids": ["superheroes:scorpion_teleport", "minecraft:flame", "minecraft:lava"]
+  },
+  {
+    "name": "scorpion_hellbreath",
+    "query": "a sustained stream of hellish fire pouring out of the mouth like a flamethrower — a widening cone of flames with embers and dark smoke at the far end, held for as long as the button is held",
+    "expected_ids": ["superheroes:scorpion_hellbreath", "minecraft:flame", "minecraft:lava", "minecraft:large_smoke", "superheroes:black_flame"]
+  },
+  {
+    "name": "scorpion_harpoon",
+    "query": "a burning chain harpoon that streaks out, skewers the target in a flare of fire, and drags them back — a fiery dotted line from the thrower to the victim",
+    "expected_ids": ["superheroes:scorpion_harpoon", "superheroes:scorpion_hellfire", "minecraft:flame", "minecraft:crit"]
+  },
+  {
+    "name": "goku_kamehameha",
+    "query": "a massive blue-white energy wave fired from cupped hands after a visible charge-up — a thick continuous beam of light that pours forward for seconds and explodes where it lands",
+    "expected_ids": ["superheroes:goku_kamehameha_core", "superheroes:goku_kamehameha_trail", "superheroes:goku_ki_aura", "minecraft:end_rod"]
+  },
+  {
+    "name": "naruto_rasenshuriken",
+    "query": "a spinning chakra disc hurled like a frisbee — a swirling white-blue vortex of wind that visibly screws through the air and bursts on whoever it clips",
+    "expected_ids": ["superheroes:naruto_rasengan_swirl", "minecraft:gust", "minecraft:gust_emitter_large", "minecraft:sweep_attack"]
+  },
+  {
+    "name": "raiden_musou_isshin",
+    "query": "an overcharged katana ultimate — the fighter freezes the area while power gathers, then one enormous slash that rips up the ground and drops a row of lightning bolts along the cut",
+    "expected_ids": ["superheroes:anomaly_slice", "superheroes:moonveil", "superheroes:jiwald_effect", "superheroes:sparks", "superheroes:white_boom", "superheroes:sword_explosion", "superheroes:shamak"]
+  },
+  {
+    "name": "hero_transform",
+    "query": "a quick magical poof of sparkles wrapping the body for an instant as one character swaps into another — bright, celebratory, gone in a blink",
+    "expected_ids": ["superheroes:transform_spark", "minecraft:firework", "minecraft:totem_of_undying"]
+  }
+]

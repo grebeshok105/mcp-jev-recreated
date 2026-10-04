@@ -1,0 +1,397 @@
+{
+ "observations": {
+  "superheroes_white_boom": {
+   "visibility": "faint",
+   "description": "Front and side views show an empty grass horizon at all captured ticks (t3, t8, t20) \u2014 no flash, particles, or debris. Only the top view shows anything: a compact brown dirt-colored blocky cluster (~5x5 blocks) at t3, fragmenting into ~8 scattered brown specks spread over a wide radius at t8, and a clean grass field by t20. Despite the id, nothing white is visible in any cell.",
+   "properties": {
+    "dominant_colors": [
+     "dirt brown",
+     "dark brown"
+    ],
+    "shape": [
+     "blocky cluster",
+     "scattered block fragments"
+    ],
+    "motion": [
+     "outward scatter then despawn"
+    ],
+    "brightness": [
+     "same as terrain"
+    ],
+    "density": [
+     "compact at t3",
+     "sparse at t8"
+    ],
+    "scale_impression": [
+     "several blocks footprint",
+     "debris spread ~8 blocks"
+    ],
+    "persistence": [
+     "clears by t20"
+    ],
+    "texture_quality": [
+     "minecraft block-textured debris"
+    ],
+    "blend_appearance": [
+     "opaque"
+    ]
+   },
+   "possible_roles": [
+    "ground impact debris",
+    "explosion aftermath",
+    "crater scatter"
+   ],
+   "confidence": 0.8,
+   "notes": "Visible only in top view; front/side cells are pixel-identical to an empty scene. The same brown dirt-debris motif appears in the top view of every sheet in this batch, so it may be a shared scene element (e.g. a scattered pile at the spawn point) rather than part of this specific effect."
+  },
+  "superheroes_homelander_roar_wave": {
+   "visibility": "faint",
+   "description": "Front and side views are completely empty at all ticks (t2, t3, t4, t8, t20). Only the top view shows motion: nothing at t2, a compact brown dirt block cluster at t3, a wide ring-like scatter of brown/dark blocky debris covering a large radius at t4, sparse leftover specks at t8, and clear grass by t20.",
+   "properties": {
+    "dominant_colors": [
+     "dirt brown",
+     "dark brown"
+    ],
+    "shape": [
+     "radial scatter of blocky fragments"
+    ],
+    "motion": [
+     "outward expansion peaking at t4",
+     "then despawn"
+    ],
+    "brightness": [
+     "same as terrain"
+    ],
+    "density": [
+     "moderate at t3-t4",
+     "sparse at t8"
+    ],
+    "scale_impression": [
+     "largest spread in batch",
+     "~10+ blocks diameter at t4"
+    ],
+    "persistence": [
+     "gone by t20"
+    ],
+    "texture_quality": [
+     "blocky"
+    ],
+    "blend_appearance": [
+     "opaque"
+    ]
+   },
+   "possible_roles": [
+    "radial shockwave",
+    "ground slam",
+    "AOE burst debris"
+   ],
+   "confidence": 0.8,
+   "notes": "Top-view only; the effect reads as a wave of block debris expanding outward. Same recurring dirt-debris motif as other sheets, but here the scatter is noticeably wider and more ring-like at t4."
+  },
+  "minecraft_flame": {
+   "visibility": "clear",
+   "description": "Front and side views at t3 show a small cluster of 2-4 orange-yellow flame sprites floating roughly a block above the ground, just above the horizon line. By t8 the cluster has shrunk to a single small flame sprite, and by t20 it is gone. Top views show the recurring brown dirt-debris cluster at t3 scattering by t8 and clearing by t20.",
+   "properties": {
+    "dominant_colors": [
+     "orange",
+     "yellow"
+    ],
+    "shape": [
+     "small flame tongues",
+     "2-4 overlapping sprites"
+    ],
+    "motion": [
+     "flicker and dissipate",
+     "dies between t8 and t20"
+    ],
+    "brightness": [
+     "bright",
+     "emissive-looking"
+    ],
+    "density": [
+     "very sparse"
+    ],
+    "scale_impression": [
+     "sub-block to ~1 block"
+    ],
+    "persistence": [
+     "short-lived, gone by t20"
+    ],
+    "texture_quality": [
+     "vanilla flame-particle look"
+    ],
+    "blend_appearance": [
+     "emissive"
+    ]
+   },
+   "possible_roles": [
+    "small fire ignition",
+    "burning/fire tick FX",
+    "flame projectile puff"
+   ],
+   "confidence": 0.9,
+   "notes": "Small effect \u2014 easy to miss at this camera distance but unambiguous once seen. Dirt debris in top view follows the same pattern as other sheets."
+  },
+  "minecraft_dust": {
+   "visibility": "clear",
+   "description": "Front and side views at t3 show a bright cyan-blue puff of dust particles \u2014 a roughly block-sized dense blob floating above the ground. By t8 the cloud has dispersed into sparse drifting cyan specks, and by t20 only one or two tiny specks remain, higher in the sky than at spawn. Top views show the recurring dirt-debris cluster decaying t3 to t8.",
+   "properties": {
+    "dominant_colors": [
+     "cyan",
+     "light blue"
+    ],
+    "shape": [
+     "round puff blob",
+     "drifting specks"
+    ],
+    "motion": [
+     "expands and disperses",
+     "drifts upward while fading"
+    ],
+    "brightness": [
+     "bright"
+    ],
+    "density": [
+     "dense at t3",
+     "sparse by t8"
+    ],
+    "scale_impression": [
+     "~1 block at spawn"
+    ],
+    "persistence": [
+     "fades by t20"
+    ],
+    "texture_quality": [
+     "small square particle specks"
+    ],
+    "blend_appearance": [
+     "opaque-to-translucent specks"
+    ]
+   },
+   "possible_roles": [
+    "magic/potion dust puff",
+    "enchantment or elemental cast FX",
+    "colored dust burst"
+   ],
+   "confidence": 0.9,
+   "notes": "Puff rises as it fades \u2014 the t20 remnants sit higher than the t3 blob. Identical appearance in front and side views suggests a symmetric cloud."
+  },
+  "levelevent_2001": {
+   "visibility": "clear",
+   "description": "Front and side views at t3 show a fountain of gray cubic debris thrown upward \u2014 roughly 15 blocky gray sprites arcing above the impact point with smaller dark fragments mixed in; the top view at t3 also shows gray blocks scattered around a central dirt blob. By t8 almost everything is gone \u2014 only a few gray specks at ground level \u2014 and t20 is clean.",
+   "properties": {
+    "dominant_colors": [
+     "gray",
+     "dark gray"
+    ],
+    "shape": [
+     "cubic block sprites",
+     "arc/fountain formation"
+    ],
+    "motion": [
+     "thrown upward then lands or despawns"
+    ],
+    "brightness": [
+     "same as terrain"
+    ],
+    "density": [
+     "moderate burst at t3"
+    ],
+    "scale_impression": [
+     "spread of ~3-4 blocks"
+    ],
+    "persistence": [
+     "gone by t8"
+    ],
+    "texture_quality": [
+     "solid block-like"
+    ],
+    "blend_appearance": [
+     "opaque"
+    ]
+   },
+   "possible_roles": [
+    "block destruction debris",
+    "explosion fragments",
+    "ground shatter burst"
+   ],
+   "confidence": 0.9,
+   "notes": "Very short-lived \u2014 the burst is essentially over by t8. Visible from all three camera angles at t3."
+  },
+  "vfxlab_ember_ring_burst": {
+   "visibility": "clear",
+   "description": "Front and side views at t2 show a dotted ring/arc of ~10-15 bright orange ember particles near the top of the frame. The ring expands steadily: by t6 its dotted ellipse is wider than the viewport, and by t9 it is a sparse wide arc of fading dots. A few faint scattered dots remain at t15; t20 is clean. The ring never appears in the top view, which only shows the recurring dirt debris.",
+   "properties": {
+    "dominant_colors": [
+     "orange",
+     "red-orange"
+    ],
+    "shape": [
+     "ring of discrete dots",
+     "expanding ellipse"
+    ],
+    "motion": [
+     "outward radial expansion",
+     "grows past frame edges"
+    ],
+    "brightness": [
+     "bright",
+     "emissive"
+    ],
+    "density": [
+     "dotted, sparse"
+    ],
+    "scale_impression": [
+     "grows to >10 blocks across"
+    ],
+    "persistence": [
+     "fades by t15-t20"
+    ],
+    "texture_quality": [
+     "small glowing point sprites"
+    ],
+    "blend_appearance": [
+     "additive/emissive"
+    ]
+   },
+   "possible_roles": [
+    "explosion ring",
+    "fire nova",
+    "shockwave burst",
+    "AOE telegraph"
+   ],
+   "confidence": 0.9,
+   "notes": "Ring sits high above the ground plane and is not visible from the top camera \u2014 it is likely a horizontal or tilted ring seen nearly edge-on from front and side."
+  },
+  "vfxlab_laser_beam": {
+   "visibility": "clear",
+   "description": "Front views at every tick (t3, t8, t20) show a thin cyan beam streak in the upper-right of the frame, hugging the top edge \u2014 a short bright line ~50 px long. Side views show only a tiny cyan dot at the same height, consistent with the beam seen nearly end-on. The pixel pattern is identical at all three ticks, indicating a static sustained beam rather than a burst. Top views show the recurring dirt debris only.",
+   "properties": {
+    "dominant_colors": [
+     "cyan",
+     "light blue"
+    ],
+    "shape": [
+     "thin line streak in front view",
+     "point in side view"
+    ],
+    "motion": [
+     "none",
+     "static/sustained"
+    ],
+    "brightness": [
+     "bright"
+    ],
+    "density": [
+     "minimal footprint"
+    ],
+    "scale_impression": [
+     "long beam",
+     "mostly out of frame upper-right"
+    ],
+    "persistence": [
+     "unchanged through t20"
+    ],
+    "texture_quality": [
+     "smooth line",
+     "non-blocky"
+    ],
+    "blend_appearance": [
+     "emissive"
+    ]
+   },
+   "possible_roles": [
+    "beam weapon",
+    "laser",
+    "energy ray",
+    "targeting beam"
+   ],
+   "confidence": 0.85,
+   "notes": "Beam direction runs mostly out of frame toward the upper-right; the side camera sees it end-on as a dot. Identical pixel counts at every tick = no evolution over the captured window."
+  },
+  "minecraft_sonic_boom": {
+   "visibility": "clear",
+   "description": "Front view at t3 shows a large teal hollow ring (a clean annulus ~2 blocks across) facing the camera; the side view at t3 shows the same effect as a solid teal oval/disc. Both views are completely empty by t8 and stay empty at t20 \u2014 the effect is a single very brief burst. Top view shows only the recurring dirt-debris cluster.",
+   "properties": {
+    "dominant_colors": [
+     "teal",
+     "cyan-green"
+    ],
+    "shape": [
+     "hollow ring face-on",
+     "solid disc edge-on"
+    ],
+    "motion": [
+     "one-shot burst",
+     "gone before t8"
+    ],
+    "brightness": [
+     "saturated"
+    ],
+    "density": [
+     "solid shape"
+    ],
+    "scale_impression": [
+     "large",
+     "~2 blocks diameter"
+    ],
+    "persistence": [
+     "very short",
+     "<5 ticks visible"
+    ],
+    "texture_quality": [
+     "smooth-edged geometric shape"
+    ],
+    "blend_appearance": [
+     "opaque"
+    ]
+   },
+   "possible_roles": [
+    "shockwave ring",
+    "sonic/projectile attack",
+    "front-facing burst wave"
+   ],
+   "confidence": 0.9,
+   "notes": "Only the t3 tick catches it \u2014 lifetime is shorter than the capture interval. The front shows a true hollow ring (verified: no teal pixels in the inner disc)."
+  },
+  "superheroes_scorpion_hellfire": {
+   "visibility": "none",
+   "description": "All three captured cells (front t1, t2, t4) show only empty flat grass and sky \u2014 zero anomalous pixels. No particles, glow, debris, or shapes are visible at any tick. This sheet also has no side or top views to cross-check.",
+   "properties": {
+    "dominant_colors": [
+     "grass green",
+     "sky blue"
+    ],
+    "shape": [
+     "none"
+    ],
+    "motion": [
+     "none"
+    ],
+    "brightness": [
+     "normal daylight"
+    ],
+    "density": [
+     "none"
+    ],
+    "scale_impression": [
+     "none"
+    ],
+    "persistence": [
+     "none"
+    ],
+    "texture_quality": [
+     "n/a"
+    ],
+    "blend_appearance": [
+     "n/a"
+    ]
+   },
+   "possible_roles": [
+    "no observable effect \u2014 possibly invisible, sub-pixel, client-only, or failed to spawn"
+   ],
+   "confidence": 0.95,
+   "notes": "Sheet contains only three front-view cells (t1, t2, t4); if the effect is short-lived or offset from the front camera it may have been missed, but nothing is literally observable."
+  }
+ }
+}

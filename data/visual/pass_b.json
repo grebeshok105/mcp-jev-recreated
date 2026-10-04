@@ -1,0 +1,386 @@
+{
+ "observations": {
+  "superheroes_white_boom": {
+   "visibility": "faint",
+   "description": "Front and side cameras show an empty flat plain and sky at every tick except for one tiny pale speck in the sky at t3. The top camera shows a compact clump of small dirt-textured brown square chunks at ground center at t3, scattered into ~8 widely separated fragments at t8, and nothing at t20.",
+   "properties": {
+    "dominant_colors": [
+     "brown",
+     "dark tan"
+    ],
+    "shape": [
+     "irregular square chunks",
+     "loose clump"
+    ],
+    "motion": [
+     "outward scatter along the ground plane"
+    ],
+    "brightness": [
+     "matte",
+     "no glow"
+    ],
+    "density": [
+     "sparse"
+    ],
+    "scale_impression": [
+     "small - covers a few blocks of terrain"
+    ],
+    "persistence": [
+     "dissipated between t8 and t20"
+    ],
+    "texture_quality": [
+     "pixelated block fragments"
+    ],
+    "blend_appearance": [
+     "opaque, hard-edged"
+    ]
+   },
+   "possible_roles": [
+    "(interpretation) small impact/explosion debris burst",
+    "(interpretation) block-break or ground-slam effect",
+    "(interpretation) landing/footstep marker"
+   ],
+   "confidence": 0.8,
+   "notes": "Visible only from the top camera. Despite the id suggesting a bright blast, the only observable output is dirt-colored debris plus a single faint speck at horizon height; the burst itself is effectively invisible to ground-level cameras."
+  },
+  "superheroes_homelander_roar_wave": {
+   "visibility": "faint",
+   "description": "Front and side views show an empty horizon at all five sampled ticks. The top camera shows a tight cluster of dirt-textured brown chunks at t3, a wide scatter of roughly 18 fragments by t4, a few stragglers at t8, and empty grass at t20.",
+   "properties": {
+    "dominant_colors": [
+     "brown",
+     "dark tan"
+    ],
+    "shape": [
+     "irregular square chunks",
+     "radial scatter"
+    ],
+    "motion": [
+     "outward scatter along the ground plane"
+    ],
+    "brightness": [
+     "matte",
+     "no glow"
+    ],
+    "density": [
+     "sparse to moderate at peak"
+    ],
+    "scale_impression": [
+     "small-to-medium debris field"
+    ],
+    "persistence": [
+     "mostly gone by t8, empty by t20"
+    ],
+    "texture_quality": [
+     "pixelated block fragments"
+    ],
+    "blend_appearance": [
+     "opaque, hard-edged"
+    ]
+   },
+   "possible_roles": [
+    "(interpretation) radial knockback or shockwave debris",
+    "(interpretation) AOE impact burst",
+    "(interpretation) ground-wave attack residue"
+   ],
+   "confidence": 0.78,
+   "notes": "No wave, ring, or force visual appears in horizontal views; if a shockwave fired it is invisible at eye level. Larger debris spread than superheroes_white_boom but the same lifecycle and texture."
+  },
+  "minecraft_flame": {
+   "visibility": "clear",
+   "description": "Front and side views show a small group of 3-5 bright orange-yellow teardrop flame sprites hovering well above the horizon at t3; one or two remain at t8; by t20 only a faint speck survives in the side view. The top camera does not register the flames at all - it shows a single compact brown dirt clump on the ground at t3 that scatters by t8.",
+   "properties": {
+    "dominant_colors": [
+     "orange",
+     "yellow",
+     "red"
+    ],
+    "shape": [
+     "teardrop flame sprites"
+    ],
+    "motion": [
+     "hover/flicker in place",
+     "sprite count decays"
+    ],
+    "brightness": [
+     "bright",
+     "luminous"
+    ],
+    "density": [
+     "sparse - a handful of sprites"
+    ],
+    "scale_impression": [
+     "small relative to terrain"
+    ],
+    "persistence": [
+     "mostly dead by t8, gone by t20"
+    ],
+    "texture_quality": [
+     "pixelated sprite particles"
+    ],
+    "blend_appearance": [
+     "bright core over sky, additive look"
+    ]
+   },
+   "possible_roles": [
+    "(interpretation) fire or ignite burst",
+    "(interpretation) burn status / flaming-attack flash",
+    "(interpretation) fireball or torch impact puff"
+   ],
+   "confidence": 0.9,
+   "notes": "Strictly angle-dependent: invisible to the top camera. The sprites float high above the terrain rather than sitting on it."
+  },
+  "minecraft_dust": {
+   "visibility": "clear",
+   "description": "A dense cluster of cyan-teal square specks with a brighter core hangs in the sky at t3. By t8 it has split into two looser drifting sub-clouds of mixed-size specks, and at t20 only one or two faint cyan dots remain. The top camera shows a compact dirt clump instead of the dust.",
+   "properties": {
+    "dominant_colors": [
+     "cyan",
+     "teal"
+    ],
+    "shape": [
+     "irregular puff of small square specks"
+    ],
+    "motion": [
+     "expands outward",
+     "splits into sub-clouds",
+     "drifts"
+    ],
+    "brightness": [
+     "moderate"
+    ],
+    "density": [
+     "moderate at t3, sparse by t8"
+    ],
+    "scale_impression": [
+     "small-to-medium puff"
+    ],
+    "persistence": [
+     "disperses by t20"
+    ],
+    "texture_quality": [
+     "blocky pixel particles"
+    ],
+    "blend_appearance": [
+     "opaque specks with soft clump edges"
+    ]
+   },
+   "possible_roles": [
+    "(interpretation) magic or potion dust puff",
+    "(interpretation) splash / sparkle burst",
+    "(interpretation) colored particle marker for an ability"
+   ],
+   "confidence": 0.85,
+   "notes": "Invisible to the top camera. Specks are larger and more varied in size than typical single-pixel dust, with a brighter core at t3."
+  },
+  "levelevent_2001": {
+   "visibility": "clear",
+   "description": "At t3 roughly 25 gray and blue-gray square chunks of varying sizes hang scattered through the air above the plain in both horizontal views, and the top view shows gray squares mixed around a central brown dirt clump. By t8 only a few small gray specks sit low near the ground line, and t20 is empty.",
+   "properties": {
+    "dominant_colors": [
+     "gray",
+     "blue-gray",
+     "brown"
+    ],
+    "shape": [
+     "square block fragments of varied sizes"
+    ],
+    "motion": [
+     "ejected upward",
+     "hangs briefly",
+     "settles and fades"
+    ],
+    "brightness": [
+     "matte"
+    ],
+    "density": [
+     "dense - highest particle count in the set"
+    ],
+    "scale_impression": [
+     "medium-to-large burst"
+    ],
+    "persistence": [
+     "mostly gone by t8, fully gone by t20"
+    ],
+    "texture_quality": [
+     "blocky, opaque, stone-like fragments"
+    ],
+    "blend_appearance": [
+     "opaque, hard-edged"
+    ]
+   },
+   "possible_roles": [
+    "(interpretation) explosion or block-destruction debris",
+    "(interpretation) heavy impact burst",
+    "(interpretation) mining / ground-break effect"
+   ],
+   "confidence": 0.9,
+   "notes": "Largest debris-type effect in the set. The chunks read as actual cube fragments - coarser and more numerous than the fine dirt specks in the other sheets."
+  },
+  "vfxlab_ember_ring_burst": {
+   "visibility": "clear",
+   "description": "Horizontal views show a flat ring of small bright orange-red glowing dots floating high above the horizon. The ring reads as a thin ellipse at t2, expands so its dots spread farther apart through t3-t8 (growing beyond the top of the frame), breaks into sparse strays at t15, and is gone by t20. The top camera never shows the ring; it shows a scatter of dirt chunks on the ground instead.",
+   "properties": {
+    "dominant_colors": [
+     "orange-red",
+     "ember orange"
+    ],
+    "shape": [
+     "flat horizontal ring of discrete dots"
+    ],
+    "motion": [
+     "ring expands radially",
+     "dots thin out on the circumference"
+    ],
+    "brightness": [
+     "bright",
+     "glowing"
+    ],
+    "density": [
+     "~20-30 discrete dots on the circumference"
+    ],
+    "scale_impression": [
+     "large - spans most of the frame width"
+    ],
+    "persistence": [
+     "roughly 15 ticks, gone by t20"
+    ],
+    "texture_quality": [
+     "crisp pixel dots"
+    ],
+    "blend_appearance": [
+     "additive-looking glow against the sky"
+    ]
+   },
+   "possible_roles": [
+    "(interpretation) AOE blast radius indicator",
+    "(interpretation) expanding shockwave ring",
+    "(interpretation) charged-attack release wave"
+   ],
+   "confidence": 0.9,
+   "notes": "The ring plane is horizontal - it reads as an ellipse from both ground-level angles. It never appears in the top view, so it is likely emitted above that camera's ground crop; the top frames capture only ground debris."
+  },
+  "vfxlab_laser_beam": {
+   "visibility": "faint",
+   "description": "A short thin cyan streak sits at the very top-right corner of the front frame at t3, t8, and t20 with no visible change between ticks; the side view shows only a small cyan dot at a matching height. Almost the whole beam is out of frame - only its tail or cross-section is captured. The top view shows dirt debris at t3 and t8, empty at t20.",
+   "properties": {
+    "dominant_colors": [
+     "cyan",
+     "light blue"
+    ],
+    "shape": [
+     "thin diagonal streak (front)",
+     "small dot (side)"
+    ],
+    "motion": [
+     "static - identical across all sampled ticks"
+    ],
+    "brightness": [
+     "bright but tiny"
+    ],
+    "density": [
+     "single element"
+    ],
+    "scale_impression": [
+     "long beam, mostly off-camera"
+    ],
+    "persistence": [
+     "persists through t20"
+    ],
+    "texture_quality": [
+     "soft glow edges"
+    ],
+    "blend_appearance": [
+     "glowy, semi-additive"
+    ]
+   },
+   "possible_roles": [
+    "(interpretation) beam or ray attack",
+    "(interpretation) laser sight / tracer line",
+    "(interpretation) directional energy projectile"
+   ],
+   "confidence": 0.75,
+   "notes": "Framing problem: the beam's body sits above the captured area, so its length and travel direction cannot be judged. Zero evolution between ticks suggests a sustained or slowly fading beam."
+  },
+  "minecraft_sonic_boom": {
+   "visibility": "clear",
+   "description": "At t3 the front view shows a giant hollow teal ring with a thick double-edged outline spanning most of the frame height and dipping below the horizon line; the side view shows the same event as a solid filled teal disc centered at the horizon. Both vanish completely by t8. The top camera shows only the central dirt clump at t3 and sparse fragments at t8.",
+   "properties": {
+    "dominant_colors": [
+     "teal",
+     "cyan-green"
+    ],
+    "shape": [
+     "giant hollow ring head-on",
+     "solid disc from the side"
+    ],
+    "motion": [
+     "single-shot burst - no expansion captured between ticks"
+    ],
+    "brightness": [
+     "saturated, medium brightness"
+    ],
+    "density": [
+     "one large element"
+    ],
+    "scale_impression": [
+     "very large - dominates the frame"
+    ],
+    "persistence": [
+     "shorter than 5 ticks"
+    ],
+    "texture_quality": [
+     "hard pixelated edges, blocky curve"
+    ],
+    "blend_appearance": [
+     "opaque solid fill"
+    ]
+   },
+   "possible_roles": [
+    "(interpretation) sonic shockwave wavefront",
+    "(interpretation) AOE blast indicator",
+    "(interpretation) projectile muzzle / impact burst"
+   ],
+   "confidence": 0.85,
+   "notes": "Strongly angle-dependent: a hollow torus-like ring head-on vs a filled disc edge-on, consistent with a world-axis-aligned circular billboard or ring mesh. Extremely brief - only the t3 row captures it."
+  },
+  "superheroes_scorpion_hellfire": {
+   "visibility": "none",
+   "description": "All three frames (front view at t1, t2, t4) show an empty flat grass plain under a plain sky - zero particles, glow, or distortion. The sheet contains only front-angle captures; no side or top frames exist.",
+   "properties": {
+    "dominant_colors": [
+     "none - empty frames"
+    ],
+    "shape": [
+     "none"
+    ],
+    "motion": [
+     "none"
+    ],
+    "brightness": [
+     "ambient daylight only"
+    ],
+    "density": [
+     "none"
+    ],
+    "scale_impression": [
+     "none"
+    ],
+    "persistence": [
+     "none"
+    ],
+    "texture_quality": [
+     "none"
+    ],
+    "blend_appearance": [
+     "none"
+    ]
+   },
+   "possible_roles": [
+    "(interpretation) undetermined - nothing rendered to interpret"
+   ],
+   "confidence": 0.9,
+   "notes": "Front-camera-only sheet covering three early ticks. The effect either failed to spawn, spawned outside the frame, or emits nothing visible at these angles and ticks."
+  }
+ }
+}
