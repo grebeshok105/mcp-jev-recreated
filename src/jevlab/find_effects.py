@@ -47,9 +47,11 @@ def find(query: str, catalog_path: str, *, top_k: int = 10,
     a 'served from query cache' diagnostic appended."""
     catalog = Catalog.load(catalog_path)
     candidates = answerable(catalog)
-    fp = catalog_fingerprint({p.id: p.content_hash() for p in candidates})
+    fp = catalog_fingerprint({p.id: p.brief_hash() for p in candidates})
     cache = LayeredCache(cache_root)
-    qkey = cache.query_key(query, fp, RANKER_VERSION)
+    qkey = cache.query_key(query, fp, RANKER_VERSION, {
+        "top_k": top_k, "stage2_pool": stage2_pool,
+        "batch_size": batch_size})
 
     meta = {"catalog": catalog_path, "candidates": len(candidates),
             "catalog_fingerprint": fp, "query_cache": "live"}
@@ -62,10 +64,11 @@ def find(query: str, catalog_path: str, *, top_k: int = 10,
                 "served from query cache"]
             return r, meta
 
-    selector = EffectSelector(
-        TypeSafeClient(), batch_size=batch_size,
-        stage2_pool=stage2_pool, top_k=top_k, deadline_s=deadline_s)
-    result = selector.find_effects(query, candidates)
+    with TypeSafeClient() as client:
+        selector = EffectSelector(
+            client, batch_size=batch_size,
+            stage2_pool=stage2_pool, top_k=top_k, deadline_s=deadline_s)
+        result = selector.find_effects(query, candidates)
     if use_query_cache:
         cache.put("query", qkey, {"result": result.to_dict()})
     return result.to_dict(), meta

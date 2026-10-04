@@ -107,7 +107,9 @@ class TypeSafeClient:
             raise ValueError("questions must be non-empty")
         body = {"model": model or self.model, "state": state, "questions": questions}
         raw, latency = self._post_with_retry("/v1/systemone", body, deadline_s)
-        return self._parse_result(raw, latency)
+        result = self._parse_result(raw, latency)
+        self.usage_totals = self.usage_totals + result.usage
+        return result
 
     # ------------------------------------------------------------- internals
 
@@ -159,7 +161,6 @@ class TypeSafeClient:
             if remaining <= 0:
                 return False
             delay = min(delay, remaining)
-        self.retry_count += 1
         time.sleep(delay)
         return True
 

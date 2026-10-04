@@ -1,0 +1,13 @@
+========= LDLib2 UI test run 44753_37e26043 =========
+selection : group:vfxlab
+status    : PASS
+scenarios : 3/3 passed
+checks    : 0/0 passed
+steps     : 1024
+duration  : 93214 ms
+
+[ok  ] vfxlab.1_dump (421 ms)
+
+[ok  ] vfxlab.2_fixturegen (538 ms)
+
+[ok  ] vfxlab.3_capture (85399 ms)

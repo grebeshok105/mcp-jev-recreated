@@ -177,6 +177,14 @@ class Passport:
                           separators=(",", ":"))
         return hashlib.sha256(blob.encode("utf-8")).hexdigest()[:24]
 
+    def brief_hash(self) -> str:
+        """Hash over everything `jev_brief` emits — identity + factual +
+        measured + visual + roles. Drives the query-cache fingerprint so
+        re-enrichment invalidates cached rankings."""
+        blob = json.dumps(self.jev_brief(), ensure_ascii=False,
+                          sort_keys=True, separators=(",", ":"))
+        return hashlib.sha256(blob.encode("utf-8")).hexdigest()[:24]
+
     # ---------------------------------------------------------- jev briefs
 
     def jev_brief(self) -> dict[str, Any]:
@@ -220,7 +228,4 @@ class Passport:
         motion = self.visual.get("motion")
         if motion and motion.values:
             bits.append("motion=" + "/".join(motion.values[:2]))
-        life = self.measured.get("lifetime_ms") or self.factual.get("duration_ms")
-        if life:
-            bits.append(f"~{life}ms")
         return f"{self.id}: " + ", ".join(bits)

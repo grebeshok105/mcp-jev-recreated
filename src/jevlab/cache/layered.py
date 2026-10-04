@@ -53,9 +53,11 @@ class LayeredCache:
                     analysis_version, pass_config, CACHE_SCHEMA_VERSION)
 
     def query_key(self, query: str, catalog_fingerprint: str,
-                  ranker_version: int) -> str:
+                  ranker_version: int,
+                  ranker_params: dict[str, Any] | None = None) -> str:
         return _sha("query", query, catalog_fingerprint,
-                    ranker_version, CACHE_SCHEMA_VERSION)
+                    ranker_version, ranker_params or {},
+                    CACHE_SCHEMA_VERSION)
 
     # ------------------------------------------------------------- storage
 

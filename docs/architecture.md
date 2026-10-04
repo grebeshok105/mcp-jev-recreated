@@ -34,8 +34,10 @@ capability tags), `measured` (capture-derived stats), `visual` (merged
 Invariants:
 - `unknown` = absent key, never `false`. `answerable()` and Jev briefs treat
   missing data as unknown.
-- `content_hash()` covers every semantic layer — cache keys and catalog
-  fingerprints derive from it.
+- `content_hash()` covers the static layers (identity+factual) and drives
+  the pipeline caches; `brief_hash()` covers everything `jev_brief` emits
+  (all layers the model sees) and drives the query-cache fingerprint, so
+  re-enrichment invalidates cached rankings.
 - `jev_brief()` projects a compact, field-ordered dict for the model;
   `one_line()` renders the human summary.
 
@@ -58,9 +60,11 @@ rules:
   (`a`/`b`);
 - `disagreement` flags only when the two passes use **fully disjoint content
   tokens** — a shared content token suppresses the flag. `_tokens()` strips
-  timing qualifiers (`t3`, `t8`), stopwords and punctuation so phrasing
-  differences don't fake divergence. Result: 26 flagged keys / ~85 — real
-  divergences like bright-vs-matte and clear-vs-faint.
+  timing qualifiers (`t3`, `t8`), stopwords, punctuation and naive
+  singularization (`puffs`→`puff`) so trivial phrasing doesn't fake
+  divergence — genuinely different vocabulary still flags. Result: 29
+  flagged keys / 91 — real divergences like bright-vs-matte and
+  clear-vs-faint.
 
 ### 5. Jev client (`src/jevlab/jev/`)
 
@@ -88,8 +92,10 @@ Final order = stage-2 probability desc, then id; top-K (default 10) returned.
 shaders stay in the KB but never reach Jev. 4,430 → 205 candidates.
 
 Query cache: `data/cache/find/` keyed by normalized query + catalog
-fingerprint (content-hash digest of answerable passports). `--no-query-cache`
-bypasses read+write. A changed catalog invalidates automatically.
+fingerprint (digest of answerable passports' `brief_hash()` — measured and
+visual changes invalidate) + ranker params (`top_k`, `stage2_pool`,
+`batch_size`). `--no-query-cache` bypasses read+write. A changed catalog or
+changed rank params misses the cache automatically.
 
 ## Probe mod (`probe/`)
 

@@ -20,7 +20,8 @@ Raw artifacts: `data/catalog.json`, `data/evals/results.json`,
 | build diagnostics | **0** |
 | measured passports | 9 |
 | visually annotated passports | 9 (2 independent passes) |
-| visual disagreement flags | 26 keys (token-normalized; phrasing-safe) |
+| visual disagreement flags | 29 of 91 keys (token-normalized incl.
+naive singularization; genuinely paraphrased divergent vocab still flags) |
 | answerable candidates per query | 205 |
 
 ## Capture lane
@@ -42,33 +43,41 @@ ranks suffer honestly for it.
 12 cases built from real Codex-Superheroes abilities
 (`data/evals/codex_cases.json`, English queries, no resource-name hints).
 Command: `python -m jevlab.evals.run_eval --no-query-cache`.
+Results below are the committed `results.json` (per-case rows carry the
+full candidate list with noul + choice probabilities, `choice_distribution`,
+and batch stats).
 
-| case | hits/expected | top-1 |
-|---|---|---|
-| homelander_clap | 3/3 | minecraft:sonic_boom |
-| homelander_eye_lasers | 3/4 | vfxlab:laser_beam |
-| homelander_roar | 3/3 | minecraft:sonic_boom |
-| flight_aura | 3/4 | superheroes:vfx/flight |
-| homelander_sun | 3/6 | superheroes:vfx/sun_detonation |
-| scorpion_teleport | 2/3 | minecraft:flame |
-| scorpion_hellbreath | 3/5 | superheroes:scorpion_hellbreath |
-| scorpion_harpoon | 2/4 | vfxlab:laser_beam |
-| goku_kamehameha | 2/4 | superheroes:vfx/laser |
-| naruto_rasenshuriken | 3/4 | minecraft:sonic_boom |
-| raiden_musou_isshin | 1/7 | we/PARTICLES_ELECTRIC_SPARK |
-| hero_transform | 1/3 | minecraft:dust |
-| **aggregate** | **29/50 = recall@10 0.58** | 12/12 cases ≥1 hit |
+| case | hits/expected | top-1 | top-1 choice p |
+|---|---|---|---|
+| homelander_clap | 3/3 | minecraft:sonic_boom | 0.84 |
+| homelander_eye_lasers | 3/4 | vfxlab:laser_beam | 0.63 |
+| homelander_roar | 2/3 | minecraft:sonic_boom | 0.75 |
+| flight_aura | 3/4 | superheroes:vfx/flight | 0.65 |
+| homelander_sun | 3/6 | superheroes:vfx/sun_detonation | 0.61 |
+| scorpion_teleport | 2/3 | minecraft:flame | 0.64 |
+| scorpion_hellbreath | 2/5 | minecraft:flame | 0.33 |
+| scorpion_harpoon | 2/4 | vfxlab:laser_beam | 0.41 |
+| goku_kamehameha | 2/4 | superheroes:vfx/laser | 0.50 |
+| naruto_rasenshuriken | 3/4 | minecraft:sonic_boom | 0.84 |
+| raiden_musou_isshin | 2/7 | we/PARTICLES_ELECTRIC_SPARK | 0.24 |
+| hero_transform | 1/3 | minecraft:dust | 0.29 |
+| **aggregate** | **28/50 = recall@10 0.56** | 12/12 cases ≥1 hit | |
 
-Latency: 0.86–1.09 s/case, 11.4 s total. Tokens: 934,077 input + 48,255
+Latency: 0.9–1.3 s/case, 12.4 s total. Tokens: 938,564 input + 48,244
 output (~78k in/case — dominated by serialized passport briefs).
+
+**Run-to-run variance**: an identical earlier run scored 29/50 (0.58) —
+Jev is non-deterministic at the margins (roar 3/3→2/3, hellbreath 3/5→2/5,
+raiden 1/7→2/7). Recall@10 ≈ 0.56–0.58 across runs; per-case ±1 hit is
+normal noise, not a code difference.
 
 ### Miss analysis (honest)
 
-- **raiden_musou_isshin (1/7)**: expected set holds 7 sibling
+- **raiden_musou_isshin (2/7)**: expected set holds 7 sibling
   `superheroes:*` slash effects; Jev filled the list with plausible
-  alternatives (electric spark world event, anomaly_slice, smash attack,
-  sonic boom, laser variants). Sibling variants crowd each other out —
-  recall@10 penalizes semantic near-duplicates.
+  alternatives (electric spark world event, anomaly_slice, sword_explosion,
+  smash attack, sonic boom, laser variants). Sibling variants crowd each
+  other out — recall@10 penalizes semantic near-duplicates.
 - **goku_kamehameha**: kamehameha_core + trail hit; `goku_ki_aura` lost to
   `homelander_laser_impact`/`vfx/laser` — reasonable given the aura's thin
   visual description.
@@ -78,6 +87,9 @@ output (~78k in/case — dominated by serialized passport briefs).
 - **scorpion_harpoon**: `scorpion_harpoon` hit at #4; `scorpion_hellfire`
   missed — its honest visual description is "ground debris", which does not
   read as a harpoon trail.
+- **scorpion_hellbreath**: `scorpion_hellbreath` hit but flame-family
+  siblings (`lava`, `black_flame`, `large_smoke`) crowded out — same
+  near-duplicate penalty as raiden.
 
 Root causes, in order: (1) only 9 of 205 answerable resources carry real
 visual semantics — the rest rank on name+facts only; (2) expected sets list

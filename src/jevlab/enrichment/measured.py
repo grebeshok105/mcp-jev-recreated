@@ -61,7 +61,7 @@ def summarize_angles(angles: dict[str, Any]) -> dict[str, Any]:
         out["peak_alive"] = peak
     if first_visible is not None:
         out["first_visible_tick"] = first_visible
-    if bounds_min and bounds_max:
+    if bounds_min and bounds_max and len(bounds_min) == len(bounds_max):
         out["bounds_min"] = bounds_min
         out["bounds_max"] = bounds_max
         out["extent_blocks"] = [round(b - a, 3) for a, b in zip(bounds_min, bounds_max)]
@@ -75,14 +75,21 @@ def apply_measured(catalog, capture_results_path: str) -> list[str]:
     diags: list[str] = []
     if not os.path.isfile(capture_results_path):
         return [f"measured: artifact missing {capture_results_path}"]
-    results = json.load(open(capture_results_path))
+    try:
+        with open(capture_results_path, encoding="utf-8") as fh:
+            results = json.load(fh)
+    except (OSError, json.JSONDecodeError, UnicodeDecodeError) as exc:
+        return [f"measured: capture results unreadable: {exc}"]
+    from ..catalog.builder import CatalogBuilder
     for shot_key, shot in results.items():
         rid = shot_resource_id(shot_key)
         if catalog.get(rid) is None:
             diags.append(f"measured: shot {shot_key} -> {rid} has no passport")
             continue
-        m = summarize_angles(shot.get("angles", {}))
-        m["capture_kind"] = shot.get("kind")
-        from ..catalog.builder import CatalogBuilder
-        CatalogBuilder.merge_measured(catalog, rid, m)
+        try:
+            m = summarize_angles(shot.get("angles", {}))
+            m["capture_kind"] = shot.get("kind")
+            CatalogBuilder.merge_measured(catalog, rid, m)
+        except Exception as exc:  # one broken shot never breaks the build
+            diags.append(f"measured: shot {shot_key} -> {rid} failed: {exc}")
     return diags

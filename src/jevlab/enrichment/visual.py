@@ -9,29 +9,16 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from typing import Any
 
 from ..catalog.builder import CatalogBuilder
 from ..passports.schema import SemanticValue
+from .measured import shot_resource_id
 
-# shot key in pass outputs -> catalog passport id
-SHOT_TO_RESOURCE: dict[str, str] = {
-    "levelevent_2001": "minecraft:world_event/PARTICLES_DESTROY_BLOCK",
-}
 _KIND_KEYS = ("dominant_colors", "shape", "motion", "brightness", "density",
               "scale_impression", "persistence", "texture_quality",
               "blend_appearance")
-
-
-def shot_resource_id(shot_key: str) -> str:
-    if shot_key in SHOT_TO_RESOURCE:
-        return SHOT_TO_RESOURCE[shot_key]
-    if ":" not in shot_key and "_" in shot_key:
-        return shot_key.replace("_", ":", 1)
-    return shot_key
-
-
-import re
 
 _STOPWORDS = frozenset({
     "a", "an", "the", "at", "by", "of", "in", "on", "to", "and", "or",
@@ -51,6 +38,13 @@ def _tokens(value: str) -> set[str]:
         if raw in _STOPWORDS or re.fullmatch(r"t\d+", raw):
             continue
         toks.add(raw)
+        # naive singularization: 'puffs' vs 'puff', 'classes' vs 'class'
+        # must not fake a disagreement. Stem forms are unioned so a real
+        # divergence (entirely different vocabulary) still flags.
+        if len(raw) > 3 and raw.endswith("s"):
+            toks.add(raw[:-1])
+        if len(raw) > 4 and raw.endswith("es"):
+            toks.add(raw[:-2])
     return toks
 
 
@@ -121,7 +115,11 @@ def apply_visual(catalog, pass_files: list[str]) -> list[str]:
         if not os.path.isfile(f):
             diags.append(f"visual: pass file missing {f}")
             continue
-        pass_outputs.append(json.load(open(f)))
+        try:
+            with open(f, encoding="utf-8") as fh:
+                pass_outputs.append(json.load(fh))
+        except (OSError, json.JSONDecodeError, UnicodeDecodeError) as exc:
+            diags.append(f"visual: pass file unreadable {f}: {exc}")
     if not pass_outputs:
         return diags + ["visual: no pass outputs loaded"]
     for shot, m in merge_passes(pass_outputs).items():
@@ -129,6 +127,9 @@ def apply_visual(catalog, pass_files: list[str]) -> list[str]:
         if catalog.get(rid) is None:
             diags.append(f"visual: shot {shot} -> {rid} has no passport")
             continue
-        CatalogBuilder.merge_visual(catalog, rid, m["visual"],
-                                    m.get("possible_roles"))
+        try:
+            CatalogBuilder.merge_visual(catalog, rid, m["visual"],
+                                        m.get("possible_roles"))
+        except Exception as exc:  # one broken shot never breaks the build
+            diags.append(f"visual: merge failed for {shot} -> {rid}: {exc}")
     return diags

@@ -22,7 +22,5 @@ probe/run/
 probe/.loom/
 *.hprof
 ---
-# uitest runtime artifacts (screenshots ~17MB, regenerated)
-data/uitest-report/
 data/fixtures/
 data/capture/frames/

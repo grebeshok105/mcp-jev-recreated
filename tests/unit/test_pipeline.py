@@ -234,8 +234,15 @@ def test_find_uses_query_cache(tmp_path, monkeypatch):
             calls["n"] += 1
             return self.inner.find_effects(q, cands)
 
+    class FakeClient:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            return False
+
     monkeypatch.setattr(fe, "EffectSelector", CountingSelector)
-    monkeypatch.setattr(fe, "TypeSafeClient", lambda *a, **k: object())
+    monkeypatch.setattr(fe, "TypeSafeClient", lambda *a, **k: FakeClient())
 
     r1, m1 = find("q", str(cat_path), cache_root=str(tmp_path / "cache"))
     r2, m2 = find("q", str(cat_path), cache_root=str(tmp_path / "cache"))
