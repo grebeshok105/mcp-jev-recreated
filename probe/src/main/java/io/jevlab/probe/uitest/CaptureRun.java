@@ -46,6 +46,9 @@ public final class CaptureRun {
             diagnostics.add("capture plan unreadable: " + e);
         }
         final CapturePlan plan = loaded;
+        // default 120s per-scenario budget cannot hold a full catalog sweep —
+        // 197 shots × angles × ticks needs tens of minutes.
+        b.timeoutMs(5_400_000L);
         if (plan.shots.isEmpty()) {
             diagnostics.add("capture plan missing or empty: " + Paths.capturePlanFile());
             b.step("vfxlab:write-empty", ctx -> finish());

@@ -18,9 +18,19 @@ SHOT_TO_RESOURCE: dict[str, str] = {
 }
 
 
+def _world_event_id(shot_key: str) -> str | None:
+    """world_event_<NAME> shots map to minecraft:world_event/<NAME>."""
+    if shot_key.startswith("world_event_"):
+        return f"minecraft:world_event/{shot_key[len('world_event_'):]}"
+    return None
+
+
 def shot_resource_id(shot_key: str) -> str:
     if shot_key in SHOT_TO_RESOURCE:
         return SHOT_TO_RESOURCE[shot_key]
+    we = _world_event_id(shot_key)
+    if we is not None:
+        return we
     if ":" not in shot_key and "_" in shot_key:
         return shot_key.replace("_", ":", 1)
     return shot_key

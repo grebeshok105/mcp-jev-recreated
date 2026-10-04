@@ -1,0 +1,42 @@
+[
+ {
+  "id": "superheroes:vfx/clap",
+  "kind": "composite",
+  "reason": "Codex vfx parameter bundle (tuning JSON consumed by ability code; contains only scalar tuning fields, no spawnable emitter/asset) \u2014 verified by file content inspection"
+ },
+ {
+  "id": "superheroes:vfx/flight",
+  "kind": "composite",
+  "reason": "Codex vfx parameter bundle (tuning JSON consumed by ability code; contains only scalar tuning fields, no spawnable emitter/asset) \u2014 verified by file content inspection"
+ },
+ {
+  "id": "superheroes:vfx/iron_fists",
+  "kind": "composite",
+  "reason": "Codex vfx parameter bundle (tuning JSON consumed by ability code; contains only scalar tuning fields, no spawnable emitter/asset) \u2014 verified by file content inspection"
+ },
+ {
+  "id": "superheroes:vfx/laser",
+  "kind": "composite",
+  "reason": "Codex vfx parameter bundle (tuning JSON consumed by ability code; contains only scalar tuning fields, no spawnable emitter/asset) \u2014 verified by file content inspection"
+ },
+ {
+  "id": "superheroes:vfx/pose",
+  "kind": "composite",
+  "reason": "Codex vfx parameter bundle (tuning JSON consumed by ability code; contains only scalar tuning fields, no spawnable emitter/asset) \u2014 verified by file content inspection"
+ },
+ {
+  "id": "superheroes:vfx/roar",
+  "kind": "composite",
+  "reason": "Codex vfx parameter bundle (tuning JSON consumed by ability code; contains only scalar tuning fields, no spawnable emitter/asset) \u2014 verified by file content inspection"
+ },
+ {
+  "id": "superheroes:vfx/sun_charge",
+  "kind": "composite",
+  "reason": "Codex vfx parameter bundle (tuning JSON consumed by ability code; contains only scalar tuning fields, no spawnable emitter/asset) \u2014 verified by file content inspection"
+ },
+ {
+  "id": "superheroes:vfx/sun_detonation",
+  "kind": "composite",
+  "reason": "Codex vfx parameter bundle (tuning JSON consumed by ability code; contains only scalar tuning fields, no spawnable emitter/asset) \u2014 verified by file content inspection"
+ }
+]

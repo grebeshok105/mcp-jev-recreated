@@ -7,6 +7,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import json
 import os
 
 from .catalog.builder import CatalogBuilder
@@ -24,6 +25,10 @@ def main() -> int:
     ap.add_argument("--data-dir", default="data")
     ap.add_argument("--out", default=None)
     ap.add_argument("--visual-pass", action="append", default=[])
+    ap.add_argument("--exceptions", default=None,
+                    help="JSON file of unrenderable/unanalyzable resources; "
+                         "each {id, reason} is recorded on the passport's "
+                         "diagnostics")
     args = ap.parse_args()
 
     ctx = ProviderContext(data_dir=args.data_dir, raw_dir=args.data_dir)
@@ -40,6 +45,20 @@ def main() -> int:
 
     if args.visual_pass:
         catalog.diagnostics.extend(apply_visual(catalog, args.visual_pass))
+
+    if args.exceptions:
+        try:
+            excs = json.load(open(args.exceptions))
+            for e in excs:
+                p = catalog.resources.get(e.get("id"))
+                if p is None:
+                    catalog.diagnostics.append(
+                        f"exceptions: {e.get('id')} has no passport")
+                    continue
+                reason = e.get("reason", "unrenderable")
+                p.diagnostics.append(f"not captureable: {reason}")
+        except Exception as exc:  # noqa: BLE001
+            catalog.diagnostics.append(f"exceptions file unreadable: {exc}")
 
     out = args.out or os.path.join(args.data_dir, "catalog.json")
     catalog.save(out)

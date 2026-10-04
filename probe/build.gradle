@@ -50,7 +50,7 @@ loom {
             property 'ldlib2.uitest.run', 'group:vfxlab'
             property 'ldlib2.uitest.out', layout.projectDirectory.dir('../data/uitest-report').asFile.absolutePath
             property 'ldlib2.uitest.window', '1280,720'
-            property 'ldlib2.uitest.watchdogSec', '900'
+            property 'ldlib2.uitest.watchdogSec', '5400'
             // Probe artifacts land in the repo's data dir so the python pipeline reads them.
             property 'vfxlab.outdir', layout.projectDirectory.dir('../data/capture').asFile.absolutePath
             property 'vfxlab.fixturesdir', layout.projectDirectory.dir('../data/fixtures').asFile.absolutePath

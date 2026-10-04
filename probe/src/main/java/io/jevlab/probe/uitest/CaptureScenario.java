@@ -3,6 +3,7 @@ package io.jevlab.probe.uitest;
 import com.lowdragmc.lowdraglib2.registry.RegistrationEnvironment;
 import com.lowdragmc.lowdraglib2.registry.annotation.LDLRegisterClient;
 import com.lowdragmc.lowdraglib2.uitest.ScenarioBuilder;
+import com.lowdragmc.lowdraglib2.uitest.ScenarioOptions;
 import com.lowdragmc.lowdraglib2.uitest.UIScenario;
 
 /**
@@ -18,6 +19,13 @@ import com.lowdragmc.lowdraglib2.uitest.UIScenario;
         priority = 30)
 public final class CaptureScenario implements UIScenario {
     private final CaptureRun run = new CaptureRun();
+
+    @Override
+    public void configure(ScenarioOptions options) {
+        // a full-catalog sweep (197 shots x angles x ticks) needs far more
+        // than the default 120s scenario budget
+        options.scenarioTimeoutMs(5_400_000L);
+    }
 
     @Override
     public void define(ScenarioBuilder builder) {

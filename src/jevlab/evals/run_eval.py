@@ -40,6 +40,9 @@ def run_cases(cases_path: str, catalog_path: str, *, top_k: int = 10,
         got = [e for e in expected if e in ranked_ids]
         hits += len(got)
         evaluated += len(expected)
+        first_rank = next(
+            (i + 1 for i, rid in enumerate(ranked_ids) if rid in expected),
+            None)
         report["cases"].append({
             "name": case["name"], "query": case["query"],
             "expected_ids": expected,
@@ -47,6 +50,11 @@ def run_cases(cases_path: str, catalog_path: str, *, top_k: int = 10,
             "hits": got,
             "missed": [e for e in expected if e not in ranked_ids],
             "hit_at_topk": len(got) / max(len(expected), 1),
+            "first_hit_rank": first_rank,
+            "hit_at_1": first_rank == 1,
+            "hit_at_3": first_rank is not None and first_rank <= 3,
+            "hit_at_10": first_rank is not None and first_rank <= 10,
+            "reciprocal_rank": (1.0 / first_rank) if first_rank else 0.0,
             "candidates": result["candidates"],
             "choice_distribution": result.get("choice_distribution"),
             "stats": result["stats"],
@@ -66,6 +74,14 @@ def run_cases(cases_path: str, catalog_path: str, *, top_k: int = 10,
         "hits_total": hits,
         "recall_at_topk": hits / max(evaluated, 1),
         "cases_with_any_hit": sum(1 for c in report["cases"] if c["hits"]),
+        "hit_at_1": sum(1 for c in report["cases"] if c["hit_at_1"])
+                    / max(len(report["cases"]), 1),
+        "hit_at_3": sum(1 for c in report["cases"] if c["hit_at_3"])
+                    / max(len(report["cases"]), 1),
+        "hit_at_10": sum(1 for c in report["cases"] if c["hit_at_10"])
+                     / max(len(report["cases"]), 1),
+        "mrr": round(sum(c["reciprocal_rank"] for c in report["cases"])
+                     / max(len(report["cases"]), 1), 4),
         "total_input_tokens": sum(c["usage"]["input_tokens"]
                                   for c in report["cases"]),
         "total_output_tokens": sum(c["usage"]["output_tokens"]
@@ -100,6 +116,8 @@ def main() -> int:
     a = report["aggregate"]
     print(f"\naggregate: {a['hits_total']}/{a['expected_total']} "
           f"recall@top{report['top_k']}={a['recall_at_topk']:.2f} "
+          f"hit@1={a['hit_at_1']:.2f} hit@3={a['hit_at_3']:.2f} "
+          f"hit@10={a['hit_at_10']:.2f} mrr={a['mrr']:.3f} "
           f"({a['cases_with_any_hit']}/{a['cases']} cases with a hit) "
           f"tokens={a['total_input_tokens']}+{a['total_output_tokens']} "
           f"latency={a['total_latency_s']}s -> {args.out}")
