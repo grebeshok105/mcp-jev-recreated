@@ -32,20 +32,44 @@ public final class Spawner {
         void stop();
     }
 
+    /**
+     * A spawned subject plus its live runtime object when the kind has one.
+     * {@code quasarEmitter} is a Veil {@code ParticleEmitter} (supports
+     * {@code setPosition} per tick); {@code fxExecutor} is a Photon
+     * {@code BlockEffectExecutor} (its runtime root supports
+     * {@code updatePos/updateRotation/updateScale}). Nulls for instantaneous
+     * kinds (particle, level_event).
+     */
+    public record LiveSpawn(SpawnHandle handle, Object quasarEmitter,
+                            Object fxExecutor) {
+        public static final LiveSpawn INSTANT = new LiveSpawn(SpawnHandle.NONE, null, null);
+    }
+
     public static SpawnHandle spawn(
             CapturePlan.Shot shot,
             ClientLevel level,
             Vec3 at,
             net.minecraft.server.MinecraftServer server,
             List<String> diagnostics) {
+        return spawnLive(shot, level, at, server, diagnostics).handle();
+    }
+
+    public static LiveSpawn spawnLive(
+            CapturePlan.Shot shot,
+            ClientLevel level,
+            Vec3 at,
+            net.minecraft.server.MinecraftServer server,
+            List<String> diagnostics) {
         return switch (shot.kind) {
-            case "particle" -> spawnParticle(shot, level, at, diagnostics);
-            case "level_event" -> spawnLevelEvent(shot, at, server, diagnostics);
-            case "fx" -> spawnFx(shot, level, at, diagnostics);
-            case "quasar_emitter" -> spawnQuasar(shot, at, diagnostics);
+            case "particle" -> new LiveSpawn(
+                    spawnParticle(shot, level, at, diagnostics), null, null);
+            case "level_event" -> new LiveSpawn(
+                    spawnLevelEvent(shot, at, server, diagnostics), null, null);
+            case "fx" -> spawnFxLive(shot, level, at, diagnostics);
+            case "quasar_emitter" -> spawnQuasarLive(shot, at, diagnostics);
             default -> {
                 diagnostics.add("spawner: unknown kind '" + shot.kind + "' for " + shot.id);
-                yield SpawnHandle.NONE;
+                yield LiveSpawn.INSTANT;
             }
         };
     }
@@ -94,11 +118,16 @@ public final class Spawner {
 
     private static SpawnHandle spawnFx(
             CapturePlan.Shot shot, ClientLevel level, Vec3 at, List<String> diagnostics) {
+        return spawnFxLive(shot, level, at, diagnostics).handle();
+    }
+
+    private static LiveSpawn spawnFxLive(
+            CapturePlan.Shot shot, ClientLevel level, Vec3 at, List<String> diagnostics) {
         ResourceLocation id = ResourceLocation.parse(shot.id);
         FX fx = FXHelper.getFX(id);
         if (fx == null) {
             diagnostics.add("spawner: FX not found " + id + " (assets/<ns>/fx/*.fx)");
-            return SpawnHandle.NONE;
+            return LiveSpawn.INSTANT;
         }
         BlockPos anchor = BlockPos.containing(at);
         BlockEffectExecutor executor = new BlockEffectExecutor(fx, level, anchor);
@@ -108,14 +137,20 @@ public final class Spawner {
         executor.setAllowMulti(true);
         executor.start();
         boolean stop = shot.stop_after == null || shot.stop_after;
-        return () -> {
+        SpawnHandle handle = () -> {
             if (stop && executor.getRuntime() != null) {
                 executor.getRuntime().destroy(true);
             }
         };
+        return new LiveSpawn(handle, null, executor);
     }
 
     private static SpawnHandle spawnQuasar(
+            CapturePlan.Shot shot, Vec3 at, List<String> diagnostics) {
+        return spawnQuasarLive(shot, at, diagnostics).handle();
+    }
+
+    private static LiveSpawn spawnQuasarLive(
             CapturePlan.Shot shot, Vec3 at, List<String> diagnostics) {
         try {
             var manager = foundry.veil.api.client.render.VeilRenderSystem.renderer().getParticleManager();
@@ -123,7 +158,7 @@ public final class Spawner {
             var emitter = manager.createEmitter(id);
             if (emitter == null) {
                 diagnostics.add("spawner: quasar emitter not found " + id);
-                return SpawnHandle.NONE;
+                return LiveSpawn.INSTANT;
             }
             emitter.setPosition(at);
             // emitters idle until force-spawned; without this the manager ticks
@@ -134,7 +169,7 @@ public final class Spawner {
             LAST_QUASAR_EMITTER = emitter;
             diagnostics.add("spawner: quasar " + id + " forceSpawn=true");
             boolean stop = shot.stop_after == null || shot.stop_after;
-            return () -> {
+            SpawnHandle handle = () -> {
                 if (stop) {
                     try {
                         emitter.remove();
@@ -142,9 +177,10 @@ public final class Spawner {
                     }
                 }
             };
+            return new LiveSpawn(handle, emitter, null);
         } catch (Throwable t) {
             diagnostics.add("spawner: quasar spawn failed for " + shot.id + " (veil present?): " + t);
-            return SpawnHandle.NONE;
+            return LiveSpawn.INSTANT;
         }
     }
 

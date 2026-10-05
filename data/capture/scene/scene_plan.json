@@ -1,6 +1,6 @@
 {
- "version": 1,
- "name": "roar_burst",
+ "version": 2,
+ "name": "follow_beam",
  "scene": {
   "pos": [
    8.5,
@@ -12,36 +12,145 @@
  },
  "camera": {
   "angles": [
-   "front",
-   "top"
+   "threequarter",
+   "side"
   ]
  },
  "frames": [
-  3,
-  8,
-  20
+  9,
+  20,
+  34
  ],
- "duration": 30,
+ "duration": 46,
  "steps": [
   {
    "at_tick": 2,
    "pos": [
     0.0,
-    -0.5,
+    0.0,
     0.0
    ],
    "shot": {
-    "id": "world_event_PARTICLES_DESTROY_BLOCK",
-    "kind": "level_event",
-    "event": 2001,
-    "data_block": "minecraft:stone",
-    "options": {},
-    "resource_id": "minecraft:world_event/PARTICLES_DESTROY_BLOCK",
+    "id": "minecraft:dust",
+    "kind": "particle",
+    "options": {
+     "count": 30,
+     "color": [
+      1,
+      0.15,
+      0.15
+     ],
+     "scale": 2,
+     "delta": 0.4
+    },
     "stop_after": true
+   },
+   "name": "zap_mark",
+   "at": {
+    "anchor": "scene",
+    "offset": [
+     0.0,
+     0.8,
+     0.0
+    ]
    }
   },
   {
-   "at_tick": 3,
+   "at_tick": 4,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "superheroes:homelander_roar_wave",
+    "kind": "quasar_emitter",
+    "options": {},
+    "stop_after": true
+   },
+   "at": {
+    "anchor": "player.chest",
+    "offset": [
+     0.0,
+     -0.7,
+     2.6
+    ],
+    "direction": "player.look"
+   },
+   "follow": "player",
+   "track": {
+    "pos": [
+     [
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      30,
+      0,
+      0.8,
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "at_tick": 8,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:vibration",
+    "kind": "particle",
+    "options": {
+     "count": 1,
+     "destination": "ref:zap_mark",
+     "arrival_in_ticks": 16
+    },
+    "stop_after": true
+   },
+   "at": {
+    "anchor": "player.head",
+    "offset": [
+     0.0,
+     -0.9,
+     1.5
+    ],
+    "direction": "player.look"
+   }
+  },
+  {
+   "at_tick": 10,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "vfxlab:laser_beam",
+    "kind": "fx",
+    "options": {},
+    "stop_after": true
+   },
+   "at": {
+    "anchor": "player.head",
+    "offset": [
+     0.0,
+     -1.0,
+     1.6
+    ],
+    "direction": "player.look"
+   },
+   "to": {
+    "anchor": "ref:zap_mark"
+   },
+   "follow": "player"
+  },
+  {
+   "at_tick": 18,
    "pos": [
     0.0,
     0.0,
@@ -55,58 +164,96 @@
      "delta": 0.4
     },
     "stop_after": true
+   },
+   "at": {
+    "anchor": "scene",
+    "offset": [
+     0.0,
+     1.2,
+     0.0
+    ]
    }
   },
   {
-   "at_tick": 5,
-   "pos": [
-    0.0,
-    0.0,
-    -1.0
-   ],
-   "shot": {
-    "id": "superheroes:homelander_roar_dust",
-    "kind": "quasar_emitter",
-    "options": {},
-    "stop_after": true
-   }
-  },
-  {
-   "at_tick": 8,
-   "pos": [
-    0.0,
-    0.0,
-    1.0
-   ],
-   "shot": {
-    "id": "vfxlab:laser_beam",
-    "kind": "fx",
-    "options": {},
-    "stop_after": true
-   }
-  },
-  {
-   "at_tick": 10,
+   "at_tick": 30,
    "pos": [
     0.0,
     0.0,
     0.0
    ],
    "shot": {
-    "id": "minecraft:dust",
+    "id": "minecraft:sonic_boom",
     "kind": "particle",
     "options": {
-     "count": 30,
-     "color": [
-      0.2,
-      0.6,
-      1.0
-     ],
-     "scale": 2,
+     "count": 1,
      "delta": 0.4
     },
     "stop_after": true
+   },
+   "at": {
+    "anchor": "scene",
+    "offset": [
+     0.0,
+     1.2,
+     0.0
+    ]
    }
+  },
+  {
+   "at_tick": 21,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:end_rod",
+    "kind": "particle",
+    "options": {
+     "count": 8,
+     "delta": 0.3
+    },
+    "stop_after": true
+   },
+   "at": {
+    "anchor": "scene",
+    "offset": [
+     0.0,
+     1.4,
+     0.0
+    ]
+   }
+  },
+  {
+   "at_tick": 33,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:end_rod",
+    "kind": "particle",
+    "options": {
+     "count": 8,
+     "delta": 0.3
+    },
+    "stop_after": true
+   },
+   "at": {
+    "anchor": "scene",
+    "offset": [
+     0.0,
+     1.4,
+     0.0
+    ]
+   }
+  }
+ ],
+ "commands": [
+  {
+   "at_tick": 26,
+   "command": "tp @p ~2.0 ~ ~ ~30 ~"
   }
  ]
 }

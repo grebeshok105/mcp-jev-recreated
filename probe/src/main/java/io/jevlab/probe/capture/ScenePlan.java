@@ -15,6 +15,8 @@ import java.util.List;
  * by the python side (jevlab.scene.compile). Unlike CapturePlan — one shot at
  * a time per angle — a scene fires many steps on a tick timeline while the
  * camera stays put, so the same timeline replays once per requested angle.
+ * v2 adds commands (tick-scheduled server commands), anchor expressions,
+ * follow/tracks and ref wiring — all compiled in python, executed verbatim.
  */
 public final class ScenePlan {
     public int version = 1;
@@ -24,6 +26,13 @@ public final class ScenePlan {
     public int[] frames = {3, 8, 20};
     public int duration = 60;
     public List<Step> steps = new ArrayList<>();
+    /** server commands fired on ticks — e.g. moving the player mid-scene. */
+    public List<Cmd> commands = new ArrayList<>();
+
+    public static final class Cmd {
+        public int at_tick = 0;
+        public String command = "";
+    }
 
     public static final class Scene {
         public double[] pos = {8.5, 2, 8.5};
@@ -37,8 +46,26 @@ public final class ScenePlan {
 
     public static final class Step {
         public int at_tick = 0;
-        /** local offset added to the resolved scene anchor. */
+        /** optional name — makes the step addressable as "ref:<name>". */
+        public String name;
+        /** v1 compat: local offset added to the resolved scene anchor. */
         public double[] pos = {0, 0, 0};
+        /**
+         * v2 anchor expression (string or object; see AnchorResolver).
+         * When set it fully describes the spawn origin; `pos` then acts as a
+         * final local offset applied on top.
+         */
+        public com.google.gson.JsonElement at;
+        /** v2 target expression — the step's direction faces this point. */
+        public com.google.gson.JsonElement to;
+        /** entity to follow per tick: "player" (the only probe entity). */
+        public String follow;
+        /**
+         * keyframe tracks applied to persistent handles per tick:
+         * {"pos":[[t,x,y,z],...], "rotation":[[t,yaw,pitch],...],
+         *  "scale":[[t,s],...]}
+         */
+        public com.google.gson.JsonObject track;
         /** spawn spec — same shape as CapturePlan.Shot. */
         public CapturePlan.Shot shot = new CapturePlan.Shot();
     }

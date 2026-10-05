@@ -1,10 +1,12 @@
 package io.jevlab.probe.uitest;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.lowdragmc.lowdraglib2.uitest.ScenarioBuilder;
 import com.lowdragmc.lowdraglib2.uitest.TestContext;
 import io.jevlab.probe.Paths;
+import io.jevlab.probe.capture.AnchorResolver;
 import io.jevlab.probe.capture.CapturePlan;
 import io.jevlab.probe.capture.Measurer;
 import io.jevlab.probe.capture.ScenePlan;
@@ -18,9 +20,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 /**
  * Exact runtime playback for the scene lane. Reads
@@ -28,6 +33,13 @@ import net.minecraft.world.phys.Vec3;
  * replays the whole timeline once per requested camera angle and records
  * per-step spawn diagnostics, scene-level particle measurements and named
  * screenshots at the requested frame ticks.
+ *
+ * <p>Scene grammar v2: steps carry anchor expressions
+ * ({@link AnchorResolver} — player.* anchors, camera, ref:&lt;name&gt;,
+ * rotated local offsets, look directions), optional {@code follow} and
+ * keyframe {@code track}s applied to persistent handles per tick, and
+ * {@code "ref:<name>"} option values substituted with the named step's
+ * resolved spawn position.
  *
  * <p>Replay is deterministic: steps fire on fixed ticks of the scenario
  * clock (each {@code b.ticks(1)} is one client tick), so the same plan
@@ -39,6 +51,34 @@ public final class SceneRun {
 
     private final List<String> diagnostics = new ArrayList<>();
     private final JsonObject results = new JsonObject();
+
+    /** A live effect we can still steer: quasar emitter or fx executor. */
+    private static final class Tracked {
+        final String kind;
+        final Object quasar;          // foundry.veil ParticleEmitter or null
+        final Object fxExecutor;      // photon BlockEffectExecutor or null
+        final JsonElement atExpr;     // anchor expr re-resolved when follow set
+        final String follow;
+        final JsonObject track;
+        final float[] spawnRot;       // yaw/pitch applied to fx once runtime exists
+        final Vec3 spawnPos;
+        final int born;
+        boolean rotated;
+
+        Tracked(String kind, Object quasar, Object fxExecutor,
+                JsonElement atExpr, String follow, JsonObject track,
+                float[] spawnRot, Vec3 spawnPos, int born) {
+            this.kind = kind;
+            this.quasar = quasar;
+            this.fxExecutor = fxExecutor;
+            this.atExpr = atExpr;
+            this.follow = follow;
+            this.track = track;
+            this.spawnRot = spawnRot;
+            this.spawnPos = spawnPos;
+            this.born = born;
+        }
+    }
 
     public void define(ScenarioBuilder b) {
         ScenePlan loaded;
@@ -72,9 +112,13 @@ public final class SceneRun {
         b.ticks(10);
 
         Map<Integer, List<ScenePlan.Step>> byTick = new HashMap<>();
-        for (int i = 0; i < plan.steps.size(); i++) {
-            ScenePlan.Step s = plan.steps.get(i);
+        for (ScenePlan.Step s : plan.steps) {
             byTick.computeIfAbsent(s.at_tick, k -> new ArrayList<>()).add(s);
+        }
+        Map<Integer, List<String>> cmdByTick = new HashMap<>();
+        for (ScenePlan.Cmd c : plan.commands) {
+            cmdByTick.computeIfAbsent(c.at_tick, k -> new ArrayList<>())
+                    .add(c.command);
         }
 
         for (String angle : plan.camera.angles) {
@@ -93,6 +137,8 @@ public final class SceneRun {
                                 cam[0], cam[1], cam[2], cam[3], cam[4])));
                 ctx.put("measurer@" + angle, new Measurer(plan.name + "@" + angle));
                 ctx.put("handles@" + angle, new ArrayList<Spawner.SpawnHandle>());
+                ctx.put("tracked@" + angle, new ArrayList<Tracked>());
+                ctx.put("refs@" + angle, new HashMap<String, Vec3>());
                 ctx.put("stepdiag@" + angle, new JsonArray());
             });
             b.ticks(4);
@@ -105,30 +151,18 @@ public final class SceneRun {
             });
             for (int t = 1; t <= plan.duration; t++) {
                 final int tick = t;
+                b.step("vfxlab:scene-drive t" + tick + "@" + angle,
+                        ctx -> driveTracked(ctx, angle, plan, tick));
+                List<String> cmds = cmdByTick.get(tick);
+                if (cmds != null) {
+                    for (String cmd : cmds) {
+                        b.runCommand(cmd);
+                    }
+                }
                 List<ScenePlan.Step> due = byTick.get(tick);
                 if (due != null) {
-                    b.step("vfxlab:scene-spawn t" + tick + "@" + angle, ctx -> {
-                        Vec3 anchor = ctx.get("anchor@" + angle);
-                        List<Spawner.SpawnHandle> handles = ctx.get("handles@" + angle);
-                        JsonArray stepDiag = ctx.get("stepdiag@" + angle);
-                        for (ScenePlan.Step s : due) {
-                            List<String> sd = new ArrayList<>();
-                            Vec3 at = anchor.add(s.pos[0], s.pos[1], s.pos[2]);
-                            Spawner.SpawnHandle h = Spawner.spawn(
-                                    s.shot, ctx.level(), at, ctx.server(), sd);
-                            if (s.shot.stop_after == null || s.shot.stop_after) {
-                                handles.add(h);
-                            }
-                            JsonObject rec = new JsonObject();
-                            rec.addProperty("tick", tick);
-                            rec.addProperty("id",
-                                    s.shot.id != null ? s.shot.id : "step");
-                            JsonArray d = new JsonArray();
-                            sd.forEach(d::add);
-                            rec.add("diagnostics", d);
-                            stepDiag.add(rec);
-                        }
-                    });
+                    b.step("vfxlab:scene-spawn t" + tick + "@" + angle,
+                            ctx -> spawnDue(ctx, angle, plan, due, tick));
                 }
                 b.ticks(1);
                 b.step("vfxlab:scene-t" + tick + "@" + angle,
@@ -142,6 +176,268 @@ public final class SceneRun {
         }
         b.step("vfxlab:scene-write", ctx -> finish(plan));
     }
+
+    // ---------------------------------------------------------------- v2 drive
+
+    private void driveTracked(TestContext ctx, String angle, ScenePlan plan, int tick) {
+        List<Tracked> tracked = ctx.get("tracked@" + angle);
+        if (tracked == null || tracked.isEmpty()) {
+            return;
+        }
+        LocalPlayer player = ctx.player();
+        Vec3 sceneAnchor = ctx.get("anchor@" + angle);
+        Map<String, Vec3> refs = ctx.get("refs@" + angle);
+        List<String> sd = new ArrayList<>();
+        for (Tracked tr : tracked) {
+            try {
+                Vec3 base = tr.spawnPos;
+                float yaw = tr.spawnRot[0], pitch = tr.spawnRot[1];
+                if (tr.follow != null && tr.atExpr != null) {
+                    AnchorResolver.Resolved r = AnchorResolver.resolve(
+                            tr.atExpr, player, sceneAnchor, refs, sd);
+                    base = r.pos();
+                    yaw = r.yaw();
+                    pitch = r.pitch();
+                }
+                int rel = Math.max(0, tick - tr.born);
+                Vec3 pos = base.add(trackVec(tr.track, "pos", rel));
+                if (tr.quasar != null) {
+                    var em = (foundry.veil.api.quasar.particle.ParticleEmitter) tr.quasar;
+                    em.setPosition(pos.x, pos.y, pos.z);
+                }
+                if (tr.fxExecutor != null) {
+                    var ex = (com.lowdragmc.photon.client.fx.BlockEffectExecutor)
+                            tr.fxExecutor;
+                    var rt = ex.getRuntime();
+                    if (rt != null && rt.root != null) {
+                        rt.root.updatePos(new Vector3f((float) pos.x,
+                                (float) pos.y, (float) pos.z));
+                        if (!tr.rotated || tr.follow != null) {
+                            rt.root.updateRotation(quat(yaw, pitch));
+                            tr.rotated = true;
+                        }
+                        float[] rp = trackPair(tr.track, "rotation", rel);
+                        if (rp != null) {
+                            rt.root.updateRotation(quat(rp[0], rp[1]));
+                        }
+                        Float sc = trackScalar(tr.track, "scale", rel);
+                        if (sc != null) {
+                            rt.root.updateScale(new Vector3f(sc, sc, sc));
+                        }
+                    }
+                }
+            } catch (Throwable t) {
+                sd.add("drive t" + tick + " failed: " + t);
+            }
+        }
+        if (!sd.isEmpty()) {
+            JsonArray stepDiag = ctx.get("stepdiag@" + angle);
+            JsonObject rec = new JsonObject();
+            rec.addProperty("tick", tick);
+            rec.addProperty("id", "drive");
+            JsonArray d = new JsonArray();
+            sd.forEach(d::add);
+            rec.add("diagnostics", d);
+            stepDiag.add(rec);
+        }
+    }
+
+    private void spawnDue(TestContext ctx, String angle, ScenePlan plan,
+                          List<ScenePlan.Step> due, int tick) {
+        LocalPlayer player = ctx.player();
+        Vec3 sceneAnchor = ctx.get("anchor@" + angle);
+        Map<String, Vec3> refs = ctx.get("refs@" + angle);
+        List<Spawner.SpawnHandle> handles = ctx.get("handles@" + angle);
+        List<Tracked> tracked = ctx.get("tracked@" + angle);
+        JsonArray stepDiag = ctx.get("stepdiag@" + angle);
+        for (ScenePlan.Step s : due) {
+            List<String> sd = new ArrayList<>();
+            // `to` without explicit direction on `at` means "face the target":
+            // inject face-direction before resolving the anchor frame.
+            JsonElement atExpr = s.at;
+            if (s.to != null && (atExpr == null || !hasDirection(atExpr))) {
+                JsonObject obj = atExpr != null && atExpr.isJsonObject()
+                        ? atExpr.getAsJsonObject().deepCopy() : new JsonObject();
+                if (!obj.has("anchor")) {
+                    obj.addProperty("anchor",
+                            atExpr != null && atExpr.isJsonPrimitive()
+                                    ? atExpr.getAsString() : "scene");
+                }
+                JsonObject face = new JsonObject();
+                face.add("face", s.to);
+                obj.add("direction", face);
+                atExpr = obj;
+            }
+            AnchorResolver.Resolved ra = atExpr != null
+                    ? AnchorResolver.resolve(atExpr, player, sceneAnchor, refs, sd)
+                    : new AnchorResolver.Resolved(sceneAnchor, 0, 0);
+            Vec3 spawnPos = ra.pos();
+            if (s.pos != null) {
+                spawnPos = spawnPos.add(
+                        AnchorResolver.rotateOffset(s.pos[0], s.pos[1], s.pos[2],
+                                ra.yaw(), ra.pitch()));
+            }
+            CapturePlan.Shot shot = s.shot;
+            if (hasRefOptions(shot)) {
+                shot = substituteRefs(shot, refs, sd);
+            }
+            Spawner.LiveSpawn live = Spawner.spawnLive(
+                    shot, ctx.level(), spawnPos, ctx.server(), sd);
+            if (s.shot.stop_after == null || s.shot.stop_after) {
+                handles.add(live.handle());
+            }
+            if (s.name != null && !s.name.isBlank()) {
+                refs.put(s.name, spawnPos);
+            }
+            boolean steerable = live.quasarEmitter() != null || live.fxExecutor() != null;
+            if ((s.follow != null || s.track != null
+                    || s.to != null) && steerable) {
+                tracked.add(new Tracked(s.shot.kind, live.quasarEmitter(),
+                        live.fxExecutor(), atExpr, s.follow, s.track,
+                        new float[] {ra.yaw(), ra.pitch()}, spawnPos, tick));
+            } else if ((s.follow != null || s.track != null) && !steerable) {
+                sd.add("note: '" + s.shot.id + "' is instantaneous — "
+                        + "follow/track have nothing to steer");
+            }
+            JsonObject rec = new JsonObject();
+            rec.addProperty("tick", tick);
+            rec.addProperty("id", s.shot.id != null ? s.shot.id : "step");
+            rec.addProperty("pos", String.format("%.3f,%.3f,%.3f",
+                    spawnPos.x, spawnPos.y, spawnPos.z));
+            JsonArray d = new JsonArray();
+            sd.forEach(d::add);
+            rec.add("diagnostics", d);
+            stepDiag.add(rec);
+        }
+    }
+
+    private static boolean hasDirection(JsonElement at) {
+        return at.isJsonObject() && at.getAsJsonObject().has("direction");
+    }
+
+    private static boolean hasRefOptions(CapturePlan.Shot shot) {
+        if (shot.options == null) {
+            return false;
+        }
+        for (Map.Entry<String, JsonElement> e : shot.options.entrySet()) {
+            JsonElement v = e.getValue();
+            if (v.isJsonPrimitive() && v.getAsString().startsWith("ref:")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static CapturePlan.Shot substituteRefs(
+            CapturePlan.Shot shot, Map<String, Vec3> refs, List<String> sd) {
+        CapturePlan.Shot copy = new CapturePlan.Shot();
+        copy.id = shot.id;
+        copy.kind = shot.kind;
+        copy.particle_args = shot.particle_args;
+        copy.event = shot.event;
+        copy.data_block = shot.data_block;
+        copy.data_int = shot.data_int;
+        copy.frames = shot.frames;
+        copy.angles = shot.angles;
+        copy.stop_after = shot.stop_after;
+        JsonObject opts = new JsonObject();
+        for (Map.Entry<String, JsonElement> e : shot.options.entrySet()) {
+            JsonElement v = e.getValue();
+            if (v.isJsonPrimitive() && v.getAsString().startsWith("ref:")) {
+                Vec3 r = refs.get(v.getAsString().substring(4));
+                if (r == null) {
+                    sd.add("option '" + e.getKey() + "': ref '" + v.getAsString()
+                            + "' unresolved — left raw");
+                    opts.add(e.getKey(), v);
+                    continue;
+                }
+                JsonArray a = new JsonArray();
+                a.add(r.x);
+                a.add(r.y);
+                a.add(r.z);
+                opts.add(e.getKey(), a);
+            } else {
+                opts.add(e.getKey(), v);
+            }
+        }
+        copy.options = opts;
+        return copy;
+    }
+
+    // --------------------------------------------------------------- tracks
+
+    private static Vec3 trackVec(JsonObject track, String key, int tick) {
+        if (track == null || !track.has(key)) {
+            return Vec3.ZERO;
+        }
+        JsonArray keys = track.getAsJsonArray(key);
+        double[] v = lerpKeys(keys, tick);
+        return new Vec3(v[0], v[1], v[2]);
+    }
+
+    private static float[] trackPair(JsonObject track, String key, int tick) {
+        if (track == null || !track.has(key)) {
+            return null;
+        }
+        double[] v = lerpKeys(track.getAsJsonArray(key), tick);
+        return new float[] {(float) v[0], (float) v[1]};
+    }
+
+    private static Float trackScalar(JsonObject track, String key, int tick) {
+        if (track == null || !track.has(key)) {
+            return null;
+        }
+        double[] v = lerpKeys(track.getAsJsonArray(key), tick);
+        return (float) v[0];
+    }
+
+    /** keyframes [[t, v...], ...] sorted by t; linear interp; clamped ends. */
+    private static double[] lerpKeys(JsonArray keys, int tick) {
+        List<double[]> rows = new ArrayList<>();
+        for (JsonElement e : keys) {
+            JsonArray a = e.getAsJsonArray();
+            double[] row = new double[a.size()];
+            for (int i = 0; i < a.size(); i++) {
+                row[i] = a.get(i).getAsDouble();
+            }
+            rows.add(row);
+        }
+        rows.sort(java.util.Comparator.comparingDouble(r -> r[0]));
+        double[] first = rows.get(0);
+        double[] last = rows.get(rows.size() - 1);
+        if (tick <= first[0]) {
+            return tail(first);
+        }
+        if (tick >= last[0]) {
+            return tail(last);
+        }
+        for (int i = 0; i + 1 < rows.size(); i++) {
+            double[] a = rows.get(i);
+            double[] c = rows.get(i + 1);
+            if (tick >= a[0] && tick <= c[0]) {
+                double f = (tick - a[0]) / Math.max(1e-9, c[0] - a[0]);
+                double[] out = new double[a.length - 1];
+                for (int j = 1; j < a.length; j++) {
+                    out[j - 1] = a[j] + (c[j] - a[j]) * f;
+                }
+                return out;
+            }
+        }
+        return tail(last);
+    }
+
+    private static double[] tail(double[] row) {
+        double[] out = new double[row.length - 1];
+        System.arraycopy(row, 1, out, 0, out.length);
+        return out;
+    }
+
+    private static Quaternionf quat(float yaw, float pitch) {
+        return new Quaternionf().rotationYXZ(
+                (float) Math.toRadians(-yaw), (float) Math.toRadians(pitch), 0f);
+    }
+
+    // --------------------------------------------------------------- results
 
     private void endAngle(TestContext ctx, ScenePlan plan, String angle) {
         List<Spawner.SpawnHandle> handles = ctx.get("handles@" + angle);

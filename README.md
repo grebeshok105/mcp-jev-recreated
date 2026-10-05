@@ -73,22 +73,38 @@ jevlab-mcp   # stdio: vfx_find / vfx_inspect / vfx_preview /
              #          vfx_scene_validate / vfx_scene_plan / vfx_scene_play
 ```
 
-### Scene playback
+### Scene playback (grammar v2)
 
 A scene spec stages several catalog resources on one tick timeline; the
 probe replays it exactly in the real client and returns frames + per-angle
-particle measurements.
+particle measurements. Grammar v2 adds entity anchors, look directions,
+follow, tracks, repeat/groups, cross-step refs and tick commands:
 
 ```json
-{"name": "demo", "duration": 30, "frames": [3, 8, 20],
- "camera": {"angles": ["front", "top"]},
+{"name": "demo", "duration": 30, "frames": [9, 20],
+ "camera": {"angles": ["threequarter"]},
  "steps": [
-   {"tick": 2, "id": "minecraft:world_event/PARTICLES_DESTROY_BLOCK", "pos": [0,-0.5,0]},
-   {"tick": 3, "id": "minecraft:sonic_boom"},
-   {"tick": 5, "id": "superheroes:homelander_roar_dust", "pos": [0,0,-1]},
-   {"tick": 10, "id": "minecraft:dust", "options": {"color": [0.2,0.6,1.0], "scale": 2}}
- ]}
+   {"tick": 2, "id": "minecraft:dust", "name": "mark",
+    "anchor": "scene", "offset": [0, 0.8, 0],
+    "options": {"color": [1,0.15,0.15], "scale": 2}},
+   {"tick": 8, "id": "minecraft:vibration",
+    "anchor": {"anchor": "player.head", "offset": [0,-0.9,1.5],
+               "direction": "player.look"},
+    "options": {"destination": "ref:mark", "arrival_in_ticks": 16}},
+   {"tick": 10, "id": "vfxlab:laser_beam",
+    "anchor": "player.head", "to": "ref:mark", "follow": "player"}
+ ],
+ "groups": [{"tick": 18, "repeat": {"every": 12, "count": 2},
+   "steps": [{"tick": 0, "id": "minecraft:sonic_boom",
+              "anchor": "scene", "offset": [0,1.2,0]}]}],
+ "commands": [{"tick": 26, "command": "tp @p ~2 ~ ~ ~30 ~"}]}
 ```
+
+Anchors: `scene`, `player[.feet|.chest|.head|.look]`, `camera`,
+`ref:<name>`; directions: `world`, `player.look`, `[yaw,pitch]`,
+`{"face": <anchor>}`; `follow:"player"` re-resolves every tick on
+persistent kinds; tracks: `pos` keyframes (fx+quasar), `rotation`/`scale`
+(fx only). Full grammar reference in docs/architecture.md §8.
 
 `vfx_scene_play` (or `jevlab.scene.play.play_scene`) compiles it against the
 catalog — unknown ids, non-spawnable kinds and missing required parameters
@@ -101,7 +117,7 @@ paths + spawned counts per angle.
 ## Tests
 
 ```bash
-pytest tests/unit          # 52 tests, offline, seconds
+pytest tests/unit          # 69 tests, offline, seconds
 pytest tests/ -m typesafe  # 2 live API tests, needs TYPESAFE_API_KEY
 ```
 
@@ -122,10 +138,14 @@ pytest tests/ -m typesafe  # 2 live API tests, needs TYPESAFE_API_KEY
   hit@10 = 0.92, MRR = 0.750, ~1.3 s/query, ~130k input tokens/query.
   Full attribution matrix (gating recovered the −0.18 visual regression
   and doubled hit@1) in docs/evaluation.md.
-- scene lane (verified live): demo scene `roar_burst` — 5 steps across 4
+- scene lane v1 (verified live): demo scene `roar_burst` — 5 steps across 4
   resource kinds replayed twice (front+top), 137/157 spawned particles,
   6 frames captured, ~41 s wall-clock end-to-end
-- 54 tests green (52 offline + 2 live)
+- scene grammar v2 (verified live): demo `follow_beam` — player.head/chest
+  and look anchors, `ref:` beam wiring, follow + pos-track on a quasar
+  emitter, repeat group, mid-scene teleport; 101/91 spawned per angle,
+  6 frames, ~55 s
+- 71 tests green (69 offline + 2 live)
 
 See `docs/architecture.md` for design, `docs/evaluation.md` for full eval
 results and known limits.

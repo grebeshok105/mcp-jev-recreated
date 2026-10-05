@@ -206,3 +206,184 @@ def test_shot_spec_for_unspawnable_kind():
     shot, reason = shot_spec_for(
         {"id": "x:y", "kind": "mesh", "factual": {}}, EVENTS)
     assert shot is None and reason
+
+
+# ----------------------------------------------------------------- v2 grammar
+
+V2_CAT = dict(CAT)
+V2_CAT["minecraft:vibration"] = {
+    "id": "minecraft:vibration", "kind": "parameterized_particle",
+    "parameterized": True,
+    "parameter_schema": {"destination": {"type": "position_source"},
+                         "arrival_in_ticks": {"type": "int"}},
+    "ready_to_use": True, "factual": {}, "visual_status": "observed",
+}
+
+
+def test_v2_anchor_shorthand_and_fields():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "minecraft:sonic_boom",
+        "anchor": "player.head", "offset": [0, 0, 0.25],
+        "direction": "player.look"}]), CAT)
+    assert v.ok, v.errors
+    at = v.normalized["steps"][0]["at"]
+    assert at["anchor"] == "player.head"
+    assert at["offset"] == [0, 0, 0.25]
+    assert at["direction"] == "player.look"
+
+
+def test_v2_anchor_object_form():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "minecraft:sonic_boom",
+        "anchor": {"anchor": "player.look", "distance": 8}}]), CAT)
+    assert v.ok, v.errors
+    at = v.normalized["steps"][0]["at"]
+    assert at["anchor"] == "player.look" and at["distance"] == 8.0
+
+
+def test_v2_unknown_anchor_errors():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "minecraft:sonic_boom",
+        "anchor": "zombie.head"}]), CAT)
+    assert not v.ok
+    assert any("zombie.head" in e for e in v.errors)
+
+
+def test_v2_follow_particle_warns():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "minecraft:sonic_boom", "follow": "player"}]), CAT)
+    assert v.ok
+    assert any("instantaneous" in w for w in v.warnings)
+
+
+def test_v2_follow_quasar_ok():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "superheroes:roar_wave",
+        "anchor": "player.chest", "follow": "player"}]), CAT)
+    assert v.ok, v.errors
+    assert v.normalized["steps"][0]["follow"] == "player"
+
+
+def test_v2_follow_nonplayer_errors():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "superheroes:roar_wave", "follow": "zombie"}]), CAT)
+    assert not v.ok
+
+
+def test_v2_track_pos_on_quasar_ok():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "superheroes:roar_wave",
+        "track": {"pos": [[0, 0, 0, 0], [10, 0, 1, 0]]}}]), CAT)
+    assert v.ok, v.errors
+    assert v.normalized["steps"][0]["track"]["pos"][1] == [10, 0, 1, 0]
+
+
+def test_v2_track_rotation_on_quasar_errors():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "superheroes:roar_wave",
+        "track": {"rotation": [[0, 0, 0]]}}]), CAT)
+    assert not v.ok
+    assert any("rotation" in e for e in v.errors)
+
+
+def test_v2_track_on_fx_allows_rotation_scale():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "superheroes:fx_ring",
+        "track": {"rotation": [[0, 0, 0], [10, 90, 0]],
+                  "scale": [[0, 1], [10, 2]]}}]), CAT)
+    assert v.ok, v.errors
+
+
+def test_v2_ref_in_options_validates_order():
+    v = validate_scene(_scene(steps=[
+        {"tick": 2, "id": "minecraft:dust", "name": "zap",
+         "options": {"color": [1, 0, 0]}},
+        {"tick": 8, "id": "minecraft:vibration",
+         "options": {"destination": "ref:zap", "arrival_in_ticks": 20}},
+    ]), V2_CAT)
+    assert v.ok, v.errors
+
+
+def test_v2_ref_forward_errors():
+    v = validate_scene(_scene(steps=[
+        {"tick": 2, "id": "minecraft:vibration",
+         "options": {"destination": "ref:zap", "arrival_in_ticks": 20}},
+        {"tick": 8, "id": "minecraft:dust", "name": "zap"},
+    ]), V2_CAT)
+    assert not v.ok
+    assert any("ref:zap" in e for e in v.errors)
+
+
+def test_v2_ref_unknown_errors():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "minecraft:sonic_boom",
+        "anchor": "ref:ghost"}]), CAT)
+    assert not v.ok
+    assert any("ref:ghost" in e for e in v.errors)
+
+
+def test_v2_same_tick_ref_order_ok():
+    v = validate_scene(_scene(steps=[
+        {"tick": 5, "id": "minecraft:dust", "name": "p"},
+        {"tick": 5, "id": "minecraft:sonic_boom", "anchor": "ref:p"},
+    ]), CAT)
+    assert v.ok, v.errors
+
+
+def test_v2_repeat_count_expands():
+    plan, v = compile_scene(_scene(steps=[{
+        "tick": 2, "id": "minecraft:sonic_boom",
+        "repeat": {"every": 4, "count": 3}}]), CAT, EVENTS)
+    assert v.ok, v.errors
+    assert [s["at_tick"] for s in plan["steps"]] == [2, 6, 10]
+
+
+def test_v2_repeat_until_expands():
+    plan, v = compile_scene(_scene(duration=20, steps=[{
+        "tick": 1, "id": "minecraft:sonic_boom",
+        "repeat": {"every": 6, "until": 15}}]), CAT, EVENTS)
+    assert v.ok, v.errors
+    assert [s["at_tick"] for s in plan["steps"]] == [1, 7, 13]
+
+
+def test_v2_group_tick_and_repeat_expand():
+    spec = _scene(duration=40, steps=[])
+    spec["groups"] = [{
+        "tick": 10, "repeat": {"every": 10, "count": 2},
+        "steps": [
+            {"tick": 0, "id": "minecraft:sonic_boom"},
+            {"tick": 3, "id": "minecraft:dust"},
+        ]}]
+    plan, v = compile_scene(spec, CAT, EVENTS)
+    assert v.ok, v.errors
+    ticks = sorted(s["at_tick"] for s in plan["steps"])
+    assert ticks == [10, 13, 20, 23]
+
+
+def test_v2_to_injects_face_direction():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "superheroes:fx_ring",
+        "anchor": "player.head",
+        "to": {"anchor": "player.look", "distance": 8}}]), CAT)
+    assert v.ok, v.errors
+    step = v.normalized["steps"][0]
+    assert step["to"]["anchor"] == "player.look"
+
+
+def test_v2_face_direction_form():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "minecraft:sonic_boom",
+        "anchor": {"anchor": "player.head",
+                   "direction": {"face": {"anchor": "player.look",
+                                          "distance": 6}}}}]), CAT)
+    assert v.ok, v.errors
+    assert v.normalized["steps"][0]["at"]["direction"]["face"]["anchor"] \
+        == "player.look"
+
+
+def test_v2_explicit_yaw_pitch_direction():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "minecraft:sonic_boom",
+        "direction": [37.0, -10.0]}]), CAT)
+    assert v.ok, v.errors
+    assert v.normalized["steps"][0]["at"]["direction"] == [37.0, -10.0]

@@ -1,93 +1,139 @@
 {
   "angles": {
-    "front": {
-      "camera": "8.50,-56.60,12.00,yaw\u003d-180.0,pitch\u003d14.4",
-      "spawned": "137",
-      "peak_alive": "104",
-      "alive_at_end": "2",
+    "threequarter": {
+      "camera": "5.70,-55.60,11.30,yaw\u003d-135.0,pitch\u003d25.6",
+      "spawned": "101",
+      "peak_alive": "80",
+      "alive_at_end": "4",
       "first_visible_tick": "1",
       "bounds_min": "-0.100,-60.000,-0.100",
-      "bounds_max": "10.459,0.200,12.879",
+      "bounds_max": "8.953,0.200,11.889",
       "steps": [
         {
           "tick": 2,
-          "id": "world_event_PARTICLES_DESTROY_BLOCK",
+          "id": "minecraft:dust",
+          "pos": "8.500,-57.200,8.500",
           "diagnostics": []
         },
         {
-          "tick": 3,
-          "id": "minecraft:sonic_boom",
-          "diagnostics": []
-        },
-        {
-          "tick": 5,
-          "id": "superheroes:homelander_roar_dust",
+          "tick": 4,
+          "id": "superheroes:homelander_roar_wave",
+          "pos": "7.143,-60.556,9.857",
           "diagnostics": [
-            "spawner: quasar superheroes:homelander_roar_dust forceSpawn\u003dtrue"
+            "spawner: quasar superheroes:homelander_roar_wave forceSpawn\u003dtrue"
           ]
         },
         {
           "tick": 8,
-          "id": "vfxlab:laser_beam",
+          "id": "minecraft:vibration",
+          "pos": "6.381,-59.840,10.619",
           "diagnostics": []
         },
         {
           "tick": 10,
-          "id": "minecraft:dust",
+          "id": "vfxlab:laser_beam",
+          "pos": "6.414,-59.974,10.586",
+          "diagnostics": []
+        },
+        {
+          "tick": 18,
+          "id": "minecraft:sonic_boom",
+          "pos": "8.500,-56.800,8.500",
+          "diagnostics": []
+        },
+        {
+          "tick": 21,
+          "id": "minecraft:end_rod",
+          "pos": "8.500,-56.600,8.500",
+          "diagnostics": []
+        },
+        {
+          "tick": 30,
+          "id": "minecraft:sonic_boom",
+          "pos": "8.500,-56.800,8.500",
+          "diagnostics": []
+        },
+        {
+          "tick": 33,
+          "id": "minecraft:end_rod",
+          "pos": "8.500,-56.600,8.500",
           "diagnostics": []
         }
       ],
       "frames": [
-        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/35_roar_burst__front__t8.png",
-        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/22_roar_burst__front__t3.png",
-        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/61_roar_burst__front__t20.png"
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/80_follow_beam__threequarter__t20.png",
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/44_follow_beam__threequarter__t9.png",
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/127_follow_beam__threequarter__t34.png"
       ]
     },
-    "top": {
-      "camera": "8.50,-53.50,8.50,yaw\u003d-0.0,pitch\u003d90.0",
-      "spawned": "157",
-      "peak_alive": "92",
-      "alive_at_end": "3",
+    "side": {
+      "camera": "5.00,-56.60,8.50,yaw\u003d-90.0,pitch\u003d14.4",
+      "spawned": "91",
+      "peak_alive": "66",
+      "alive_at_end": "6",
       "first_visible_tick": "1",
       "bounds_min": "-0.100,-60.000,-0.100",
-      "bounds_max": "10.037,0.200,9.764",
+      "bounds_max": "8.923,0.200,9.126",
       "steps": [
         {
           "tick": 2,
-          "id": "world_event_PARTICLES_DESTROY_BLOCK",
+          "id": "minecraft:dust",
+          "pos": "8.500,-57.200,8.500",
           "diagnostics": []
         },
         {
-          "tick": 3,
-          "id": "minecraft:sonic_boom",
-          "diagnostics": []
-        },
-        {
-          "tick": 5,
-          "id": "superheroes:homelander_roar_dust",
+          "tick": 4,
+          "id": "superheroes:homelander_roar_wave",
+          "pos": "7.344,-60.125,8.500",
           "diagnostics": [
-            "spawner: quasar superheroes:homelander_roar_dust forceSpawn\u003dtrue"
+            "spawner: quasar superheroes:homelander_roar_wave forceSpawn\u003dtrue"
           ]
         },
         {
           "tick": 8,
-          "id": "vfxlab:laser_beam",
+          "id": "minecraft:vibration",
+          "pos": "6.229,-59.625,8.500",
           "diagnostics": []
         },
         {
           "tick": 10,
-          "id": "minecraft:dust",
+          "id": "vfxlab:laser_beam",
+          "pos": "6.301,-59.747,8.500",
+          "diagnostics": []
+        },
+        {
+          "tick": 18,
+          "id": "minecraft:sonic_boom",
+          "pos": "8.500,-56.800,8.500",
+          "diagnostics": []
+        },
+        {
+          "tick": 21,
+          "id": "minecraft:end_rod",
+          "pos": "8.500,-56.600,8.500",
+          "diagnostics": []
+        },
+        {
+          "tick": 30,
+          "id": "minecraft:sonic_boom",
+          "pos": "8.500,-56.800,8.500",
+          "diagnostics": []
+        },
+        {
+          "tick": 33,
+          "id": "minecraft:end_rod",
+          "pos": "8.500,-56.600,8.500",
           "diagnostics": []
         }
       ],
       "frames": [
-        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/95_roar_burst__top__t3.png",
-        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/134_roar_burst__top__t20.png",
-        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/108_roar_burst__top__t8.png"
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/199_follow_beam__side__t9.png",
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/282_follow_beam__side__t34.png",
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/235_follow_beam__side__t20.png"
       ]
     }
   },
-  "name": "roar_burst",
-  "duration": 30,
-  "step_count": 5
+  "name": "follow_beam",
+  "duration": 46,
+  "step_count": 8
 }

@@ -109,21 +109,45 @@ changed rank params misses the cache automatically.
 ### 8. Scene lane (`src/jevlab/scene/`)
 
 Stages several catalog resources on one tick timeline and replays them
-inside the real client.
+inside the real client. One spec drives preview and gameplay identically —
+the probe is the only runtime; validation states honestly what the runtime
+cannot do (e.g. `follow` on instantaneous kinds, `rotation/scale` tracks on
+quasar emitters).
 
-- `spec.py` — validates a scene spec (`steps:[{tick,id,pos,options,
-  stop_after}]`, `camera.angles`, `duration`, `frames`) against the catalog:
-  unknown ids / non-spawnable kinds / unresolvable required parameters are
-  hard errors; `environment_mismatch` and `capture_failed` passports become
-  warnings, not fatal.
-- `compile.py` — normalized spec → `scene_plan.json`. Shot specs come from
-  `spawn_specs.shot_spec_for` — the same resource→shot mapping
-  `tools/gen_capture_plan.py` uses, so a scene step spawns exactly like the
-  catalog capture; user options merge over tuned defaults; params are
-  validated against `parameter_schema` post-merge.
+**Grammar v2** (see `examples/follow_beam.scene.json`):
+
+- *Anchors* — `anchor`: `scene`, `player` (feet, `.chest`, `.head`, `.look`),
+  `camera`, `ref:<step name>`; `offset [x,y,z]` in the direction's local
+  frame; `distance` pushes along the direction.
+- *Directions* — `world` | `player.look` | `[yaw,pitch]` |
+  `{"face": <anchor expr>}`; `to: <anchor expr>` faces a target point.
+- *Follow* — `follow: "player"` re-resolves the anchor every tick on
+  persistent handles (`fx`, `quasar_emitter`).
+- *Tracks* — `track.pos` keyframes `[t,x,y,z]` (fx + quasar), `rotation` /
+  `scale` (fx only); ticks are relative to the step's spawn.
+- *Repeat* — `{every, count}` | `{every, until}` on a step or a whole
+  `groups[]` block; expansion happens at compile time.
+- *Refs* — a named step (`name:`) is addressable as `ref:<name>` in anchor
+  positions and option values (e.g. `destination: "ref:zap"`); producers
+  must sort before their consumers.
+- *Commands* — `commands:[{tick, command}]` fire server commands mid-scene
+  (e.g. move the player to prove follow).
+
+- `spec.py` — validates all of the above against the catalog (unknown ids,
+  non-spawnable kinds, unresolvable params, bad refs/ordering = errors;
+  `environment_mismatch` / `capture_failed` passports and follow-on-instant
+  = warnings). Same-tick refs are legal when the producer sorts first.
+- `compile.py` — normalized spec → `scene_plan.json` (repeat/group
+  expansion to absolute ticks; shot specs from `spawn_specs.shot_spec_for`,
+  user options merged over tuned defaults).
 - `play.py` — writes `data/capture/scene/scene_plan.json`, launches
   `runUitest -Pvfxlab.uitestSelection=vfxlab.4_scene` (xvfb, Java 21), and
   reads back `scene_results.json` + the frame index.
+
+Note: in the probe the local player *is* the camera — player-anchored
+effects land at the viewpoint, so visible staging usually wants a look
+offset (`offset: [0, -0.5, 2.0]` = ahead of the camera) or scene-anchored
+positions.
 
 ### 9. MCP server (`src/jevlab/mcp_server.py`, optional `mcp` dep)
 
@@ -151,11 +175,17 @@ Fabric mod inside the LDLib2 dev environment. `runUitest` (xvfb) runs
   includes the particle pass), measure live counts through the
   `ParticleEngine` mixin + quasar manager introspection.
 - `SceneRun` (`vfxlab.4_scene`) replays `scene_plan.json`: one camera
-  teleport per angle, then the tick timeline — each step's shot spawns at
-  its `at_tick` on `anchor + pos`, frames screenshot at the requested
-  ticks, all `stop_after` handles are torn down per angle. Deterministic
-  (fixed tick schedule), so every angle sees the identical timeline. Writes
-  `scene_results.json` + `scene_frames_index.json`.
+  teleport per angle, then the tick timeline — each step resolves its
+  anchor expression (`AnchorResolver`: scene/player/camera/ref anchors,
+  rotated local offsets, look/face directions), `ref:` option values are
+  substituted with named steps' resolved positions, follow + track
+  keyframes are driven per tick on live handles (quasar
+  `ParticleEmitter.setPosition`, fx `root.updatePos/updateRotation/
+  updateScale`), tick-scheduled `commands` run on the server, frames
+  screenshot at the requested ticks, `stop_after` handles torn down per
+  angle. Deterministic (fixed tick schedule), so every angle sees the
+  identical timeline. Writes `scene_results.json` +
+  `scene_frames_index.json`.
 
 ## Failure design
 

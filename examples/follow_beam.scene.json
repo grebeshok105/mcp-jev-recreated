@@ -1,0 +1,34 @@
+{
+  "name": "follow_beam",
+  "scene": {"pos": [8.5, 2.0, 8.5], "time": 6000, "weather": "clear"},
+  "camera": {"angles": ["threequarter", "side"]},
+  "duration": 46,
+  "frames": [9, 20, 34],
+  "steps": [
+    {"tick": 2, "id": "minecraft:dust", "name": "zap_mark",
+     "anchor": "scene", "offset": [0, 0.8, 0],
+     "options": {"color": [1, 0.15, 0.15], "scale": 2}},
+    {"tick": 4, "id": "superheroes:homelander_roar_wave",
+     "anchor": {"anchor": "player.chest", "offset": [0, -0.7, 2.6],
+                "direction": "player.look"},
+     "follow": "player",
+     "track": {"pos": [[0, 0, 0, 0], [30, 0, 0.8, 0]]}},
+    {"tick": 8, "id": "minecraft:vibration",
+     "anchor": {"anchor": "player.head", "offset": [0, -0.9, 1.5],
+                "direction": "player.look"},
+     "options": {"destination": "ref:zap_mark", "arrival_in_ticks": 16}},
+    {"tick": 10, "id": "vfxlab:laser_beam",
+     "anchor": {"anchor": "player.head", "offset": [0, -1.0, 1.6],
+                "direction": "player.look"},
+     "to": "ref:zap_mark", "follow": "player"}
+  ],
+  "groups": [{
+    "tick": 18, "repeat": {"every": 12, "count": 2},
+    "steps": [
+      {"tick": 0, "id": "minecraft:sonic_boom",
+       "anchor": "scene", "offset": [0, 1.2, 0]},
+      {"tick": 3, "id": "minecraft:end_rod",
+       "anchor": "scene", "offset": [0, 1.4, 0]}
+    ]}],
+  "commands": [{"tick": 26, "command": "tp @p ~2.0 ~ ~ ~30 ~"}]
+}
