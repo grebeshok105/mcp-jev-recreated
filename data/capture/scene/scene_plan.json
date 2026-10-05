@@ -1,6 +1,6 @@
 {
  "version": 2,
- "name": "follow_beam",
+ "name": "following_aura",
  "scene": {
   "pos": [
    8.5,
@@ -12,17 +12,550 @@
  },
  "camera": {
   "angles": [
-   "threequarter",
-   "side"
+   "front",
+   "threequarter"
   ]
  },
  "frames": [
-  9,
-  20,
-  34
+  6,
+  14,
+  24,
+  32
  ],
- "duration": 46,
+ "duration": 40,
  "steps": [
+  {
+   "at_tick": 0,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:entity_effect",
+    "kind": "particle",
+    "options": {
+     "count": 20,
+     "color": [
+      0.2,
+      0.7,
+      1.0
+     ],
+     "delta": 1.3
+    },
+    "stop_after": true
+   },
+   "name": "aura_ring",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 3,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:entity_effect",
+    "kind": "particle",
+    "options": {
+     "count": 20,
+     "color": [
+      0.2,
+      0.7,
+      1.0
+     ],
+     "delta": 1.3
+    },
+    "stop_after": true
+   },
+   "name": "aura_ring",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 6,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:entity_effect",
+    "kind": "particle",
+    "options": {
+     "count": 20,
+     "color": [
+      0.2,
+      0.7,
+      1.0
+     ],
+     "delta": 1.3
+    },
+    "stop_after": true
+   },
+   "name": "aura_ring",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 9,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:entity_effect",
+    "kind": "particle",
+    "options": {
+     "count": 20,
+     "color": [
+      0.2,
+      0.7,
+      1.0
+     ],
+     "delta": 1.3
+    },
+    "stop_after": true
+   },
+   "name": "aura_ring",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 12,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:entity_effect",
+    "kind": "particle",
+    "options": {
+     "count": 20,
+     "color": [
+      0.2,
+      0.7,
+      1.0
+     ],
+     "delta": 1.3
+    },
+    "stop_after": true
+   },
+   "name": "aura_ring",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 15,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:entity_effect",
+    "kind": "particle",
+    "options": {
+     "count": 20,
+     "color": [
+      0.2,
+      0.7,
+      1.0
+     ],
+     "delta": 1.3
+    },
+    "stop_after": true
+   },
+   "name": "aura_ring",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 18,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:entity_effect",
+    "kind": "particle",
+    "options": {
+     "count": 20,
+     "color": [
+      0.2,
+      0.7,
+      1.0
+     ],
+     "delta": 1.3
+    },
+    "stop_after": true
+   },
+   "name": "aura_ring",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 21,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:entity_effect",
+    "kind": "particle",
+    "options": {
+     "count": 20,
+     "color": [
+      0.2,
+      0.7,
+      1.0
+     ],
+     "delta": 1.3
+    },
+    "stop_after": true
+   },
+   "name": "aura_ring",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 24,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:entity_effect",
+    "kind": "particle",
+    "options": {
+     "count": 20,
+     "color": [
+      0.2,
+      0.7,
+      1.0
+     ],
+     "delta": 1.3
+    },
+    "stop_after": true
+   },
+   "name": "aura_ring",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 27,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:entity_effect",
+    "kind": "particle",
+    "options": {
+     "count": 20,
+     "color": [
+      0.2,
+      0.7,
+      1.0
+     ],
+     "delta": 1.3
+    },
+    "stop_after": true
+   },
+   "name": "aura_ring",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 30,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:entity_effect",
+    "kind": "particle",
+    "options": {
+     "count": 20,
+     "color": [
+      0.2,
+      0.7,
+      1.0
+     ],
+     "delta": 1.3
+    },
+    "stop_after": true
+   },
+   "name": "aura_ring",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 33,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:entity_effect",
+    "kind": "particle",
+    "options": {
+     "count": 20,
+     "color": [
+      0.2,
+      0.7,
+      1.0
+     ],
+     "delta": 1.3
+    },
+    "stop_after": true
+   },
+   "name": "aura_ring",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 36,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:entity_effect",
+    "kind": "particle",
+    "options": {
+     "count": 20,
+     "color": [
+      0.2,
+      0.7,
+      1.0
+     ],
+     "delta": 1.3
+    },
+    "stop_after": true
+   },
+   "name": "aura_ring",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 39,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:entity_effect",
+    "kind": "particle",
+    "options": {
+     "count": 20,
+     "color": [
+      0.2,
+      0.7,
+      1.0
+     ],
+     "delta": 1.3
+    },
+    "stop_after": true
+   },
+   "name": "aura_ring",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 1,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:enchant",
+    "kind": "particle",
+    "options": {
+     "count": 10,
+     "delta": 0.4
+    },
+    "stop_after": true
+   },
+   "name": "aura_glyphs",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 6,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:enchant",
+    "kind": "particle",
+    "options": {
+     "count": 10,
+     "delta": 0.4
+    },
+    "stop_after": true
+   },
+   "name": "aura_glyphs",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 11,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:enchant",
+    "kind": "particle",
+    "options": {
+     "count": 10,
+     "delta": 0.4
+    },
+    "stop_after": true
+   },
+   "name": "aura_glyphs",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 16,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:enchant",
+    "kind": "particle",
+    "options": {
+     "count": 10,
+     "delta": 0.4
+    },
+    "stop_after": true
+   },
+   "name": "aura_glyphs",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 21,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:enchant",
+    "kind": "particle",
+    "options": {
+     "count": 10,
+     "delta": 0.4
+    },
+    "stop_after": true
+   },
+   "name": "aura_glyphs",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 26,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:enchant",
+    "kind": "particle",
+    "options": {
+     "count": 10,
+     "delta": 0.4
+    },
+    "stop_after": true
+   },
+   "name": "aura_glyphs",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 31,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:enchant",
+    "kind": "particle",
+    "options": {
+     "count": 10,
+     "delta": 0.4
+    },
+    "stop_after": true
+   },
+   "name": "aura_glyphs",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
+  {
+   "at_tick": 36,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:enchant",
+    "kind": "particle",
+    "options": {
+     "count": 10,
+     "delta": 0.4
+    },
+    "stop_after": true
+   },
+   "name": "aura_glyphs",
+   "at": {
+    "anchor": "player.feet"
+   }
+  },
   {
    "at_tick": 2,
    "pos": [
@@ -31,93 +564,48 @@
     0.0
    ],
    "shot": {
-    "id": "minecraft:dust",
+    "id": "superheroes:blue_flame",
     "kind": "particle",
     "options": {
-     "count": 30,
-     "color": [
-      1,
-      0.15,
-      0.15
-     ],
-     "scale": 2,
-     "delta": 0.4
+     "count": 7,
+     "delta": 0.35
     },
     "stop_after": true
    },
-   "name": "zap_mark",
-   "at": {
-    "anchor": "scene",
-    "offset": [
-     0.0,
-     0.8,
-     0.0
-    ]
-   }
-  },
-  {
-   "at_tick": 4,
-   "pos": [
-    0.0,
-    0.0,
-    0.0
-   ],
-   "shot": {
-    "id": "superheroes:homelander_roar_wave",
-    "kind": "quasar_emitter",
-    "options": {},
-    "stop_after": true
-   },
-   "at": {
-    "anchor": "player.chest",
-    "offset": [
-     0.0,
-     -0.7,
-     2.6
-    ],
-    "direction": "player.look"
-   },
-   "follow": "player",
-   "track": {
-    "pos": [
-     [
-      0,
-      0,
-      0,
-      0
-     ],
-     [
-      30,
-      0,
-      0.8,
-      0
-     ]
-    ]
-   }
-  },
-  {
-   "at_tick": 8,
-   "pos": [
-    0.0,
-    0.0,
-    0.0
-   ],
-   "shot": {
-    "id": "minecraft:vibration",
-    "kind": "particle",
-    "options": {
-     "count": 1,
-     "destination": "ref:zap_mark",
-     "arrival_in_ticks": 16
-    },
-    "stop_after": true
-   },
+   "name": "aura_core",
    "at": {
     "anchor": "player.head",
     "offset": [
      0.0,
-     -0.9,
-     1.5
+     -0.5,
+     2.0
+    ],
+    "direction": "player.look"
+   }
+  },
+  {
+   "at_tick": 6,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "superheroes:blue_flame",
+    "kind": "particle",
+    "options": {
+     "count": 7,
+     "delta": 0.35
+    },
+    "stop_after": true
+   },
+   "name": "aura_core",
+   "at": {
+    "anchor": "player.head",
+    "offset": [
+     0.0,
+     -0.5,
+     2.0
     ],
     "direction": "player.look"
    }
@@ -130,18 +618,51 @@
     0.0
    ],
    "shot": {
-    "id": "vfxlab:laser_beam",
-    "kind": "fx",
-    "options": {},
+    "id": "superheroes:blue_flame",
+    "kind": "particle",
+    "options": {
+     "count": 7,
+     "delta": 0.35
+    },
     "stop_after": true
    },
+   "name": "aura_core",
    "at": {
-    "anchor": "player.head"
+    "anchor": "player.head",
+    "offset": [
+     0.0,
+     -0.5,
+     2.0
+    ],
+    "direction": "player.look"
+   }
+  },
+  {
+   "at_tick": 14,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "superheroes:blue_flame",
+    "kind": "particle",
+    "options": {
+     "count": 7,
+     "delta": 0.35
+    },
+    "stop_after": true
    },
-   "to": {
-    "anchor": "ref:zap_mark"
-   },
-   "follow": "player"
+   "name": "aura_core",
+   "at": {
+    "anchor": "player.head",
+    "offset": [
+     0.0,
+     -0.5,
+     2.0
+    ],
+    "direction": "player.look"
+   }
   },
   {
    "at_tick": 18,
@@ -151,21 +672,77 @@
     0.0
    ],
    "shot": {
-    "id": "minecraft:sonic_boom",
+    "id": "superheroes:blue_flame",
     "kind": "particle",
     "options": {
-     "count": 1,
-     "delta": 0.4
+     "count": 7,
+     "delta": 0.35
     },
     "stop_after": true
    },
+   "name": "aura_core",
    "at": {
-    "anchor": "scene",
+    "anchor": "player.head",
     "offset": [
      0.0,
-     1.2,
-     0.0
-    ]
+     -0.5,
+     2.0
+    ],
+    "direction": "player.look"
+   }
+  },
+  {
+   "at_tick": 22,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "superheroes:blue_flame",
+    "kind": "particle",
+    "options": {
+     "count": 7,
+     "delta": 0.35
+    },
+    "stop_after": true
+   },
+   "name": "aura_core",
+   "at": {
+    "anchor": "player.head",
+    "offset": [
+     0.0,
+     -0.5,
+     2.0
+    ],
+    "direction": "player.look"
+   }
+  },
+  {
+   "at_tick": 26,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "superheroes:blue_flame",
+    "kind": "particle",
+    "options": {
+     "count": 7,
+     "delta": 0.35
+    },
+    "stop_after": true
+   },
+   "name": "aura_core",
+   "at": {
+    "anchor": "player.head",
+    "offset": [
+     0.0,
+     -0.5,
+     2.0
+    ],
+    "direction": "player.look"
    }
   },
   {
@@ -176,25 +753,81 @@
     0.0
    ],
    "shot": {
-    "id": "minecraft:sonic_boom",
+    "id": "superheroes:blue_flame",
     "kind": "particle",
     "options": {
-     "count": 1,
-     "delta": 0.4
+     "count": 7,
+     "delta": 0.35
     },
     "stop_after": true
    },
+   "name": "aura_core",
    "at": {
-    "anchor": "scene",
+    "anchor": "player.head",
     "offset": [
      0.0,
-     1.2,
-     0.0
-    ]
+     -0.5,
+     2.0
+    ],
+    "direction": "player.look"
    }
   },
   {
-   "at_tick": 21,
+   "at_tick": 34,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "superheroes:blue_flame",
+    "kind": "particle",
+    "options": {
+     "count": 7,
+     "delta": 0.35
+    },
+    "stop_after": true
+   },
+   "name": "aura_core",
+   "at": {
+    "anchor": "player.head",
+    "offset": [
+     0.0,
+     -0.5,
+     2.0
+    ],
+    "direction": "player.look"
+   }
+  },
+  {
+   "at_tick": 38,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "superheroes:blue_flame",
+    "kind": "particle",
+    "options": {
+     "count": 7,
+     "delta": 0.35
+    },
+    "stop_after": true
+   },
+   "name": "aura_core",
+   "at": {
+    "anchor": "player.head",
+    "offset": [
+     0.0,
+     -0.5,
+     2.0
+    ],
+    "direction": "player.look"
+   }
+  },
+  {
+   "at_tick": 3,
    "pos": [
     0.0,
     0.0,
@@ -204,22 +837,24 @@
     "id": "minecraft:end_rod",
     "kind": "particle",
     "options": {
-     "count": 8,
-     "delta": 0.3
+     "count": 6,
+     "delta": 0.5
     },
     "stop_after": true
    },
+   "name": "aura_sparks",
    "at": {
-    "anchor": "scene",
+    "anchor": "player.head",
     "offset": [
      0.0,
-     1.4,
-     0.0
-    ]
+     -0.3,
+     2.0
+    ],
+    "direction": "player.look"
    }
   },
   {
-   "at_tick": 33,
+   "at_tick": 7,
    "pos": [
     0.0,
     0.0,
@@ -229,25 +864,243 @@
     "id": "minecraft:end_rod",
     "kind": "particle",
     "options": {
-     "count": 8,
-     "delta": 0.3
+     "count": 6,
+     "delta": 0.5
     },
     "stop_after": true
    },
+   "name": "aura_sparks",
    "at": {
-    "anchor": "scene",
+    "anchor": "player.head",
     "offset": [
      0.0,
-     1.4,
-     0.0
-    ]
+     -0.3,
+     2.0
+    ],
+    "direction": "player.look"
+   }
+  },
+  {
+   "at_tick": 11,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:end_rod",
+    "kind": "particle",
+    "options": {
+     "count": 6,
+     "delta": 0.5
+    },
+    "stop_after": true
+   },
+   "name": "aura_sparks",
+   "at": {
+    "anchor": "player.head",
+    "offset": [
+     0.0,
+     -0.3,
+     2.0
+    ],
+    "direction": "player.look"
+   }
+  },
+  {
+   "at_tick": 15,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:end_rod",
+    "kind": "particle",
+    "options": {
+     "count": 6,
+     "delta": 0.5
+    },
+    "stop_after": true
+   },
+   "name": "aura_sparks",
+   "at": {
+    "anchor": "player.head",
+    "offset": [
+     0.0,
+     -0.3,
+     2.0
+    ],
+    "direction": "player.look"
+   }
+  },
+  {
+   "at_tick": 19,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:end_rod",
+    "kind": "particle",
+    "options": {
+     "count": 6,
+     "delta": 0.5
+    },
+    "stop_after": true
+   },
+   "name": "aura_sparks",
+   "at": {
+    "anchor": "player.head",
+    "offset": [
+     0.0,
+     -0.3,
+     2.0
+    ],
+    "direction": "player.look"
+   }
+  },
+  {
+   "at_tick": 23,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:end_rod",
+    "kind": "particle",
+    "options": {
+     "count": 6,
+     "delta": 0.5
+    },
+    "stop_after": true
+   },
+   "name": "aura_sparks",
+   "at": {
+    "anchor": "player.head",
+    "offset": [
+     0.0,
+     -0.3,
+     2.0
+    ],
+    "direction": "player.look"
+   }
+  },
+  {
+   "at_tick": 27,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:end_rod",
+    "kind": "particle",
+    "options": {
+     "count": 6,
+     "delta": 0.5
+    },
+    "stop_after": true
+   },
+   "name": "aura_sparks",
+   "at": {
+    "anchor": "player.head",
+    "offset": [
+     0.0,
+     -0.3,
+     2.0
+    ],
+    "direction": "player.look"
+   }
+  },
+  {
+   "at_tick": 31,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:end_rod",
+    "kind": "particle",
+    "options": {
+     "count": 6,
+     "delta": 0.5
+    },
+    "stop_after": true
+   },
+   "name": "aura_sparks",
+   "at": {
+    "anchor": "player.head",
+    "offset": [
+     0.0,
+     -0.3,
+     2.0
+    ],
+    "direction": "player.look"
+   }
+  },
+  {
+   "at_tick": 35,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:end_rod",
+    "kind": "particle",
+    "options": {
+     "count": 6,
+     "delta": 0.5
+    },
+    "stop_after": true
+   },
+   "name": "aura_sparks",
+   "at": {
+    "anchor": "player.head",
+    "offset": [
+     0.0,
+     -0.3,
+     2.0
+    ],
+    "direction": "player.look"
+   }
+  },
+  {
+   "at_tick": 39,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:end_rod",
+    "kind": "particle",
+    "options": {
+     "count": 6,
+     "delta": 0.5
+    },
+    "stop_after": true
+   },
+   "name": "aura_sparks",
+   "at": {
+    "anchor": "player.head",
+    "offset": [
+     0.0,
+     -0.3,
+     2.0
+    ],
+    "direction": "player.look"
    }
   }
  ],
  "commands": [
   {
-   "at_tick": 26,
-   "command": "tp @p ~2.0 ~ ~ ~30 ~"
+   "at_tick": 20,
+   "command": "execute at @p run tp @p ~1.5 ~ ~ ~25 ~"
   }
  ]
 }

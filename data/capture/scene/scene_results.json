@@ -1,139 +1,545 @@
 {
   "angles": {
-    "threequarter": {
-      "camera": "5.70,-55.60,11.30,yaw\u003d-135.0,pitch\u003d25.6",
-      "spawned": "101",
-      "peak_alive": "80",
-      "alive_at_end": "2",
-      "first_visible_tick": "1",
-      "bounds_min": "-0.100,-60.000,-0.100",
-      "bounds_max": "8.995,0.200,11.922",
+    "front": {
+      "camera": "8.50,-56.60,12.00,yaw\u003d-180.0,pitch\u003d14.4",
+      "spawned": "530",
+      "peak_alive": "82",
+      "alive_at_end": "72",
+      "first_visible_tick": "0",
+      "bounds_min": "7.659,-60.589,9.790",
+      "bounds_max": "11.135,-55.771,12.853",
       "steps": [
         {
-          "tick": 2,
-          "id": "minecraft:dust",
-          "pos": "8.500,-57.200,8.500",
+          "tick": 0,
+          "id": "minecraft:entity_effect",
+          "pos": "8.500,-58.193,12.000",
           "diagnostics": []
         },
         {
-          "tick": 4,
-          "id": "superheroes:homelander_roar_wave",
-          "pos": "7.143,-60.556,9.857",
-          "diagnostics": [
-            "spawner: quasar superheroes:homelander_roar_wave forceSpawn\u003dtrue"
-          ]
+          "tick": 1,
+          "id": "minecraft:enchant",
+          "pos": "8.500,-59.946,12.000",
+          "diagnostics": []
         },
         {
-          "tick": 8,
-          "id": "minecraft:vibration",
-          "pos": "6.381,-59.840,10.619",
+          "tick": 2,
+          "id": "superheroes:blue_flame",
+          "pos": "8.500,-59.362,10.188",
+          "diagnostics": []
+        },
+        {
+          "tick": 3,
+          "id": "minecraft:entity_effect",
+          "pos": "8.500,-60.000,12.000",
+          "diagnostics": []
+        },
+        {
+          "tick": 3,
+          "id": "minecraft:end_rod",
+          "pos": "8.500,-59.169,10.138",
+          "diagnostics": []
+        },
+        {
+          "tick": 6,
+          "id": "minecraft:entity_effect",
+          "pos": "8.500,-60.000,12.000",
+          "diagnostics": []
+        },
+        {
+          "tick": 6,
+          "id": "minecraft:enchant",
+          "pos": "8.500,-60.000,12.000",
+          "diagnostics": []
+        },
+        {
+          "tick": 6,
+          "id": "superheroes:blue_flame",
+          "pos": "8.500,-59.362,10.188",
+          "diagnostics": []
+        },
+        {
+          "tick": 7,
+          "id": "minecraft:end_rod",
+          "pos": "8.500,-59.169,10.138",
+          "diagnostics": []
+        },
+        {
+          "tick": 9,
+          "id": "minecraft:entity_effect",
+          "pos": "8.500,-60.000,12.000",
           "diagnostics": []
         },
         {
           "tick": 10,
-          "id": "vfxlab:laser_beam",
-          "pos": "5.700,-58.380,11.300",
+          "id": "superheroes:blue_flame",
+          "pos": "8.500,-59.362,10.188",
+          "diagnostics": []
+        },
+        {
+          "tick": 11,
+          "id": "minecraft:enchant",
+          "pos": "8.500,-60.000,12.000",
+          "diagnostics": []
+        },
+        {
+          "tick": 11,
+          "id": "minecraft:end_rod",
+          "pos": "8.500,-59.169,10.138",
+          "diagnostics": []
+        },
+        {
+          "tick": 12,
+          "id": "minecraft:entity_effect",
+          "pos": "8.500,-60.000,12.000",
+          "diagnostics": []
+        },
+        {
+          "tick": 14,
+          "id": "superheroes:blue_flame",
+          "pos": "8.500,-59.362,10.188",
+          "diagnostics": []
+        },
+        {
+          "tick": 15,
+          "id": "minecraft:entity_effect",
+          "pos": "8.500,-60.000,12.000",
+          "diagnostics": []
+        },
+        {
+          "tick": 15,
+          "id": "minecraft:end_rod",
+          "pos": "8.500,-59.169,10.138",
+          "diagnostics": []
+        },
+        {
+          "tick": 16,
+          "id": "minecraft:enchant",
+          "pos": "8.500,-60.000,12.000",
           "diagnostics": []
         },
         {
           "tick": 18,
-          "id": "minecraft:sonic_boom",
-          "pos": "8.500,-56.800,8.500",
+          "id": "minecraft:entity_effect",
+          "pos": "8.500,-60.000,12.000",
+          "diagnostics": []
+        },
+        {
+          "tick": 18,
+          "id": "superheroes:blue_flame",
+          "pos": "8.500,-59.362,10.188",
+          "diagnostics": []
+        },
+        {
+          "tick": 19,
+          "id": "minecraft:end_rod",
+          "pos": "8.500,-59.169,10.138",
           "diagnostics": []
         },
         {
           "tick": 21,
+          "id": "minecraft:entity_effect",
+          "pos": "10.000,-60.000,12.000",
+          "diagnostics": []
+        },
+        {
+          "tick": 21,
+          "id": "minecraft:enchant",
+          "pos": "10.000,-60.000,12.000",
+          "diagnostics": []
+        },
+        {
+          "tick": 22,
+          "id": "superheroes:blue_flame",
+          "pos": "10.766,-59.362,10.357",
+          "diagnostics": []
+        },
+        {
+          "tick": 23,
           "id": "minecraft:end_rod",
-          "pos": "8.500,-56.600,8.500",
+          "pos": "10.787,-59.169,10.312",
+          "diagnostics": []
+        },
+        {
+          "tick": 24,
+          "id": "minecraft:entity_effect",
+          "pos": "10.000,-60.000,12.000",
+          "diagnostics": []
+        },
+        {
+          "tick": 26,
+          "id": "minecraft:enchant",
+          "pos": "10.000,-60.000,12.000",
+          "diagnostics": []
+        },
+        {
+          "tick": 26,
+          "id": "superheroes:blue_flame",
+          "pos": "10.766,-59.362,10.357",
+          "diagnostics": []
+        },
+        {
+          "tick": 27,
+          "id": "minecraft:entity_effect",
+          "pos": "10.000,-60.000,12.000",
+          "diagnostics": []
+        },
+        {
+          "tick": 27,
+          "id": "minecraft:end_rod",
+          "pos": "10.787,-59.169,10.312",
           "diagnostics": []
         },
         {
           "tick": 30,
-          "id": "minecraft:sonic_boom",
-          "pos": "8.500,-56.800,8.500",
+          "id": "minecraft:entity_effect",
+          "pos": "10.000,-60.000,12.000",
+          "diagnostics": []
+        },
+        {
+          "tick": 30,
+          "id": "superheroes:blue_flame",
+          "pos": "10.766,-59.362,10.357",
+          "diagnostics": []
+        },
+        {
+          "tick": 31,
+          "id": "minecraft:enchant",
+          "pos": "10.000,-60.000,12.000",
+          "diagnostics": []
+        },
+        {
+          "tick": 31,
+          "id": "minecraft:end_rod",
+          "pos": "10.787,-59.169,10.312",
           "diagnostics": []
         },
         {
           "tick": 33,
+          "id": "minecraft:entity_effect",
+          "pos": "10.000,-60.000,12.000",
+          "diagnostics": []
+        },
+        {
+          "tick": 34,
+          "id": "superheroes:blue_flame",
+          "pos": "10.766,-59.362,10.357",
+          "diagnostics": []
+        },
+        {
+          "tick": 35,
           "id": "minecraft:end_rod",
-          "pos": "8.500,-56.600,8.500",
+          "pos": "10.787,-59.169,10.312",
+          "diagnostics": []
+        },
+        {
+          "tick": 36,
+          "id": "minecraft:entity_effect",
+          "pos": "10.000,-60.000,12.000",
+          "diagnostics": []
+        },
+        {
+          "tick": 36,
+          "id": "minecraft:enchant",
+          "pos": "10.000,-60.000,12.000",
+          "diagnostics": []
+        },
+        {
+          "tick": 38,
+          "id": "superheroes:blue_flame",
+          "pos": "10.766,-59.362,10.357",
+          "diagnostics": []
+        },
+        {
+          "tick": 39,
+          "id": "minecraft:entity_effect",
+          "pos": "10.000,-60.000,12.000",
+          "diagnostics": []
+        },
+        {
+          "tick": 39,
+          "id": "minecraft:end_rod",
+          "pos": "10.787,-59.169,10.312",
           "diagnostics": []
         }
       ],
       "frames": [
-        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/80_follow_beam__threequarter__t20.png",
-        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/44_follow_beam__threequarter__t9.png",
-        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/127_follow_beam__threequarter__t34.png"
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/137_following_aura__front__t32.png",
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/68_following_aura__front__t14.png",
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/108_following_aura__front__t24.png",
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/37_following_aura__front__t6.png"
       ]
     },
-    "side": {
-      "camera": "5.00,-56.60,8.50,yaw\u003d-90.0,pitch\u003d14.4",
-      "spawned": "91",
-      "peak_alive": "60",
-      "alive_at_end": "7",
-      "first_visible_tick": "1",
-      "bounds_min": "-0.100,-60.000,-0.100",
-      "bounds_max": "8.910,0.200,9.218",
+    "threequarter": {
+      "camera": "5.70,-55.60,11.30,yaw\u003d-135.0,pitch\u003d25.6",
+      "spawned": "540",
+      "peak_alive": "83",
+      "alive_at_end": "72",
+      "first_visible_tick": "0",
+      "bounds_min": "4.822,-60.604,9.772",
+      "bounds_max": "9.092,-55.490,12.212",
       "steps": [
         {
-          "tick": 2,
-          "id": "minecraft:dust",
-          "pos": "8.500,-57.200,8.500",
+          "tick": 0,
+          "id": "minecraft:entity_effect",
+          "pos": "5.700,-57.193,11.300",
           "diagnostics": []
         },
         {
-          "tick": 4,
-          "id": "superheroes:homelander_roar_wave",
-          "pos": "7.344,-60.125,8.500",
-          "diagnostics": [
-            "spawner: quasar superheroes:homelander_roar_wave forceSpawn\u003dtrue"
-          ]
+          "tick": 1,
+          "id": "minecraft:enchant",
+          "pos": "5.700,-58.946,11.300",
+          "diagnostics": []
         },
         {
-          "tick": 8,
-          "id": "minecraft:vibration",
-          "pos": "6.229,-59.625,8.500",
+          "tick": 2,
+          "id": "superheroes:blue_flame",
+          "pos": "6.822,-59.696,10.178",
+          "diagnostics": []
+        },
+        {
+          "tick": 3,
+          "id": "minecraft:entity_effect",
+          "pos": "5.700,-60.000,11.300",
+          "diagnostics": []
+        },
+        {
+          "tick": 3,
+          "id": "minecraft:end_rod",
+          "pos": "6.883,-59.516,10.117",
+          "diagnostics": []
+        },
+        {
+          "tick": 6,
+          "id": "minecraft:entity_effect",
+          "pos": "5.700,-60.000,11.300",
+          "diagnostics": []
+        },
+        {
+          "tick": 6,
+          "id": "minecraft:enchant",
+          "pos": "5.700,-60.000,11.300",
+          "diagnostics": []
+        },
+        {
+          "tick": 6,
+          "id": "superheroes:blue_flame",
+          "pos": "6.822,-59.696,10.178",
+          "diagnostics": []
+        },
+        {
+          "tick": 7,
+          "id": "minecraft:end_rod",
+          "pos": "6.883,-59.516,10.117",
+          "diagnostics": []
+        },
+        {
+          "tick": 9,
+          "id": "minecraft:entity_effect",
+          "pos": "5.700,-60.000,11.300",
           "diagnostics": []
         },
         {
           "tick": 10,
-          "id": "vfxlab:laser_beam",
-          "pos": "5.000,-58.380,8.500",
+          "id": "superheroes:blue_flame",
+          "pos": "6.822,-59.696,10.178",
+          "diagnostics": []
+        },
+        {
+          "tick": 11,
+          "id": "minecraft:enchant",
+          "pos": "5.700,-60.000,11.300",
+          "diagnostics": []
+        },
+        {
+          "tick": 11,
+          "id": "minecraft:end_rod",
+          "pos": "6.883,-59.516,10.117",
+          "diagnostics": []
+        },
+        {
+          "tick": 12,
+          "id": "minecraft:entity_effect",
+          "pos": "5.700,-60.000,11.300",
+          "diagnostics": []
+        },
+        {
+          "tick": 14,
+          "id": "superheroes:blue_flame",
+          "pos": "6.822,-59.696,10.178",
+          "diagnostics": []
+        },
+        {
+          "tick": 15,
+          "id": "minecraft:entity_effect",
+          "pos": "5.700,-60.000,11.300",
+          "diagnostics": []
+        },
+        {
+          "tick": 15,
+          "id": "minecraft:end_rod",
+          "pos": "6.883,-59.516,10.117",
+          "diagnostics": []
+        },
+        {
+          "tick": 16,
+          "id": "minecraft:enchant",
+          "pos": "5.700,-60.000,11.300",
           "diagnostics": []
         },
         {
           "tick": 18,
-          "id": "minecraft:sonic_boom",
-          "pos": "8.500,-56.800,8.500",
+          "id": "minecraft:entity_effect",
+          "pos": "5.700,-60.000,11.300",
+          "diagnostics": []
+        },
+        {
+          "tick": 18,
+          "id": "superheroes:blue_flame",
+          "pos": "6.822,-59.696,10.178",
+          "diagnostics": []
+        },
+        {
+          "tick": 19,
+          "id": "minecraft:end_rod",
+          "pos": "6.883,-59.516,10.117",
           "diagnostics": []
         },
         {
           "tick": 21,
+          "id": "minecraft:entity_effect",
+          "pos": "7.200,-60.000,11.300",
+          "diagnostics": []
+        },
+        {
+          "tick": 21,
+          "id": "minecraft:enchant",
+          "pos": "7.200,-60.000,11.300",
+          "diagnostics": []
+        },
+        {
+          "tick": 22,
+          "id": "superheroes:blue_flame",
+          "pos": "8.691,-59.696,10.757",
+          "diagnostics": []
+        },
+        {
+          "tick": 23,
           "id": "minecraft:end_rod",
-          "pos": "8.500,-56.600,8.500",
+          "pos": "8.772,-59.516,10.728",
+          "diagnostics": []
+        },
+        {
+          "tick": 24,
+          "id": "minecraft:entity_effect",
+          "pos": "7.200,-60.000,11.300",
+          "diagnostics": []
+        },
+        {
+          "tick": 26,
+          "id": "minecraft:enchant",
+          "pos": "7.200,-60.000,11.300",
+          "diagnostics": []
+        },
+        {
+          "tick": 26,
+          "id": "superheroes:blue_flame",
+          "pos": "8.691,-59.696,10.757",
+          "diagnostics": []
+        },
+        {
+          "tick": 27,
+          "id": "minecraft:entity_effect",
+          "pos": "7.200,-60.000,11.300",
+          "diagnostics": []
+        },
+        {
+          "tick": 27,
+          "id": "minecraft:end_rod",
+          "pos": "8.772,-59.516,10.728",
           "diagnostics": []
         },
         {
           "tick": 30,
-          "id": "minecraft:sonic_boom",
-          "pos": "8.500,-56.800,8.500",
+          "id": "minecraft:entity_effect",
+          "pos": "7.200,-60.000,11.300",
+          "diagnostics": []
+        },
+        {
+          "tick": 30,
+          "id": "superheroes:blue_flame",
+          "pos": "8.691,-59.696,10.757",
+          "diagnostics": []
+        },
+        {
+          "tick": 31,
+          "id": "minecraft:enchant",
+          "pos": "7.200,-60.000,11.300",
+          "diagnostics": []
+        },
+        {
+          "tick": 31,
+          "id": "minecraft:end_rod",
+          "pos": "8.772,-59.516,10.728",
           "diagnostics": []
         },
         {
           "tick": 33,
+          "id": "minecraft:entity_effect",
+          "pos": "7.200,-60.000,11.300",
+          "diagnostics": []
+        },
+        {
+          "tick": 34,
+          "id": "superheroes:blue_flame",
+          "pos": "8.691,-59.696,10.757",
+          "diagnostics": []
+        },
+        {
+          "tick": 35,
           "id": "minecraft:end_rod",
-          "pos": "8.500,-56.600,8.500",
+          "pos": "8.772,-59.516,10.728",
+          "diagnostics": []
+        },
+        {
+          "tick": 36,
+          "id": "minecraft:entity_effect",
+          "pos": "7.200,-60.000,11.300",
+          "diagnostics": []
+        },
+        {
+          "tick": 36,
+          "id": "minecraft:enchant",
+          "pos": "7.200,-60.000,11.300",
+          "diagnostics": []
+        },
+        {
+          "tick": 38,
+          "id": "superheroes:blue_flame",
+          "pos": "8.691,-59.696,10.757",
+          "diagnostics": []
+        },
+        {
+          "tick": 39,
+          "id": "minecraft:entity_effect",
+          "pos": "7.200,-60.000,11.300",
+          "diagnostics": []
+        },
+        {
+          "tick": 39,
+          "id": "minecraft:end_rod",
+          "pos": "8.772,-59.516,10.728",
           "diagnostics": []
         }
       ],
       "frames": [
-        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/199_follow_beam__side__t9.png",
-        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/282_follow_beam__side__t34.png",
-        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/235_follow_beam__side__t20.png"
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/196_following_aura__threequarter__t6.png",
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/296_following_aura__threequarter__t32.png",
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/267_following_aura__threequarter__t24.png",
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/227_following_aura__threequarter__t14.png"
       ]
     }
   },
-  "name": "follow_beam",
-  "duration": 46,
-  "step_count": 8
+  "name": "following_aura",
+  "duration": 40,
+  "step_count": 42
 }

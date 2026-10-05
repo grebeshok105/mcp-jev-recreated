@@ -1,9 +1,9 @@
-========= LDLib2 UI test run 35320_61365db6 =========
+========= LDLib2 UI test run 24206_30fc6a55 =========
 selection : vfxlab.4_scene
 status    : PASS
 scenarios : 1/1 passed
 checks    : 0/0 passed
-steps     : 321
-duration  : 37060 ms
+steps     : 329
+duration  : 32834 ms
 
-[ok  ] vfxlab.4_scene (28192 ms)
+[ok  ] vfxlab.4_scene (25517 ms)
