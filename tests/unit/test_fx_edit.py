@@ -88,12 +88,16 @@ def test_inspect_burst_payload_fields():
 # ------------------------------------------------------------------ ops
 
 def _fresh_clone(tmp_path, src, new, monkeypatch):
+    import shutil
+    real_src = fx_edit.FX_SRC_DIR
     monkeypatch.setattr(fx_edit, "FX_SRC_DIR", str(tmp_path))
     monkeypatch.setattr(fx_edit, "FX_RUNTIME_DIR", str(tmp_path / "rt"))
+    monkeypatch.setattr(fx_edit, "PROVENANCE_DIR", str(tmp_path / "prov"))
+    monkeypatch.setattr(fx_edit, "CATALOG", str(tmp_path / "catalog.json"))
     os.makedirs(tmp_path / "vfxlab/fx", exist_ok=True)
-    import shutil
     for f in FIXTURES:
-        shutil.copyfile(_path(f), str(tmp_path / "vfxlab/fx" / f"{f}.fx"))
+        shutil.copyfile(os.path.join(real_src, "vfxlab/fx", f"{f}.fx"),
+                        str(tmp_path / "vfxlab/fx" / f"{f}.fx"))
     return fx_edit.clone_fx(src, new)
 
 
