@@ -1,0 +1,4 @@
+interface:
+  display_name: "vfxlab · Pipeline"
+  short_description: "vfx_find/preview, капчуры, каталог, eval, jevlab-mcp"
+  default_prompt: "Используй $vfxlab-pipeline для работы с поиском и превью эффектов, прогонов capture/eval, пересборки data/catalog.json и сервера jevlab-mcp."

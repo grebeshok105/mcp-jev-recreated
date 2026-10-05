@@ -1,0 +1,4 @@
+interface:
+  display_name: "vfxlab · Scenes"
+  short_description: "Сцены grammar v2: якоря, follow, треки, refs, playback"
+  default_prompt: "Используй $vfxlab-scenes для написания и доводки .scene.json спеков и их проигрывания в реальном клиенте через vfx_scene_validate/plan/play."

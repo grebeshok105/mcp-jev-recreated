@@ -1,0 +1,4 @@
+interface:
+  display_name: "vfxlab · Use"
+  short_description: "Оркестратор vfxlab: роутинг, pre-flight, правила честности"
+  default_prompt: "Используй $vfxlab-use перед любыми вызовами vfx_* MCP-инструментов или командами пайплайна jevlab, затем загрузи нужные саб-скиллы из набора."
