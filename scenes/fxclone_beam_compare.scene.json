@@ -1,0 +1,48 @@
+{
+  "name": "fxclone_beam_compare",
+  "duration": 30,
+  "frames": [
+    10,
+    25
+  ],
+  "scene": {
+    "pos": [
+      8.5,
+      1.0,
+      8.5
+    ],
+    "time": 6000,
+    "weather": "clear"
+  },
+  "camera": {
+    "angles": [
+      "front",
+      "threequarter",
+      "top"
+    ]
+  },
+  "steps": [
+    {
+      "tick": 0,
+      "id": "vfxlab:laser_beam",
+      "name": "orig",
+      "anchor": "scene",
+      "pos": [
+        -3.0,
+        0.4,
+        -1.0
+      ]
+    },
+    {
+      "tick": 0,
+      "id": "vfxlab:laser_beam_red",
+      "name": "clone",
+      "anchor": "scene",
+      "pos": [
+        1.0,
+        0.4,
+        -1.0
+      ]
+    }
+  ]
+}

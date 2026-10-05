@@ -1,0 +1,34 @@
+{
+  "source": "vfxlab:laser_beam",
+  "cloned_at": 1791200667.7768438,
+  "ops": [
+    {
+      "op": "scalar",
+      "emitter": "0",
+      "field": "width",
+      "value": 0.5
+    },
+    {
+      "op": "color",
+      "emitter": "0",
+      "field": "color",
+      "value": "#FF0000"
+    },
+    {
+      "op": "scalar",
+      "emitter": "0",
+      "field": "end",
+      "value": [
+        2.0,
+        0.5,
+        1.0
+      ]
+    },
+    {
+      "op": "toggle",
+      "emitter": "0",
+      "field": "lights",
+      "value": false
+    }
+  ]
+}

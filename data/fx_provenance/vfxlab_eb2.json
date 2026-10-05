@@ -1,0 +1,12 @@
+{
+  "source": "vfxlab:ember_ring_burst",
+  "cloned_at": 1791200667.7907615,
+  "ops": [
+    {
+      "op": "scalar",
+      "emitter": "0",
+      "field": "emission.bursts.payload[0].probability",
+      "value": 0.0
+    }
+  ]
+}

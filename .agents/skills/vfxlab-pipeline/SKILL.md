@@ -9,7 +9,7 @@ Commands, data artifacts, and measured facts for the two pipeline surfaces: **qu
 
 ## Bootstrap
 
-This is one of 3 vfxlab skills. If you have not already loaded them this session, load the other two now — `vfxlab-use` (orchestration + safety rules) and `vfxlab-scenes` (scene authoring/playback) — then continue.
+This is one of 4 vfxlab skills. If you have not already loaded them this session, load the other three now — `vfxlab-use` (orchestration + safety rules), `vfxlab-scenes` (scene authoring/playback) and `vfxlab-fx-edit` (cloning/patching .fx resources) — then continue.
 
 ## Setup
 
@@ -28,6 +28,7 @@ Client-side work also needs Java 21 (`~/.jdks/temurin-21` or `$VFXLAB_JAVA_HOME`
 | `vfx_find(query, top_k)` / `jevlab find "<q>"` | live Jev ranking → top-k `{rank, id, source, kind, noul_relevance, choice_probability}` |
 | `vfx_inspect(id)` | full passport — every layer (FAT view; not for ranking) |
 | `vfx_preview(id)` | contact-sheet + per-angle frame paths + merged visual semantics |
+| `vfx_fx_inspect` / `clone` / `patch` / `validate` / `register` | narrow Photon `.fx` customization lane — see `vfxlab-fx-edit` |
 | `jevlab eval` | 12 Codex ability cases → recall@10, hit@1/3/10, MRR |
 
 Jev semantics (verified): stage 1 = one `noul` independent-relevance question per candidate (batched, comparable); stage 2 = a single `choice` question over the stage-2 pool — probabilities are meaningful **only inside that one question**, never across batches. Jev is nondeterministic: ±1 expected id per run; judge changes over multiple runs, not one.

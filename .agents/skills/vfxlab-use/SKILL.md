@@ -9,7 +9,7 @@ Orchestrator for the vfxlab system — VFX Knowledge Base + Jev selector + real-
 
 ## Bootstrap
 
-This is one of 3 vfxlab skills. If you have not already loaded them this session, load the other two now — `vfxlab-scenes` and `vfxlab-pipeline` — then continue. The same rule is stated at the top of each skill; already-loaded skills do not need re-loading.
+This is one of 4 vfxlab skills. If you have not already loaded them this session, load the other three now — `vfxlab-scenes`, `vfxlab-pipeline` and `vfxlab-fx-edit` — then continue. The same rule is stated at the top of each skill; already-loaded skills do not need re-loading.
 
 ## Rule
 
@@ -32,7 +32,10 @@ Pick by primary intent. When the task spans domains, load **all** relevant skill
 | Write/debug a `.scene.json`; anchors, directions, follow, tracks, repeat, refs, commands; run playback; read scene frames | `vfxlab-scenes` | resources not picked yet → `vfxlab-pipeline` (find/inspect/preview) |
 | "find an effect for X", rank candidates, inspect passports, preview captured frames, run evals | `vfxlab-pipeline` | results get staged → `vfxlab-scenes` |
 | Run captures, contact sheets, visual annotation passes, rebuild catalog, operate `jevlab-mcp` | `vfxlab-pipeline` | — |
+| Stock `.fx` is right but needs recolor/resize/retime or one emitter/layer off — clone + semantic patch, then back into scenes | `vfxlab-fx-edit` | choreography still open → `vfxlab-scenes` first |
 | "What is this repo / how does it fit together" | this skill + the `vfxlab-pipeline` reference tables | — |
+
+Routing rule for edits: try scene grammar before `.fx` edits. The editor only operates on an already-found suitable resource; a weak first scene is a choreography problem until proven otherwise. See `vfxlab-fx-edit` for the apply/do-not-apply checklist.
 
 ## Pre-flight checks
 

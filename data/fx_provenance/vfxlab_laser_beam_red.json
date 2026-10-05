@@ -1,0 +1,24 @@
+{
+  "source": "vfxlab:laser_beam",
+  "cloned_at": 1791199992.24532,
+  "ops": [
+    {
+      "op": "color",
+      "emitter": "0",
+      "field": "color",
+      "value": "#FF2222"
+    },
+    {
+      "op": "scalar",
+      "emitter": "0",
+      "field": "width",
+      "value": 0.35
+    },
+    {
+      "op": "scalar",
+      "emitter": "0",
+      "field": "duration",
+      "value": 60
+    }
+  ]
+}

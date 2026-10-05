@@ -185,6 +185,71 @@ def vfx_scene_play(scene: dict, timeout_s: int = 900) -> dict:
     return out
 
 
+# ------------------------------------------------------------------ fx edit
+# Narrow Photon .fx customization lane (scalar | color | toggle only).
+# Flow: vfx_fx_inspect -> vfx_fx_clone -> vfx_fx_patch -> vfx_fx_validate ->
+# vfx_fx_register -> normal find/inspect/preview/scene/play.
+
+from .fx_edit import (clone_fx, inspect_fx, patch_fx, register_fx,
+                      validate_fx)
+
+
+@mcp.tool()
+def vfx_fx_inspect(resource_id: str) -> dict:
+    """Normalized view of a Photon .fx resource: emitters, patchable scalar
+    fields (constant number functions, plain ints/floats, vec3s, enum
+    strings), color fields, and toggleable layers (_enable compounds).
+    Call before cloning — only 'patchable' entries accept vfx_fx_patch."""
+    return inspect_fx(resource_id)
+
+
+@mcp.tool()
+def vfx_fx_clone(source_id: str, new_id: str, ops: list | None = None) -> dict:
+    """Clone a Photon .fx to a new resource id; the original is never
+    touched. `ops` is an optional patch list applied at clone time:
+
+      {"op":"scalar","emitter":"0","field":"width","value":0.35}
+      {"op":"color","emitter":"0","field":"color","value":"#FF2222"}
+      {"op":"toggle","emitter":"0","field":"lights","value":false}
+      {"op":"toggle","emitter":"emitter:0","value":false}  # remove emitter
+
+    Emitter selects by index or name. Provenance (source + ops) is kept in
+    data/fx_provenance/. Call vfx_fx_register afterwards to expose the
+    clone to find/inspect/preview/scene/play."""
+    return clone_fx(source_id, new_id, ops)
+
+
+@mcp.tool()
+def vfx_fx_patch(resource_id: str, ops: list) -> dict:
+    """Apply semantic patch ops to an existing .fx (use on a clone, never a
+    stock resource — see vfx_fx_clone). Same op shape as vfx_fx_clone.
+    Refuses unknown fields and non-constant number functions instead of
+    guessing."""
+    return patch_fx(resource_id, ops)
+
+
+@mcp.tool()
+def vfx_fx_validate(resource_id: str) -> dict:
+    """Structural validation of an .fx resource: NBT reads, fxData.fxObjects
+    well-formed, known object/number-function types, transform ids unique.
+    errors vs warnings separated. Deep acceptance is proven by playback —
+    this gate catches corrupt structure before a run."""
+    return validate_fx(resource_id)
+
+
+@mcp.tool()
+def vfx_fx_register(resource_id: str) -> dict:
+    """Register a cloned .fx into the VFXLab catalog (data/catalog.json):
+    builds a passport (kind fx, ready_to_use) inheriting measured/visual
+    data from the source clone with fx_clone provenance. Afterwards the id
+    works in vfx_find/vfx_inspect/vfx_scene_* like any stock resource."""
+    out = register_fx(resource_id)
+    if out.get("ok"):
+        global _catalog_index
+        _catalog_index = None  # rebuild index so the clone is visible
+    return out
+
+
 def main() -> None:
     mcp.run()
 

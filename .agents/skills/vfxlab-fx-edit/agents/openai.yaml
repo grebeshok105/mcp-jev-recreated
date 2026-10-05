@@ -1,0 +1,4 @@
+interface:
+  display_name: "vfxlab · FX Edit"
+  short_description: "Клон и безопасный патч Photon .fx: цвет, скаляры, toggle слоёв"
+  default_prompt: "Используй $vfxlab-fx-edit для семантической кастомизации Photon .fx: vfx_fx_inspect → clone → patch (scalar/color/toggle) → validate → register, затем обычный VFXLab flow."

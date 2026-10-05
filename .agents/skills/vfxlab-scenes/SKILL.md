@@ -9,7 +9,7 @@ Author scene specs that stage catalog resources on one tick timeline and replay 
 
 ## Bootstrap
 
-This is one of 3 vfxlab skills. If you have not already loaded them this session, load the other two now — `vfxlab-use` (orchestration + safety rules) and `vfxlab-pipeline` (how to find/preview resource ids) — then continue.
+This is one of 4 vfxlab skills. If you have not already loaded them this session, load the other three now — `vfxlab-use` (orchestration + safety rules), `vfxlab-pipeline` (how to find/preview resource ids) and `vfxlab-fx-edit` (cloning/patching .fx resources) — then continue.
 
 ## One spec → one runtime
 

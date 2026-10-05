@@ -1,0 +1,12 @@
+{
+  "source": "vfxlab:laser_beam",
+  "cloned_at": 1791200667.787046,
+  "ops": [
+    {
+      "op": "color",
+      "emitter": "0",
+      "field": "color",
+      "value": "#00FF00"
+    }
+  ]
+}

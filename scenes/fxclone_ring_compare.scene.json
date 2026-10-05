@@ -1,0 +1,13 @@
+{
+  "name": "fxclone_ring_compare",
+  "duration": 20,
+  "frames": [6, 12],
+  "scene": {"pos": [8.5, 2.0, 8.5], "time": 6000, "weather": "clear"},
+  "camera": {"angles": ["front", "top"]},
+  "steps": [
+    {"tick": 0, "id": "vfxlab:ember_ring_burst", "name": "orig",
+     "anchor": "scene", "pos": [-1.5, 0, 0]},
+    {"tick": 0, "id": "vfxlab:ember_ring_burst_noburst", "name": "clone",
+     "anchor": "scene", "pos": [1.5, 0, 0]}
+  ]
+}
