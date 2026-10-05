@@ -1,0 +1,112 @@
+{
+ "version": 1,
+ "name": "roar_burst",
+ "scene": {
+  "pos": [
+   8.5,
+   2.0,
+   8.5
+  ],
+  "time": 6000,
+  "weather": "clear"
+ },
+ "camera": {
+  "angles": [
+   "front",
+   "top"
+  ]
+ },
+ "frames": [
+  3,
+  8,
+  20
+ ],
+ "duration": 30,
+ "steps": [
+  {
+   "at_tick": 2,
+   "pos": [
+    0.0,
+    -0.5,
+    0.0
+   ],
+   "shot": {
+    "id": "world_event_PARTICLES_DESTROY_BLOCK",
+    "kind": "level_event",
+    "event": 2001,
+    "data_block": "minecraft:stone",
+    "options": {},
+    "resource_id": "minecraft:world_event/PARTICLES_DESTROY_BLOCK",
+    "stop_after": true
+   }
+  },
+  {
+   "at_tick": 3,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:sonic_boom",
+    "kind": "particle",
+    "options": {
+     "count": 1,
+     "delta": 0.4
+    },
+    "stop_after": true
+   }
+  },
+  {
+   "at_tick": 5,
+   "pos": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "shot": {
+    "id": "superheroes:homelander_roar_dust",
+    "kind": "quasar_emitter",
+    "options": {},
+    "stop_after": true
+   }
+  },
+  {
+   "at_tick": 8,
+   "pos": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "shot": {
+    "id": "vfxlab:laser_beam",
+    "kind": "fx",
+    "options": {},
+    "stop_after": true
+   }
+  },
+  {
+   "at_tick": 10,
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "shot": {
+    "id": "minecraft:dust",
+    "kind": "particle",
+    "options": {
+     "count": 30,
+     "color": [
+      0.2,
+      0.6,
+      1.0
+     ],
+     "scale": 2,
+     "delta": 0.4
+    },
+    "stop_after": true
+   }
+  }
+ ]
+}

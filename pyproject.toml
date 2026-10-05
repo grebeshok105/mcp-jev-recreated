@@ -15,9 +15,13 @@ dependencies = [
 dev = [
     "pytest>=8.0",
 ]
+mcp = [
+    "mcp>=2.0",
+]
 
 [project.scripts]
 jevlab = "jevlab.cli:main"
+jevlab-mcp = "jevlab.mcp_server:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

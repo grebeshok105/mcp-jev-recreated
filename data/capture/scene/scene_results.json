@@ -1,0 +1,93 @@
+{
+  "angles": {
+    "front": {
+      "camera": "8.50,-56.60,12.00,yaw\u003d-180.0,pitch\u003d14.4",
+      "spawned": "137",
+      "peak_alive": "104",
+      "alive_at_end": "2",
+      "first_visible_tick": "1",
+      "bounds_min": "-0.100,-60.000,-0.100",
+      "bounds_max": "10.459,0.200,12.879",
+      "steps": [
+        {
+          "tick": 2,
+          "id": "world_event_PARTICLES_DESTROY_BLOCK",
+          "diagnostics": []
+        },
+        {
+          "tick": 3,
+          "id": "minecraft:sonic_boom",
+          "diagnostics": []
+        },
+        {
+          "tick": 5,
+          "id": "superheroes:homelander_roar_dust",
+          "diagnostics": [
+            "spawner: quasar superheroes:homelander_roar_dust forceSpawn\u003dtrue"
+          ]
+        },
+        {
+          "tick": 8,
+          "id": "vfxlab:laser_beam",
+          "diagnostics": []
+        },
+        {
+          "tick": 10,
+          "id": "minecraft:dust",
+          "diagnostics": []
+        }
+      ],
+      "frames": [
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/35_roar_burst__front__t8.png",
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/22_roar_burst__front__t3.png",
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/61_roar_burst__front__t20.png"
+      ]
+    },
+    "top": {
+      "camera": "8.50,-53.50,8.50,yaw\u003d-0.0,pitch\u003d90.0",
+      "spawned": "157",
+      "peak_alive": "92",
+      "alive_at_end": "3",
+      "first_visible_tick": "1",
+      "bounds_min": "-0.100,-60.000,-0.100",
+      "bounds_max": "10.037,0.200,9.764",
+      "steps": [
+        {
+          "tick": 2,
+          "id": "world_event_PARTICLES_DESTROY_BLOCK",
+          "diagnostics": []
+        },
+        {
+          "tick": 3,
+          "id": "minecraft:sonic_boom",
+          "diagnostics": []
+        },
+        {
+          "tick": 5,
+          "id": "superheroes:homelander_roar_dust",
+          "diagnostics": [
+            "spawner: quasar superheroes:homelander_roar_dust forceSpawn\u003dtrue"
+          ]
+        },
+        {
+          "tick": 8,
+          "id": "vfxlab:laser_beam",
+          "diagnostics": []
+        },
+        {
+          "tick": 10,
+          "id": "minecraft:dust",
+          "diagnostics": []
+        }
+      ],
+      "frames": [
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/95_roar_burst__top__t3.png",
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/134_roar_burst__top__t20.png",
+        "/home/ubuntu/repos/mcp-jev-recreated/data/uitest-report/screenshots/vfxlab.4_scene/108_roar_burst__top__t8.png"
+      ]
+    }
+  },
+  "name": "roar_burst",
+  "duration": 30,
+  "step_count": 5
+}

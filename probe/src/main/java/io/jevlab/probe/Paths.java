@@ -40,6 +40,18 @@ public final class Paths {
         return outDir().resolve("fixtures");
     }
 
+    public static Path sceneDir() {
+        return outDir().resolve("scene");
+    }
+
+    public static Path sceneFile() {
+        return sceneDir().resolve("scene_plan.json");
+    }
+
+    public static Path sceneResultsFile() {
+        return sceneDir().resolve("scene_results.json");
+    }
+
     public static Path diagnosticsFile() {
         return outDir().resolve("probe_diagnostics.json");
     }

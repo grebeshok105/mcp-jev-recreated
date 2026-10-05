@@ -42,7 +42,9 @@ full measured enrichment + reliability-gated visual semantics).
 | `src/jevlab/ranking/` | two-stage selector |
 | `src/jevlab/find_effects.py` | end-to-end query → top-K with query cache |
 | `src/jevlab/evals/` | Codex ability eval harness |
-| `probe/` | Fabric probe mod — registry dump + capture harness (ldlib2 uitest) |
+| `src/jevlab/scene/` | scene spec → validation → probe playback plan → real-client run |
+| `src/jevlab/mcp_server.py` | stdio MCP server: find/inspect/preview/scene tools |
+| `probe/` | Fabric probe mod — registry dump + capture harness + scene playback (ldlib2 uitest) |
 | `data/` | committed artifacts: dumps, measurements, contact sheets, catalog, evals |
 | `docs/` | architecture, evaluation, research inventories |
 
@@ -65,12 +67,41 @@ python -m jevlab.find_effects "a cold blue beam that holds for a second" \
 # run the Codex ability eval (12 real ability descriptions)
 python -m jevlab.evals.run_eval --out data/evals/results_gated_1212.json \
     --no-query-cache
+
+# MCP server (pip install -e ".[mcp]")
+jevlab-mcp   # stdio: vfx_find / vfx_inspect / vfx_preview /
+             #          vfx_scene_validate / vfx_scene_plan / vfx_scene_play
 ```
+
+### Scene playback
+
+A scene spec stages several catalog resources on one tick timeline; the
+probe replays it exactly in the real client and returns frames + per-angle
+particle measurements.
+
+```json
+{"name": "demo", "duration": 30, "frames": [3, 8, 20],
+ "camera": {"angles": ["front", "top"]},
+ "steps": [
+   {"tick": 2, "id": "minecraft:world_event/PARTICLES_DESTROY_BLOCK", "pos": [0,-0.5,0]},
+   {"tick": 3, "id": "minecraft:sonic_boom"},
+   {"tick": 5, "id": "superheroes:homelander_roar_dust", "pos": [0,0,-1]},
+   {"tick": 10, "id": "minecraft:dust", "options": {"color": [0.2,0.6,1.0], "scale": 2}}
+ ]}
+```
+
+`vfx_scene_play` (or `jevlab.scene.play.play_scene`) compiles it against the
+catalog — unknown ids, non-spawnable kinds and missing required parameters
+are hard errors; `requires_water` / `offscreen` capture history becomes
+warnings — writes `data/capture/scene/scene_plan.json`, runs
+`runUitest -Pvfxlab.uitestSelection=vfxlab.4_scene` under xvfb (needs Java
+21 at `~/.jdks/temurin-21` or `$VFXLAB_JAVA_HOME`), and returns the frame
+paths + spawned counts per angle.
 
 ## Tests
 
 ```bash
-pytest tests/unit          # 38 tests, offline, seconds
+pytest tests/unit          # 52 tests, offline, seconds
 pytest tests/ -m typesafe  # 2 live API tests, needs TYPESAFE_API_KEY
 ```
 
@@ -91,7 +122,10 @@ pytest tests/ -m typesafe  # 2 live API tests, needs TYPESAFE_API_KEY
   hit@10 = 0.92, MRR = 0.750, ~1.3 s/query, ~130k input tokens/query.
   Full attribution matrix (gating recovered the −0.18 visual regression
   and doubled hit@1) in docs/evaluation.md.
-- 40 tests green (38 offline + 2 live)
+- scene lane (verified live): demo scene `roar_burst` — 5 steps across 4
+  resource kinds replayed twice (front+top), 137/157 spawned particles,
+  6 frames captured, ~41 s wall-clock end-to-end
+- 54 tests green (52 offline + 2 live)
 
 See `docs/architecture.md` for design, `docs/evaluation.md` for full eval
 results and known limits.

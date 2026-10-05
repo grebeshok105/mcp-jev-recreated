@@ -1,0 +1,13 @@
+{
+ "name": "roar_burst",
+ "duration": 30,
+ "frames": [3, 8, 20],
+ "camera": {"angles": ["front", "top"]},
+ "steps": [
+  {"tick": 2, "id": "minecraft:world_event/PARTICLES_DESTROY_BLOCK", "pos": [0, -0.5, 0]},
+  {"tick": 3, "id": "minecraft:sonic_boom"},
+  {"tick": 5, "id": "superheroes:homelander_roar_dust", "pos": [0, 0, -1.0]},
+  {"tick": 8, "id": "vfxlab:laser_beam", "pos": [0, 0, 1.0]},
+  {"tick": 10, "id": "minecraft:dust", "options": {"color": [0.2, 0.6, 1.0], "scale": 2}}
+ ]
+}

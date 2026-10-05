@@ -106,10 +106,42 @@ visual changes invalidate) + ranker params (`top_k`, `stage2_pool`,
 `batch_size`). `--no-query-cache` bypasses read+write. A changed catalog or
 changed rank params misses the cache automatically.
 
+### 8. Scene lane (`src/jevlab/scene/`)
+
+Stages several catalog resources on one tick timeline and replays them
+inside the real client.
+
+- `spec.py` — validates a scene spec (`steps:[{tick,id,pos,options,
+  stop_after}]`, `camera.angles`, `duration`, `frames`) against the catalog:
+  unknown ids / non-spawnable kinds / unresolvable required parameters are
+  hard errors; `environment_mismatch` and `capture_failed` passports become
+  warnings, not fatal.
+- `compile.py` — normalized spec → `scene_plan.json`. Shot specs come from
+  `spawn_specs.shot_spec_for` — the same resource→shot mapping
+  `tools/gen_capture_plan.py` uses, so a scene step spawns exactly like the
+  catalog capture; user options merge over tuned defaults; params are
+  validated against `parameter_schema` post-merge.
+- `play.py` — writes `data/capture/scene/scene_plan.json`, launches
+  `runUitest -Pvfxlab.uitestSelection=vfxlab.4_scene` (xvfb, Java 21), and
+  reads back `scene_results.json` + the frame index.
+
+### 9. MCP server (`src/jevlab/mcp_server.py`, optional `mcp` dep)
+
+stdio MCPServer exposing the lane boundaries as tools:
+
+| tool | wraps |
+|---|---|
+| `vfx_find` | `find_effects.find` — live Jev top-k |
+| `vfx_inspect` | full passport from `data/catalog.json` |
+| `vfx_preview` | contact-sheet URL + per-angle frames + visual semantics |
+| `vfx_scene_validate` | `validate_scene` |
+| `vfx_scene_plan` | `compile_scene` |
+| `vfx_scene_play` | `play_scene` — real playback → frames + measurements |
+
 ## Probe mod (`probe/`)
 
 Fabric mod inside the LDLib2 dev environment. `runUitest` (xvfb) runs
-`group:vfxlab`:
+`group:vfxlab` (override with `-Pvfxlab.uitestSelection=<selector>`):
 
 - `RegistryDump` → `particle_types.json`, `particle_providers.json`,
   `world_events`, photon asset listings, quasar module scans.
@@ -118,6 +150,12 @@ Fabric mod inside the LDLib2 dev environment. `runUitest` (xvfb) runs
   and ticks via the runner's own `b.screenshot()` (the only capture that
   includes the particle pass), measure live counts through the
   `ParticleEngine` mixin + quasar manager introspection.
+- `SceneRun` (`vfxlab.4_scene`) replays `scene_plan.json`: one camera
+  teleport per angle, then the tick timeline — each step's shot spawns at
+  its `at_tick` on `anchor + pos`, frames screenshot at the requested
+  ticks, all `stop_after` handles are torn down per angle. Deterministic
+  (fixed tick schedule), so every angle sees the identical timeline. Writes
+  `scene_results.json` + `scene_frames_index.json`.
 
 ## Failure design
 

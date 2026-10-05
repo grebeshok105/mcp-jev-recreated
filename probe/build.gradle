@@ -45,9 +45,11 @@ loom {
             client()
             name 'vfxlab-uitest'
             ideConfigGenerated false
-            // Run all probe scenarios (vfxlab.1_dump, vfxlab.2_fixturegen, vfxlab.3_capture).
-            // Selection syntax: all|*|group:<g>|tag:<t>|mod:<m>|regex:<re>|<exact name>.
-            property 'ldlib2.uitest.run', 'group:vfxlab'
+            // Run all probe scenarios (vfxlab.1_dump, vfxlab.2_fixturegen, vfxlab.3_capture,
+            // vfxlab.4_scene). Selection syntax: all|*|group:<g>|tag:<t>|mod:<m>|regex:<re>|<exact name>.
+            // Override with -Pvfxlab.uitestSelection=<selector> (e.g. vfxlab.4_scene for
+            // the scene playback lane alone).
+            property 'ldlib2.uitest.run', providers.gradleProperty('vfxlab.uitestSelection').orElse('group:vfxlab').get()
             property 'ldlib2.uitest.out', layout.projectDirectory.dir('../data/uitest-report').asFile.absolutePath
             property 'ldlib2.uitest.window', '1280,720'
             property 'ldlib2.uitest.watchdogSec', '5400'
