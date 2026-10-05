@@ -10,6 +10,12 @@ Tools:
   vfx_scene_play(scene_json)      — compile + exact runtime playback in the
                                     real client -> frames + measurements
 
+  vfx_fx_inspect(id)              — normalized emitter view of a Photon .fx
+  vfx_fx_clone(src, new_id, ops)  — clone .fx (source untouched) + optional ops
+  vfx_fx_patch(id, ops)           — semantic ops on a clone (scalar/color/toggle)
+  vfx_fx_validate(id)             — structural gate: errors vs warnings
+  vfx_fx_register(id)             — catalog passport -> normal find/scene flow
+
 Env: TYPESAFE_API_KEY for vfx_find; repo layout must be intact (data/catalog.json,
 data/capture/...). Run: `python -m jevlab.mcp_server`.
 """
@@ -221,10 +227,11 @@ def vfx_fx_clone(source_id: str, new_id: str, ops: list | None = None) -> dict:
 
 @mcp.tool()
 def vfx_fx_patch(resource_id: str, ops: list) -> dict:
-    """Apply semantic patch ops to an existing .fx (use on a clone, never a
-    stock resource — see vfx_fx_clone). Same op shape as vfx_fx_clone.
-    Refuses unknown fields and non-constant number functions instead of
-    guessing."""
+    """Apply semantic patch ops to an existing .fx. Works only on clones
+    (resources that have fx-edit provenance) — stock fixtures are refused
+    so originals can never be mutated. Same op shape as vfx_fx_clone.
+    Refuses unknown fields, numfunc interiors and non-constant number
+    functions instead of guessing."""
     return patch_fx(resource_id, ops)
 
 

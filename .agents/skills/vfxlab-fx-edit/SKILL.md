@@ -34,9 +34,9 @@ Do NOT use the editor when:
 
 - **`vfx_fx_inspect(id)`** — normalized emitter view. Each emitter lists `fields` (path → `{kind, value, patchable}`) and `layers` (`_enable` feature compounds). Read this before patching: only `patchable` entries accept ops.
 - **`vfx_fx_clone(src, new_id, ops?)`** — writes a new `.fx` under `assets/<ns>/fx/` (src resources + runtime mirror), fresh transform uuids, provenance sidecar in `data/fx_provenance/`. The source is never mutated. `ops` may apply patches atomically at clone time.
-- **`vfx_fx_patch(id, ops)`** — apply ops to an existing resource. Use it on clones; never patch stock fixtures.
+- **`vfx_fx_patch(id, ops)`** — apply ops to an existing resource. **Enforced**: ids without clone provenance (i.e. stock fixtures) are refused, so an op can never touch an original.
 - **`vfx_fx_validate(id)`** — structural gate: NBT reads, `fxData.fxObjects` well-formed, known types, unique transform ids. `errors` block; `warnings` inform.
-- **`vfx_fx_register(id)`** — adds a catalog passport (`kind: fx`, `ready_to_use`, `source: fx-edit`) inheriting the source's factual/measured/visual data with `fx_clone` provenance. After this the id works everywhere stock ids do.
+- **`vfx_fx_register(id)`** — adds a catalog passport (`kind: fx`, `ready_to_use`, `source: fx-edit`) inheriting the source's factual/roles/capabilities with `fx_clone` provenance. `measured`/`visual` are deliberately NOT copied — a patch can change exactly those, so the clone is marked `visual_status: inherited` (Jev hedges instead of asserting the source's look); re-capture promotes it to observed. After this the id works everywhere stock ids do.
 
 ## Op vocabulary (the whole supported set)
 
@@ -61,7 +61,9 @@ Do NOT use the editor when:
 2. **Register before use** — an unregistered clone exists on disk but scenes/Jev cannot see it.
 3. **Validate structurally, prove visually** — `fx_validate` catches corrupt structure; only a `vfx_scene_play` run proves Photon accepts and renders the change. Compare clone vs source frames side by side (spawn both in one scene a few blocks apart).
 4. **Provenance travels** — the provenance file + passport `fx_clone` block record source id, ops, and date. Keep them when copying clone workflows into docs.
-5. **Inherited passport data is the source's** — `measured`/`visual` on a clone describe the original capture, not the patch; re-capture if the difference matters to selection.
+5. **A clone does not claim the source's captured look** — `measured`/`visual` are not inherited; Jev sees `visual_status: inherited` and hedges. `vfx_fx_inspect` on the source + diagnostics on the clone tell the agent where the un-patched truth lives; re-capture when the patch changes selection-relevant look.
+6. **Paths are semantic, not arbitrary NBT** — `*.data.*` numfunc interiors, `_`-prefixed keys (`_enable`, `_parentId`), and transform ids are refused. Known enum fields are domain-checked (`renderer.layer: Opaque|Translucent`, `simulationSpace: Local|World`, `emissionMode: Exacting|Random`) and known scalars are bound-checked (`probability 0..1`, `interval/cycles >= 1`, `duration/count >= 0`) — the lane errors rather than writes a value Photon would choke on.
+7. **Ops are all-or-nothing per call** — if any op in a `patch` call errors, nothing is persisted.
 
 ## Known limits (by design)
 

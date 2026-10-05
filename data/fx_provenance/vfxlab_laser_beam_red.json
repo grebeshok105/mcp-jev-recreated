@@ -19,6 +19,25 @@
       "emitter": "0",
       "field": "duration",
       "value": 60
+    },
+    {
+      "op": "scalar",
+      "emitter": "0",
+      "field": "duration",
+      "value": 60
+    }
+  ],
+  "ops_history": [
+    {
+      "at": 1791204001.7469661,
+      "ops": [
+        {
+          "op": "scalar",
+          "emitter": "0",
+          "field": "duration",
+          "value": 60
+        }
+      ]
     }
   ]
 }

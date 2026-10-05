@@ -9,6 +9,7 @@ gzip header noise.
 from __future__ import annotations
 
 import gzip
+import os
 import struct
 from dataclasses import dataclass, field
 from typing import Any
@@ -39,9 +40,16 @@ _SCALAR_FMT = {
 
 @dataclass
 class Tag:
-    """A typed NBT value. `value` for compound = list[(name, Tag)] (ordered)."""
+    """A typed NBT value. `value` for compound = list[(name, Tag)] (ordered).
+
+    `elem_type` is meaningful only for TAG_LIST: Java stores the declared
+    element type even when the list is empty. Keeping it preserves the
+    byte shape of empty non-END lists; -1 = infer from elements (END when
+    empty, matching Photon output).
+    """
     type: int
     value: Any = None
+    elem_type: int = -1
 
     def get(self, name: str) -> "Tag | None":
         if self.type != TAG_COMPOUND:
@@ -89,7 +97,10 @@ class Reader:
 
     def read_str(self) -> str:
         n = self._read(">H")
-        return self._take(n).decode("utf-8", errors="replace")
+        # strict: MUTF-8 forms Java writes (overlong NUL, surrogate pairs)
+        # raise here instead of silently mangling — a decode that differs
+        # from Java's should be loud, not corrupt.
+        return self._take(n).decode("utf-8")
 
     def payload(self, t: int) -> Tag:
         if t in _SCALAR_FMT:
@@ -108,7 +119,7 @@ class Reader:
         if t == TAG_LIST:
             et = self.read_u8()
             n = self.read_i32()
-            return Tag(t, [self.payload(et) for _ in range(n)])
+            return Tag(t, [self.payload(et) for _ in range(n)], et)
         if t == TAG_COMPOUND:
             items: list[tuple[str, Tag]] = []
             while True:
@@ -129,6 +140,11 @@ class Reader:
 
 
 def _enc_str(s: str) -> bytes:
+    if "\x00" in s or any(ord(c) > 0xFFFF for c in s):
+        # Java writeUTF is modified UTF-8 (NUL and non-BMP encode
+        # differently); we cannot represent it faithfully — refuse.
+        raise ValueError("string not encodable as strict UTF-8 "
+                         "(NUL/non-BMP chars need MUTF-8)")
     b = s.encode("utf-8")
     return struct.pack(">H", len(b)) + b
 
@@ -148,7 +164,9 @@ def _enc_payload(tag: Tag) -> bytes:
         return struct.pack(">i", len(tag.value)) + b"".join(
             struct.pack(">q", v) for v in tag.value)
     if t == TAG_LIST:
-        et = tag.value[0].type if tag.value else TAG_END
+        et = tag.elem_type
+        if et < 0:
+            et = tag.value[0].type if tag.value else TAG_END
         return (struct.pack(">Bi", et, len(tag.value)) +
                 b"".join(_enc_payload(v) for v in tag.value))
     if t == TAG_COMPOUND:
@@ -176,5 +194,10 @@ def load_fx(path: str) -> tuple[str, Tag]:
 
 
 def save_fx(path: str, name: str, root: Tag) -> None:
-    with gzip.open(path, "wb") as f:
-        f.write(dumps(name, root))
+    # serialize fully BEFORE truncating the target (encode errors must
+    # leave the old file intact), then atomically rename into place.
+    raw = gzip.compress(dumps(name, root))
+    tmp = path + ".tmp"
+    with open(tmp, "wb") as f:
+        f.write(raw)
+    os.replace(tmp, path)

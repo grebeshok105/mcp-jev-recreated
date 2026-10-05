@@ -41,7 +41,7 @@ Routing rule for edits: try scene grammar before `.fx` edits. The editor only op
 
 Run before any pipeline operation:
 
-1. **Catalog present and fresh?** `data/catalog.json` — 4,430 passports, 205 answerable. Rebuild via `vfxlab-pipeline` if stale.
+1. **Catalog present and fresh?** `data/catalog.json` — 4,432 passports, 207 answerable. Rebuild via `vfxlab-pipeline` if stale.
 2. **Jev needed?** `vfx_find` / evals call the real TypeSafe API — requires `TYPESAFE_API_KEY` in env.
 3. **Client run needed?** Playback/capture = real Minecraft 1.21.1 client under xvfb — needs Java 21 (`~/.jdks/temurin-21` or `$VFXLAB_JAVA_HOME`) and `xvfb-run`; a scene replay takes ~40–60 s+.
 4. **Kind check.** Only `ready_to_use` + spawnable kinds stage in scenes: `particle`, `parameterized_particle`, `world_event` (needs `has_visual`), `fx`, `quasar_emitter`. `composite`/`texture`/`shader`/`mesh` stay KB-only — validation rejects them.

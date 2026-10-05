@@ -1,6 +1,6 @@
 ---
 name: vfxlab-pipeline
-description: Operate the vfxlab data and query pipeline in mcp-jev-recreated. Use when running vfx_find/vfx_inspect/vfx_preview (Jev ranking, passports, captured frames), executing probe captures (capture_plan, contact sheets, annotation passes), rebuilding data/catalog.json, running the Codex eval suite, or working with the jevlab-mcp stdio server and its six tools.
+description: Operate the vfxlab data and query pipeline in mcp-jev-recreated. Use when running vfx_find/vfx_inspect/vfx_preview (Jev ranking, passports, captured frames), executing probe captures (capture_plan, contact sheets, annotation passes), rebuilding data/catalog.json, running the Codex eval suite, or working with the jevlab-mcp stdio server and its eleven tools (6 scene lane + 5 fx-edit lane).
 ---
 
 # vfxlab Pipeline
@@ -63,7 +63,7 @@ Visual-pass discipline: passes are **independent** — pass B agents never see p
 
 ## Measured numbers (current, committed)
 
-- catalog: **4,430** passports; **205** answerable candidates; 0 build diagnostics
+- catalog: **4,432** passports; **207** answerable candidates (205 captured + 2 fx-edit clones); 0 build diagnostics
 - capture: 197/197 spawnable shots, 3 angles × 3 ticks; visual passes A+B → 205/205 coverage (8 composite exceptions documented in `data/capture/exceptions.json`)
 - best eval config (gated SELECTION BRIEF, 12/12): **recall@10 0.66, hit@1 0.67, hit@3 0.83, hit@10 0.92, MRR 0.750**; ~1.3 s/query, ~130k input tokens
 - tests: 90 offline (`pytest tests/unit`), 2 live (`pytest -m typesafe`)

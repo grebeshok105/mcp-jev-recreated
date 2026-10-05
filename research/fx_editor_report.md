@@ -4,7 +4,7 @@ Stage 2 of the editor investigation. Stage 1 (`editor_need_report.md`) proved a 
 
 ## 1. Real .fx layout (verified against Photon sources + stock files)
 
-`.fx` = gzip'd Minecraft NBT (`NbtIo.readCompressed`). Root compound `""` → `{fxData:{fxObjects:[...], version:int}}`. Each fxObject = `{type:"beam_emitter|particle_emitter|trail_emitter|ara_trail_emitter|empty", data:{name, transform:{id,_parentId,_childrenId,localPosition/localScale/localRotation}, config:{...}}}`.
+`.fx` = gzip'd Minecraft NBT (`NbtIo.readCompressed`). Root compound `""` → `{version:int, fxData:{fxObjects:[...]}}` — `version` is a root-level sibling of `fxData`, not inside it. Each fxObject = `{type:"beam_emitter|particle_emitter|trail_emitter|ara_trail_emitter|empty", data:{name, transform:{id,_parentId,_childrenId,localPosition/localScale/localRotation}, config:{...}}}`.
 
 Config internals: plain scalars (`duration:int`, `maxParticles:int`, `minVertexDistance:float`, `end:list[float]`), enum strings (`simulationSpace`, `emissionMode`, `layer`), NumberFunction wrappers `{type: constant|random_constant|color|gradient|random_color|random_gradient|curve|random_curve, data:{number:<scalar or ARGB int>}}`, and `_enable:byte` feature-layer compounds (lights, trails, uvAnimation, physics, noise, *OverLifetime, inheritVelocity, subEmitters, …). `emission` holds `emissionRate`/`distanceRate` numfuncs + `bursts.payload[i]` (probability/count/cycles/interval/time — `random.nextFloat() < probability` gate, so 0 suppresses a burst cleanly).
 
@@ -72,4 +72,4 @@ Confirmed: `git status` shows no changes to the 5 stock `.fx` files (tracked, un
 
 ## 10. Is a full graph editor still worth thinking about?
 
-No — and it never was the right frame. The file has no graph; what stage 1 needed was parameter access. The 5-tool lane covers 8/8 logged wants. The only uncovered stage-1 blocker (melee slash vocab) is a **catalog gap** (no visible slash resource to clone from), which no editor layer fixes — it needs new source assets.
+No — and it never was the right frame. The file has no graph; what stage 1 needed was parameter access. The 5-tool lane covers the patchable share of logged wants (6 of 8 directly; the rest needed catalog assets, not patching). The only uncovered stage-1 blocker (melee slash vocab) is a **catalog gap** (no visible slash resource to clone from), which no editor layer fixes — it needs new source assets.
