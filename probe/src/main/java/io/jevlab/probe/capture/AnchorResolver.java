@@ -14,13 +14,16 @@ import net.minecraft.world.phys.Vec3;
  * <pre>{@code
  *   "player.head"                                     // shorthand string
  *   {"anchor":"player.head","offset":[0,0,0.25],"direction":"player.look"}
- *   {"anchor":"player.look","distance":8}             // 8 blocks along the look
+ *   {"anchor":"player.look","distance":8,"direction":"player.look"}
  *   {"anchor":"ref:zap"}                              // spawn pos of a named step
  * }</pre>
  *
  * <p>Anchors: scene | player | player.feet | player.chest | player.head |
- * player.look | camera | ref:&lt;name&gt;. Offsets are in the anchor's local
- * frame (x right, y up, z forward) rotated by the resolved direction.
+ * player.look | camera | ref:&lt;name&gt;. `player.head`, `player.look` and
+ * `camera` are aliases (eye position); `player` = `player.feet`. Offsets
+ * are in the anchor's local frame (x right, y up, z forward) rotated by
+ * the resolved direction. `distance` pushes along the resolved direction
+ * (world = +z when direction is absent).
  *
  * <p>Directions: "world" | "player.look" | [yaw,pitch] | {"face":&lt;anchor expr&gt;}.
  */
@@ -41,7 +44,8 @@ public final class AnchorResolver {
         }
         String anchor = obj.has("anchor") ? obj.get("anchor").getAsString() : "scene";
         Vec3 base = basePoint(anchor, player, sceneAnchor, refs, diagnostics);
-        float[] dir = direction(obj.get("direction"), base, player, refs, diagnostics);
+        float[] dir = direction(obj.get("direction"), base, player,
+                sceneAnchor, refs, diagnostics);
         Vec3 p = base;
         if (obj.has("offset")) {
             JsonArray off = obj.getAsJsonArray("offset");
@@ -58,7 +62,7 @@ public final class AnchorResolver {
 
     private static Vec3 basePoint(String anchor, LocalPlayer player, Vec3 sceneAnchor,
                                   Map<String, Vec3> refs, java.util.List<String> diagnostics) {
-        if (player == null || anchor.startsWith("scene") || anchor.startsWith("ref:")) {
+        if (player == null || anchor.equals("scene") || anchor.startsWith("ref:")) {
             if (anchor.startsWith("ref:")) {
                 Vec3 r = refs.get(anchor.substring(4));
                 if (r == null) {
@@ -66,6 +70,10 @@ public final class AnchorResolver {
                     return sceneAnchor;
                 }
                 return r;
+            }
+            if (player == null && !anchor.equals("scene")) {
+                diagnostics.add("anchor '" + anchor
+                        + "' needs a player but none is present");
             }
             return sceneAnchor;
         }
@@ -81,7 +89,8 @@ public final class AnchorResolver {
     }
 
     private static float[] direction(JsonElement dir, Vec3 from, LocalPlayer player,
-                                     Map<String, Vec3> refs, java.util.List<String> diagnostics) {
+                                     Vec3 sceneAnchor, Map<String, Vec3> refs,
+                                     java.util.List<String> diagnostics) {
         if (dir == null || dir.isJsonNull()) {
             return new float[] {0, 0};
         }
@@ -103,7 +112,7 @@ public final class AnchorResolver {
         }
         if (dir.isJsonObject() && dir.getAsJsonObject().has("face")) {
             Resolved target = resolve(dir.getAsJsonObject().get("face"), player,
-                    new Vec3(0, 0, 0), refs, diagnostics);
+                    sceneAnchor, refs, diagnostics);
             return faceYawPitch(from, target.pos());
         }
         diagnostics.add("direction: unsupported form " + dir);
@@ -132,7 +141,7 @@ public final class AnchorResolver {
     public static Vec3 rotateOffset(double lx, double ly, double lz, float yaw, float pitch) {
         double yr = Math.toRadians(yaw), pr = Math.toRadians(pitch);
         Vec3 fwd = forward(yaw, pitch);
-        Vec3 right = new Vec3(Math.cos(yr), 0, Math.sin(yr));
+        Vec3 right = new Vec3(-Math.cos(yr), 0, -Math.sin(yr));
         Vec3 up = new Vec3(-Math.sin(yr) * Math.sin(pr), Math.cos(pr),
                 Math.cos(yr) * Math.sin(pr));
         return right.scale(lx).add(up.scale(ly)).add(fwd.scale(lz));

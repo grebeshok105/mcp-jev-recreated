@@ -117,7 +117,7 @@ paths + spawned counts per angle.
 ## Tests
 
 ```bash
-pytest tests/unit          # 69 tests, offline, seconds
+pytest tests/unit          # 90 tests, offline, seconds
 pytest tests/ -m typesafe  # 2 live API tests, needs TYPESAFE_API_KEY
 ```
 
@@ -145,7 +145,7 @@ pytest tests/ -m typesafe  # 2 live API tests, needs TYPESAFE_API_KEY
   and look anchors, `ref:` beam wiring, follow + pos-track on a quasar
   emitter, repeat group, mid-scene teleport; 101/91 spawned per angle,
   6 frames, ~55 s
-- 71 tests green (69 offline + 2 live)
+- 92 tests green (90 offline + 2 live)
 
 See `docs/architecture.md` for design, `docs/evaluation.md` for full eval
 results and known limits.

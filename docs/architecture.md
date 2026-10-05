@@ -118,20 +118,46 @@ quasar emitters).
 
 - *Anchors* — `anchor`: `scene`, `player` (feet, `.chest`, `.head`, `.look`),
   `camera`, `ref:<step name>`; `offset [x,y,z]` in the direction's local
-  frame; `distance` pushes along the direction.
+  frame; `distance` pushes along the direction. Aliases: `player.head` =
+  `player.look` = `camera`; bare `player` = feet. A `distance` without an
+  explicit direction on a player/camera anchor injects `player.look`.
 - *Directions* — `world` | `player.look` | `[yaw,pitch]` |
   `{"face": <anchor expr>}`; `to: <anchor expr>` faces a target point.
+  An explicit `direction` wins over `to` (the validator warns when both
+  are given).
 - *Follow* — `follow: "player"` re-resolves the anchor every tick on
-  persistent handles (`fx`, `quasar_emitter`).
+  persistent handles (`fx`, `quasar_emitter`); follow on a constant anchor
+  warns. Refs record the **spawn-time** position — a followed emitter's
+  later motion is not reflected into `ref:` consumers.
 - *Tracks* — `track.pos` keyframes `[t,x,y,z]` (fx + quasar), `rotation` /
-  `scale` (fx only); ticks are relative to the step's spawn.
+  `scale` (fx only); ticks are relative to the step's spawn and `pos` rows
+  are local-frame deltas added to the anchor. `rotation`/`scale` on an
+  aimed (`to`/`direction`) step overrides the aim while its keyframes are
+  active — validator warns.
 - *Repeat* — `{every, count}` | `{every, until}` on a step or a whole
-  `groups[]` block; expansion happens at compile time.
+  `groups[]` block; expansion happens at compile time. `count` includes
+  the first firing; `until` is absolute (`t < until`), including inside
+  repeated groups. `until <= tick` means no repeat window — the step just
+  fires once at its own tick (validator warns).
 - *Refs* — a named step (`name:`) is addressable as `ref:<name>` in anchor
   positions and option values (e.g. `destination: "ref:zap"`); producers
-  must sort before their consumers.
-- *Commands* — `commands:[{tick, command}]` fire server commands mid-scene
-  (e.g. move the player to prove follow).
+  must sort before their consumers. `ref:` must be the whole option value —
+  nesting it in a list/dict is an error. On duplicate names the most
+  recently spawned instance wins.
+- *Commands* — `commands:[{tick, command}]` fire server commands mid-scene,
+  in console context (`~` resolves at world spawn — use `execute at @p`
+  for player-relative moves). Per angle the ordering is drive → commands
+  → spawn, and a `tp` in a command lands on the *next* tick's player
+  position. Commands replay once per camera angle.
+
+Runtime notes: `tick: 0` fires at scene start. `stop_after` controls
+whether the persistent handle stops at angle teardown — `false` means
+the emitter survives into the next angle (deliberate leak, emitted
+honestly rather than clamped). `pos`/`offset` rotate with the resolved
+direction. fx roots render ~0.5 blocks above `at` (inherited photon
+centering — consistent across all fx captures). Unknown keys warn at
+every level (step, anchor expr, track, repeat) instead of being silently
+dropped.
 
 - `spec.py` — validates all of the above against the catalog (unknown ids,
   non-spawnable kinds, unresolvable params, bad refs/ordering = errors;

@@ -34,8 +34,9 @@ def _repeat_offsets(rep: dict | None, base: int, duration: int) -> list[int]:
     if "count" in rep:
         for k in range(rep["count"]):
             off = k * every
-            if base + off < duration:
-                out.append(off)
+            if base + off >= duration:
+                break  # offsets are monotonic — nothing later can pass
+            out.append(off)
     else:  # until — fires at base, base+every, ... while < until
         k = 0
         while base + k * every < rep["until"]:
@@ -51,11 +52,17 @@ def _expand_ticks(step: dict, duration: int) -> list[int]:
     grp = step.get("group_repeat")
     if not grp:
         return sorted(set(base + o for o in own))
+    # group iterations are computed from the GROUP's own tick, not the
+    # member's — "replays the whole block" keeps every member's cadence
+    gtick = step.get("group_tick") or 0
+    # `until` is an absolute bound everywhere, even inside a replayed
+    # group — a member's window does not restart with each iteration
+    own_until = (step.get("repeat") or {}).get("until", duration)
     out: list[int] = []
-    for g_off in _repeat_offsets(grp, base, duration):
+    for g_off in _repeat_offsets(grp, gtick, duration):
         for o in own:
             t = base + g_off + o
-            if t < duration:
+            if t < min(duration, own_until):
                 out.append(t)
     return sorted(set(out))
 
@@ -76,9 +83,12 @@ def compile_scene(spec: dict, catalog_index: dict[str, dict],
         shot, reason = shot_spec_for(res, events)
         if shot is None:
             # validate_scene already rejects non-spawnable kinds; this is a
-            # belt-and-braces guard for mapping drift.
-            v.errors.append(f"'{s['id']}': {reason}")
-            return None, v
+            # belt-and-braces guard for mapping drift. Return a clean
+            # invalid validation — leaving ok=True+normalized set with
+            # errors is a lie.
+            return None, SceneValidation(
+                ok=False, errors=v.errors + [f"'{s['id']}': {reason}"],
+                warnings=v.warnings)
         merged_opts = dict(shot.get("options") or {})
         merged_opts.update(s.get("options") or {})
         out_shot = dict(shot)
@@ -87,8 +97,9 @@ def compile_scene(spec: dict, catalog_index: dict[str, dict],
             # level_event shots carry a synthetic id; keep the resource id so
             # results index by what the caller asked for.
             out_shot["resource_id"] = s["id"]
-        if s["stop_after"]:
-            out_shot["stop_after"] = True
+        # explicit both ways: java treats missing as true, so a user-set
+        # false MUST be emitted to survive the trip through gson
+        out_shot["stop_after"] = bool(s["stop_after"])
         for t in _expand_ticks(s, n["duration"]):
             step: dict[str, Any] = {"at_tick": t, "pos": s["pos"],
                                     "shot": out_shot}

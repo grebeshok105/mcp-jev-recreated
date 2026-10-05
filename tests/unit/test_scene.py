@@ -218,6 +218,10 @@ V2_CAT["minecraft:vibration"] = {
                          "arrival_in_ticks": {"type": "int"}},
     "ready_to_use": True, "factual": {}, "visual_status": "observed",
 }
+V2_CAT["homelander_roar_dust"] = {
+    "id": "homelander_roar_dust", "kind": "fx",
+    "ready_to_use": True, "factual": {}, "visual_status": "observed",
+}
 
 
 def test_v2_anchor_shorthand_and_fields():
@@ -387,3 +391,181 @@ def test_v2_explicit_yaw_pitch_direction():
         "direction": [37.0, -10.0]}]), CAT)
     assert v.ok, v.errors
     assert v.normalized["steps"][0]["at"]["direction"] == [37.0, -10.0]
+
+
+# ------------------------------------------------------- review-fix tests
+
+def test_stop_after_false_is_emitted():
+    plan, v = compile_scene(_scene(steps=[{
+        "tick": 1, "id": "superheroes:roar_wave", "stop_after": False}]),
+        CAT, EVENTS)
+    assert v.ok, v.errors
+    assert plan["steps"][0]["shot"]["stop_after"] is False
+
+
+def test_to_plus_direction_warns():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "superheroes:fx_ring",
+        "anchor": {"anchor": "player.head", "direction": "player.look"},
+        "to": "ref:x"}], ), CAT)
+    assert any("'to' is ignored" in w for w in v.warnings) or not v.ok
+
+
+def test_follow_on_constant_anchor_warns():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "superheroes:roar_wave",
+        "anchor": "scene", "follow": "player"}]), CAT)
+    assert any("constant" in w for w in v.warnings)
+
+
+def test_direction_without_offset_on_particle_warns():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "minecraft:sonic_boom",
+        "direction": "player.look"}]), CAT)
+    assert any("changes nothing" in w for w in v.warnings)
+
+
+def test_direction_with_offset_on_particle_no_warn():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "minecraft:sonic_boom",
+        "direction": "player.look", "offset": [0, 0, 2]}]), CAT)
+    assert not any("changes nothing" in w for w in v.warnings)
+
+
+def test_distance_implies_look_for_player_anchor():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "minecraft:sonic_boom",
+        "anchor": {"anchor": "player.look", "distance": 8}}]), CAT)
+    assert v.ok, v.errors
+    assert v.normalized["steps"][0]["at"]["direction"] == "player.look"
+
+
+def test_group_until_replays_whole_block():
+    spec = _scene(duration=40, steps=[])
+    spec["groups"] = [{
+        "tick": 5, "repeat": {"every": 8, "until": 30},
+        "steps": [
+            {"tick": 0, "id": "minecraft:sonic_boom"},
+            {"tick": 4, "id": "minecraft:dust"},
+        ]}]
+    plan, v = compile_scene(spec, CAT, EVENTS)
+    assert v.ok, v.errors
+    ticks = sorted(s["at_tick"] for s in plan["steps"])
+    # iterations at 5,13,21,29 -> member ticks 5,9,13,17,21,25,29,33
+    assert ticks == [5, 9, 13, 17, 21, 25, 29, 33]
+
+
+def test_commands_normalized():
+    spec = _scene(steps=[{"tick": 1, "id": "minecraft:dust"}])
+    spec["commands"] = [{"tick": 5, "command": "tp @p ~1 ~ ~"}]
+    plan, v = compile_scene(spec, CAT, EVENTS)
+    assert v.ok, v.errors
+    assert plan["commands"] == [{"at_tick": 5, "command": "tp @p ~1 ~ ~"}]
+
+
+# --------------------------------------------------- second review pass
+
+def test_nested_ref_in_options_errors():
+    v = validate_scene(_scene(steps=[
+        {"tick": 1, "id": "minecraft:dust", "name": "m"},
+        {"tick": 2, "id": "minecraft:vibration",
+         "options": {"destination": ["ref:m"]}}]), V2_CAT)
+    assert not v.ok
+    assert any("top-level" in e for e in v.errors)
+
+
+def test_nested_face_ref_is_order_checked():
+    v = validate_scene(_scene(steps=[
+        {"tick": 1, "id": "minecraft:dust",
+         "anchor": {"anchor": "player.head",
+                    "direction": {"face": {
+                        "anchor": "player.look",
+                        "direction": {"face": "ref:later"}}}}},
+        {"tick": 5, "id": "minecraft:dust", "name": "later"}]), CAT)
+    assert not v.ok
+    assert any("ref:later" in e for e in v.errors)
+
+
+def test_track_unknown_key_warns():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "superheroes:roar_wave",
+        "track": {"poss": [[0, 0, 0, 0]]}}]), CAT)
+    assert any("track.poss" in w for w in v.warnings)
+
+
+def test_nan_rejected():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "minecraft:dust",
+        "offset": [0.0, float("nan"), 1.0]}]), CAT)
+    assert not v.ok
+
+
+def test_scene_pos_must_be_exact_vec3():
+    v = validate_scene(_scene(steps=[{"tick": 1, "id": "minecraft:dust"}],
+                           scene={"pos": [1, 2, 3, 4]}), CAT)
+    assert not v.ok
+    assert any("scene.pos" in e for e in v.errors)
+
+
+def test_name_charset():
+    v = validate_scene(_scene(steps=[{"tick": 1, "id": "minecraft:dust"}],
+                           name="has space"), CAT)
+    assert not v.ok
+    assert any("name" in e for e in v.errors)
+
+
+def test_track_rotation_warns_vs_to():
+    v = validate_scene(_scene(steps=[
+        {"tick": 1, "id": "minecraft:dust", "name": "m"},
+        {"tick": 2, "id": "superheroes:roar_wave",
+         "to": "ref:m", "track": {"rotation": [[0, 0, 0]]}}]), CAT)
+    # quasar can't do rotation tracks at all — that's an error, not a warn
+    assert not v.ok
+    v2 = validate_scene(_scene(steps=[
+        {"tick": 1, "id": "minecraft:dust", "name": "m"},
+        {"tick": 2, "id": "homelander_roar_dust",
+         "to": "ref:m", "track": {"rotation": [[0, 0, 0]]}}]), V2_CAT)
+    assert any("track.rotation" in w for w in v2.warnings)
+
+
+def test_bool_tick_errors():
+    v = validate_scene(_scene(steps=[{
+        "tick": True, "id": "minecraft:dust"}]), CAT)
+    assert not v.ok
+
+
+def test_member_until_absolute_in_group():
+    spec = _scene(duration=100, steps=[])
+    spec["groups"] = [{
+        "tick": 0, "repeat": {"every": 40, "count": 3},
+        "steps": [{"tick": 0, "id": "minecraft:dust",
+                   "repeat": {"every": 3, "until": 10}}]}]
+    plan, v = compile_scene(spec, CAT, EVENTS)
+    assert v.ok, v.errors
+    ticks = sorted(s["at_tick"] for s in plan["steps"])
+    # group fires at 0,40,80 but member until=10 is absolute ->
+    # only the first iteration's window produces firings
+    assert ticks == [0, 3, 6, 9]
+
+
+def test_plan_shape_emits_v2_fields():
+    plan, v = compile_scene(_scene(steps=[
+        {"tick": 1, "id": "minecraft:dust", "name": "m"},
+        {"tick": 2, "id": "superheroes:roar_wave",
+         "anchor": {"anchor": "player.head", "offset": [0, 0, 1],
+                    "direction": "player.look"},
+         "to": "ref:m", "follow": "player",
+         "track": {"pos": [[0, 0, 0, 0], [5, 0, 1, 0]]}}]), CAT, EVENTS)
+    assert v.ok, v.errors
+    s2 = plan["steps"][1]
+    assert s2["at"]["anchor"] == "player.head"
+    assert s2["to"] == {"anchor": "ref:m"}
+    assert s2["follow"] == "player"
+    assert s2["track"]["pos"][1] == [5, 0.0, 1.0, 0.0]
+    assert s2.get("name") is None  # absent when unset
+
+
+def test_unknown_step_key_warns():
+    v = validate_scene(_scene(steps=[{
+        "tick": 1, "id": "minecraft:dust", "anchr": "scene"}]), CAT)
+    assert any("anchr" in w for w in v.warnings)

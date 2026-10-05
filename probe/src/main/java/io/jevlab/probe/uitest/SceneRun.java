@@ -59,15 +59,16 @@ public final class SceneRun {
         final Object fxExecutor;      // photon BlockEffectExecutor or null
         final JsonElement atExpr;     // anchor expr re-resolved when follow set
         final String follow;
-        final JsonObject track;
+        JsonObject track;             // nulled after the first drive failure
         final float[] spawnRot;       // yaw/pitch applied to fx once runtime exists
         final Vec3 spawnPos;
+        final double[] localPos;      // step's pos, re-applied after re-resolve
         final int born;
         boolean rotated;
 
         Tracked(String kind, Object quasar, Object fxExecutor,
                 JsonElement atExpr, String follow, JsonObject track,
-                float[] spawnRot, Vec3 spawnPos, int born) {
+                float[] spawnRot, Vec3 spawnPos, double[] localPos, int born) {
             this.kind = kind;
             this.quasar = quasar;
             this.fxExecutor = fxExecutor;
@@ -76,6 +77,7 @@ public final class SceneRun {
             this.track = track;
             this.spawnRot = spawnRot;
             this.spawnPos = spawnPos;
+            this.localPos = localPos;
             this.born = born;
         }
     }
@@ -86,7 +88,9 @@ public final class SceneRun {
             loaded = Paths.sceneFile().toFile().exists()
                     ? ScenePlan.load(Paths.sceneFile())
                     : new ScenePlan();
-        } catch (IOException e) {
+        } catch (IOException | RuntimeException e) {
+            // gson's JsonSyntaxException is a RuntimeException — a
+            // hand-edited/degenerate plan must not kill the scenario
             loaded = new ScenePlan();
             diagnostics.add("scene plan unreadable: " + e);
         }
@@ -149,16 +153,30 @@ public final class SceneRun {
                         "scene@%s cam pos=%.2f,%.2f,%.2f yRot=%.1f xRot=%.1f",
                         angle, p.getX(), p.getY(), p.getZ(), p.getYRot(), p.getXRot()));
             });
+            // tick 0 fires at scene start, before the 1..duration loop
+            {
+                List<String> cmds0 = cmdByTick.get(0);
+                List<ScenePlan.Step> due0 = byTick.get(0);
+                if (cmds0 != null || due0 != null) {
+                    b.step("vfxlab:scene-t0@" + angle, ctx -> {
+                        execCommands(ctx, cmds0);
+                        if (due0 != null) {
+                            spawnDue(ctx, angle, plan, due0, 0);
+                        }
+                    });
+                }
+            }
             for (int t = 1; t <= plan.duration; t++) {
                 final int tick = t;
                 b.step("vfxlab:scene-drive t" + tick + "@" + angle,
-                        ctx -> driveTracked(ctx, angle, plan, tick));
+                        ctx -> driveTracked(ctx, angle, tick));
                 List<String> cmds = cmdByTick.get(tick);
                 if (cmds != null) {
                     for (String cmd : cmds) {
                         b.runCommand(cmd);
                     }
                 }
+
                 List<ScenePlan.Step> due = byTick.get(tick);
                 if (due != null) {
                     b.step("vfxlab:scene-spawn t" + tick + "@" + angle,
@@ -179,7 +197,7 @@ public final class SceneRun {
 
     // ---------------------------------------------------------------- v2 drive
 
-    private void driveTracked(TestContext ctx, String angle, ScenePlan plan, int tick) {
+    private void driveTracked(TestContext ctx, String angle, int tick) {
         List<Tracked> tracked = ctx.get("tracked@" + angle);
         if (tracked == null || tracked.isEmpty()) {
             return;
@@ -201,6 +219,10 @@ public final class SceneRun {
                 }
                 int rel = Math.max(0, tick - tr.born);
                 Vec3 pos = base.add(trackVec(tr.track, "pos", rel));
+                if (tr.follow != null && tr.localPos != null) {
+                    pos = pos.add(AnchorResolver.rotateOffset(tr.localPos[0],
+                            tr.localPos[1], tr.localPos[2], yaw, pitch));
+                }
                 if (tr.quasar != null) {
                     var em = (foundry.veil.api.quasar.particle.ParticleEmitter) tr.quasar;
                     em.setPosition(pos.x, pos.y, pos.z);
@@ -210,8 +232,14 @@ public final class SceneRun {
                             tr.fxExecutor;
                     var rt = ex.getRuntime();
                     if (rt != null && rt.root != null) {
-                        rt.root.updatePos(new Vector3f((float) pos.x,
-                                (float) pos.y, (float) pos.z));
+                        // only re-assert position when something actually
+                        // steers it — a `to`-only fx keeps photon's own
+                        // root animation otherwise
+                        if (tr.follow != null || (tr.track != null
+                                && tr.track.has("pos"))) {
+                            rt.root.updatePos(new Vector3f((float) pos.x,
+                                    (float) pos.y, (float) pos.z));
+                        }
                         if (!tr.rotated || tr.follow != null) {
                             rt.root.updateRotation(quat(yaw, pitch));
                             tr.rotated = true;
@@ -227,7 +255,9 @@ public final class SceneRun {
                     }
                 }
             } catch (Throwable t) {
-                sd.add("drive t" + tick + " failed: " + t);
+                sd.add("drive t" + tick + " failed: " + t
+                        + " (track dropped)");
+                tr.track = null;  // don't spam the same failure every tick
             }
         }
         if (!sd.isEmpty()) {
@@ -268,11 +298,19 @@ public final class SceneRun {
                 obj.add("direction", face);
                 atExpr = obj;
             }
-            AnchorResolver.Resolved ra = atExpr != null
-                    ? AnchorResolver.resolve(atExpr, player, sceneAnchor, refs, sd)
-                    : new AnchorResolver.Resolved(sceneAnchor, 0, 0);
+            AnchorResolver.Resolved ra;
+            try {
+                ra = atExpr != null
+                        ? AnchorResolver.resolve(atExpr, player, sceneAnchor,
+                                refs, sd)
+                        : new AnchorResolver.Resolved(sceneAnchor, 0, 0);
+            } catch (Throwable t) {
+                sd.add("anchor resolution failed (" + t + ") — "
+                        + "falling back to scene anchor");
+                ra = new AnchorResolver.Resolved(sceneAnchor, 0, 0);
+            }
             Vec3 spawnPos = ra.pos();
-            if (s.pos != null) {
+            if (s.pos != null && s.pos.length >= 3) {
                 spawnPos = spawnPos.add(
                         AnchorResolver.rotateOffset(s.pos[0], s.pos[1], s.pos[2],
                                 ra.yaw(), ra.pitch()));
@@ -290,18 +328,28 @@ public final class SceneRun {
                 refs.put(s.name, spawnPos);
             }
             boolean steerable = live.quasarEmitter() != null || live.fxExecutor() != null;
+            boolean persistent = "fx".equals(s.shot.kind)
+                    || "quasar_emitter".equals(s.shot.kind);
             if ((s.follow != null || s.track != null
                     || s.to != null) && steerable) {
                 tracked.add(new Tracked(s.shot.kind, live.quasarEmitter(),
                         live.fxExecutor(), atExpr, s.follow, s.track,
-                        new float[] {ra.yaw(), ra.pitch()}, spawnPos, tick));
+                        new float[] {ra.yaw(), ra.pitch()}, spawnPos,
+                        s.pos, tick));
+                // apply the rel-0 keyframe now — next drive is at born+1
+                driveTracked(ctx, angle, tick);
             } else if ((s.follow != null || s.track != null) && !steerable) {
-                sd.add("note: '" + s.shot.id + "' is instantaneous — "
-                        + "follow/track have nothing to steer");
+                sd.add(persistent
+                        ? "spawn failed — '" + s.shot.id
+                                + "' produced no steerable handle"
+                        : "note: '" + s.shot.id + "' is instantaneous — "
+                                + "follow/track have nothing to steer");
             }
             JsonObject rec = new JsonObject();
             rec.addProperty("tick", tick);
-            rec.addProperty("id", s.shot.id != null ? s.shot.id : "step");
+            rec.addProperty("id", s.shot.resource_id != null
+                    ? s.shot.resource_id
+                    : (s.shot.id != null ? s.shot.id : "step"));
             rec.addProperty("pos", String.format("%.3f,%.3f,%.3f",
                     spawnPos.x, spawnPos.y, spawnPos.z));
             JsonArray d = new JsonArray();
@@ -340,6 +388,7 @@ public final class SceneRun {
         copy.frames = shot.frames;
         copy.angles = shot.angles;
         copy.stop_after = shot.stop_after;
+        copy.resource_id = shot.resource_id;
         JsonObject opts = new JsonObject();
         for (Map.Entry<String, JsonElement> e : shot.options.entrySet()) {
             JsonElement v = e.getValue();
@@ -362,6 +411,17 @@ public final class SceneRun {
         }
         copy.options = opts;
         return copy;
+    }
+
+    private static void execCommands(TestContext ctx, List<String> cmds) {
+        if (cmds == null) {
+            return;
+        }
+        for (String cmd : cmds) {
+            ctx.server().execute(() -> ctx.server().getCommands()
+                    .performPrefixedCommand(
+                            ctx.server().createCommandSourceStack(), cmd));
+        }
     }
 
     // --------------------------------------------------------------- tracks

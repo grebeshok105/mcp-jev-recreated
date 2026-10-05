@@ -67,14 +67,20 @@ def play_scene(spec_or_plan: dict, *, timeout_s: int = 900,
     catalog_index = catalog_index or load_catalog_index()
 
     if "steps" in spec_or_plan and spec_or_plan["steps"] and \
+            isinstance(spec_or_plan["steps"][0], dict) and \
             isinstance(spec_or_plan["steps"][0].get("shot"), dict):
         plan = spec_or_plan  # already compiled
+        # advisory re-validation: surface everything it finds — silently
+        # dropping errors would be a lie about the plan's health
         v = validate_scene(
             {"name": plan.get("name"), "duration": plan.get("duration", 60),
-             "steps": [{"id": s["shot"].get("id"), "tick": s.get("at_tick", 0)}
-                       for s in plan["steps"]]},
+             "steps": [
+                 {"id": (s.get("shot") or {}).get("id"),
+                  "tick": s.get("at_tick", 0)}
+                 for s in plan["steps"] if isinstance(s, dict)]},
             catalog_index)
         res.warnings.extend(v.warnings)
+        res.warnings.extend(f"plan re-check: {e}" for e in v.errors)
     else:
         events = load_level_events(LEVEL_EVENTS)
         plan, v = compile_scene(spec_or_plan, catalog_index, events)

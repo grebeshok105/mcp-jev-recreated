@@ -18,8 +18,7 @@
                 "direction": "player.look"},
      "options": {"destination": "ref:zap_mark", "arrival_in_ticks": 16}},
     {"tick": 10, "id": "vfxlab:laser_beam",
-     "anchor": {"anchor": "player.head", "offset": [0, -1.0, 1.6],
-                "direction": "player.look"},
+     "anchor": "player.head",
      "to": "ref:zap_mark", "follow": "player"}
   ],
   "groups": [{
@@ -30,5 +29,6 @@
       {"tick": 3, "id": "minecraft:end_rod",
        "anchor": "scene", "offset": [0, 1.4, 0]}
     ]}],
-  "commands": [{"tick": 26, "command": "tp @p ~2.0 ~ ~ ~30 ~"}]
+  "commands": [{"tick": 26,
+                "command": "execute at @p run tp @p ~2.0 ~ ~ ~30 ~"}]
 }

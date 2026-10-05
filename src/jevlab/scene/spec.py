@@ -35,6 +35,8 @@ relative to the group's tick; repeat re-fires the whole group.
 """
 from __future__ import annotations
 
+import math
+import re
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -69,8 +71,13 @@ class SceneValidation:
     normalized: dict | None = None
 
 
+def _is_int(v: Any) -> bool:
+    return isinstance(v, int) and not isinstance(v, bool)
+
+
 def _is_num(v: Any) -> bool:
-    return isinstance(v, (int, float)) and not isinstance(v, bool)
+    return isinstance(v, (int, float)) and not isinstance(v, bool) \
+        and math.isfinite(v)
 
 
 def _vec3(v: Any) -> bool:
@@ -98,6 +105,10 @@ def _validate_anchor_expr(expr: Any, label: str, field_name: str,
         errors.append(
             f"{label}: {field_name}.anchor '{anchor}' unknown "
             f"(known: {sorted(ANCHOR_BASES)}, or ref:<step name>)")
+    for k in expr:
+        if k not in ("anchor", "offset", "direction", "distance"):
+            errors.append(f"{label}: {field_name}.{k} unknown "
+                          f"(anchor, offset, direction, distance)")
     out = {"anchor": anchor}
     off = expr.get("offset")
     if off is not None:
@@ -116,6 +127,11 @@ def _validate_anchor_expr(expr: Any, label: str, field_name: str,
         nd = _validate_direction(d, label, field_name, errors, depth)
         if nd is not None:
             out["direction"] = nd
+    if "distance" in out and "direction" not in out and anchor.startswith(
+            ("player", "camera")):
+        # the overwhelmingly-intended meaning of {"anchor":"player.look",
+        # "distance":8} is "8 blocks along the look" — make it explicit
+        out["direction"] = "player.look"
     return out
 
 
@@ -152,14 +168,17 @@ def _check_param(schema_key: str, pschema: dict, options: dict,
                           f"'{schema_key}' (option '{opt_key}')")
         return
     v = options[opt_key]
-    if isinstance(v, str) and v.startswith("ref:"):
-        return  # ref targets are resolved at runtime; shape checked elsewhere
     t = spec.get("type")
+    if isinstance(v, str) and v.startswith("ref:"):
+        if t is not None and t != "position_source":
+            errors.append(f"{step_label}: ref: substitution produces a "
+                          f"world position — '{opt_key}' expects {t}")
+        return  # ref targets are resolved at runtime
     if t == "rgb" and not _vec3(v):
         errors.append(f"{step_label}: '{opt_key}' must be [r,g,b] numbers")
     elif t == "float" and not _is_num(v):
         errors.append(f"{step_label}: '{opt_key}' must be a number")
-    elif t == "int" and not isinstance(v, int):
+    elif t == "int" and not _is_int(v):
         errors.append(f"{step_label}: '{opt_key}' must be an int")
     elif t == "blockstate" and not isinstance(v, str):
         errors.append(f"{step_label}: '{opt_key}' must be a block id string")
@@ -174,6 +193,10 @@ def _validate_track(track: Any, label: str, kind: str,
     if not isinstance(track, dict):
         errors.append(f"{label}: track must be an object")
         return None
+    for k in track:
+        if k not in ("pos", "rotation", "scale"):
+            warnings.append(f"{label}: track.{k} unknown — dropped "
+                            f"(known keys: pos, rotation, scale)")
     out: dict[str, list] = {}
     for key, arity in (("pos", 3), ("rotation", 2), ("scale", 1)):
         if key not in track:
@@ -185,31 +208,33 @@ def _validate_track(track: Any, label: str, kind: str,
             continue
         bad = [r for r in rows
                if not (isinstance(r, list) and len(r) == arity + 1
-                       and isinstance(r[0], int) and r[0] >= 0
+                       and _is_int(r[0]) and r[0] >= 0
                        and all(_is_num(c) for c in r[1:]))]
         if bad:
             errors.append(f"{label}: track.{key} rows must be "
                           f"[tick:int, {arity} numbers]")
             continue
-        out[key] = rows
+        out[key] = [[r[0]] + [float(c) for c in r[1:]] for r in rows]
     if kind not in PERSISTENT_KINDS and out:
         warnings.append(f"{label}: '{kind}' is instantaneous — track has "
                         f"nothing to steer and will be ignored at runtime")
+    # channels that exist per kind: fx gets pos/rotation/scale, quasar pos
     if kind == "quasar_emitter":
-        for k in ("rotation", "scale"):
-            if k in out:
-                errors.append(f"{label}: track.{k} has no channel on "
-                              f"quasar_emitter (pos only)")
-    if kind == "particle" or kind == "level_event":
-        for k in ("rotation", "scale"):
-            if k in out:
-                errors.append(f"{label}: track.{k} has no channel on "
-                              f"{kind}")
+        allowed = {"pos"}
+    elif kind in PERSISTENT_KINDS:
+        allowed = {"pos", "rotation", "scale"}
+    else:
+        allowed = set()
+    for k in out:
+        if k not in allowed:
+            errors.append(f"{label}: track.{k} has no channel on "
+                          f"{kind}")
     return out or None
 
 
 def _validate_repeat(rep: Any, label: str, duration: int,
-                     errors: list[str]) -> dict | None:
+                     errors: list[str], warnings: list[str] | None = None,
+                     base_tick: int = 0) -> dict | None:
     if rep is None:
         return None
     if not isinstance(rep, dict):
@@ -218,40 +243,72 @@ def _validate_repeat(rep: Any, label: str, duration: int,
     every = rep.get("every")
     count = rep.get("count")
     until = rep.get("until")
-    if not isinstance(every, int) or every <= 0:
+    if not _is_int(every) or every <= 0:
         errors.append(f"{label}: repeat.every must be an int > 0")
         return None
     if (count is None) == (until is None):
         errors.append(f"{label}: repeat needs exactly one of count/until")
         return None
     if count is not None:
-        if not isinstance(count, int) or count < 1:
+        if not _is_int(count) or count < 1:
             errors.append(f"{label}: repeat.count must be an int >= 1")
             return None
         return {"every": every, "count": count}
-    if not isinstance(until, int) or until <= 0 or until > duration:
+    if not _is_int(until) or until <= 0 or until > duration:
         errors.append(f"{label}: repeat.until must be an int in 1..{duration}")
         return None
+    if until <= base_tick:
+        warnings.append(f"{label}: repeat.until {until} <= step tick "
+                        f"{base_tick} — no repeat window, fires once")
     return {"every": every, "until": until}
 
 
+def _expr_refs(expr: dict | None, found: list[str]) -> None:
+    """Walk an anchor expr AND its nested face chains for ref: names."""
+    if not expr:
+        return
+    a = expr.get("anchor", "")
+    if a.startswith("ref:"):
+        found.append(a[4:])
+    d = expr.get("direction")
+    if isinstance(d, dict) and isinstance(d.get("face"), dict):
+        _expr_refs(d["face"], found)
+
+
+def _stop_after(s: dict, label: str, warnings: list[str]) -> bool:
+    v = s.get("stop_after", True)
+    if not isinstance(v, bool):
+        warnings.append(f"{label}: stop_after must be a boolean "
+                        f"(got {v!r} — treated as true)")
+        return True
+    return v
+
+
 def _ref_names(options: dict, anchor: dict | None, to: dict | None,
-               direction: Any) -> list[str]:
-    """Collect every `ref:<name>` used by the step."""
+               label: str = "step",
+               errors: list[str] | None = None) -> list[str]:
+    """Collect every `ref:<name>` used by the step. Nested refs inside
+    option lists/dicts are rejected — the runtime only substitutes
+    top-level option values."""
     found: list[str] = []
-    for v in (options or {}).values():
+    for k, v in (options or {}).items():
         if isinstance(v, str) and v.startswith("ref:"):
             found.append(v[4:])
-    for expr in (anchor, to):
-        if expr and expr.get("anchor", "").startswith("ref:"):
-            found.append(expr["anchor"][4:])
-    # face targets can also point at refs
-    for holder in (anchor, to):
-        d = (holder or {}).get("direction")
-        if isinstance(d, dict) and isinstance(d.get("face"), dict):
-            a = d["face"].get("anchor", "")
-            if a.startswith("ref:"):
-                found.append(a[4:])
+        elif isinstance(v, (list, dict)):
+            def _nested(x: Any) -> bool:
+                if isinstance(x, str):
+                    return x.startswith("ref:")
+                if isinstance(x, dict):
+                    return any(_nested(vv) for vv in x.values())
+                if isinstance(x, list):
+                    return any(_nested(vv) for vv in x)
+                return False
+            if _nested(v) and errors is not None:
+                errors.append(f"{label}: option '{k}' nests a ref: inside a "
+                              f"list/dict — refs only substitute as "
+                              f"top-level option values")
+    _expr_refs(anchor, found)
+    _expr_refs(to, found)
     return found
 
 
@@ -268,42 +325,86 @@ def validate_scene(spec: dict, catalog_index: dict[str, dict],
         return SceneValidation(ok=False, errors=["scene spec must be an object"])
 
     name = spec.get("name") or "scene"
+    if not isinstance(name, str):
+        errors.append("name must be a string")
+        name = "scene"
+    elif not re.fullmatch(r"[A-Za-z0-9](?!.*__)[A-Za-z0-9_\-]{0,63}", name):
+        # frame-index parsing in SceneRun.finish() splits on '__' — keep
+        # names strictly [A-Za-z0-9_-] so result keys stay unambiguous
+        errors.append("name must match [A-Za-z0-9_-]{1,64} "
+                      "(used in result keys and frame filenames)")
+        name = "scene"
     scene_in = spec.get("scene") or {}
+    if not isinstance(scene_in, dict):
+        errors.append("scene must be an object {pos, time, weather}")
+        scene_in = {}
     pos = scene_in.get("pos", [8.5, 2.0, 8.5])
-    if not _vec3(pos[:3] if isinstance(pos, list) else pos):
-        errors.append("scene.pos must be [x, lift, z] numbers")
+    if not _vec3(pos):
+        errors.append("scene.pos must be exactly [x, lift, z] numbers")
         pos = [8.5, 2.0, 8.5]
-    while len(pos) < 3:
-        pos.append(2.0 if len(pos) == 1 else 8.5)
+    else:
+        pos = [float(c) for c in pos]
+    try:
+        time_v = int(scene_in.get("time", 6000))
+    except (TypeError, ValueError):
+        errors.append("scene.time must be a world-tick int (e.g. 6000)")
+        time_v = 6000
+    weather_v = scene_in.get("weather", "clear")
+    if weather_v not in ("clear", "rain", "thunder"):
+        warnings.append(f"scene.weather '{weather_v}' — known values: "
+                        f"clear/rain/thunder (server will reject others)")
     scene = {
         "pos": pos,
-        "time": int(scene_in.get("time", 6000)),
-        "weather": str(scene_in.get("weather", "clear")),
+        "time": time_v,
+        "weather": str(weather_v),
     }
 
     cam_in = spec.get("camera") or {}
+    if not isinstance(cam_in, dict):
+        errors.append("camera must be an object {angles}")
+        cam_in = {}
     angles = cam_in.get("angles") or spec.get("angles") or ["front"]
     if not isinstance(angles, list) or not angles:
         errors.append("camera.angles must be a non-empty list")
         angles = []
     else:
+        seen_a: set[str] = set()
+        deduped: list[str] = []
         for a in angles:
             if a not in KNOWN_ANGLES:
                 errors.append(f"unknown camera angle '{a}' "
                               f"(known: {sorted(KNOWN_ANGLES)})")
+            elif a in seen_a:
+                warnings.append(f"camera.angles: '{a}' listed twice — "
+                                f"kept once (a replay overwrites the "
+                                f"first run's results)")
+            else:
+                seen_a.add(a)
+                deduped.append(a)
+        angles = deduped
 
     duration = spec.get("duration", 60)
-    if not isinstance(duration, int) or duration <= 0 or duration > max_duration:
+    if not _is_int(duration) or duration <= 0 or duration > max_duration:
         errors.append(f"duration must be an int in 1..{max_duration}")
         duration = 60
 
     frames = spec.get("frames") or [3, 8, 20]
     if not isinstance(frames, list) or not all(
-            isinstance(f, int) and f > 0 for f in frames):
+            _is_int(f) and f > 0 for f in frames):
         errors.append("frames must be a list of positive ints")
         frames = []
     else:
-        frames = sorted(set(f for f in frames if f <= duration))
+        kept: list[int] = []
+        for f in frames:
+            if f > duration:
+                warnings.append(f"frame at tick {f} dropped — past "
+                                f"duration {duration}")
+            elif f in kept:
+                warnings.append(f"frame at tick {f} listed twice — "
+                                f"kept once")
+            else:
+                kept.append(f)
+        frames = sorted(kept)
         if not frames:
             warnings.append("no frame ticks within duration — nothing will "
                             "be screenshotted")
@@ -318,10 +419,15 @@ def validate_scene(spec: dict, catalog_index: dict[str, dict],
             errors.append(f"{glabel}: must be an object")
             continue
         gtick = g.get("tick", 0)
-        if not isinstance(gtick, int) or gtick < 0 or gtick >= duration:
+        if not _is_int(gtick) or gtick < 0 or gtick >= duration:
             errors.append(f"{glabel}: tick must be an int in 0..{duration - 1}")
             continue
-        grep = _validate_repeat(g.get("repeat"), glabel, duration, errors)
+        grep = _validate_repeat(g.get("repeat"), glabel, duration,
+                                errors, warnings, base_tick=gtick)
+        if grep and "count" in grep and \
+                gtick + (grep["count"] - 1) * grep["every"] >= duration:
+            warnings.append(f"{glabel}: repeat tail exceeds duration "
+                            f"— iterations past {duration} dropped")
         members = g.get("steps")
         if not isinstance(members, list) or not members:
             errors.append(f"{glabel}: steps must be a non-empty list")
@@ -343,11 +449,17 @@ def validate_scene(spec: dict, catalog_index: dict[str, dict],
         if not isinstance(s, dict):
             errors.append(f"{label}: must be an object")
             return
+        STEP_KEYS = {"tick", "at_tick", "id", "name", "anchor", "at",
+                     "offset", "direction", "distance", "pos", "to",
+                     "follow", "track", "repeat", "options", "stop_after"}
+        for k in s:
+            if k not in STEP_KEYS:
+                warnings.append(f"{label}: unknown key '{k}' — ignored")
         rid = s.get("id")
         tick = s.get("tick", s.get("at_tick", 0))
-        if not isinstance(tick, int) or tick < 0:
+        if not _is_int(tick) or tick < 0:
             errors.append(f"{label}: tick must be an int >= 0")
-            return
+            tick = 0
         tick += tick_shift
         if tick >= duration:
             errors.append(f"{label}: resolved tick {tick} >= duration "
@@ -398,6 +510,9 @@ def validate_scene(spec: dict, catalog_index: dict[str, dict],
             anchor = _validate_anchor_expr(anchor_expr, label, "anchor", errors)
         to = _validate_anchor_expr(s.get("to"), label, "to", errors) \
             if "to" in s else None
+        if to is not None and anchor and "direction" in anchor:
+            warnings.append(f"{label}: 'to' is ignored when 'direction' is "
+                            f"also set — the explicit direction wins")
 
         lpos = s.get("pos", [0.0, 0.0, 0.0])
         if not _vec3(lpos):
@@ -415,8 +530,26 @@ def validate_scene(spec: dict, catalog_index: dict[str, dict],
                 warnings.append(f"{label}: follow on instantaneous '{kind}' "
                                 f"— spawn point resolves at its tick, "
                                 f"nothing to steer afterwards")
+            elif anchor is None or not anchor["anchor"].startswith("player"):
+                warnings.append(f"{label}: follow re-resolves the anchor "
+                                f"every tick — a non-player anchor "
+                                f"({(anchor or {}).get('anchor')!r}) is "
+                                f"constant, so follow changes nothing")
+        if kind not in PERSISTENT_KINDS and (
+                (to is not None and not (
+                    anchor and ("offset" in anchor or "distance" in anchor)
+                    or _vec3(lpos) and any(c != 0 for c in lpos)))
+                or (anchor and "direction" in anchor and "offset" not in
+                    anchor and "distance" not in anchor and to is None)):
+            warnings.append(f"{label}: 'to'/'direction' on instantaneous "
+                            f"'{kind}' only rotates the offset frame — with "
+                            f"no offset/distance it changes nothing at all")
 
         track = _validate_track(s.get("track"), label, kind, errors, warnings)
+        if track and "rotation" in track and (to is not None or (
+                anchor and "direction" in anchor)):
+            warnings.append(f"{label}: track.rotation overrides the facing "
+                            f"each tick — 'to'/'direction' aim is lost")
 
         options = s.get("options") or {}
         if not isinstance(options, dict):
@@ -429,16 +562,15 @@ def validate_scene(spec: dict, catalog_index: dict[str, dict],
         for sk in pschema:
             _check_param(sk, pschema, effective, f"{label} '{rid}'", errors)
 
-        rep = _validate_repeat(s.get("repeat"), label, duration, errors)
-        if rep and tick + (rep.get("count", 1) - 1) * rep["every"] >= duration \
-                and "count" in rep:
+        rep = _validate_repeat(s.get("repeat"), label, duration, errors,
+                               warnings, base_tick=tick + tick_shift) \
+            if "repeat" in s else None
+        if rep and "count" in rep and \
+                tick + (rep["count"] - 1) * rep["every"] >= duration:
             warnings.append(f"{label}: repeat tail exceeds duration — "
                             f"iterations past {duration} are dropped")
-        if rep and "until" in rep:
-            if rep["until"] > duration:
-                warnings.append(f"{label}: repeat.until clamped to duration")
 
-        step_refs = _ref_names(options, anchor, to, None)
+        step_refs = _ref_names(options, anchor, to, label, errors)
 
         vs = res.get("visual_status")
         vsr = res.get("visual_status_reason")
@@ -461,8 +593,9 @@ def validate_scene(spec: dict, catalog_index: dict[str, dict],
             "track": track,
             "repeat": rep,
             "group_repeat": group_repeat,
+            "group_tick": tick_shift if group_repeat else None,
             "options": options,
-            "stop_after": bool(s.get("stop_after", True)),
+            "stop_after": _stop_after(s, label, warnings),
         }
         for ref in step_refs:
             deferred_ref_checks.append((step, ref, label))
@@ -479,7 +612,8 @@ def validate_scene(spec: dict, catalog_index: dict[str, dict],
         if st["name"]:
             if st["name"] in seen:
                 warnings.append(f"ref target '{st['name']}' has multiple "
-                                f"steps — refs resolve to the first")
+                                f"firings — refs resolve to the most "
+                                f"recent spawn before the consumer")
             else:
                 seen[st["name"]] = st["at_tick"]
 
@@ -491,14 +625,16 @@ def validate_scene(spec: dict, catalog_index: dict[str, dict],
             errors.append(f"{label}: must be " + "{'tick': int, 'command': str}")
             continue
         ctick = c.get("tick", 0)
-        if not isinstance(ctick, int) or ctick < 0 or ctick >= duration:
+        if not _is_int(ctick) or ctick < 0 or ctick >= duration:
             errors.append(f"{label}: tick must be an int in 0..{duration - 1}")
             continue
         commands.append({"at_tick": ctick, "command": c["command"]})
 
     norm_steps.sort(key=lambda x: x["at_tick"])
     # final ordering decides ref legality: the producer's first instance must
-    # precede the consumer in the sorted stream (runtime spawns in order)
+    # precede the consumer in the sorted stream (runtime spawns in order).
+    # index by identity — two identical step dicts would collide on .index()
+    step_pos = {id(st): i for i, st in enumerate(norm_steps)}
     producer_order: dict[str, int] = {}
     for idx, st in enumerate(norm_steps):
         if st["name"] and st["name"] not in producer_order:
@@ -507,7 +643,7 @@ def validate_scene(spec: dict, catalog_index: dict[str, dict],
         if ref not in producer_order:
             errors.append(f"{label}: 'ref:{ref}' names no step")
             continue
-        if producer_order[ref] >= norm_steps.index(consumer):
+        if producer_order[ref] >= step_pos[id(consumer)]:
             errors.append(
                 f"{label}: 'ref:{ref}' resolves to a step that spawns after "
                 f"this one (tick {name_first_tick[ref]})")

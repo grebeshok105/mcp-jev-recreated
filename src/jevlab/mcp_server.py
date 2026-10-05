@@ -125,13 +125,29 @@ def vfx_preview(resource_id: str) -> dict:
 
 @mcp.tool()
 def vfx_scene_validate(scene: dict) -> dict:
-    """Validate a scene spec against the catalog. Scene shape:
+    """Validate a scene spec against the catalog. Scene shape (v2):
 
-      {"name": str, "scene": {"pos":[x,lift,z],"time":int,"weather":str},
+      {"name": str,
+       "scene": {"pos":[x,lift,z], "time":int, "weather":"clear|rain|thunder"},
        "camera": {"angles":[front|back|side|side_right|top|threequarter|low|far]},
        "duration": ticks, "frames": [ticks to screenshot],
-       "steps": [{"tick":int,"id":resource_id,"pos":[dx,dy,dz],
-                  "options":{...},"stop_after":bool}]}
+       "steps": [{
+         "tick": int,                      # 0 fires at scene start
+         "id": resource_id,
+         "name": str,                      # gives this step's spawn pos a ref name
+         "anchor": "scene|player[.feet|.chest|.head|.look]|camera|ref:<name>"
+                 or {"anchor":..., "offset":[x,y,z], "distance":n,
+                     "direction":"world|player.look|[yaw,pitch]|{\"face\":<expr>}"},
+         "offset": [x,y,z], "direction": ..., "distance": n,
+         "pos": [x,y,z],                   # local-frame offset, rotates with direction
+         "to": <anchor expr>,              # aim the effect at a target
+         "follow": "player",               # re-resolve the anchor every tick
+         "track": {"pos":[[t,x,y,z]...],   # keyframes relative to spawn tick
+                   "rotation":[[t,yaw,pitch]...], "scale":[[t,s]...]},
+         "repeat": {"every":T,"count":N} | {"every":T,"until":M},
+         "options": {...}, "stop_after": bool}],
+       "groups": [{"tick":T, "repeat":{...}, "steps":[member steps...]}],
+       "commands": [{"tick":int, "command":"server console command"}]}
 
     Returns {ok, errors, warnings, normalized}."""
     v = validate_scene(_scene_arg(scene), _index())

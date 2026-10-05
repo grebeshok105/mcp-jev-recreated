@@ -4,10 +4,10 @@
       "camera": "5.70,-55.60,11.30,yaw\u003d-135.0,pitch\u003d25.6",
       "spawned": "101",
       "peak_alive": "80",
-      "alive_at_end": "4",
+      "alive_at_end": "2",
       "first_visible_tick": "1",
       "bounds_min": "-0.100,-60.000,-0.100",
-      "bounds_max": "8.953,0.200,11.889",
+      "bounds_max": "8.995,0.200,11.922",
       "steps": [
         {
           "tick": 2,
@@ -32,7 +32,7 @@
         {
           "tick": 10,
           "id": "vfxlab:laser_beam",
-          "pos": "6.414,-59.974,10.586",
+          "pos": "5.700,-58.380,11.300",
           "diagnostics": []
         },
         {
@@ -69,11 +69,11 @@
     "side": {
       "camera": "5.00,-56.60,8.50,yaw\u003d-90.0,pitch\u003d14.4",
       "spawned": "91",
-      "peak_alive": "66",
-      "alive_at_end": "6",
+      "peak_alive": "60",
+      "alive_at_end": "7",
       "first_visible_tick": "1",
       "bounds_min": "-0.100,-60.000,-0.100",
-      "bounds_max": "8.923,0.200,9.126",
+      "bounds_max": "8.910,0.200,9.218",
       "steps": [
         {
           "tick": 2,
@@ -98,7 +98,7 @@
         {
           "tick": 10,
           "id": "vfxlab:laser_beam",
-          "pos": "6.301,-59.747,8.500",
+          "pos": "5.000,-58.380,8.500",
           "diagnostics": []
         },
         {

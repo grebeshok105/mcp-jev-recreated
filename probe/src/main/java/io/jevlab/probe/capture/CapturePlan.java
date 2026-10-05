@@ -48,6 +48,11 @@ public final class CapturePlan {
 
     public static final class Shot {
         public String id;
+        /** original resource id when `id` is a synthetic shot id
+         *  (e.g. a world_event compiled to a level_event shot) —
+         *  set by the scene compiler so results can index the resource
+         *  the caller actually asked for */
+        public String resource_id;
         public String kind; // particle | level_event | fx | quasar_emitter
         /** extra particle options spec, e.g. {"color":[1,0,0],"scale":1.0} or {"block":"minecraft:stone"} */
         public JsonObject options;
