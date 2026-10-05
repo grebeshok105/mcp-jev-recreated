@@ -21,6 +21,9 @@ class CatalogStats:
     with_measured: int = 0
     with_visual: int = 0
     disagreements: int = 0
+    visual_observed: int = 0
+    visual_capture_failed: int = 0
+    visual_env_mismatch: int = 0
     failed_sources: list[str] = field(default_factory=list)
 
 
@@ -42,6 +45,12 @@ class Catalog:
             s.with_visual += 1 if p.visual else 0
             s.disagreements += 1 if any(
                 v.disagreement for v in p.visual.values()) else 0
+            if p.visual_status == "observed":
+                s.visual_observed += 1
+            elif p.visual_status == "capture_failed":
+                s.visual_capture_failed += 1
+            elif p.visual_status == "environment_mismatch":
+                s.visual_env_mismatch += 1
         self.stats = s
         return s
 
@@ -60,6 +69,9 @@ class Catalog:
                 "with_measured": self.stats.with_measured,
                 "with_visual": self.stats.with_visual,
                 "disagreements": self.stats.disagreements,
+                "visual_observed": self.stats.visual_observed,
+                "visual_capture_failed": self.stats.visual_capture_failed,
+                "visual_env_mismatch": self.stats.visual_env_mismatch,
             },
             "diagnostics": self.diagnostics,
             "resources": [p.to_dict() for p in

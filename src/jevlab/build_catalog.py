@@ -67,6 +67,9 @@ def main() -> int:
     print(f"  total={s.total} kinds={s.by_kind} sources={s.by_source}")
     print(f"  measured={s.with_measured} visual={s.with_visual} "
           f"disagreements={s.disagreements} skipped={s.failed_sources}")
+    print(f"  visual_status: observed={s.visual_observed} "
+          f"capture_failed={s.visual_capture_failed} "
+          f"env_mismatch={s.visual_env_mismatch}")
     if catalog.diagnostics:
         print(f"  diagnostics={len(catalog.diagnostics)} (first: {catalog.diagnostics[0]})")
     return 0

@@ -16,8 +16,8 @@ VFX Knowledge Base (4,430 passports, real resources)
         │  quasar emitters/particle defs/vfx params · composites
         ▼
 passports: identity + factual + measured + visual semantics
-        │  (measured = real in-game capture; visual = two independent
-        │   annotation passes merged with disagreement flags)
+        │  (measured = real in-game capture; visual = independent
+        │   annotation passes, gated by visual_status reliability)
         ▼
 Jev stage 1 — Noul independent relevance per candidate (batched)
 Jev stage 2 — single Choice over the top pool
@@ -26,9 +26,9 @@ Jev stage 2 — single Choice over the top pool
 top-10: {rank, id, source, kind, noul_relevance, choice_probability, summary}
 ```
 
-Measured end-to-end: **~3.1 s per query**, ~330k input tokens/query on the
+Measured end-to-end: **~1.3 s per query**, ~130k input tokens/query on the
 4.4k-resource catalog (candidate-filtered to ~200 answerable entries,
-all with full measured+visual enrichment).
+full measured enrichment + reliability-gated visual semantics).
 
 ## Layout
 
@@ -60,17 +60,17 @@ python -m jevlab.build_catalog --data-dir data \
 
 # ask for an effect — real Jev calls, top-10 JSON
 python -m jevlab.find_effects "a cold blue beam that holds for a second" \
-    --top-k 10 --batch-size 12 --stage2-pool 12 --no-query-cache
+    --top-k 10 --no-query-cache
 
 # run the Codex ability eval (12 real ability descriptions)
-python -m jevlab.evals.run_eval --out data/evals/results_full_enrichment.json \
-    --batch-size 12 --stage2-pool 12 --no-query-cache
+python -m jevlab.evals.run_eval --out data/evals/results_gated_1212.json \
+    --no-query-cache
 ```
 
 ## Tests
 
 ```bash
-pytest tests/unit          # 33 tests, offline, seconds
+pytest tests/unit          # 38 tests, offline, seconds
 pytest tests/ -m typesafe  # 2 live API tests, needs TYPESAFE_API_KEY
 ```
 
@@ -84,14 +84,14 @@ pytest tests/ -m typesafe  # 2 live API tests, needs TYPESAFE_API_KEY
 - visual layer: **197/197 shots annotated** — pass A on all, independent
   pass B on the 78 ambiguous/low-confidence shots; 73 disagreement flags
 - visual coverage of answerable candidates: **205/205** (197 annotated +
-  8 documented unrenderable composite exceptions)
-- Codex eval at full enrichment (2 identical live runs): **recall@10 =
-  0.50**, hit@1 = 0.42, hit@3 = 0.83, hit@10 = 0.92, MRR = 0.618,
-  ~3.1 s/query, ~330k input tokens/query. Full visual enrichment
-  *regressed* recall vs the 0.56–0.58 baseline — measured layer alone
-  scored 0.68 under identical config; attribution matrix in
-  docs/evaluation.md.
-- 37 tests green (35 offline + 2 live)
+  8 documented unrenderable composite exceptions); visual reliability:
+  166 observed / 27 capture_failed / 4 environment_mismatch
+- Codex eval with SELECTION BRIEF + visual gate (best measured config,
+  batch/pool 12/12): **recall@10 = 0.66**, hit@1 = 0.67, hit@3 = 0.83,
+  hit@10 = 0.92, MRR = 0.750, ~1.3 s/query, ~130k input tokens/query.
+  Full attribution matrix (gating recovered the −0.18 visual regression
+  and doubled hit@1) in docs/evaluation.md.
+- 40 tests green (38 offline + 2 live)
 
 See `docs/architecture.md` for design, `docs/evaluation.md` for full eval
 results and known limits.

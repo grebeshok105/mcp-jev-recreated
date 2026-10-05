@@ -40,7 +40,7 @@ def answerable(catalog: Catalog) -> list:
 
 
 def find(query: str, catalog_path: str, *, top_k: int = 10,
-         stage2_pool: int = 25, batch_size: int = 30,
+         stage2_pool: int = 12, batch_size: int = 12,
          use_query_cache: bool = True, cache_root: str = "data/cache",
          deadline_s: float | None = None) -> tuple[dict, dict]:
     """Returns (result_dict, meta). Cached hits return the stored dict with
@@ -79,8 +79,8 @@ def main() -> int:
     ap.add_argument("query")
     ap.add_argument("--catalog", default="data/catalog.json")
     ap.add_argument("--top-k", type=int, default=10)
-    ap.add_argument("--stage2-pool", type=int, default=25)
-    ap.add_argument("--batch-size", type=int, default=30)
+    ap.add_argument("--stage2-pool", type=int, default=12)
+    ap.add_argument("--batch-size", type=int, default=12)
     ap.add_argument("--no-query-cache", action="store_true")
     ap.add_argument("--deadline", type=float, default=None)
     ap.add_argument("--out", default=None)

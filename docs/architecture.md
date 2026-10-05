@@ -38,8 +38,15 @@ Invariants:
   the pipeline caches; `brief_hash()` covers everything `jev_brief` emits
   (all layers the model sees) and drives the query-cache fingerprint, so
   re-enrichment invalidates cached rankings.
-- `jev_brief()` projects a compact, field-ordered dict for the model;
-  `one_line()` renders the human summary.
+- `jev_brief()` projects the SELECTION BRIEF — a compact projection for
+  the model (identity, type, aggregate measured facts, capabilities, real
+  constraints, roles, and visual semantics only when `visual_status ==
+  "observed"`); `one_line()` renders the human summary. `visual_status`
+  (`observed` / `capture_failed:offscreen` / `environment_mismatch:
+  requires_water`) is derived from all passes' visibility verdicts at
+  `apply_visual` time: a capture that saw nothing is a property of the
+  capture, not of the effect, so non-observed statuses never reach Jev as
+  visual semantics.
 
 ### 3. Measured enrichment (`enrichment/measured.py`)
 
@@ -79,10 +86,10 @@ on 429, per-call deadline, typed errors (`JevAuthError`, `JevRateLimitError`,
 
 ### 6. Two-stage selector (`ranking/selector.py`)
 
-Stage 1 — candidates are split into batches (default 30); **one Noul question
+Stage 1 — candidates are split into batches (default 12); **one Noul question
 per candidate**, so scores are comparable across batches.
 Stage 2 — **one Choice call** over the top-`stage2_pool` finalists (default
-25). Choice probabilities are meaningful only inside a single question; they
+12). Choice probabilities are meaningful only inside a single question; they
 are never compared across batches — the finalist pool is a single question.
 Final order = stage-2 probability desc, then id; top-K (default 10) returned.
 

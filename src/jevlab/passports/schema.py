@@ -88,6 +88,16 @@ class Passport:
     factual: dict[str, Any] = field(default_factory=dict)
     measured: dict[str, Any] = field(default_factory=dict)
     visual: dict[str, SemanticValue] = field(default_factory=dict)
+    # Reliability of the visual layer, set by apply_visual:
+    #   "observed"               — passes actually saw the effect
+    #   "capture_failed"         — spawned but nothing rendered in any
+    #                              captured frame (offscreen/subpixel); the
+    #                              visual dict is a property of the capture,
+    #                              not of the effect — never shown to Jev
+    #   "environment_mismatch"   — effect exists but cannot render in the
+    #                              capture environment (e.g. requires_water)
+    visual_status: str | None = None
+    visual_status_reason: str | None = None
     possible_roles: SemanticValue | None = None
     provenance: list[Provenance] = field(default_factory=list)
     diagnostics: list[str] = field(default_factory=list)
@@ -119,6 +129,10 @@ class Passport:
             d["measured"] = self.measured
         if self.visual:
             d["visual"] = {k: v.to_dict() for k, v in self.visual.items()}
+        if self.visual_status:
+            d["visual_status"] = self.visual_status
+            if self.visual_status_reason:
+                d["visual_status_reason"] = self.visual_status_reason
         if self.possible_roles is not None:
             d["possible_roles"] = self.possible_roles.to_dict()
         if self.provenance:
@@ -146,6 +160,8 @@ class Passport:
             measured=dict(d.get("measured", {})),
             visual={k: SemanticValue.from_dict(v)
                     for k, v in (d.get("visual") or {}).items()},
+            visual_status=d.get("visual_status"),
+            visual_status_reason=d.get("visual_status_reason"),
             possible_roles=(SemanticValue.from_dict(d["possible_roles"])
                             if d.get("possible_roles") else None),
             provenance=[Provenance.from_dict(p)
@@ -188,31 +204,59 @@ class Passport:
     # ---------------------------------------------------------- jev briefs
 
     def jev_brief(self) -> dict[str, Any]:
-        """Compact projection sent to Jev inside `state` (token discipline)."""
+        """SELECTION BRIEF — compact projection sent to Jev inside `state`.
+
+        Deliberately different from the full passport (which stays complete
+        for `vfx_inspect`). It carries only what a ranker needs: identity,
+        type, objective measured facts, capabilities, real constraints — and
+        visual semantics *only when they were actually observed*. A failed
+        or mismatched capture is a property of the capture, not of the
+        effect, so it must never read to Jev as "this effect does nothing":
+        non-observed statuses surface as a small status token and no visual
+        block at all.
+        """
         brief: dict[str, Any] = {
             "id": self.id, "kind": self.kind, "source": self.source,
             "ready_to_use": self.ready_to_use,
-            "parameterized": self.parameterized,
         }
-        if self.parameter_schema:
-            brief["parameters"] = self.parameter_schema
+        if self.parameterized:
+            brief["parameterized"] = True
+            if self.parameter_schema:
+                brief["parameters"] = self.parameter_schema
         if self.capabilities:
             brief["capabilities"] = self.capabilities
         if self.factual:
             brief["facts"] = self.factual
         if self.measured:
-            brief["measured"] = self.measured
-        if self.visual:
-            brief["visual"] = {
-                k: {"values": v.values, "confidence": round(v.confidence, 2),
-                    **({"disagreement": True} if v.disagreement else {})}
-                for k, v in self.visual.items()
-            }
+            # only the aggregate signals — per-angle/frame detail stays in
+            # the full passport
+            m = {k: self.measured[k] for k in
+                 ("spawned_max", "peak_alive", "first_visible_tick",
+                  "extent_blocks") if k in self.measured}
+            if m:
+                brief["measured"] = m
+        if self.visual_status == "observed" or (
+                self.visual_status is None and self.visual):
+            visual: dict[str, Any] = {}
+            disagreements: list[str] = []
+            for k, v in self.visual.items():
+                visual[k] = v.values
+                if v.disagreement:
+                    disagreements.append(k)
+            if visual:
+                brief["visual"] = visual
+            if disagreements:
+                brief["visual_disagreements"] = disagreements
+        elif self.visual_status:
+            brief["visual_status"] = (
+                f"{self.visual_status}:{self.visual_status_reason}"
+                if self.visual_status_reason else self.visual_status)
+            if self.visual_status == "environment_mismatch" and \
+                    self.visual_status_reason:
+                # an honest fact about the effect itself, not about frames
+                brief["constraints"] = [self.visual_status_reason]
         if self.possible_roles and self.possible_roles.values:
-            brief["possible_roles"] = {
-                "values": self.possible_roles.values,
-                "confidence": round(self.possible_roles.confidence, 2),
-            }
+            brief["roles"] = self.possible_roles.values
         return brief
 
     def one_line(self) -> str:
@@ -222,10 +266,11 @@ class Passport:
                  if self.possible_roles else [])
         if roles:
             bits.append("/".join(roles))
-        shape = self.visual.get("shape")
-        if shape and shape.values:
-            bits.append("shape=" + "/".join(shape.values[:2]))
-        motion = self.visual.get("motion")
-        if motion and motion.values:
-            bits.append("motion=" + "/".join(motion.values[:2]))
+        if self.visual_status in (None, "observed"):
+            shape = self.visual.get("shape")
+            if shape and shape.values:
+                bits.append("shape=" + "/".join(shape.values[:2]))
+            motion = self.visual.get("motion")
+            if motion and motion.values:
+                bits.append("motion=" + "/".join(motion.values[:2]))
         return f"{self.id}: " + ", ".join(bits)

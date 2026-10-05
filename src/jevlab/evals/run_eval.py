@@ -20,7 +20,7 @@ from ..find_effects import find
 
 
 def run_cases(cases_path: str, catalog_path: str, *, top_k: int = 10,
-              stage2_pool: int = 25, batch_size: int = 30,
+              stage2_pool: int = 12, batch_size: int = 12,
               use_query_cache: bool = True, limit: int | None = None,
               deadline_s: float | None = None) -> dict:
     cases = json.load(open(cases_path))
@@ -97,8 +97,8 @@ def main() -> int:
     ap.add_argument("--cases", default="data/evals/codex_cases.json")
     ap.add_argument("--catalog", default="data/catalog.json")
     ap.add_argument("--top-k", type=int, default=10)
-    ap.add_argument("--stage2-pool", type=int, default=25)
-    ap.add_argument("--batch-size", type=int, default=30)
+    ap.add_argument("--stage2-pool", type=int, default=12)
+    ap.add_argument("--batch-size", type=int, default=12)
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--no-query-cache", action="store_true")
     ap.add_argument("--deadline", type=float, default=None)

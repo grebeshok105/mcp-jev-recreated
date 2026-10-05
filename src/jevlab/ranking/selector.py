@@ -98,8 +98,8 @@ class EffectSelector:
         self,
         client: TypeSafeClient,
         *,
-        batch_size: int = 30,
-        stage2_pool: int = 25,
+        batch_size: int = 12,
+        stage2_pool: int = 12,
         top_k: int = 10,
         deadline_s: float | None = None,
     ):

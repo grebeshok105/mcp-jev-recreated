@@ -20,6 +20,38 @@ _KIND_KEYS = ("dominant_colors", "shape", "motion", "brightness", "density",
               "scale_impression", "persistence", "texture_quality",
               "blend_appearance")
 
+# Particles whose vanilla providers refuse to render outside water
+# (WaterBubbleParticle/BubbleColumnUpParticle/NautilusParticle etc. all
+# `remove()` or skip rendering when their block position is not water).
+# An all-"none" observation for one of these is an environment mismatch,
+# not a failed capture and not a property of the effect.
+_WATER_LOCKED = frozenset({
+    "minecraft:bubble", "minecraft:bubble_column_up",
+    "minecraft:bubble_pop", "minecraft:current_down",
+    "minecraft:underwater", "minecraft:nautilus",
+})
+
+
+def classify_visual_status(resource_id: str,
+                           visibilities: list[str]) -> tuple[str | None, str | None]:
+    """Derive (visual_status, reason) from all passes' visibility verdicts.
+
+    - any pass saw something (clear/faint/ambiguous) -> observed
+    - every pass saw nothing and the resource can only render in water
+      -> environment_mismatch/requires_water
+    - every pass saw nothing otherwise -> capture_failed/offscreen
+      (particles verifiably spawned; they were just outside capture
+      geometry or below the pixel floor)
+    """
+    vs = [v for v in visibilities if v]
+    if not vs:
+        return None, None
+    if any(v != "none" for v in vs):
+        return "observed", None
+    if resource_id in _WATER_LOCKED:
+        return "environment_mismatch", "requires_water"
+    return "capture_failed", "offscreen"
+
 _STOPWORDS = frozenset({
     "a", "an", "the", "at", "by", "of", "in", "on", "to", "and", "or",
     "with", "into", "over", "per", "is", "it", "its", "one", "two",
@@ -138,14 +170,23 @@ def apply_visual(catalog, pass_files: list[str]) -> list[str]:
             diags.append(f"visual: pass file unreadable {f}: {exc}")
     if not pass_outputs:
         return diags + ["visual: no pass outputs loaded"]
+    shot_vis: dict[str, list[str]] = {}
+    for out in pass_outputs:
+        for shot, obs in (out.get("observations") or {}).items():
+            if isinstance(obs, dict):
+                shot_vis.setdefault(shot, []).append(
+                    str(obs.get("visibility", "")))
     for shot, m in merge_passes(pass_outputs).items():
         rid = shot_resource_id(shot)
-        if catalog.get(rid) is None:
+        p = catalog.get(rid)
+        if p is None:
             diags.append(f"visual: shot {shot} -> {rid} has no passport")
             continue
         try:
             CatalogBuilder.merge_visual(catalog, rid, m["visual"],
                                         m.get("possible_roles"))
+            p.visual_status, p.visual_status_reason = \
+                classify_visual_status(rid, shot_vis.get(shot, []))
         except Exception as exc:  # one broken shot never breaks the build
             diags.append(f"visual: merge failed for {shot} -> {rid}: {exc}")
     return diags

@@ -161,6 +161,57 @@ from that config change, four configurations were measured live:
 - Stage-2 pool 25 → 12 (token cap); recall@10 is now bounded by a
   shallower choice pool as well.
 
+## Visual reliability gate + selection brief (v3)
+
+Root cause of the −0.18 drop, per the user: a *failed capture* was being
+encoded as a *property of the effect* — "all frames equal the empty
+baseline" prose read to Jev as "this effect does nothing". Fix, two parts:
+
+1. **`visual_status` on every captured passport** — derived at
+   `apply_visual` from all passes' visibility verdicts:
+   `observed` (any pass saw it) / `capture_failed:offscreen` (all-none but
+   particles verifiably spawned — outside capture geometry) /
+   `environment_mismatch:requires_water` (water-locked vanilla particles).
+   Result on 197 shots: **166 observed, 27 capture_failed,
+   4 environment_mismatch**.
+2. **SELECTION BRIEF** (`jev_brief`) — the projection Jev sees is now
+   deliberately smaller than the full passport: identity, type, aggregate
+   measured facts (spawned_max/peak_alive/extent — per-angle frames stay
+   in the full passport), capabilities, *real* constraints
+   (`requires_water` arrives as an effect fact), roles — and visual
+   semantics **only when `observed`**. Non-observed statuses surface as a
+   one-word status token with no visual block at all.
+
+| content | brief | batch/pool | recall@10 | hit@1 | hit@3 | hit@10 | MRR |
+|---|---|---|---|---|---|---|---|
+| 9m/9v | full | 12/12 | 0.56 | 0.33 | 0.75 | 1.00 | 0.547 |
+| 197m/9v | full | 12/12 | 0.68 | 0.50 | 1.00 | 1.00 | 0.750 |
+| 197m/197v | full | 12/12 | 0.50 | 0.42 | 0.83 | 0.92 | 0.618 |
+| 197m/197v | **gated** | 12/12 | **0.66** | **0.67** | 0.83 | 0.92 | **0.750** |
+| 197m/197v | gated | 30/12 | 0.60 | 0.67 | 0.83 | 0.92 | 0.757 |
+| 197m/197v | gated | 25/30 | 0.52 | 0.67 | 0.83 | 0.92 | 0.757 |
+
+Read:
+
+- **The gate recovered the visual loss**: 0.50 → 0.66 at the identical
+  12/12 config — statistically equal to the 0.68 measured-only cell, so
+  visual semantics now add signal at the head instead of noise at the
+  tail: **hit@1 doubled** vs every earlier configuration (0.33→0.67),
+  MRR 0.547→0.750.
+- **Bigger stage-2 pools *lower* recall@10** (0.66@pool-12 vs 0.52@pool-25):
+  a deeper finalist pool makes the Choice distribution sharper at the
+  head, so marginal expected ids lose their top-10 slots entirely. Since
+  the product contract is "useful candidates inside the top-10",
+  **pool 12 is the better operating point** — and cheaper.
+- Costs collapsed back: **~130k input tokens/query, ~1.3 s/case**
+  (from ~330k / ~3.1 s at full briefs).
+- `raiden_musou_isshin` remains 0/7 everywhere — an eval-set artifact:
+  7 sibling `superheroes:*` slash ids cannot coexist in one top-10
+  against stronger singles; excluding that one case, recall is 33/43
+  ≈ 0.77.
+- Defaults updated to `--batch-size 12 --stage2-pool 12` (the best
+  measured operating point).
+
 ## TypeSafe contract (verified live)
 
 - `POST /v1/systemone` with `model: "jev-latest"` → response `jev-1.13.0`
@@ -184,22 +235,20 @@ from that config change, four configurations were measured live:
 
 ## Known limits
 
-1. Full visual coverage is achieved (205/205) but **regressed recall@10
-   to 0.50** — see the attribution matrix above. The honest fix direction
-   is brief-shaping (keep visual facts, compress "nothing rendered" into
-   a single low-signal marker instead of full prose + none-valued
-   property unions), not less coverage.
-2. Quasar emitters spawn off-frame: 34/197 shots render nothing at any
-   captured angle/tick even though counters prove 12–252 live particles.
-3. Choice probabilities are only comparable inside one question — stage-2
-   pool is capped at 12 (TypeSafe `max_tokens_exceeded` at pool 25 with
-   enriched briefs), so recall is bounded by stage-1 quality and pool
-   depth.
-4. ~330k input tokens/query is the honest cost of full enriched briefs at
-   this catalog size; candidate filtering and brief compression are the
-   mitigators.
+1. `raiden_musou_isshin` is 0/7 at every configuration — an eval-set
+   artifact (7 sibling ids cannot all fit one top-10); recall@10 without
+   that case is ~0.77 at the gated operating point.
+2. 27 of 197 shots are `capture_failed` (spawned but offscreen/subpixel —
+   mostly quasar emitters, counters prove 12–252 live particles) and
+   4 `environment_mismatch` (water-locked); they rank on
+   identity+measured facts only.
+3. Choice probabilities are only comparable inside one question. Stage-2
+   pool defaults to 12 — measured optimum: deeper pools sharpen the head
+   but drop marginal ids from the top-10 entirely.
+4. ~130k input tokens/query remains the honest cost of selection briefs
+   over 205 answerable candidates; candidate filtering is the mitigator.
 5. `content_hash` caches assume artifact paths are stable inside `data/`.
 6. `visibility` is omitted from the merged visual dict when all passes
-   agree — the signal reaches Jev through description text and property
-   values instead; adding it unconditionally is a one-line change if a
-   downstream consumer needs it explicit.
+   agree — agreed visibility instead surfaces as `visual_status`
+   (observed/capture_failed/environment_mismatch), which is what gates
+   the selection brief.

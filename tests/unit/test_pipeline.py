@@ -13,7 +13,8 @@ import pytest
 
 from jevlab.catalog.builder import Catalog, CatalogBuilder
 from jevlab.enrichment.measured import apply_measured, shot_resource_id
-from jevlab.enrichment.visual import apply_visual, merge_passes, _tokens
+from jevlab.enrichment.visual import (
+    apply_visual, classify_visual_status, merge_passes, _tokens)
 from jevlab.find_effects import answerable, find
 from jevlab.jev.questions import ChoiceAnswer, NoulAnswer, SystemOneResult, Usage
 from jevlab.passports.schema import Passport
@@ -167,6 +168,45 @@ def test_apply_visual_real_files(catalog):
     v = catalog.get("minecraft:dust").visual
     assert "cyan" in " ".join(v["dominant_colors"].values)
     assert catalog.get("vfxlab:laser_beam").possible_roles is not None
+
+
+# ---------------------------------------------------- visual_status gate
+
+def test_classify_visual_status():
+    assert classify_visual_status("minecraft:dust", ["clear", "faint"]) == \
+        ("observed", None)
+    assert classify_visual_status("minecraft:bubble", ["none", "none"]) == \
+        ("environment_mismatch", "requires_water")
+    assert classify_visual_status("superheroes:x", ["none"]) == \
+        ("capture_failed", "offscreen")
+    assert classify_visual_status("minecraft:dust", []) == (None, None)
+
+
+def test_selection_brief_gates_visual(catalog):
+    apply_visual(catalog, [os.path.join(DATA, "visual/pass_a.json"),
+                           os.path.join(DATA, "visual/pass_b.json")])
+    p = catalog.get("minecraft:dust")
+    p.visual_status, p.visual_status_reason = "capture_failed", "offscreen"
+    b = p.jev_brief()
+    assert "visual" not in b                      # capture prose is not a fact
+    assert b["visual_status"] == "capture_failed:offscreen"
+    p.visual_status, p.visual_status_reason = \
+        "environment_mismatch", "requires_water"
+    b = p.jev_brief()
+    assert "visual" not in b
+    assert b["constraints"] == ["requires_water"]  # real constraint survives
+    p.visual_status = "observed"
+    b = p.jev_brief()
+    assert "cyan" in " ".join(b["visual"]["dominant_colors"])
+
+
+def test_selection_brief_compact_measured(catalog):
+    apply_measured(catalog, os.path.join(
+        DATA, "capture/measurements/capture_results.json"))
+    b = catalog.get("minecraft:dust").jev_brief()
+    assert "angles" not in b.get("measured", {})
+    assert "frames" not in b.get("measured", {})
+    assert b["measured"]["spawned_max"] > 0
 
 
 # ----------------------------------------------------------- answerable
