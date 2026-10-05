@@ -114,9 +114,10 @@ hellbreath 3↔2, rasenshuriken 3↔2, transform 1↔2, raiden 1↔2). Per-case
   read as a harpoon trail.
 
 Root causes, in order: (1) only 9 of 205 answerable resources carry real
-visual semantics — the rest rank on name+facts only; (2) expected sets list
-every acceptable sibling, so list diversity is punished; (3) quasar
-eye-level capture gap makes some emitters look like debris.
+visual semantics — the rest rank on name+facts only; (2) expected-set
+granularity (accent particles vs scene-level query — see the raiden
+diagnosis in the v3 section); (3) quasar eye-level capture gap makes some
+emitters look like debris.
 
 ## Full-enrichment impact experiment (205/205)
 
@@ -205,10 +206,20 @@ Read:
   **pool 12 is the better operating point** — and cheaper.
 - Costs collapsed back: **~130k input tokens/query, ~1.3 s/case**
   (from ~330k / ~3.1 s at full briefs).
-- `raiden_musou_isshin` remains 0/7 everywhere — an eval-set artifact:
-  7 sibling `superheroes:*` slash ids cannot coexist in one top-10
-  against stronger singles; excluding that one case, recall is 33/43
-  ≈ 0.77.
+- `raiden_musou_isshin` remains 0/7 everywhere — diagnosed, not a
+  "can't fit" artifact. The query describes a composite *scene*
+  (freeze + enormous slash + lightning row) while `expected_ids` list
+  the ability's **accent particles**: their honest captured visuals are
+  tiny speck clusters/scatters (8–68 specks, sky-height), which simply
+  do not read as a giant slash. And the scene-level resource itself —
+  the actual slash visual — is not in the catalog at all (the ability's
+  main effect is code-driven, not a spawnable resource). Jev's picks
+  (sweep_attack, PARTICLES_ELECTRIC_SPARK, laser_beam) are semantically
+  reasonable given what exists. Excluding this case, recall is 33/43
+  ≈ 0.77; the durable fix is eval expected-set curation at scene
+  granularity plus composite passports for code-driven ability FX —
+  which is precisely what the scene-build lane of the MCP work
+  addresses.
 - Defaults updated to `--batch-size 12 --stage2-pool 12` (the best
   measured operating point).
 
@@ -235,9 +246,12 @@ Read:
 
 ## Known limits
 
-1. `raiden_musou_isshin` is 0/7 at every configuration — an eval-set
-   artifact (7 sibling ids cannot all fit one top-10); recall@10 without
-   that case is ~0.77 at the gated operating point.
+1. `raiden_musou_isshin` is 0/7 at every configuration — expected-set
+   granularity: the query describes the composite scene but
+   `expected_ids` hold the ability's small accent particles, and the
+   scene-level resource is absent from the catalog (code-driven
+   effect). recall@10 without that case is ~0.77 at the gated
+   operating point.
 2. 27 of 197 shots are `capture_failed` (spawned but offscreen/subpixel —
    mostly quasar emitters, counters prove 12–252 live particles) and
    4 `environment_mismatch` (water-locked); they rank on
