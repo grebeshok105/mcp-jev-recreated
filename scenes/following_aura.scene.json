@@ -1,0 +1,109 @@
+{
+  "name": "following_aura",
+  "duration": 40,
+  "frames": [
+    6,
+    14,
+    24,
+    32
+  ],
+  "scene": {
+    "pos": [
+      8.5,
+      2.0,
+      8.5
+    ],
+    "time": 6000,
+    "weather": "clear"
+  },
+  "camera": {
+    "angles": [
+      "front",
+      "threequarter"
+    ]
+  },
+  "steps": [
+    {
+      "tick": 0,
+      "id": "minecraft:entity_effect",
+      "name": "aura_ring",
+      "anchor": "player.feet",
+      "repeat": {
+        "every": 3,
+        "count": 14
+      },
+      "options": {
+        "color": [
+          0.2,
+          0.7,
+          1.0
+        ],
+        "count": 20,
+        "delta": 1.3
+      }
+    },
+    {
+      "tick": 1,
+      "id": "minecraft:enchant",
+      "name": "aura_glyphs",
+      "anchor": "player.feet",
+      "repeat": {
+        "every": 5,
+        "count": 8
+      },
+      "options": {
+        "count": 10
+      }
+    },
+    {
+      "tick": 2,
+      "id": "superheroes:blue_flame",
+      "name": "aura_core",
+      "anchor": {
+        "anchor": "player.head",
+        "offset": [
+          0,
+          -0.5,
+          2.0
+        ],
+        "direction": "player.look"
+      },
+      "repeat": {
+        "every": 4,
+        "count": 10
+      },
+      "options": {
+        "count": 7,
+        "delta": 0.35
+      }
+    },
+    {
+      "tick": 3,
+      "id": "minecraft:end_rod",
+      "name": "aura_sparks",
+      "anchor": {
+        "anchor": "player.head",
+        "offset": [
+          0,
+          -0.3,
+          2.0
+        ],
+        "direction": "player.look"
+      },
+      "repeat": {
+        "every": 4,
+        "count": 10
+      },
+      "options": {
+        "count": 6,
+        "delta": 0.5
+      }
+    }
+  ],
+  "commands": [
+    {
+      "tick": 20,
+      "command": "execute at @p run tp @p ~1.5 ~ ~ ~25 ~"
+    }
+  ]
+}

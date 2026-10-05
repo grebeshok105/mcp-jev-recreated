@@ -1,0 +1,37 @@
+{
+  "name": "laser_sequence",
+  "duration": 46,
+  "frames": [6, 10, 18, 36],
+  "scene": {"pos": [8.5, 2.0, 8.5], "time": 6000, "weather": "clear"},
+  "camera": {"angles": ["side_right", "front"]},
+  "steps": [
+    {"tick": 0, "id": "vfxlab:sparkle_sphere", "name": "charge_orb",
+     "anchor": "scene", "pos": [0, -0.1, 0]},
+
+    {"tick": 1, "id": "superheroes:unibeam_spark",
+     "anchor": "ref:charge_orb",
+     "repeat": {"every": 3, "count": 3},
+     "options": {"count": 8, "delta": 0.25}},
+
+    {"tick": 2, "id": "minecraft:dust", "name": "mark",
+     "anchor": "scene", "pos": [0, -0.4, -4],
+     "options": {"color": [0.1, 0.8, 1.0], "scale": 1, "count": 6,
+                 "delta": 0.1}},
+
+    {"tick": 8, "id": "vfxlab:laser_beam",
+     "anchor": "scene", "pos": [0, 0.0, 1.8], "to": "ref:mark"},
+
+    {"tick": 8, "id": "superheroes:unibeam_spark",
+     "anchor": "ref:mark",
+     "repeat": {"every": 6, "count": 3},
+     "options": {"count": 14, "delta": 0.4}},
+
+    {"tick": 30, "id": "superheroes:sword_explosion",
+     "anchor": "ref:mark",
+     "options": {"count": 18, "delta": 0.7}},
+
+    {"tick": 34, "id": "minecraft:ash",
+     "anchor": "ref:mark",
+     "options": {"count": 14, "delta": 0.8}}
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "name": "melee_strike",
+  "duration": 28,
+  "frames": [4, 7, 9, 14],
+  "scene": {"pos": [8.5, 2.0, 8.5], "time": 6000, "weather": "clear"},
+  "camera": {"angles": ["front", "threequarter"]},
+  "steps": [
+    {"tick": 0, "id": "minecraft:dust", "name": "windup",
+     "anchor": "scene", "pos": [0.85, 0.8, 1.0],
+     "options": {"color": [0.6, 0.85, 1.0], "scale": 1.4, "count": 18,
+                 "delta": 0.3}},
+
+    {"tick": 2, "id": "minecraft:dust", "name": "arc_end",
+     "anchor": "scene", "pos": [-0.85, 0.6, 1.0],
+     "options": {"color": [0.6, 0.85, 1.0], "scale": 0.9, "count": 5,
+                 "delta": 0.15}},
+
+    {"tick": 4, "id": "vfxlab:ribbon_trail",
+     "anchor": "scene", "pos": [0.9, 0.8, 1.0],
+     "track": {"pos": [[0, 0, 0, 0],
+                       [1, -0.45, 0.05, 0],
+                       [2, -0.9, 0.08, 0],
+                       [3, -1.35, 0.04, 0],
+                       [4, -1.8, 0, 0]]}},
+
+    {"tick": 5, "id": "superheroes:nightfall",
+     "anchor": "scene", "pos": [0.4, 0.8, 1.0],
+     "options": {"count": 8, "delta": 0.25}},
+
+    {"tick": 7, "id": "superheroes:nightfall",
+     "anchor": "scene", "pos": [-0.4, 0.7, 1.0],
+     "options": {"count": 8, "delta": 0.25}},
+
+    {"tick": 8, "id": "superheroes:sword_explosion",
+     "anchor": "ref:arc_end",
+     "options": {"count": 16, "delta": 0.6}},
+
+    {"tick": 8, "id": "superheroes:unibeam_spark",
+     "anchor": "ref:arc_end",
+     "options": {"count": 12, "delta": 0.4}},
+
+    {"tick": 11, "id": "minecraft:ash",
+     "anchor": "scene", "pos": [0, 0.5, 1.0],
+     "options": {"count": 12, "delta": 0.8}}
+  ]
+}
