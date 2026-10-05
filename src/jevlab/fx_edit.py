@@ -59,7 +59,9 @@ _ID_RE = re.compile(r"^[a-z0-9_.-]+:[a-z0-9_./-]+$")
 
 # ---------------------------------------------------------------- paths
 
-def fx_file_path(resource_id: str, root: str = FX_SRC_DIR) -> str:
+def fx_file_path(resource_id: str, root: str | None = None) -> str:
+    if root is None:
+        root = FX_SRC_DIR
     ns, _, name = resource_id.partition(":")
     return os.path.join(root, ns, "fx", name + ".fx")
 
